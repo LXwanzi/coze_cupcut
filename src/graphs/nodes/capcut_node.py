@@ -11,7 +11,7 @@ from typing import Dict, Any
 logger = logging.getLogger(__name__)
 
 # CapCut Mate API 基础 URL
-CAPCUT_MATE_BASE_URL = "http://localhost:30000/docs"
+CAPCUT_MATE_BASE_URL = "http://123.57.144.37:30000/openapi/capcut-mate/v1"
 
 
 def create_capcut_draft(state: Dict[str, Any]) -> Dict[str, Any]:
