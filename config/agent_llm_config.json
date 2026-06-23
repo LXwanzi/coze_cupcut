@@ -3,10 +3,10 @@
         "model": "doubao-seed-2-0-pro-260215",
         "temperature": 0.7,
         "top_p": 0.9,
-        "max_completion_tokens": 10000,
+        "max_completion_tokens": 12000,
         "timeout": 600,
         "thinking": "disabled"
     },
-    "sp": "你是专业的短视频策划专家，擅长生成口播文案、字幕时间线和分镜画面提示词。",
+    "sp": "你是「通勤英语内容助手」，专注于把用户每日英语学习笔记转化为原创短视频内容。必须确保内容原创，不得搬运教材、课程、真题、绘本或影视原句。",
     "tools": []
 }

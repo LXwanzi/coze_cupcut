@@ -1,16 +1,14 @@
 """
-剪映草稿生成 Agent
-使用工作流图来生成剪映草稿
+通勤英语内容助手 Agent
+把每日英语学习笔记转化为原创短视频内容
 """
 import os
 import json
 import logging
 from typing import Annotated
-from langchain.agents import create_agent
-from langchain_openai import ChatOpenAI
 from langgraph.graph import MessagesState, END
 from langgraph.graph.message import add_messages
-from langchain_core.messages import AnyMessage, HumanMessage, SystemMessage
+from langchain_core.messages import AnyMessage
 from langgraph.graph import StateGraph
 from coze_coding_utils.runtime_ctx.context import default_headers
 from storage.memory.memory_saver import get_memory_saver
@@ -34,26 +32,39 @@ def _windowed_messages(old, new):
 
 class AgentState(MessagesState):
     """Agent 状态"""
-    topic: str
+    # 输入字段
+    learning_note: str
+    scene: str
     duration_seconds: int
-    style: str
+    audience: str
+    tone: str
     canvas_width: int
     canvas_height: int
+
+    # 内容生成结果
+    content_meta: dict
+    publish_pack: dict
+    voice_text: str
+    review_card: dict
     video_plan: dict
+    material_bank: list
+
+    # 媒体生成结果
     audio_url: str
     audio_size: int
     scenes_generated: int
+
+    # 最终结果
     success: bool
     draft_url: str
-    duration: int
-    scene_count: int
-    caption_count: int
     error: str
+
+    # 消息历史
     messages: Annotated[list[AnyMessage], _windowed_messages]
 
 
 def _generate_plan_node(state: AgentState) -> dict:
-    """生成视频计划节点"""
+    """生成内容计划节点"""
     result = generate_plan(state)
 
     if result.get("error"):
@@ -63,7 +74,12 @@ def _generate_plan_node(state: AgentState) -> dict:
         }
 
     return {
+        "content_meta": result.get("content_meta"),
+        "publish_pack": result.get("publish_pack"),
+        "voice_text": result.get("voice_text"),
+        "review_card": result.get("review_card"),
         "video_plan": result.get("video_plan"),
+        "material_bank": result.get("material_bank", []),
         "error": None
     }
 
@@ -110,9 +126,10 @@ def _capcut_node(state: AgentState) -> dict:
     return {
         "success": result.get("success", False),
         "draft_url": result.get("draft_url"),
-        "duration": result.get("duration"),
-        "scene_count": result.get("scene_count"),
-        "caption_count": result.get("caption_count"),
+        "title": result.get("title"),
+        "cover_text": result.get("cover_text"),
+        "review_card": result.get("review_card"),
+        "material_bank": result.get("material_bank"),
         "error": result.get("error")
     }
 
