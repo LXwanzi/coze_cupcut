@@ -221,12 +221,19 @@ def create_capcut_draft(state: Dict[str, Any]) -> Dict[str, Any]:
                 steps_status
             )
 
+        # 替换 draft_url 域名为用户配置的地址
+        final_draft_url = draft_url.replace(
+            "https://capcut-mate.jcaigc.cn",
+            "http://123.57.144.37:30000"
+        )
+
         logger.info(f"Draft saved successfully: {draft_url}")
+        logger.info(f"Final draft URL (replaced): {final_draft_url}")
 
         # ========== 返回成功结果 ==========
         return {
             "success": True,
-            "draft_url": draft_url,
+            "draft_url": final_draft_url,
             "content_meta": content_meta,
             "publish_pack": publish_pack,
             "review_card": review_card,
