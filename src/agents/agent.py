@@ -48,11 +48,15 @@ class AgentState(MessagesState):
     review_card: dict
     video_plan: dict
     material_bank: list
+    scenes: list  # 包含 asset_url 的 scenes
 
     # 媒体生成结果
     audio_url: str
     audio_size: int
     scenes_generated: int
+
+    # CapCut API 结果
+    steps_status: list
 
     # 最终结果
     success: bool
@@ -111,10 +115,15 @@ def _generate_images_node(state: AgentState) -> dict:
             "success": False
         }
 
+    # 更新 video_plan 中的 scenes
+    video_plan = state.get("video_plan", {})
+    updated_scenes = result.get("scenes", [])
+    video_plan["scenes"] = updated_scenes
+
     return {
-        "video_plan": result.get("video_plan"),
-        "scenes_generated": result.get("scenes_generated", 0),
-        "errors": result.get("errors"),
+        "video_plan": video_plan,
+        "scenes": updated_scenes,
+        "scenes_generated": len(updated_scenes),
         "error": None
     }
 
@@ -126,11 +135,13 @@ def _capcut_node(state: AgentState) -> dict:
     return {
         "success": result.get("success", False),
         "draft_url": result.get("draft_url"),
-        "title": result.get("title"),
-        "cover_text": result.get("cover_text"),
+        "title": result.get("publish_pack", {}).get("title"),
+        "cover_text": result.get("publish_pack", {}).get("cover_text"),
         "review_card": result.get("review_card"),
         "material_bank": result.get("material_bank"),
-        "error": result.get("error")
+        "steps_status": result.get("steps_status", []),
+        "error": result.get("error"),
+        "message": result.get("message")
     }
 
 
