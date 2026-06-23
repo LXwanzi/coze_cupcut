@@ -11,7 +11,7 @@ logger = logging.getLogger(__name__)
 
 # OSS 配置
 OSS_ENDPOINT = "https://oss-cn-beijing.aliyuncs.com"
-OSS_BUCKET = "coze-video-assets"
+OSS_BUCKET = "wanzioss"
 
 # 阿里云 AccessKey
 ACCESS_KEY_ID = os.getenv("OSS_ACCESS_KEY_ID", "")
