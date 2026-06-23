@@ -7,11 +7,14 @@ AI 图片生成节点
 线条简洁，人物用火柴人或简化卡通小人表现，表情夸张但可爱，
 画面元素少，主体明确，色彩明亮，扁平化插画风格。
 竖屏比例 9:16，适合 1080x1920 视频。
+
+生成后自动上传到 OSS，CapCut Mate 可直接访问。
 """
 import logging
 from typing import Dict, Any
 from coze_coding_dev_sdk import ImageGenerationClient
 from coze_coding_utils.runtime_ctx.context import new_context
+from graphs.nodes.oss_uploader import upload_image_to_oss
 
 logger = logging.getLogger(__name__)
 
@@ -87,6 +90,12 @@ def generate_images(state: Dict[str, Any]) -> Dict[str, Any]:
             image_url = _extract_image_url(response)
 
             if image_url:
+                # 上传到 OSS，生成公网 URL
+                oss_url = upload_image_to_oss(image_url, i)
+                
+                # 如果 OSS 上传成功，使用 OSS URL；否则回退到原 URL
+                asset_url = oss_url if oss_url else image_url
+                
                 # 构建带 asset_url 的 scene
                 updated_scene = {
                     "start": scene.get("start", 0),
@@ -94,10 +103,11 @@ def generate_images(state: Dict[str, Any]) -> Dict[str, Any]:
                     "type": scene.get("type", "image"),
                     "visual_role": scene.get("visual_role", ""),
                     "prompt": original_prompt,  # 保留原始 prompt
-                    "asset_url": image_url
+                    "asset_url": asset_url,
+                    "coze_url": image_url  # 保留原始 coze URL
                 }
                 updated_scenes.append(updated_scene)
-                logger.info(f"Scene {i} image generated: {image_url[:80]}...")
+                logger.info(f"Scene {i} asset_url: {asset_url[:80]}...")
             else:
                 errors.append(f"Scene {i} 未获取到图片 URL")
                 logger.error(f"Scene {i} image generation failed: {response}")

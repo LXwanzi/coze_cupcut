@@ -2,11 +2,14 @@
 TTS 配音节点
 输入: voice_text
 输出: audio_url
+
+生成后自动上传到 OSS，CapCut Mate 可直接访问。
 """
 import logging
 from typing import Dict, Any
 from coze_coding_dev_sdk import TTSClient
 from coze_coding_utils.runtime_ctx.context import new_context
+from graphs.nodes.oss_uploader import upload_audio_to_oss
 
 logger = logging.getLogger(__name__)
 
@@ -50,8 +53,17 @@ def tts_synthesize(state: Dict[str, Any]) -> Dict[str, Any]:
 
         logger.info(f"TTS generated: {audio_url}, size: {audio_size}")
 
+        # 上传到 OSS，生成公网 URL
+        oss_url = upload_audio_to_oss(audio_url)
+        
+        # 如果 OSS 上传成功，使用 OSS URL；否则回退到原 URL
+        final_url = oss_url if oss_url else audio_url
+        
+        logger.info(f"TTS final audio_url: {final_url[:80]}...")
+
         return {
-            "audio_url": audio_url,
+            "audio_url": final_url,
+            "coze_audio_url": audio_url,  # 保留原始 URL
             "audio_size": audio_size,
             "error": None
         }
