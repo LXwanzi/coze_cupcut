@@ -6,17 +6,46 @@ TTS 配音节点
 为每个片段单独生成音频，获取实际时长，确保音视频同步。
 """
 import logging
-import json
 import time
 import wave
 import os
 from typing import Dict, Any, List, Optional
+import requests
 from coze_coding_dev_sdk import TTSClient
 from coze_coding_utils.runtime_ctx.context import new_context
-from graphs.nodes.oss_uploader import upload_audio_to_oss, _get_bucket
-import oss2
+from graphs.nodes.oss_uploader import upload_audio_to_oss
 
 logger = logging.getLogger(__name__)
+
+CAPCUT_MATE_BASE_URL = os.getenv(
+    "CAPCUT_MATE_BASE_URL",
+    "http://123.57.144.37:30000/openapi/capcut-mate/v1"
+)
+MICROSECONDS_PER_SECOND = 1_000_000
+
+
+def _seconds_to_us(seconds: float) -> int:
+    return max(1, int(round(seconds * MICROSECONDS_PER_SECOND)))
+
+
+def _get_audio_duration_from_capcut(mp3_url: str) -> Optional[int]:
+    """通过 capcut-mate 获取音频时长，返回微秒。"""
+    try:
+        response = requests.post(
+            f"{CAPCUT_MATE_BASE_URL}/get_audio_duration",
+            json={"mp3_url": mp3_url},
+            timeout=60
+        )
+        data = response.json()
+        duration = data.get("duration") or data.get("data", {}).get("duration")
+        if data.get("code") == 0 and duration:
+            return int(duration)
+        if duration and "code" not in data:
+            return int(duration)
+        logger.warning(f"capcut audio duration failed: {data}")
+    except Exception as e:
+        logger.warning(f"Failed to get audio duration from capcut-mate: {e}")
+    return None
 
 
 def _get_audio_duration(file_path: str) -> float:
@@ -76,21 +105,30 @@ def _generate_segment_audio(
             sample_rate=24000
         )
         
-        # 获取音频时长
-        duration = _get_audio_duration(audio_url)
-        if duration is None:
-            # 估算时长：约 3-5 字/秒
-            duration = max(1.5, len(text) / 4.0)
-        
         # 上传到 OSS
         oss_url = upload_audio_to_oss(audio_url)
         final_url = oss_url if oss_url else audio_url
+
+        # 优先让 capcut-mate 用 ffprobe 读取最终 URL，避免本地缺 mutagen 时靠字符数估算。
+        duration_us = _get_audio_duration_from_capcut(final_url)
+        if duration_us is None:
+            duration = _get_audio_duration(audio_url)
+            if duration is None:
+                # 最后兜底：估算时长。只在远端接口和本地探测都失败时使用。
+                duration = max(1.5, len(text) / 4.0)
+            duration_us = _seconds_to_us(duration)
+        duration = duration_us / MICROSECONDS_PER_SECOND
         
-        logger.info(f"Segment {segment_index} audio: {final_url}, duration: {duration:.2f}s")
+        logger.info(
+            f"Segment {segment_index} audio: {final_url}, "
+            f"duration: {duration:.2f}s ({duration_us} μs)"
+        )
         
         return {
             "url": final_url,
-            "duration": duration,
+            "duration": duration_us,
+            "duration_seconds": duration,
+            "duration_us": duration_us,
             "original_url": audio_url
         }
         
@@ -171,7 +209,7 @@ def tts_synthesize(state: Dict[str, Any]) -> Dict[str, Any]:
     
     # 为每个片段生成音频
     audio_segments = []
-    current_time = 0.0
+    current_time_us = 0
     
     for i, segment in enumerate(segments):
         if not segment or not isinstance(segment, dict):
@@ -185,19 +223,22 @@ def tts_synthesize(state: Dict[str, Any]) -> Dict[str, Any]:
         result = _generate_segment_audio(client, tts_text, speaker, i, ctx)
         
         if result:
-            duration = result["duration"]
+            duration_us = int(result["duration_us"])
+            start_us = current_time_us
+            end_us = start_us + duration_us
             audio_segments.append({
                 "index": i,
                 "scene": segment.get("scene", ""),
                 "tts_text": tts_text,
                 "caption": segment.get("caption", ""),
                 "audio_url": result["url"],  # 统一使用 audio_url
-                "duration": duration,
-                "start": current_time,
-                "end": current_time + duration,
+                "duration": duration_us,
+                "duration_seconds": result["duration_seconds"],
+                "start": start_us,
+                "end": end_us,
                 "scene_data": segment  # 保留原始片段数据
             })
-            current_time += duration
+            current_time_us = end_us
         else:
             # 生成失败，跳过该片段
             logger.warning(f"Skipping segment {i} due to audio generation failure")
@@ -210,9 +251,12 @@ def tts_synthesize(state: Dict[str, Any]) -> Dict[str, Any]:
             "error": "所有片段音频生成失败"
         }
     
-    total_duration = current_time
+    total_duration = current_time_us
     
-    logger.info(f"TTS completed: {len(audio_segments)} segments, total_duration: {total_duration:.2f}s")
+    logger.info(
+        f"TTS completed: {len(audio_segments)} segments, "
+        f"total_duration: {total_duration / MICROSECONDS_PER_SECOND:.2f}s"
+    )
     
     return {
         "audio_url": audio_segments[0]["audio_url"] if audio_segments else None,  # 保留第一个片段 URL

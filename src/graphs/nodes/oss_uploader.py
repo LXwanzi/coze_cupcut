@@ -5,15 +5,16 @@ OSS 存储辅助模块
 import logging
 import tempfile
 import requests
+import os
 from typing import Optional
 
 logger = logging.getLogger(__name__)
 
 # OSS 配置
-OSS_ENDPOINT = "https://oss-cn-beijing.aliyuncs.com"
-OSS_BUCKET = "wanzioss"
+OSS_ENDPOINT = os.getenv("OSS_ENDPOINT", "https://oss-cn-beijing.aliyuncs.com")
+OSS_BUCKET = os.getenv("OSS_BUCKET", "wanzioss")
 
-# 阿里云 AccessKey
+# 阿里云 AccessKey：必须通过环境变量提供，不能写死在源码里。
 ACCESS_KEY_ID = os.getenv("OSS_ACCESS_KEY_ID", "")
 ACCESS_KEY_SECRET = os.getenv("OSS_ACCESS_KEY_SECRET", "")
 
@@ -21,6 +22,9 @@ ACCESS_KEY_SECRET = os.getenv("OSS_ACCESS_KEY_SECRET", "")
 def _get_bucket():
     """获取 OSS Bucket 客户端"""
     try:
+        if not ACCESS_KEY_ID or not ACCESS_KEY_SECRET:
+            logger.warning("OSS credentials are not configured; skip OSS upload")
+            return None
         import oss2
         auth = oss2.Auth(ACCESS_KEY_ID, ACCESS_KEY_SECRET)
         bucket = oss2.Bucket(auth, OSS_ENDPOINT, OSS_BUCKET)

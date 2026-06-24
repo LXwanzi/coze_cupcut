@@ -3,9 +3,9 @@ AI 图片生成节点
 输入: video_plan
 输出: scenes（每项包含 asset_url）
 
-图片风格：极简卡通火柴人风格，白色或浅色干净背景，
-线条简洁，人物用火柴人或简化卡通小人表现，表情夸张但可爱，
-画面元素少，主体明确，色彩明亮，扁平化插画风格。
+图片风格：极简卡通圆头豆豆人「小丸子」，白色或浅色干净背景，
+线条简洁，表情亲切有活力，像通勤路上学英语的年轻打工人学习搭子。
+画面元素少，主体明确，底部预留字幕区域，色彩明亮，扁平化插画风格。
 竖屏比例 9:16，适合 1080x1920 视频。
 
 生成后自动上传到 OSS，CapCut Mate 可直接访问。
@@ -20,10 +20,12 @@ logger = logging.getLogger(__name__)
 
 # 统一图片风格后缀
 STYLE_SUFFIX = (
-    ", minimalist stick figure cartoon illustration, white clean background, "
-    "simple black outlines, stick figure or simplified cartoon character, "
-    "exaggerated cute expressions and poses, minimal details, clear main subject "
-    "occupying 55-70% of the frame, no large white empty areas, "
+    ", minimalist round-headed cartoon character Xiao Wanzi, young office worker "
+    "learning English during commute, wearing wireless earbuds and carrying a laptop bag, "
+    "white or light clean background, simple black outlines, warm energetic expression, "
+    "minimal details, clear main subject occupying 50-65% of the frame, "
+    "bottom 25% of the image intentionally left clean for subtitles, "
+    "no text inside the image, no large empty areas outside the subtitle area, "
     "bright colors, flat illustration, 9:16 vertical frame"
 )
 
@@ -31,7 +33,8 @@ STYLE_SUFFIX = (
 FORBIDDEN_STYLES = [
     "photorealistic", "realistic photo", "cinematic", "film grain",
     "hyperrealistic", "detailed texture", "3D render", "cyberpunk",
-    "dark style", "oil painting", "complex background"
+    "dark style", "oil painting", "complex background", "anime",
+    "manga", "children book", "childish", "text in image"
 ]
 
 

@@ -17,13 +17,90 @@ API Base URL: http://123.57.144.37:30000/openapi/capcut-mate/v1
 """
 import json
 import logging
+import os
 import requests
 from typing import Dict, Any, List, Optional
 
 logger = logging.getLogger(__name__)
 
 # CapCut Mate API 基础 URL
-CAPCUT_MATE_BASE_URL = "http://123.57.144.37:30000/openapi/capcut-mate/v1"
+CAPCUT_MATE_BASE_URL = os.getenv(
+    "CAPCUT_MATE_BASE_URL",
+    "http://123.57.144.37:30000/openapi/capcut-mate/v1"
+)
+MICROSECONDS_PER_SECOND = 1_000_000
+
+
+def _to_microseconds(value: Any) -> int:
+    """Normalize seconds/microseconds-like values to integer microseconds."""
+    if value is None:
+        return 0
+    try:
+        number = float(value)
+    except (TypeError, ValueError):
+        return 0
+    # TTS 节点旧版本可能传秒；新版本传微秒。小于 10_000 基本可判定为秒。
+    if 0 < number < 10_000:
+        number *= MICROSECONDS_PER_SECOND
+    return int(round(number))
+
+
+def _build_timeline_segments(state: Dict[str, Any]) -> List[Dict[str, Any]]:
+    """Build one authoritative timeline used by images, captions, and audio."""
+    audio_segments = state.get("audio_segments") or []
+    segments = state.get("segments") or []
+    scenes = state.get("scenes") or []
+    timeline_segments: List[Dict[str, Any]] = []
+    current_start = 0
+
+    for i, audio_seg in enumerate(audio_segments):
+        source_seg = audio_seg.get("scene_data") or (segments[i] if i < len(segments) else {})
+        scene = scenes[i] if i < len(scenes) else {}
+        start = _to_microseconds(audio_seg.get("start"))
+        if start <= 0 and i > 0:
+            start = current_start
+
+        duration = _to_microseconds(audio_seg.get("duration"))
+        end = _to_microseconds(audio_seg.get("end"))
+        if end <= start:
+            end = start + max(duration, 1_500_000)
+
+        asset_url = (
+            audio_seg.get("asset_url")
+            or audio_seg.get("image_url")
+            or source_seg.get("asset_url")
+            or source_seg.get("image_url")
+            or scene.get("asset_url")
+        )
+
+        timeline_segments.append({
+            "index": audio_seg.get("index", i),
+            "start": start,
+            "end": end,
+            "duration": end - start,
+            "caption": audio_seg.get("caption") or source_seg.get("caption", ""),
+            "audio_url": audio_seg.get("audio_url") or audio_seg.get("url"),
+            "asset_url": asset_url,
+            "scene": audio_seg.get("scene") or source_seg.get("scene", ""),
+        })
+        current_start = end
+
+    return timeline_segments
+
+
+def _validate_timeline(timeline_segments: List[Dict[str, Any]]) -> Optional[str]:
+    if not timeline_segments:
+        return "没有可用的片段级时间轴"
+    for i, seg in enumerate(timeline_segments):
+        if not seg.get("audio_url"):
+            return f"片段 {i} 缺少 audio_url"
+        if not seg.get("asset_url"):
+            return f"片段 {i} 缺少图片 asset_url"
+        if not seg.get("caption"):
+            return f"片段 {i} 缺少字幕 caption"
+        if int(seg.get("end", 0)) <= int(seg.get("start", 0)):
+            return f"片段 {i} 时间范围无效: {seg.get('start')} - {seg.get('end')}"
+    return None
 
 
 def create_capcut_draft(state: Dict[str, Any]) -> Dict[str, Any]:
@@ -64,15 +141,20 @@ def create_capcut_draft(state: Dict[str, Any]) -> Dict[str, Any]:
 
     try:
         # ========== 校验时间轴 ==========
-        # 使用片段级音频计算总时长
-        if audio_segments and len(audio_segments) > 0:
-            total_audio_duration = max(seg.get("end", 0) for seg in audio_segments)
-        else:
-            # 备用：使用视频时长
-            total_audio_duration = video_plan.get("duration", 60000000)
+        # 只使用一套权威时间轴，后续图片、字幕、音频都从这里派生。
+        timeline_segments = _build_timeline_segments(state)
+        timeline_error = _validate_timeline(timeline_segments)
+        if timeline_error:
+            return _build_error_result(
+                draft_url, content_meta, publish_pack, review_card, material_bank,
+                timeline_error,
+                steps_status
+            )
+
+        total_audio_duration = max(seg["end"] for seg in timeline_segments)
 
         logger.info(f"Total audio duration: {total_audio_duration} μs ({total_audio_duration / 1000000:.2f}s)")
-        logger.info(f"Audio segments count: {len(audio_segments)}")
+        logger.info(f"Timeline segments count: {len(timeline_segments)}")
 
         # ========== Step 1: 创建草稿 ==========
         logger.info("Step 1: Creating draft...")
@@ -111,41 +193,14 @@ def create_capcut_draft(state: Dict[str, Any]) -> Dict[str, Any]:
         # ========== Step 2: 添加图片 ==========
         # 构建图片信息列表 - 使用片段时间轴
         image_infos_list = []
-        for seg in audio_segments:
-            scene = seg.get("scene", {})
-            asset_url = scene.get("asset_url")
-            start = seg.get("start", 0)
-            end = seg.get("end", start + 3000000)  # 默认 3 秒
-
-            if not asset_url:
-                logger.warning(f"Scene missing asset_url at {start}-{end}, skipping")
-                continue
-
+        for seg in timeline_segments:
             image_infos_list.append({
-                "image_url": asset_url,
+                "image_url": seg["asset_url"],
                 "width": width,
                 "height": height,
-                "start": start,
-                "end": end
+                "start": seg["start"],
+                "end": seg["end"]
             })
-
-        # 如果没有片段数据，使用 scenes
-        if not image_infos_list and scenes:
-            for scene in scenes:
-                asset_url = scene.get("asset_url")
-                if not asset_url:
-                    return _build_error_result(
-                        draft_url, content_meta, publish_pack, review_card, material_bank,
-                        f"Scene 缺少 asset_url: {scene}",
-                        steps_status
-                    )
-                image_infos_list.append({
-                    "image_url": asset_url,
-                    "width": width,
-                    "height": height,
-                    "start": scene.get("start", 0),
-                    "end": scene.get("end", 0)
-                })
 
         if image_infos_list:
             logger.info(f"Step 2: Adding {len(image_infos_list)} images...")
@@ -176,18 +231,12 @@ def create_capcut_draft(state: Dict[str, Any]) -> Dict[str, Any]:
         # ========== Step 3: 添加字幕 ==========
         # 构建字幕列表 - 基于片段时间轴，使用深色文字+白色背景+底部位置
         captions_list = []
-        for seg in audio_segments:
-            caption_text = seg.get("caption", "")
-            start = seg.get("start", 0)
-            end = seg.get("end", start + 3000000)
-
-            if not caption_text:
-                continue
-
+        for seg in timeline_segments:
             captions_list.append({
-                "start": start,
-                "end": end,
-                "text": caption_text
+                "start": seg["start"],
+                "end": seg["end"],
+                "text": seg["caption"],
+                "font_size": 42
             })
 
         if captions_list:
@@ -206,16 +255,20 @@ def create_capcut_draft(state: Dict[str, Any]) -> Dict[str, Any]:
                 "font_size": 42,
                 # 透明度
                 "alpha": 1.0,
+                "bold": True,
+                "line_spacing": 4,
                 # 阴影增加可读性
-                "shadow": True,
-                "shadow_color": "#000000",
-                "shadow_alpha": 0.30,
-                "shadow_blur": 8,
-                "shadow_offset_x": 0,
-                "shadow_offset_y": 4,
+                "has_shadow": True,
+                "shadow_info": {
+                    "shadow_color": "#000000",
+                    "shadow_alpha": 0.35,
+                    "shadow_diffuse": 8,
+                    "shadow_distance": 4,
+                    "shadow_angle": -45
+                },
                 # 底部安全区位置 (画布高度 1920，字幕放底部约 2/3 处)
                 "transform_x": 0,
-                "transform_y": 600
+                "transform_y": 620
             }
 
             add_captions_response = _safe_post("/add_captions", add_captions_payload)
@@ -236,24 +289,12 @@ def create_capcut_draft(state: Dict[str, Any]) -> Dict[str, Any]:
         # ========== Step 4: 添加音频 ==========
         # 使用片段级音频同步
         audio_infos_list = []
-        if audio_segments and len(audio_segments) > 0:
-            for seg in audio_segments:
-                seg_audio_url = seg.get("audio_url")
-                if not seg_audio_url:
-                    continue
-
-                audio_infos_list.append({
-                    "audio_url": seg_audio_url,
-                    "start": seg.get("start", 0),
-                    "end": seg.get("end", seg.get("start", 0) + 3000000),
-                    "volume": 1.0
-                })
-        elif audio_url:
-            # 备用：整段音频
+        for seg in timeline_segments:
             audio_infos_list.append({
-                "audio_url": audio_url,
-                "start": 0,
-                "end": total_audio_duration,
+                "audio_url": seg["audio_url"],
+                "start": seg["start"],
+                "end": seg["end"],
+                "duration": seg["duration"],
                 "volume": 1.0
             })
 
@@ -317,6 +358,11 @@ def create_capcut_draft(state: Dict[str, Any]) -> Dict[str, Any]:
             "publish_pack": publish_pack,
             "review_card": review_card,
             "material_bank": material_bank,
+            "duration": total_audio_duration,
+            "duration_seconds": round(total_audio_duration / MICROSECONDS_PER_SECOND, 2),
+            "scene_count": len(timeline_segments),
+            "caption_count": len(timeline_segments),
+            "timeline_segments": timeline_segments,
             "steps_status": steps_status,
             "message": "剪映草稿已生成，请用 CapCut Mate 桌面端导入剪映。"
         }

@@ -4,6 +4,7 @@
 import logging
 from typing import Dict, Any
 from langgraph.graph import StateGraph, END
+from langgraph.graph.state import CompiledStateGraph
 
 from graphs.nodes.generate_plan import generate_plan
 from graphs.nodes.tts_node import tts_synthesize
@@ -48,7 +49,7 @@ class VideoWorkflowState(dict):
     error: str
 
 
-def create_workflow() -> StateGraph:
+def create_workflow() -> CompiledStateGraph:
     """创建工作流图"""
     
     workflow = StateGraph(VideoWorkflowState)
@@ -115,8 +116,11 @@ def tts_synthesize_node(state: VideoWorkflowState) -> Dict[str, Any]:
             if not audio_seg:
                 continue
             if audio_seg.get("index") == i:
-                seg["audio_url"] = audio_seg.get("url")
+                seg["audio_url"] = audio_seg.get("audio_url") or audio_seg.get("url")
                 seg["audio_duration"] = audio_seg.get("duration")
+                seg["audio_duration_seconds"] = audio_seg.get("duration_seconds")
+                seg["start"] = audio_seg.get("start")
+                seg["end"] = audio_seg.get("end")
                 break
     
     return {
@@ -151,18 +155,30 @@ def generate_images_node(state: VideoWorkflowState) -> Dict[str, Any]:
         if i < len(video_plan_scenes):
             video_plan_scenes[i]["asset_url"] = scene.get("asset_url")
     
-    # 更新 segments 中的场景信息
+    # 更新 segments 和 audio_segments 中的场景信息。后续 CapCut 节点只使用同一套
+    # audio_segments 时间轴，避免图片/字幕/音频各自生成时间导致错位。
     for i, seg in enumerate(segments):
-        for scene in scenes:
-            if scene.get("visual_role") == seg.get("scene") or i == scenes.index(scene):
-                seg["asset_url"] = scene.get("asset_url")
-                seg["image_url"] = scene.get("asset_url")
-                break
+        if i < len(scenes):
+            scene = scenes[i]
+            seg["asset_url"] = scene.get("asset_url")
+            seg["image_url"] = scene.get("asset_url")
+
+    audio_segments = state.get("audio_segments", [])
+    for audio_seg in audio_segments:
+        index = audio_seg.get("index")
+        if isinstance(index, int) and index < len(scenes):
+            scene = scenes[index]
+            audio_seg["asset_url"] = scene.get("asset_url")
+            audio_seg["image_url"] = scene.get("asset_url")
+            audio_seg["image_prompt"] = scene.get("prompt", "")
+        if isinstance(index, int) and index < len(segments):
+            audio_seg["scene_data"] = segments[index]
     
     return {
         "scenes": scenes,
         "video_plan": video_plan,
         "segments": segments,
+        "audio_segments": audio_segments,
         "error": None
     }
 
@@ -185,14 +201,16 @@ def create_capcut_draft_node(state: VideoWorkflowState) -> Dict[str, Any]:
 
 
 # 全局工作流实例
-_workflow = None
+#
+# coze_coding_utils.helper.graph_helper.get_graph_instance() 不会调用
+# build_graph()，只会扫描模块里的 CompiledStateGraph 对象。因此这里必须在
+# 模块加载时暴露一个已编译图，否则 workflow 模式下会拿到 None。
+graph = create_workflow()
+_workflow = graph
 
 
-def get_graph() -> StateGraph:
+def get_graph() -> CompiledStateGraph:
     """获取工作流图实例"""
-    global _workflow
-    if _workflow is None:
-        _workflow = create_workflow()
     return _workflow
 
 
