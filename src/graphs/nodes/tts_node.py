@@ -147,25 +147,18 @@ def _generate_segment_audio(
     ctx,
     speed: float = TTS_SPEED
 ) -> Optional[Dict[str, Any]]:
-    """为单个片段生成音频，speed 参数控制语速（0.5-2.0，1.0为正常，<1.0为慢速）"""
+    """为单个片段生成音频"""
     try:
-        # 根据 SDK 文档，尝试添加 speed 参数
-        # 如果 SDK 不支持 speed，会忽略该参数
-        generate_kwargs = {
-            "uid": f"segment_{segment_index}_{int(time.time())}",
-            "text": text,
-            "speaker": speaker,
-            "audio_format": "mp3",
-            "sample_rate": 24000
-        }
+        # 清理临时文件名中的空格
+        safe_uid = f"segment_{segment_index}_{int(time.time())}".replace(" ", "_")
         
-        # 尝试添加 speed 参数（部分 SDK 版本支持）
-        try:
-            generate_kwargs["speed"] = speed
-        except Exception:
-            pass
-        
-        audio_url, audio_size = client.synthesize(**generate_kwargs)
+        audio_url, audio_size = client.synthesize(
+            uid=safe_uid,
+            text=text,
+            speaker=speaker,
+            audio_format="mp3",
+            sample_rate=24000
+        )
         
         # 上传到 OSS
         oss_url = upload_audio_to_oss(audio_url)
