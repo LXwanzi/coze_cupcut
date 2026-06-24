@@ -27,8 +27,8 @@ def generate_plan(state: Dict[str, Any]) -> Dict[str, Any]:
     canvas_width = state.get("canvas_width", 1080)
     canvas_height = state.get("canvas_height", 1920)
 
-    # 确保时长在 45-90 秒范围内
-    duration_seconds = max(45, min(90, duration_seconds))
+    # 确保时长在 25-35 秒范围内
+    duration_seconds = max(25, min(35, duration_seconds))
     duration_microseconds = duration_seconds * 1000000
 
     # 场景映射
@@ -58,23 +58,48 @@ def generate_plan(state: Dict[str, Any]) -> Dict[str, Any]:
 1. 内容必须原创，不得搬运教材、课程、真题、绘本原文
 2. 如果涉及 BEC，只能生成风格练习、商务表达和备考建议，不解析真题原文
 3. 如果涉及绘本，只生成围绕主题的亲子互动句，不复述绘本原文
-4. 英文例句必须是重新组织的原创表达，不照抄用户提供的原始句子
+4. 英文例句必须是重新组织的原创表达
 
 ### 视频结构要求
-每条视频包含：
-- 开场钩子（吸引眼球）
-- 3-5 个英语表达
-- 中文解释
-- 使用场景
-- 结尾复习提醒
+总时长 {duration_seconds} 秒，节奏分配：
+- 开头 2 秒：标题页，吸引眼球
+- 每个表达 5-6 秒：先显示场景图，同时显示英文句子和中文翻译
+- 结尾 3 秒：复习前面出现的所有英文表达
 
-### 脚本要求
-- 要适合口播，不要书面腔
-- 字幕要短句化，方便剪映显示
-- 画面用泛化原创场景（通勤、生活、办公室、亲子互动、旅行等）
+### 每条表达的结构（每个表达都是这个结构）
+1. 场景画面（与英文句子语义完全匹配）
+2. 画面上同时显示英文句子和中文翻译（不要拆成英文一页、中文一页）
 
-### 输出格式
-请按以下 JSON 格式输出（必须严格遵循此格式）：
+### 画面匹配规则
+- 画面必须和英文句子语义完全匹配
+- 例如 "rush hour traffic"：画面应该是堵车、早高峰、通勤车辆，不要出现咖啡机
+- 例如 "shuttle bus"：画面应该是赶班车的人和通勤班车
+- 例如 "packed like sardines"：画面应该是拥挤地铁
+- 不要生成 Excuse me / Thank you / Sorry / You're welcome 这种无关内容
+
+### 图片风格要求
+极简卡通火柴人插画：
+- 白色或浅色背景
+- 黑色线条
+- 少细节
+- 主体明确
+- 表情夸张可爱
+- 竖屏 9:16
+- 主体占画面 55%-70%，不要大面积空白
+
+### 字幕排版规则
+- 字幕放在画面底部安全区
+- 不要遮挡人物脸、身体、车辆、地铁等主体
+- 最多两行：英文在上，中文在下
+- 字号要足够大，移动端能看清
+- 不要把字幕放在画面正中间
+
+### 结尾复习页规则
+- 必须复习本视频出现过的所有英文表达
+- 不要换成其他日常短句
+- 不要生成 Excuse me / Thank you / Sorry / You're welcome
+
+## 输出 JSON 格式（严格遵循）
 
 {{
     "content_meta": {{
@@ -90,16 +115,16 @@ def generate_plan(state: Dict[str, Any]) -> Dict[str, Any]:
         "description": "发布文案（带引导语）",
         "hashtags": ["通勤英语", "英语学习", "每日英语"]
     }},
-    "voice_text": "完整原创口播文案（{duration_seconds}秒左右）",
+    "voice_text": "完整原创口播文案（{duration_seconds}秒左右，与画面节奏匹配）",
     "review_card": {{
         "today_expressions": [
             {{
-                "english": "原创英文表达1",
+                "english": "英文表达1",
                 "chinese": "中文翻译",
-                "usage": "使用场景说明"
+                "usage": "使用场景"
             }}
         ],
-        "quick_review": "今日复盘提醒"
+        "quick_review": "复盘提醒"
     }},
     "video_plan": {{
         "canvas": {{
@@ -110,24 +135,17 @@ def generate_plan(state: Dict[str, Any]) -> Dict[str, Any]:
         "scenes": [
             {{
                 "start": 0,
-                "end": 8000000,
+                "end": 2000000,
                 "type": "image",
                 "visual_role": "hook",
-                "prompt": "英文AI画面提示词，泛化原创场景，9:16竖屏"
-            }},
-            {{
-                "start": 8000000,
-                "end": 16000000,
-                "type": "image",
-                "visual_role": "expression_1",
-                "prompt": "英文AI画面提示词"
+                "prompt": "极简卡通火柴人插画，白色背景，黑色线条，人物表情夸张可爱，竖屏9:16。开场标题画面"
             }}
         ],
         "captions": [
             {{
                 "start": 0,
-                "end": 4000000,
-                "text": "短字幕"
+                "end": 2000000,
+                "text": "标题文字"
             }}
         ]
     }},
@@ -139,12 +157,12 @@ def generate_plan(state: Dict[str, Any]) -> Dict[str, Any]:
     ]
 }}
 
-## 注意事项
-- video_plan 的 scenes 和 captions 时间覆盖整个 {duration_seconds} 秒
-- scenes 数量建议 4-6 个
+## 重要说明
+- video_plan 的 scenes 和 captions 时间必须覆盖整个 {duration_seconds} 秒
+- 每个表达的画面必须和对应的英文句子语义完全匹配
+- 结尾复习页必须列出本视频所有英文表达
 - 所有时间使用微秒（1秒=1000000微秒）
-- 必须输出纯 JSON，不要有任何额外文字
-- material_bank 存放当天未使用但有价值的素材点子"""
+- 必须输出纯 JSON，不要有任何额外文字"""
 
     messages = [
         SystemMessage(content="你是专业的通勤英语内容策划专家，擅长生成原创短视频脚本。"),

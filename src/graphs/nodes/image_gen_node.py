@@ -20,10 +20,11 @@ logger = logging.getLogger(__name__)
 
 # 统一图片风格后缀
 STYLE_SUFFIX = (
-    ", minimalist stick figure cartoon style, white or light clean background, "
-    "simple clean lines, stick figure or simplified cartoon character, "
-    "exaggerated cute expressions, minimal elements in frame, clear main subject, "
-    "bright colors, flat illustration style, 9:16 vertical frame"
+    ", minimalist stick figure cartoon illustration, white clean background, "
+    "simple black outlines, stick figure or simplified cartoon character, "
+    "exaggerated cute expressions and poses, minimal details, clear main subject "
+    "occupying 55-70% of the frame, no large white empty areas, "
+    "bright colors, flat illustration, 9:16 vertical frame"
 )
 
 # 禁止的风格关键词
