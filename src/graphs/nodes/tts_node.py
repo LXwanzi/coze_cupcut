@@ -4,7 +4,56 @@ TTS 配音节点
 输出: audio_segments, audio_url, total_duration
 
 为每个片段单独生成音频，获取实际时长，确保音视频同步。
+支持多种音色选择（见 TTS_VOICES 配置）。
 """
+
+# ========== TTS 音色配置 ==========
+# 可选音色：
+# - zh_female_xiaohe_uranus_bigtts (小禾 - 默认，通用女声)
+# - zh_female_vv_uranus_bigtts (Vivi - 中英双语)
+# - zh_female_xueayi_saturn_bigtts (雪球 - 儿童故事)
+# - zh_male_m191_uranus_bigtts (云舟 - 男声)
+# - zh_male_taocheng_uranus_bigtts (小天 - 男声)
+# - zh_male_dayi_saturn_bigtts (大奕 - 视频配音男声)
+# - zh_female_mizai_saturn_bigtts (米仔 - 视频配音女声)
+# - zh_female_meilinvyou_saturn_bigtts (美丽女友 - 商务女声)
+# - zh_female_santongyongns_saturn_bigtts (三通女 - 温柔女声)
+# - zh_male_ruyayichen_saturn_bigtts (儒雅男 - 优雅男声)
+# - saturn_zh_female_keainvsheng_tob (可爱女声)
+# - saturn_zh_female_tiaopigongzhu_tob (俏皮女声)
+# - saturn_zh_male_shuanglangshaonian_tob (爽朗少年)
+# - saturn_zh_male_tiancaitongzhuo_tob (天才同学)
+# - saturn_zh_female_cancan_tob (才女)
+
+TTS_VOICES = {
+    "default": "zh_female_xiaohe_uranus_bigtts",
+    "xiaohao": "zh_female_xiaohe_uranus_bigtts",
+    "vivi": "zh_female_vv_uranus_bigtts",
+    "children": "zh_female_xueayi_saturn_bigtts",
+    "parent_child": "zh_female_xueayi_saturn_bigtts",
+    "kids": "zh_female_xueayi_saturn_bigtts",
+    "male": "zh_male_m191_uranus_bigtts",
+    "yunzhou": "zh_male_m191_uranus_bigtts",
+    "xiaotian": "zh_male_taocheng_uranus_bigtts",
+    "business": "zh_female_meilinvyou_saturn_bigtts",
+    "bec": "zh_female_meilinvyou_saturn_bigtts",
+    "professional": "zh_female_meilinvyou_saturn_bigtts",
+    "video": "zh_male_dayi_saturn_bigtts",
+    "dubbing": "zh_female_mizai_saturn_bigtts",
+    "motivation": "zh_female_jitangnv_saturn_bigtts",
+    "gentle": "zh_female_santongyongns_saturn_bigtts",
+    "sweet": "zh_female_santongyongns_saturn_bigtts",
+    "elegant": "zh_male_ruyayichen_saturn_bigtts",
+    "cute": "saturn_zh_female_keainvsheng_tob",
+    "playful": "saturn_zh_female_tiaopigongzhu_tob",
+    "cheerful": "saturn_zh_male_shuanglangshaonian_tob",
+    "genius": "saturn_zh_male_tiancaitongzhuo_tob",
+    "smart": "saturn_zh_female_cancan_tob",
+}
+
+DEFAULT_VOICE = "zh_female_xiaohe_uranus_bigtts"
+# =================================
+
 import logging
 import time
 import wave
@@ -160,14 +209,13 @@ def tts_synthesize(state: Dict[str, Any]) -> Dict[str, Any]:
                 "error": "缺少 voice_text，无法生成配音"
             }
         
-        # 使用旧方式生成整段音频
-        scene = state.get("content_meta", {}).get("scene", "general")
-        if scene == "parent_child":
-            speaker = "zh_female_xueayi_saturn_bigtts"
-        elif scene == "business" or scene == "bec":
-            speaker = "zh_female_meilinvyou_saturn_bigtts"
-        else:
-            speaker = "zh_female_xiaohe_uranus_bigtts"
+        # 获取音色配置：优先使用用户指定的音色，其次根据场景选择
+        voice_key = (
+            state.get("content_meta", {}).get("voice") or
+            state.get("content_meta", {}).get("scene") or
+            "default"
+        )
+        speaker = TTS_VOICES.get(voice_key, DEFAULT_VOICE)
         
         try:
             audio_url, audio_size = client.synthesize(

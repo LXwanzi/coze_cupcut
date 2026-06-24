@@ -6,14 +6,15 @@ API Base URL: http://123.57.144.37:30000/openapi/capcut-mate/v1
 流程:
 1. POST /create_draft - 创建草稿
 2. POST /add_images - 添加图片到草稿（基于音频时间轴）
-3. POST /add_captions - 添加字幕（深色文字+白色背景+底部位置）
+3. POST /add_captions - 添加字幕（深色文字+白色背景+顶部位置）
 4. POST /add_audios - 添加音频（片段级同步）
 5. POST /save_draft - 保存草稿
 
 核心原则:
 - 所有片段（图片、字幕、音频）必须使用相同的 start/end 时间轴
 - 总时长以音频总时长为准
-- 字幕固定在底部安全区
+- 字幕固定在顶部安全区
+- 支持添加 BGM 背景音乐
 """
 import json
 import logging
@@ -22,6 +23,19 @@ import requests
 from typing import Dict, Any, List, Optional
 
 logger = logging.getLogger(__name__)
+
+# ========== BGM 配置 ==========
+# 设置 BGM URL 即可添加背景音乐
+# 可选 BGM 风格：
+# - "none" 或空: 不添加 BGM
+# - 自定义 URL: 使用你自己的 BGM 音频 URL
+
+BGM_URL = os.getenv("BGM_URL", "")  # 环境变量配置
+BGM_VOLUME = 0.3  # BGM 音量 (0.0-1.0)，配音为主，BGM 作为背景
+
+# 内置 BGM 示例（需要替换为实际可用的 URL）
+# BGM_URL = "https://your-oss-bucket/bgm/light_piano.mp3"
+# =================================
 
 # CapCut Mate API 基础 URL
 CAPCUT_MATE_BASE_URL = os.getenv(
@@ -256,6 +270,7 @@ def create_capcut_draft(state: Dict[str, Any]) -> Dict[str, Any]:
                 # 透明度
                 "alpha": 1.0,
                 "bold": True,
+                "italic": True,  # 斜体
                 "line_spacing": 2,
                 # 阴影增加可读性
                 "has_shadow": True,
@@ -319,6 +334,38 @@ def create_capcut_draft(state: Dict[str, Any]) -> Dict[str, Any]:
                     f"添加音频失败: {add_audios_response}",
                     steps_status
                 )
+
+        # ========== Step 4.5: 添加 BGM（可选）==========
+        # 检查是否有 BGM 配置
+        bgm_url = state.get("bgm_url") or BGM_URL
+        if bgm_url and bgm_url.lower() not in ["none", "", "false"]:
+            logger.info(f"Step 4.5: Adding BGM from {bgm_url}...")
+            # BGM 从 0 开始，贯穿整个视频
+            bgm_infos_list = [{
+                "audio_url": bgm_url,
+                "start": 0,
+                "end": total_audio_duration,
+                "duration": total_audio_duration,
+                "volume": BGM_VOLUME  # BGM 音量较低，作为背景
+            }]
+            
+            add_bgm_payload = {
+                "draft_url": draft_url,
+                "audio_infos": json.dumps(bgm_infos_list, ensure_ascii=False)
+            }
+            
+            add_bgm_response = _safe_post("/add_audios", add_bgm_payload)
+            steps_status.append({
+                "step": "add_bgm",
+                "url": f"{CAPCUT_MATE_BASE_URL}/add_audios",
+                "request": add_bgm_payload,
+                "response": add_bgm_response
+            })
+            
+            if add_bgm_response and add_bgm_response.get("code") == 0:
+                logger.info("BGM added successfully")
+            else:
+                logger.warning(f"BGM add failed (non-critical): {add_bgm_response}")
 
         # ========== Step 5: 保存草稿 ==========
         logger.info("Step 5: Saving draft...")
