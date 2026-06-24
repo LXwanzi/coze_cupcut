@@ -18,7 +18,14 @@ from graphs.nodes.oss_uploader import upload_image_to_oss
 
 logger = logging.getLogger(__name__)
 
-# 统一图片风格后缀
+# 小丸子角色参考图 URL（上传到 OSS 后的永久 URL）
+CHARACTER_REFERENCE_IMAGE_URL = (
+    "https://coze-coding-project.tos.coze.site/"
+    "coze_storage_7654517760407470089/character/xiaowanzi_reference_025ac01d.png"
+    "?sign=1813840450-6d264531cf-0-98731a4230b5a6d4f921455f1f0f76e47a690a7e486f6a0e53b2c4637f455532"
+)
+
+# 统一图片风格后缀（角色一致性要求）
 STYLE_SUFFIX = (
     ", minimalist round-headed cartoon character Xiao Wanzi, young office worker "
     "learning English in everyday spare moments, wearing wireless earbuds and carrying a laptop bag, "
@@ -27,6 +34,14 @@ STYLE_SUFFIX = (
     "bottom 25% of the image intentionally left clean for subtitles, "
     "no text inside the image, no large empty areas outside the subtitle area, "
     "bright colors, flat illustration, 9:16 vertical frame"
+)
+
+# 角色一致性追加描述（用于图生图）
+CHARACTER_CONSISTENCY_PROMPT = (
+    " Keep the character consistent with the reference image: "
+    "same face shape, short black hair, wireless earbuds, light-colored top, crossbody bag, line art style. "
+    "Only change actions, expressions, props and scene. "
+    "Do not generate character sheet text, labels, borders, or multiple characters."
 )
 
 # 禁止的风格关键词
@@ -38,15 +53,26 @@ FORBIDDEN_STYLES = [
 ]
 
 
-def _apply_style(prompt: str) -> str:
-    """为 prompt 添加统一风格，并移除禁止的风格关键词"""
+def _apply_style(prompt: str, use_reference: bool = True) -> str:
+    """为 prompt 添加统一风格，并移除禁止的风格关键词
+    
+    Args:
+        prompt: 原始 prompt
+        use_reference: 是否追加角色一致性描述
+    """
     # 移除禁止的关键词
     clean_prompt = prompt
     for forbidden in FORBIDDEN_STYLES:
         clean_prompt = clean_prompt.replace(forbidden, "")
 
     # 添加风格后缀
-    return clean_prompt + STYLE_SUFFIX
+    styled_prompt = clean_prompt + STYLE_SUFFIX
+    
+    # 追加角色一致性描述（图生图模式）
+    if use_reference:
+        styled_prompt += CHARACTER_CONSISTENCY_PROMPT
+    
+    return styled_prompt
 
 
 def generate_images(state: Dict[str, Any]) -> Dict[str, Any]:
@@ -65,7 +91,7 @@ def generate_images(state: Dict[str, Any]) -> Dict[str, Any]:
             "error": "缺少 video_plan 或 segments，无法生成图片"
         }
     
-    # 如果有 segments 但没有 video_plan，从 segments 构建 scenes
+    # 如果有 segments 但 video_plan 为空，从 segments 构建 video_plan
     if not video_plan and segments:
         # 从 segments 构建 video_plan 结构
         video_plan = {
@@ -102,11 +128,12 @@ def generate_images(state: Dict[str, Any]) -> Dict[str, Any]:
         logger.info(f"Generating image for scene {i}: {prompt[:100]}...")
 
         try:
-            # 生成 2K 竖屏图片
+            # 生成 2K 竖屏图片，使用角色参考图进行图生图
             response = client.generate(
                 prompt=prompt,
                 size="2K",
-                watermark=False
+                watermark=False,
+                image=CHARACTER_REFERENCE_IMAGE_URL  # 传入角色参考图
             )
 
             # 提取图片 URL
