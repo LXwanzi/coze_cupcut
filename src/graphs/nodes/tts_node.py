@@ -161,7 +161,7 @@ def tts_synthesize(state: Dict[str, Any]) -> Dict[str, Any]:
             }
         
         # 使用旧方式生成整段音频
-        scene = state.get("content_meta", {}).get("scene", "commute")
+        scene = state.get("content_meta", {}).get("scene", "general")
         if scene == "parent_child":
             speaker = "zh_female_xueayi_saturn_bigtts"
         elif scene == "business" or scene == "bec":
@@ -199,7 +199,7 @@ def tts_synthesize(state: Dict[str, Any]) -> Dict[str, Any]:
             }
     
     # 根据场景选择音色
-    scene = state.get("content_meta", {}).get("scene", "commute")
+    scene = state.get("content_meta", {}).get("scene", "general")
     if scene == "parent_child":
         speaker = "zh_female_xueayi_saturn_bigtts"
     elif scene == "business" or scene == "bec":

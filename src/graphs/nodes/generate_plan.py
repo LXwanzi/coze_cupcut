@@ -20,7 +20,7 @@ def generate_plan(state: Dict[str, Any]) -> Dict[str, Any]:
 
     # 解析输入
     learning_note = state.get("learning_note") or state.get("topic") or state.get("text") or ""
-    scene = state.get("scene") or state.get("style") or "commute"
+    scene = state.get("scene") or state.get("style") or "general"
     duration_seconds = state.get("duration_seconds", 60)
     audience = state.get("audience", "英语学习者")
     tone = state.get("tone", "轻松实用")
@@ -29,13 +29,16 @@ def generate_plan(state: Dict[str, Any]) -> Dict[str, Any]:
 
     # 场景映射
     scene_mapping = {
-        "commute": "早晚通勤",
+        "general": "碎片时间英语",
+        "daily": "日常口语",
         "parent_child": "亲子绘本",
         "travel": "生活旅游",
         "business": "商务英语",
-        "bec": "BEC备考"
+        "office": "办公室英语",
+        "bec": "BEC备考",
+        "commute": "通勤场景"
     }
-    scene_name = scene_mapping.get(scene, scene if scene else "通勤学习")
+    scene_name = scene_mapping.get(scene, scene if scene else "碎片时间英语")
 
     # 构建 prompt，根据用户输入决定场景
     prompt = f"""你是「英语短视频内容助手」，严格根据用户提供的学习笔记或主题生成内容。
@@ -48,9 +51,10 @@ def generate_plan(state: Dict[str, Any]) -> Dict[str, Any]:
 2. **禁止**：改变用户指定的主题方向
 3. **必须**：直接使用用户提供的英文表达或其同义改写
 4. **必须**：根据用户主题选择合适的场景画面
-5. **必须**：固定主角是“小丸子”，她是通勤路上学英语的年轻打工人学习搭子
+5. **必须**：固定主角是“小丸子”，她是利用碎片时间学英语的年轻打工人学习搭子
 6. **必须**：每个图片 prompt 都写明底部预留字幕区域，不遮挡人物脸、身体、手机和关键物体
 7. **必须**：英文和中文同屏，英文在上、中文在下，字幕最多两行
+8. **禁止**：除非用户主题明确要求通勤/地铁/公交/堵车，否则不要默认生成通勤场景
 
 ## 输出 JSON 格式（严格遵循）
 
@@ -94,11 +98,12 @@ def generate_plan(state: Dict[str, Any]) -> Dict[str, Any]:
 1. segments 必须生成 4 个片段：标题页 + 3 个英语表达，不要生成无音频的长结尾页
 2. 每个表达片段必须使用用户提供的英文表达或主题下最相关的表达
 3. image_prompt 必须与该片段英文句子语义严格匹配
-4. image_prompt 统一使用：极简卡通圆头豆豆人“小丸子”，浅色背景，黑色简洁线条，少细节，竖屏9:16，底部预留 25% 字幕区域
-5. caption 必须是两行：英文句子\\n中文意思
-6. tts 必须朗读该片段 caption 对应内容，不能为空
-7. 每个表达的 tts 控制在 3-5 秒，标题页 tts 控制在 1-2 秒
-8. 输出纯 JSON，不要有任何额外文字"""
+4. image_prompt 必须根据用户主题选择场景：亲子启蒙用家庭/绘本/玩具，商务英语用办公室/会议/电脑，旅行英语用酒店/机场/餐厅/问路，日常口语用生活服务/朋友聊天/咖啡店/便利店。不要默认通勤场景
+5. image_prompt 统一使用：极简卡通圆头豆豆人“小丸子”，浅色背景，黑色简洁线条，少细节，竖屏9:16，底部预留 25% 字幕区域
+6. caption 必须是两行：英文句子\\n中文意思
+7. tts 必须朗读该片段 caption 对应内容，不能为空
+8. 每个表达的 tts 控制在 3-5 秒，标题页 tts 控制在 1-2 秒
+9. 输出纯 JSON，不要有任何额外文字"""
 
     messages = [
         SystemMessage(content="你是专业的英语短视频内容策划专家，擅长根据用户输入生成原创短视频脚本。严格遵循用户提供的主题，不添加无关内容。"),

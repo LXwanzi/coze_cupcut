@@ -15,7 +15,7 @@ def test_build_timeline_segments_uses_one_timeline_for_all_tracks():
                 "end": 1_500_000,
                 "duration": 1_500_000,
                 "audio_url": "https://example.com/0.mp3",
-                "caption": "小丸子通勤英语",
+                "caption": "小丸子英语时间",
                 "scene_data": {"scene": "标题页"},
             },
             {
@@ -24,7 +24,7 @@ def test_build_timeline_segments_uses_one_timeline_for_all_tracks():
                 "end": 4_300_000,
                 "duration": 2_800_000,
                 "audio_url": "https://example.com/1.mp3",
-                "caption": "I missed the subway train!\n我错过地铁了！",
+                "caption": "Could you say that again?\n你能再说一遍吗？",
                 "scene_data": {"scene": "表达1"},
             },
         ],

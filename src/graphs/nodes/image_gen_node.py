@@ -4,7 +4,7 @@ AI 图片生成节点
 输出: scenes（每项包含 asset_url）
 
 图片风格：极简卡通圆头豆豆人「小丸子」，白色或浅色干净背景，
-线条简洁，表情亲切有活力，像通勤路上学英语的年轻打工人学习搭子。
+线条简洁，表情亲切有活力，像利用碎片时间学英语的年轻打工人学习搭子。
 画面元素少，主体明确，底部预留字幕区域，色彩明亮，扁平化插画风格。
 竖屏比例 9:16，适合 1080x1920 视频。
 
@@ -21,7 +21,7 @@ logger = logging.getLogger(__name__)
 # 统一图片风格后缀
 STYLE_SUFFIX = (
     ", minimalist round-headed cartoon character Xiao Wanzi, young office worker "
-    "learning English during commute, wearing wireless earbuds and carrying a laptop bag, "
+    "learning English in everyday spare moments, wearing wireless earbuds and carrying a laptop bag, "
     "white or light clean background, simple black outlines, warm energetic expression, "
     "minimal details, clear main subject occupying 50-65% of the frame, "
     "bottom 25% of the image intentionally left clean for subtitles, "
