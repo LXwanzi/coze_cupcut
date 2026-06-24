@@ -109,7 +109,11 @@ def tts_synthesize_node(state: VideoWorkflowState) -> Dict[str, Any]:
     
     # 更新每个 segment 的音频 URL 和时长
     for i, seg in enumerate(segments):
+        if not seg:
+            continue
         for audio_seg in audio_segments:
+            if not audio_seg:
+                continue
             if audio_seg.get("index") == i:
                 seg["audio_url"] = audio_seg.get("url")
                 seg["audio_duration"] = audio_seg.get("duration")

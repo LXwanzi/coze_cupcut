@@ -51,14 +51,33 @@ def generate_images(state: Dict[str, Any]) -> Dict[str, Any]:
     ctx = new_context(method="generate_images")
     client = ImageGenerationClient(ctx=ctx)
 
-    # 优先使用 video_plan
+    # 优先使用 video_plan，如果不存在则从 segments 构建
     video_plan = state.get("video_plan")
-    if not video_plan:
+    segments = state.get("segments", [])
+    
+    # 如果既没有 video_plan 也没有 segments，返回错误
+    if not video_plan and not segments:
         return {
             "scenes": None,
-            "error": "缺少 video_plan，无法生成图片"
+            "error": "缺少 video_plan 或 segments，无法生成图片"
         }
-
+    
+    # 如果有 segments 但没有 video_plan，从 segments 构建 scenes
+    if not video_plan and segments:
+        # 从 segments 构建 video_plan 结构
+        video_plan = {
+            "canvas": state.get("video_plan", {}).get("canvas", {"width": 1080, "height": 1920}),
+            "scenes": []
+        }
+        for seg in segments:
+            video_plan["scenes"].append({
+                "start": 0,
+                "end": int(seg.get("duration", 4.0) * 1000000),
+                "type": "image",
+                "prompt": seg.get("image_prompt", ""),
+                "visual_role": seg.get("scene", "scene")
+            })
+    
     scenes = video_plan.get("scenes", [])
     if not scenes:
         return {

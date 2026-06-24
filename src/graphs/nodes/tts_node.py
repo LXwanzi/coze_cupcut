@@ -29,11 +29,21 @@ def _get_audio_duration(file_path: str) -> float:
             urllib.request.urlretrieve(file_path, temp_path)
             file_path = temp_path
         
-        # 使用 wave 模块获取时长
-        with wave.open(file_path, 'rb') as wav_file:
-            frames = wav_file.getnframes()
-            rate = wav_file.getframerate()
-            duration = frames / float(rate)
+        # 尝试使用 mutagen 读取 mp3 时长
+        try:
+            from mutagen.mp3 import MP3
+            audio = MP3(file_path)
+            duration = audio.info.length
+        except ImportError:
+            # 如果没有 mutagen，尝试用 wave（用于 wav 格式）
+            if file_path.endswith('.wav'):
+                with wave.open(file_path, 'rb') as wav_file:
+                    frames = wav_file.getnframes()
+                    rate = wav_file.getframerate()
+                    duration = frames / float(rate)
+            else:
+                # 无法读取，返回估算值
+                duration = None
         
         # 清理临时文件
         if file_path.startswith('/tmp/'):
@@ -62,7 +72,7 @@ def _generate_segment_audio(
             uid=f"segment_{segment_index}_{int(time.time())}",
             text=text,
             speaker=speaker,
-            audio_format="wav",  # 使用 wav 以便获取时长
+            audio_format="mp3",  # 使用 mp3 格式
             sample_rate=24000
         )
         
@@ -164,6 +174,10 @@ def tts_synthesize(state: Dict[str, Any]) -> Dict[str, Any]:
     current_time = 0.0
     
     for i, segment in enumerate(segments):
+        if not segment or not isinstance(segment, dict):
+            logger.warning(f"Segment {i} is invalid, skipping: {segment}")
+            continue
+        
         tts_text = segment.get("tts", "")
         if not tts_text:
             continue
@@ -201,7 +215,7 @@ def tts_synthesize(state: Dict[str, Any]) -> Dict[str, Any]:
     logger.info(f"TTS completed: {len(audio_segments)} segments, total_duration: {total_duration:.2f}s")
     
     return {
-        "audio_url": audio_segments[0]["url"] if audio_segments else None,  # 保留第一个片段 URL
+        "audio_url": audio_segments[0]["audio_url"] if audio_segments else None,  # 保留第一个片段 URL
         "audio_segments": audio_segments,
         "total_duration": total_duration,
         "error": None
