@@ -236,11 +236,11 @@ def create_capcut_draft(state: Dict[str, Any]) -> Dict[str, Any]:
                 "start": seg["start"],
                 "end": seg["end"],
                 "text": seg["caption"],
-                "font_size": 42
+                "font_size": 10
             })
 
         if captions_list:
-            logger.info(f"Step 3: Adding {len(captions_list)} captions with bottom position...")
+            logger.info(f"Step 3: Adding {len(captions_list)} captions with top position...")
             add_captions_payload = {
                 "draft_url": draft_url,
                 "captions": json.dumps(captions_list, ensure_ascii=False),
@@ -251,24 +251,24 @@ def create_capcut_draft(state: Dict[str, Any]) -> Dict[str, Any]:
                 "border_width": 2,
                 # 居中对齐
                 "alignment": 1,
-                # 较大字号，移动端可读
-                "font_size": 42,
+                # 字号10
+                "font_size": 10,
                 # 透明度
                 "alpha": 1.0,
                 "bold": True,
-                "line_spacing": 4,
+                "line_spacing": 2,
                 # 阴影增加可读性
                 "has_shadow": True,
                 "shadow_info": {
                     "shadow_color": "#000000",
-                    "shadow_alpha": 0.35,
-                    "shadow_diffuse": 8,
-                    "shadow_distance": 4,
+                    "shadow_alpha": 0.3,
+                    "shadow_diffuse": 4,
+                    "shadow_distance": 2,
                     "shadow_angle": -45
                 },
-                # 底部安全区位置 (画布高度 1920，字幕放底部约 2/3 处)
+                # 顶部位置，不遮挡人物
                 "transform_x": 0,
-                "transform_y": 620
+                "transform_y": -700
             }
 
             add_captions_response = _safe_post("/add_captions", add_captions_payload)
