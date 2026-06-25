@@ -221,8 +221,9 @@ def _generate_topic_id(user_input: str, scene: str) -> str:
     # 定义大类主题映射（同一大类的所有场景共享同一个 topic_id）
     topic_categories = {
         'hotel': ['酒店', 'hotel', 'check in', 'check out', 'check-in', 'check-out', '退房', '入住', '换房', '房间'],
+        'travel': ['旅行', 'travel', '旅游', '出行', '行程', 'itinerary', '护照', 'passport', '航班', 'flight'],
         'restaurant': ['餐厅', 'restaurant', '点餐', '用餐', '吃饭'],
-        'airport': ['机场', 'airport', '登机', '航班'],
+        'airport': ['机场', 'airport', '登机'],
         'shopping': ['购物', 'shopping', '商店', '买'],
         'transport': ['打车', 'taxi', '地铁', '公交', '问路', '导航'],
         'office': ['办公室', 'office', '工作', '会议'],
