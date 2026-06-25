@@ -154,14 +154,13 @@ def generate_plan(state: Dict[str, Any]) -> Dict[str, Any]:
             'duration_seconds': sum(seg.get('duration', 5) for seg in segments),
             'originality_check': '所有内容基于用户提供的原始素材生成',
             'safety_note': '未涉及教材原文复述',
-            'topic_id': topic_id,
-            'episode_num': memory.episode_count
+            'topic_id': topic_id
         }
         
         # 6. 构建发布信息
         publish_pack = {
-            'title': f"第{memory.episode_count}集 | 跟小丸子学{content_meta['selected_topic']}",
-            'cover_text': f"第{memory.episode_count}集\n{content_meta['selected_topic']}",
+            'title': f"跟小丸子学{content_meta['selected_topic']}",
+            'cover_text': f"{content_meta['selected_topic']}",
             'description': f"每天跟读3遍，一周熟练运用！#英语学习 #跟读练习",
             'hashtags': ['英语学习', '跟读练习', '实用英语']
         }
@@ -341,7 +340,6 @@ def _generate_video_plan(
 
 ## 专题信息
 - 专题名称：{season_name or '新专题'}
-- 当前集数：第{episode_num}集
 - {review_hint}
 
 ## 已学过的句子（不要重复！）
@@ -356,25 +354,24 @@ def _generate_video_plan(
    - 如果用户提供了5个或以上句子，从中选择5个最合适的
    - 如果用户提供的句子不足5个，根据同一主题自动补充相关句子到5个
    - 补充的句子必须与用户提供的句子属于同一场景、难度相当
-3. 生成回顾文案（如果是第2集以上）
+3. 生成回顾文案（如果有已学过的句子）
 4. 生成一个吸引人的"钩子页"文案
-5. 生成下集预告文案（留悬念）
+5. 生成预告文案（留悬念）
 
 ## 输出格式
 请直接输出 JSON，不要有其他内容：
 
 {{
     "episode_info": {{
-        "episode_num": {episode_num},
         "season_name": "{season_name or '新专题'}",
-        "review": "上集回顾文案（第1集为空字符串）",
-        "preview": "下集预告文案（留悬念）"
+        "review": "上集回顾文案（首次为空字符串）",
+        "preview": "预告文案（留悬念）"
     }},
     "segments": [
         {{
             "scene": "回顾页",
             "caption": "上集回顾\\n简短回顾文案",
-            "tts": "上集我们学了...这集继续...",
+            "tts": "上次我们学了...这次继续...",
             "image_prompt": "FIXED_HOOK_IMAGE",
             "duration": 2.0
         }},
@@ -387,8 +384,8 @@ def _generate_video_plan(
         }},
         {{
             "scene": "标题页",
-            "caption": "第X集\\n英文标题\\n中文标题",
-            "tts": "第X集，标题语音内容",
+            "caption": "英文标题\\n中文标题",
+            "tts": "标题语音内容",
             "image_prompt": "简洁的场景描述，小丸子站立在中下区域，头顶留白 25%",
             "duration": 3.0
         }},
@@ -402,25 +399,25 @@ def _generate_video_plan(
         ...
         {{
             "scene": "预告页",
-            "caption": "下集预告\\n悬念文案",
-            "tts": "下一集，我们学更实用的说法...",
+            "caption": "预告\\n悬念文案",
+            "tts": "接下来，我们学更实用的说法...",
             "image_prompt": "FIXED_HOOK_IMAGE",
             "duration": 3.0
         }},
         {{
             "scene": "结尾复习页",
             "caption": "本集X句跟读复习\\n1. 句子1 - 意思1\\n2. 句子2 - 意思2\\n...",
-            "tts": "来复习一下本集学的X句话...",
+            "tts": "来复习一下今天学的X句话...",
             "image_prompt": "FIXED_REVIEW_WITH_CHAR",
             "duration": 8.0
         }}
     ]
 }}
 
-## 回顾页规则（第1集跳过）
-- 如果是第1集，回顾页文案为空，duration设为0
-- 如果是第2集以上，用一句话回顾上集内容
-- 示例："上集我们学了check in，这集继续学..."
+## 回顾页规则（首次跳过）
+- 如果没有已学过的句子，回顾页文案为空，duration设为0
+- 如果有已学过的句子，用一句话回顾上集内容
+- 示例："上次我们学了check in，这次继续学..."
 
 ## 钩子页规则
 1. **必须和本期5句英语内容强相关**
@@ -432,12 +429,12 @@ def _generate_video_plan(
    - "这5句，真的能救场。"
 
 ## 预告页规则（必须留悬念！）
-1. 预告下一集的内容
-2. 制造期待感，让人想看下一集
+1. 预告接下来要学的内容
+2. 制造期待感，让人想继续看
 3. 示例：
-   - "下一集，我们学更自然的说法"
+   - "接下来，我们学更自然的说法"
    - "还有一句更像老外会说的"
-   - "下集我给你看最实用的版本"
+   - "下一句更实用哦"
 
 ## image_prompt 规则
 - 钩子页、回顾页、预告页：固定为 "FIXED_HOOK_IMAGE"
@@ -449,6 +446,10 @@ def _generate_video_plan(
 2. **不要重复已学过的句子**
 3. 每个跟读句的 duration 设为 6.0 秒
 4. 只输出 JSON，不要有 ```json 之类的标记
+5. **禁止出现"第X集"概念**：
+   - 标题页 tts 只说主题，如"旅行英语，出发前确认行程"
+   - 不要说"第1集"、"第二集"等
+   - 用户会手动添加合集，不需要在视频中提及集数
 """
     
     try:
