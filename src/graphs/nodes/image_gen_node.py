@@ -29,49 +29,46 @@ CHARACTER_REFERENCE_IMAGE_URL = (
     "?sign=1813840450-6d264531cf-0-98731a4230b5a6d4f921455f1f0f76e47a690a7e486f6a0e53b2c4637f455532"
 )
 
-# 固定图片 URL（预生成并上传到 OSS，不再调用 API）
+# 固定图片 URL（warm beige背景 + 米白色渐变）
 FIXED_HOOK_IMAGE_URL = (
     "https://coze-coding-project.tos.coze.site/"
-    "coze_storage_7654517760407470089/fixed/hook_img_a6d431c4.png"
-    "?sign=1784962848-2e8d27ec42-0-b0927206c31be1d5267887152302e36b8fe1051fa5e2f2aad37e2e35c34b72c3"
+    "coze_storage_7654517760407470089/fixed/hook_v2_c362fa07.png"
+    "?sign=1784964895-037cf37b48-0-339cc160f1c31a11dedb04c065cf435541bf41677ce811b2332fdd1d4cf6fd12"
 )
 
-# 复习卡带人物背景 URL（底部有小头像，右侧和上方60%+留白给字幕）
+# 复习卡带人物背景 URL（底部小头像，顶部80%留白给字幕）
 FIXED_REVIEW_WITH_CHAR_URL = (
     "https://coze-coding-project.tos.coze.site/"
-    "coze_storage_7654517760407470089/fixed/review_with_char_767c238f.png"
-    "?sign=1784962848-ff43d16ccd-0-97b502720df91ec9af3c4f975c810f36d57496a865acf659982e2ff2244801ce"
+    "coze_storage_7654517760407470089/fixed/review_v2_6f1121be.png"
+    "?sign=1784964896-cd489dffc6-0-6cfcc2b6b884fc6aa2e4685b6e97081a2d8125a2e1967f3c16da1b9b8e22dd81"
 )
 
 # 缓存已生成的固定图片（仅用于缓存从 URL 下载后的本地路径）
 FIXED_HOOK_IMAGE_GENERATED = None
 FIXED_REVIEW_BACKGROUND_GENERATED = None
 
-# 统一图片风格后缀（角色一致性要求）
+# 统一图片风格后缀（warm beige米白色渐变背景，顶部15%留白给字幕）
 STYLE_SUFFIX = (
-    ", minimalist round-headed cartoon character Xiao Wanzi, young office worker "
+    ", warm beige gradient background, minimalist style, soft lighting. "
+    "The top 15% of the frame is completely empty and clean for text overlay. "
+    "Minimalist round-headed cartoon character Xiao Wanzi, young office worker "
     "learning English in everyday spare moments, wearing wireless earbuds and carrying a laptop bag, "
-    "white or light clean background, simple black outlines, warm energetic expression, "
-    "minimal details, clear main subject occupying 50-65% of the frame, "
-    "bottom 25% of the image intentionally left clean for subtitles, "
-    "no text inside the image, no large empty areas outside the subtitle area, "
-    "bright colors, flat illustration, 9:16 vertical frame"
+    "short black hair, light-colored top, crossbody bag, line art style, "
+    "character fixed in middle-lower area (head should not exceed middle line), "
+    "no text inside the image, bright colors, flat illustration, 9:16 vertical frame"
 )
 
-# 角色一致性追加描述（用于图生图）
-CHARACTER_CONSISTENCY_PROMPT = (
-    " Keep the character consistent with the reference image: "
-    "same face shape, short black hair, wireless earbuds, light-colored top, crossbody bag, line art style. "
-    "Only change actions, expressions, props and scene. "
-    "Do not generate character sheet text, labels, borders, or multiple characters."
-)
-
-# 禁止的风格关键词
+# 禁止的风格/颜色关键词
 FORBIDDEN_STYLES = [
+    # 禁止的质感
     "photorealistic", "realistic photo", "cinematic", "film grain",
     "hyperrealistic", "detailed texture", "3D render", "cyberpunk",
     "dark style", "oil painting", "complex background", "anime",
-    "manga", "children book", "childish", "text in image"
+    "manga", "children book", "childish", "text in image",
+    # 禁止的蓝色系背景
+    "blue", "cyan", "sky blue", "gradient blue", "teal", "navy",
+    "azure", "ocean blue", "light blue", "dark blue", "royal blue",
+    "aqua", "turquoise", "steel blue", "cobalt", "indigo"
 ]
 
 
@@ -220,12 +217,8 @@ def _apply_style(prompt: str, scene_type: str = "", use_reference: bool = True) 
             "character head should NOT reach the top third of the frame"
         )
 
-    # 构建完整 prompt
+    # 构建完整 prompt（STYLE_SUFFIX 已包含角色一致性描述）
     styled_prompt = clean_prompt + STYLE_SUFFIX + position_constraint
-    
-    # 追加角色一致性描述（图生图模式）
-    if use_reference:
-        styled_prompt += CHARACTER_CONSISTENCY_PROMPT
     
     return styled_prompt
 
