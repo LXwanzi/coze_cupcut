@@ -54,11 +54,12 @@ FORBIDDEN_STYLES = [
 ]
 
 
-def _apply_style(prompt: str, use_reference: bool = True) -> str:
+def _apply_style(prompt: str, scene_type: str = "", use_reference: bool = True) -> str:
     """为 prompt 添加统一风格，并移除禁止的风格关键词
     
     Args:
         prompt: 原始 prompt
+        scene_type: 场景类型，用于确定位置约束
         use_reference: 是否追加角色一致性描述
     """
     # 移除禁止的关键词
@@ -66,8 +67,32 @@ def _apply_style(prompt: str, use_reference: bool = True) -> str:
     for forbidden in FORBIDDEN_STYLES:
         clean_prompt = clean_prompt.replace(forbidden, "")
 
-    # 添加风格后缀
-    styled_prompt = clean_prompt + STYLE_SUFFIX
+    # 根据场景类型添加位置约束
+    if "复习" in scene_type:
+        # 复习页：人物缩小放角落，字幕区域留白
+        position_constraint = (
+            ", IMPORTANT: Xiao Wanzi MUST be positioned in the BOTTOM-LEFT or BOTTOM-RIGHT corner, "
+            "character height takes up NO MORE than 30% of the frame height, "
+            "right side and upper area of the frame (60%+) MUST be completely empty for subtitle text overlay, "
+            "background is a clean review card style with large empty space on the right"
+        )
+    elif "标题页" in scene_type:
+        # 标题页：人物在中下，头顶留白
+        position_constraint = (
+            ", IMPORTANT: Xiao Wanzi positioned in the CENTER-LOWER area, "
+            "top 25% of the frame is intentionally left empty and clean for subtitle placement, "
+            "character head should NOT reach the middle of the frame"
+        )
+    else:
+        # 跟读句：人物固定在中下区域
+        position_constraint = (
+            ", IMPORTANT: Xiao Wanzi positioned in the CENTER-LOWER or LOWER-CENTER area of the frame, "
+            "top 25% of the frame is intentionally left empty and clean for subtitle placement, "
+            "character head should NOT reach the top third of the frame"
+        )
+
+    # 构建完整 prompt
+    styled_prompt = clean_prompt + STYLE_SUFFIX + position_constraint
     
     # 追加角色一致性描述（图生图模式）
     if use_reference:
@@ -137,8 +162,10 @@ def generate_images(state: Dict[str, Any]) -> Dict[str, Any]:
         if not original_prompt:
             return i, None, f"Scene {i} 缺少 prompt"
 
-        prompt = _apply_style(original_prompt)
-        logger.info(f"Generating image for scene {i}: {prompt[:80]}...")
+        # 获取场景类型，用于添加位置约束
+        scene_type = scene.get("visual_role", "") or scene.get("scene", "")
+        prompt = _apply_style(original_prompt, scene_type=scene_type)
+        logger.info(f"Generating image for scene {i} ({scene_type}): {prompt[:80]}...")
 
         try:
             response = client.generate(
