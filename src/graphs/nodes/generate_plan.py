@@ -224,15 +224,15 @@ def _generate_video_plan(
             "scene": "钩子页",
             "caption": "钩子文案（12-18字以内，一句话）",
             "tts": "钩子文案（慢速、直接）",
-            "image_prompt": "小丸子做出惊讶或思考的表情，背景简洁，顶部30%留白",
-            "duration": 2.0
+            "image_prompt": "FIXED_HOOK_IMAGE",
+            "duration": 2.5
         }},
         {{
             "scene": "标题页",
             "caption": "英文标题\\n中文标题",
             "tts": "标题语音内容（简短）",
             "image_prompt": "简洁的场景描述，小丸子站立在中下区域，头顶留白 25%",
-            "duration": 2.0
+            "duration": 3.0
         }},
         {{
             "scene": "第1句跟读",
@@ -266,9 +266,9 @@ def _generate_video_plan(
 
 ## image_prompt 场景描述规则（必须严格遵守）
 
-### 钩子页
-image_prompt 格式："小丸子做出惊讶或思考的表情，背景简洁，顶部30%留白"
-要求：小丸子表情突出，背景简单干净
+### 钩子页（重要！）
+image_prompt 必须固定为："FIXED_HOOK_IMAGE"
+这是特殊标记，表示使用固定钩子页图片，不生成AI图片
 
 ### 标题页
 image_prompt 格式："简洁的场景描述，小丸子站立在中下区域，头顶留白 25%"
@@ -278,8 +278,8 @@ image_prompt 格式："与句子意思匹配的场景描述，小丸子站立在
 示例："小丸子站在酒店前台微笑着递出证件，小丸子站立在中下区域，头顶留白 25%"
 
 ### 结尾复习页（重要！）
-image_prompt 必须固定为："FIXED_REVIEW_BACKGROUND"
-这是特殊标记，表示使用固定复习卡背景图，不生成AI图片
+image_prompt 必须固定为："FIXED_REVIEW_WITH_CHAR"
+这是特殊标记，表示使用同色系复习背景+底部小丸子头像，不生成AI图片
 
 ## 重要规则
 1. **必须使用用户提供的原始英语句子**，不要自己编造新句子
