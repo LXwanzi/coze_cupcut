@@ -29,15 +29,21 @@ CHARACTER_REFERENCE_IMAGE_URL = (
     "?sign=1813840450-6d264531cf-0-98731a4230b5a6d4f921455f1f0f76e47a690a7e486f6a0e53b2c4637f455532"
 )
 
-# 固定复习卡背景图 URL（纯色渐变背景，无文字）
-# 使用 Coze 图像生成一张干净的复习卡背景
-FIXED_REVIEW_BACKGROUND_URL = (
+# 固定图片 URL（预生成并上传到 OSS，不再调用 API）
+FIXED_HOOK_IMAGE_URL = (
     "https://coze-coding-project.tos.coze.site/"
-    "coze_storage_7654517760407470089/review/review_card_bg.png"
-    "?sign=xxx"
+    "coze_storage_7654517760407470089/fixed/hook_img_a6d431c4.png"
+    "?sign=1784962848-2e8d27ec42-0-b0927206c31be1d5267887152302e36b8fe1051fa5e2f2aad37e2e35c34b72c3"
 )
 
-# 缓存已生成的固定图片
+# 复习卡带人物背景 URL（底部有小头像，右侧和上方60%+留白给字幕）
+FIXED_REVIEW_WITH_CHAR_URL = (
+    "https://coze-coding-project.tos.coze.site/"
+    "coze_storage_7654517760407470089/fixed/review_with_char_767c238f.png"
+    "?sign=1784962848-ff43d16ccd-0-97b502720df91ec9af3c4f975c810f36d57496a865acf659982e2ff2244801ce"
+)
+
+# 缓存已生成的固定图片（仅用于缓存从 URL 下载后的本地路径）
 FIXED_HOOK_IMAGE_GENERATED = None
 FIXED_REVIEW_BACKGROUND_GENERATED = None
 
@@ -70,75 +76,94 @@ FORBIDDEN_STYLES = [
 
 
 def _handle_fixed_image(prompt_marker: str, i: int, scene: Dict[str, Any], client: Any) -> tuple:
-    """处理固定图片类型：钩子页和复习页背景"""
+    """处理固定图片类型：直接使用预置固定 URL，不调用 API"""
     global FIXED_HOOK_IMAGE_GENERATED, FIXED_REVIEW_BACKGROUND_GENERATED
-
-    cache_key = f"fixed_{i}"
 
     try:
         if prompt_marker == "FIXED_HOOK_IMAGE":
-            # 钩子页：固定小丸子惊讶表情图片
+            fixed_url = FIXED_HOOK_IMAGE_URL
             cache = FIXED_HOOK_IMAGE_GENERATED
-            cache_var_name = "FIXED_HOOK_IMAGE_GENERATED"
 
             if cache:
                 oss_url = upload_image_to_oss(cache, f"hook_img_{i}")
                 asset_url = oss_url if oss_url else cache
-                updated_scene = {
-                    "start": scene.get("start", 0),
-                    "end": scene.get("end", 0),
-                    "type": "image",
-                    "visual_role": scene.get("visual_role", ""),
-                    "prompt": prompt_marker,
-                    "asset_url": asset_url,
-                    "coze_url": cache
-                }
-                logger.info(f"Scene {i} using cached hook image")
-                return i, updated_scene, None
+            else:
+                import requests as req
+                resp = req.get(fixed_url, timeout=30)
+                if resp.status_code == 200:
+                    cache = resp.content
+                    FIXED_HOOK_IMAGE_GENERATED = cache
+                    oss_url = upload_image_to_oss(cache, f"hook_img_{i}")
+                    asset_url = oss_url if oss_url else fixed_url
+                else:
+                    asset_url = fixed_url
 
-            # 生成钩子页固定图片
-            hook_prompt = (
-                "Xiao Wanzi looking surprised with wide eyes, mouth slightly open, "
-                "holding both hands near chest in a gesture of amazement, "
-                "simple white or light blue clean background, "
-                "minimalist cartoon style, warm friendly expression, "
-                "no text, no decorations, clean and simple, "
-                "flat illustration, 9:16 vertical format"
-            )
-
-            logger.info(f"Generating fixed hook image for scene {i}...")
-            response = client.generate(
-                prompt=hook_prompt,
-                size="2K",
-                watermark=False,
-                image=CHARACTER_REFERENCE_IMAGE_URL
-            )
-
-            image_url = _extract_image_url(response)
-
-            if image_url:
-                FIXED_HOOK_IMAGE_GENERATED = image_url
-                oss_url = upload_image_to_oss(image_url, f"hook_img_{i}")
-                asset_url = oss_url if oss_url else image_url
-                updated_scene = {
-                    "start": scene.get("start", 0),
-                    "end": scene.get("end", 0),
-                    "type": "image",
-                    "visual_role": scene.get("visual_role", ""),
-                    "prompt": prompt_marker,
-                    "asset_url": asset_url,
-                    "coze_url": image_url
-                }
-                logger.info(f"Scene {i} hook image: {asset_url[:60]}...")
-                return i, updated_scene, None
+            updated_scene = {
+                "start": scene.get("start", 0),
+                "end": scene.get("end", 0),
+                "type": "image",
+                "visual_role": scene.get("visual_role", ""),
+                "prompt": prompt_marker,
+                "asset_url": asset_url,
+                "coze_url": fixed_url
+            }
+            logger.info(f"Scene {i} FIXED_HOOK_IMAGE (no API call)")
+            return i, updated_scene, None
 
         elif prompt_marker == "FIXED_REVIEW_WITH_CHAR":
-            # 复习页：同色系背景 + 底部小丸子头像
+            fixed_url = FIXED_REVIEW_WITH_CHAR_URL
             cache = FIXED_REVIEW_BACKGROUND_GENERATED
 
             if cache:
                 oss_url = upload_image_to_oss(cache, f"review_bg_{i}")
                 asset_url = oss_url if oss_url else cache
+            else:
+                import requests as req
+                resp = req.get(fixed_url, timeout=30)
+                if resp.status_code == 200:
+                    cache = resp.content
+                    FIXED_REVIEW_BACKGROUND_GENERATED = cache
+                    oss_url = upload_image_to_oss(cache, f"review_bg_{i}")
+                    asset_url = oss_url if oss_url else fixed_url
+                else:
+                    asset_url = fixed_url
+
+            updated_scene = {
+                "start": scene.get("start", 0),
+                "end": scene.get("end", 0),
+                "type": "image",
+                "visual_role": scene.get("visual_role", ""),
+                "prompt": prompt_marker,
+                "asset_url": asset_url,
+                "coze_url": fixed_url
+            }
+            logger.info(f"Scene {i} FIXED_REVIEW_WITH_CHAR (no API call)")
+            return i, updated_scene, None
+
+        elif prompt_marker == "FIXED_REVIEW_BACKGROUND":
+            # 纯色渐变复习背景（无人物）
+            import requests as req
+            fixed_url = (
+                "https://coze-coding-project.tos.coze.site/"
+                "coze_storage_7654517760407470089/fixed/review_bg_a6d431c4.png"
+                "?sign=xxx"
+            )
+            cache = FIXED_REVIEW_BACKGROUND_GENERATED
+
+            if cache:
+                oss_url = upload_image_to_oss(cache, f"review_bg_plain_{i}")
+                asset_url = oss_url if oss_url else cache
+            else:
+                resp = req.get(fixed_url, timeout=30)
+                if resp.status_code == 200:
+                    cache = resp.content
+                    FIXED_REVIEW_BACKGROUND_GENERATED = cache
+                    oss_url = upload_image_to_oss(cache, f"review_bg_plain_{i}")
+                    asset_url = oss_url if oss_url else fixed_url
+                else:
+                    asset_url = None
+
+            if asset_url:
                 updated_scene = {
                     "start": scene.get("start", 0),
                     "end": scene.get("end", 0),
@@ -146,51 +171,15 @@ def _handle_fixed_image(prompt_marker: str, i: int, scene: Dict[str, Any], clien
                     "visual_role": scene.get("visual_role", ""),
                     "prompt": prompt_marker,
                     "asset_url": asset_url,
-                    "coze_url": cache
+                    "coze_url": fixed_url
                 }
-                logger.info(f"Scene {i} using cached review background with char")
+                logger.info(f"Scene {i} FIXED_REVIEW_BACKGROUND fallback success")
                 return i, updated_scene, None
-
-            # 生成复习页背景：浅色同色系背景 + 底部小丸子
-            review_prompt = (
-                "Xiao Wanzi standing in the bottom area of the frame, small figure taking up only 20% of height, "
-                "surprised or happy expression, simple wave gesture, "
-                "clean light blue to white gradient background, "
-                "center and upper area (70%+) completely empty for text overlay, "
-                "simple geometric decorations only at corners, "
-                "no text, no other characters, minimalist cartoon style, "
-                "flat illustration, 9:16 vertical format"
-            )
-
-            logger.info(f"Generating fixed review background with char for scene {i}...")
-            response = client.generate(
-                prompt=review_prompt,
-                size="2K",
-                watermark=False,
-                image=CHARACTER_REFERENCE_IMAGE_URL
-            )
-
-            image_url = _extract_image_url(response)
-
-            if image_url:
-                FIXED_REVIEW_BACKGROUND_GENERATED = image_url
-                oss_url = upload_image_to_oss(image_url, f"review_bg_{i}")
-                asset_url = oss_url if oss_url else image_url
-                updated_scene = {
-                    "start": scene.get("start", 0),
-                    "end": scene.get("end", 0),
-                    "type": "image",
-                    "visual_role": scene.get("visual_role", ""),
-                    "prompt": prompt_marker,
-                    "asset_url": asset_url,
-                    "coze_url": image_url
-                }
-                logger.info(f"Scene {i} review bg with char: {asset_url[:60]}...")
-                return i, updated_scene, None
-
-        return i, None, f"Scene {i} 固定图片生成失败"
+            else:
+                return i, None, f"Scene {i} 固定复习背景获取失败"
 
     except Exception as e:
+        logger.error(f"Scene {i} fixed image error: {e}")
         return i, None, f"Scene {i} 固定图片生成异常: {str(e)}"
 
 

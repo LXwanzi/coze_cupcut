@@ -246,7 +246,7 @@ def _generate_video_plan(
             "scene": "结尾复习页",
             "caption": "今日X句跟读复习\\n1. 句子1 - 意思1\\n2. 句子2 - 意思2\\n...",
             "tts": "来复习一下今天学的X句话。第一句，句子1 第二句，句子2 ...",
-            "image_prompt": "FIXED_REVIEW_BACKGROUND",
+            "image_prompt": "FIXED_REVIEW_WITH_CHAR",
             "duration": 8.0
         }}
     ]
