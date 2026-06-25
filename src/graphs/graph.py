@@ -26,6 +26,8 @@ class VideoWorkflowState(dict):
     canvas_height: int
     
     # 中间状态
+    topic_id: str  # 专题ID
+    episode_info: Dict[str, Any]  # 集数信息
     content_meta: Dict[str, Any]
     publish_pack: Dict[str, Any]
     review_card: Dict[str, Any]
@@ -83,6 +85,7 @@ def generate_plan_node(state: VideoWorkflowState) -> Dict[str, Any]:
         }
     
     return {
+        "topic_id": result.get("topic_id"),
         "content_meta": result.get("content_meta"),
         "publish_pack": result.get("publish_pack"),
         "review_card": result.get("review_card"),

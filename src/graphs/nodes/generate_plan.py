@@ -214,34 +214,34 @@ def generate_plan(state: Dict[str, Any]) -> Dict[str, Any]:
 
 
 def _generate_topic_id(user_input: str, scene: str) -> str:
-    """从用户输入生成 topic_id，基于主题关键词而非完整输入"""
+    """从用户输入生成 topic_id，基于大类主题而非具体场景"""
     import hashlib
     import re
     
-    # 提取主题关键词（如"酒店入住"、"酒店退房"等）
-    # 匹配常见的主题模式
-    topic_patterns = [
-        r'酒店入住',
-        r'酒店退房',
-        r'酒店',
-        r'机场',
-        r'餐厅',
-        r'购物',
-        r'问路',
-        r'打车',
-        r'办公室',
-        r'亲子',
-        r'日常',
-    ]
+    # 定义大类主题映射（同一大类的所有场景共享同一个 topic_id）
+    topic_categories = {
+        'hotel': ['酒店', 'hotel', 'check in', 'check out', 'check-in', 'check-out', '退房', '入住', '换房', '房间'],
+        'restaurant': ['餐厅', 'restaurant', '点餐', '用餐', '吃饭'],
+        'airport': ['机场', 'airport', '登机', '航班'],
+        'shopping': ['购物', 'shopping', '商店', '买'],
+        'transport': ['打车', 'taxi', '地铁', '公交', '问路', '导航'],
+        'office': ['办公室', 'office', '工作', '会议'],
+        'daily': ['日常', 'daily', '生活'],
+    }
     
-    topic_keyword = scene  # 默认使用 scene
-    for pattern in topic_patterns:
-        match = re.search(pattern, user_input)
-        if match:
-            topic_keyword = match.group()
+    # 查找匹配的大类主题
+    topic_category = scene  # 默认使用 scene
+    user_input_lower = user_input.lower()
+    
+    for category, keywords in topic_categories.items():
+        for keyword in keywords:
+            if keyword.lower() in user_input_lower:
+                topic_category = category
+                break
+        if topic_category != scene:
             break
     
-    key = f"{scene}_{topic_keyword}"
+    key = f"{scene}_{topic_category}"
     return hashlib.md5(key.encode()).hexdigest()[:12]
 
 
