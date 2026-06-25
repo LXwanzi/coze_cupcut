@@ -17,6 +17,7 @@ from langchain_openai import ChatOpenAI
 from langchain_core.messages import HumanMessage
 
 from coze_coding_utils.runtime_ctx.context import default_headers, new_context
+from graphs.nodes.topic_memory import get_topic_memory
 
 logger = logging.getLogger(__name__)
 
@@ -64,11 +65,12 @@ def _get_llm():
 
 def generate_plan(state: Dict[str, Any]) -> Dict[str, Any]:
     """
-    生成视频计划
+    生成视频计划（专题追剧式连续内容）
     
     支持的输入格式：
     - learning_note: 字符串，用户的学习笔记或英语句子
     - topic: 字符串，简单的主题描述
+    - topic_id: 字符串（可选），专题ID，用于关联记忆表
     - image_url: 字符串（可选），用户提供参考图片
     - scene: 字符串（可选），场景类型
     
@@ -77,11 +79,13 @@ def generate_plan(state: Dict[str, Any]) -> Dict[str, Any]:
     - content_meta: 内容元数据
     - publish_pack: 发布信息
     - review_card: 复习卡片
+    - episode_info: 集数信息（回顾、预告等）
     """
     try:
         # 1. 提取用户输入
         learning_note = state.get('learning_note', '')
         topic = state.get('topic', '')
+        topic_id = state.get('topic_id', '')
         user_input = learning_note or topic
         
         if not user_input:
@@ -90,7 +94,8 @@ def generate_plan(state: Dict[str, Any]) -> Dict[str, Any]:
                 'segments': [],
                 'content_meta': {},
                 'publish_pack': {},
-                'review_card': {}
+                'review_card': {},
+                'episode_info': {}
             }
         
         scene = state.get('scene', 'travel')
@@ -98,43 +103,73 @@ def generate_plan(state: Dict[str, Any]) -> Dict[str, Any]:
         canvas_width = state.get('canvas_width', 1080)
         canvas_height = state.get('canvas_height', 1920)
         
-        # 2. 调用 LLM 生成视频计划
-        segments = _generate_video_plan(
+        # 2. 获取或创建专题记忆表
+        if not topic_id:
+            # 从用户输入生成 topic_id
+            topic_id = _generate_topic_id(user_input, scene)
+        
+        memory = get_topic_memory(topic_id)
+        memory_context = memory.get_context_for_plan()
+        
+        # 3. 调用 LLM 生成视频计划（带记忆上下文）
+        result = _generate_video_plan(
             user_input=user_input,
             scene=scene,
-            duration_seconds=duration_seconds
+            duration_seconds=duration_seconds,
+            memory_context=memory_context
         )
         
-        if not segments:
+        if not result or not result.get('segments'):
             return {
                 'error': '未能生成视频计划',
                 'segments': [],
                 'content_meta': {},
                 'publish_pack': {},
-                'review_card': {}
+                'review_card': {},
+                'episode_info': {},
+                'topic_id': topic_id
             }
         
-        # 3. 构建内容元数据
+        segments = result['segments']
+        episode_info = result.get('episode_info', {})
+        
+        # 4. 更新记忆表
+        episode_data = {
+            "sentences": _extract_sentences(segments),
+            "scene": _extract_scene_name(segments),
+            "hook": episode_info.get('review', ''),
+            "preview": episode_info.get('preview', '')
+        }
+        memory.add_episode(episode_data)
+        
+        # 设置专题名称（如果是第一集）
+        if memory.episode_count == 1:
+            season_name = _extract_season_name(segments, user_input)
+            memory.set_season_name(season_name)
+        
+        # 5. 构建内容元数据
         content_meta = {
             'selected_topic': _extract_topic(segments),
             'scene': scene,
             'duration_seconds': sum(seg.get('duration', 5) for seg in segments),
             'originality_check': '所有内容基于用户提供的原始素材生成',
-            'safety_note': '未涉及教材原文复述'
+            'safety_note': '未涉及教材原文复述',
+            'topic_id': topic_id,
+            'episode_num': memory.episode_count
         }
         
-        # 4. 构建发布信息
+        # 6. 构建发布信息
         publish_pack = {
-            'title': f"跟小丸子学{content_meta['selected_topic']}",
-            'cover_text': f"跟读学英语\n{content_meta['selected_topic']}",
+            'title': f"第{memory.episode_count}集 | 跟小丸子学{content_meta['selected_topic']}",
+            'cover_text': f"第{memory.episode_count}集\n{content_meta['selected_topic']}",
             'description': f"每天跟读3遍，一周熟练运用！#英语学习 #跟读练习",
             'hashtags': ['英语学习', '跟读练习', '实用英语']
         }
         
-        # 5. 构建复习卡片
+        # 7. 构建复习卡片
         expressions = []
         for seg in segments:
-            if seg.get('scene', '').startswith('第') and '跟读句' in seg.get('scene', ''):
+            if seg.get('scene', '').startswith('第') and '跟读' in seg.get('scene', ''):
                 caption = seg.get('caption', '')
                 if '\n' in caption:
                     parts = caption.split('\n')
@@ -154,6 +189,8 @@ def generate_plan(state: Dict[str, Any]) -> Dict[str, Any]:
             'content_meta': content_meta,
             'publish_pack': publish_pack,
             'review_card': review_card,
+            'episode_info': episode_info,
+            'topic_id': topic_id,
             'video_plan': {
                 'canvas': {
                     'width': canvas_width,
@@ -170,8 +207,79 @@ def generate_plan(state: Dict[str, Any]) -> Dict[str, Any]:
             'segments': [],
             'content_meta': {},
             'publish_pack': {},
-            'review_card': {}
+            'review_card': {},
+            'episode_info': {},
+            'topic_id': topic_id if 'topic_id' in locals() else ''
         }
+
+
+def _generate_topic_id(user_input: str, scene: str) -> str:
+    """从用户输入生成 topic_id，基于主题关键词而非完整输入"""
+    import hashlib
+    import re
+    
+    # 提取主题关键词（如"酒店入住"、"酒店退房"等）
+    # 匹配常见的主题模式
+    topic_patterns = [
+        r'酒店入住',
+        r'酒店退房',
+        r'酒店',
+        r'机场',
+        r'餐厅',
+        r'购物',
+        r'问路',
+        r'打车',
+        r'办公室',
+        r'亲子',
+        r'日常',
+    ]
+    
+    topic_keyword = scene  # 默认使用 scene
+    for pattern in topic_patterns:
+        match = re.search(pattern, user_input)
+        if match:
+            topic_keyword = match.group()
+            break
+    
+    key = f"{scene}_{topic_keyword}"
+    return hashlib.md5(key.encode()).hexdigest()[:12]
+
+
+def _extract_sentences(segments: List[Dict]) -> List[str]:
+    """从片段中提取英语句子"""
+    sentences = []
+    for seg in segments:
+        if seg.get('scene', '').startswith('第') and '跟读' in seg.get('scene', ''):
+            caption = seg.get('caption', '')
+            if '\n' in caption:
+                sentences.append(caption.split('\n')[0].strip())
+            else:
+                sentences.append(caption.strip())
+    return sentences
+
+
+def _extract_scene_name(segments: List[Dict]) -> str:
+    """从片段中提取场景名称"""
+    for seg in segments:
+        if '标题' in seg.get('scene', ''):
+            caption = seg.get('caption', '')
+            if '\n' in caption:
+                return caption.split('\n')[-1].strip()
+            return caption.strip()
+    return ''
+
+
+def _extract_season_name(segments: List[Dict], user_input: str) -> str:
+    """提取专题名称"""
+    for seg in segments:
+        if '标题' in seg.get('scene', ''):
+            caption = seg.get('caption', '')
+            if '\n' in caption:
+                parts = caption.split('\n')
+                for p in parts:
+                    if any('\u4e00' <= c <= '\u9fff' for c in p):
+                        return p.strip()
+    return user_input[:20] if len(user_input) > 20 else user_input
 
 
 def _extract_topic(segments: List[Dict]) -> str:
@@ -188,18 +296,41 @@ def _extract_topic(segments: List[Dict]) -> str:
 def _generate_video_plan(
     user_input: str,
     scene: str,
-    duration_seconds: int
-) -> List[Dict[str, Any]]:
+    duration_seconds: int,
+    memory_context: Dict[str, Any] = None
+) -> Dict[str, Any]:
     """
-    调用 LLM 生成视频计划
+    调用 LLM 生成视频计划（专题追剧式连续内容）
     
-    LLM 需要理解用户输入，识别其中的英语句子，
-    并按要求生成结构化的视频计划。
+    支持：
+    - 上集回顾
+    - 本集新内容
+    - 下集预告
     """
     llm = _get_llm()
     
+    # 构建记忆上下文
+    if memory_context is None:
+        memory_context = {}
+    
+    episode_num = memory_context.get('episode_num', 1)
+    season_name = memory_context.get('season_name', '')
+    previous_review = memory_context.get('previous_review', '')
+    previous_preview = memory_context.get('previous_preview', '')
+    learned_sentences = memory_context.get('learned_sentences', [])
+    used_scenes = memory_context.get('used_scenes', [])
+    
+    # 构建回顾文案
+    if episode_num > 1 and previous_review:
+        review_hint = f"上集回顾：{previous_review}"
+    else:
+        review_hint = "这是第一集，不需要回顾"
+    
+    # 构建已学句子列表
+    learned_list = "\n".join([f"- {s}" for s in learned_sentences[-10:]]) if learned_sentences else "无"
+    
     # 构建提示词
-    prompt = f"""你是一个英语短视频内容策划助手。用户会提供英语学习内容，你需要生成一个跟读视频计划。
+    prompt = f"""你是一个英语短视频内容策划助手。用户会提供英语学习内容，你需要生成一个**专题追剧式**的跟读视频计划。
 
 ## 用户输入
 {user_input}
@@ -207,30 +338,53 @@ def _generate_video_plan(
 ## 场景类型
 {scene}
 
+## 专题信息
+- 专题名称：{season_name or '新专题'}
+- 当前集数：第{episode_num}集
+- {review_hint}
+
+## 已学过的句子（不要重复！）
+{learned_list}
+
 ## 视频结构（必须按此顺序）
-1. 钩子页（1.5-3秒）→ 2. 标题页（2秒）→ 3. 跟读句1-5（每句6秒）→ 4. 结尾复习页（8秒）
+1. 回顾页（2秒）→ 2. 钩子页（2.5秒）→ 3. 标题页（3秒）→ 4. 跟读句1-5（每句6秒）→ 5. 预告页（3秒）→ 6. 结尾复习页（8秒）
 
 ## 任务要求
 1. 理解用户提供的英语内容，识别用户想要学习的英语表达
 2. **如果用户提供了具体的英语句子，必须严格使用这些句子**
-3. 生成一个吸引人的"钩子页"文案，制造好奇或反差
+3. 生成回顾文案（如果是第2集以上）
+4. 生成一个吸引人的"钩子页"文案
+5. 生成下集预告文案（留悬念）
 
 ## 输出格式
 请直接输出 JSON，不要有其他内容：
 
 {{
+    "episode_info": {{
+        "episode_num": {episode_num},
+        "season_name": "{season_name or '新专题'}",
+        "review": "上集回顾文案（第1集为空字符串）",
+        "preview": "下集预告文案（留悬念）"
+    }},
     "segments": [
         {{
+            "scene": "回顾页",
+            "caption": "上集回顾\\n简短回顾文案",
+            "tts": "上集我们学了...这集继续...",
+            "image_prompt": "FIXED_HOOK_IMAGE",
+            "duration": 2.0
+        }},
+        {{
             "scene": "钩子页",
-            "caption": "钩子文案（12-18字以内，一句话）",
+            "caption": "钩子文案（12-18字以内）",
             "tts": "钩子文案（慢速、直接）",
             "image_prompt": "FIXED_HOOK_IMAGE",
             "duration": 2.5
         }},
         {{
             "scene": "标题页",
-            "caption": "英文标题\\n中文标题",
-            "tts": "标题语音内容（简短）",
+            "caption": "第X集\\n英文标题\\n中文标题",
+            "tts": "第X集，标题语音内容",
             "image_prompt": "简洁的场景描述，小丸子站立在中下区域，头顶留白 25%",
             "duration": 3.0
         }},
@@ -238,53 +392,59 @@ def _generate_video_plan(
             "scene": "第1句跟读",
             "caption": "英语句子\\n中文意思",
             "tts": "第1句。英语句子 中文意思。跟我读：英语句子 再来一遍：英语句子",
-            "image_prompt": "场景描述（与句子意思匹配），小丸子站立在中下区域，头顶留白 25%",
+            "image_prompt": "场景描述，小丸子站立在中下区域，头顶留白 25%",
             "duration": 6.0
         }},
         ...
         {{
+            "scene": "预告页",
+            "caption": "下集预告\\n悬念文案",
+            "tts": "下一集，我们学更实用的说法...",
+            "image_prompt": "FIXED_HOOK_IMAGE",
+            "duration": 3.0
+        }},
+        {{
             "scene": "结尾复习页",
-            "caption": "今日X句跟读复习\\n1. 句子1 - 意思1\\n2. 句子2 - 意思2\\n...",
-            "tts": "来复习一下今天学的X句话。第一句，句子1 第二句，句子2 ...",
+            "caption": "本集X句跟读复习\\n1. 句子1 - 意思1\\n2. 句子2 - 意思2\\n...",
+            "tts": "来复习一下本集学的X句话...",
             "image_prompt": "FIXED_REVIEW_WITH_CHAR",
             "duration": 8.0
         }}
     ]
 }}
 
-## 钩子页要求（必须遵守）
-1. **必须和本期5句英语内容强相关**，可以从第1句或最后一句引出
-2. 文字要短，一句就够，12-18个字以内
-3. 优先使用反差型、痛点型、结果型、悬念型风格
-4. 示例文案：
+## 回顾页规则（第1集跳过）
+- 如果是第1集，回顾页文案为空，duration设为0
+- 如果是第2集以上，用一句话回顾上集内容
+- 示例："上集我们学了check in，这集继续学..."
+
+## 钩子页规则
+1. **必须和本期5句英语内容强相关**
+2. 文字要短，12-18个字以内
+3. 优先使用反差型、痛点型、悬念型风格
+4. 示例：
    - "这句英语，今天就能用。"
    - "最后一句，才是最实用的。"
    - "这5句，真的能救场。"
-   - "学会这句，聊天会顺很多。"
-5. TTS要慢、直接，不要说教
-6. 图片：小丸子做出惊讶或思考的表情
 
-## image_prompt 场景描述规则（必须严格遵守）
+## 预告页规则（必须留悬念！）
+1. 预告下一集的内容
+2. 制造期待感，让人想看下一集
+3. 示例：
+   - "下一集，我们学更自然的说法"
+   - "还有一句更像老外会说的"
+   - "下集我给你看最实用的版本"
 
-### 钩子页（重要！）
-image_prompt 必须固定为："FIXED_HOOK_IMAGE"
-这是特殊标记，表示使用固定钩子页图片，不生成AI图片
-
-### 标题页
-image_prompt 格式："简洁的场景描述，小丸子站立在中下区域，头顶留白 25%"
-
-### 跟读句（scene 包含"第X句"）
-image_prompt 格式："与句子意思匹配的场景描述，小丸子站立在中下区域，头顶留白 25%"
-示例："小丸子站在酒店前台微笑着递出证件，小丸子站立在中下区域，头顶留白 25%"
-
-### 结尾复习页（重要！）
-image_prompt 必须固定为："FIXED_REVIEW_WITH_CHAR"
-这是特殊标记，表示使用同色系复习背景+底部小丸子头像，不生成AI图片
+## image_prompt 规则
+- 钩子页、回顾页、预告页：固定为 "FIXED_HOOK_IMAGE"
+- 标题页、跟读句：描述场景，小丸子在中下区域
+- 结尾复习页：固定为 "FIXED_REVIEW_WITH_CHAR"
 
 ## 重要规则
-1. **必须使用用户提供的原始英语句子**，不要自己编造新句子
-2. 每个跟读句的 duration 设为 6.0 秒
-3. 只输出 JSON，不要有 ```json 之类的标记
+1. **必须使用用户提供的原始英语句子**，不要自己编造
+2. **不要重复已学过的句子**
+3. 每个跟读句的 duration 设为 6.0 秒
+4. 只输出 JSON，不要有 ```json 之类的标记
 """
     
     try:
@@ -318,7 +478,7 @@ image_prompt 必须固定为："FIXED_REVIEW_WITH_CHAR"
             timeout=120
         )
         
-        # 解析 SSE 流式响应 - 从字节直接解析避免编码问题
+        # 解析 SSE 流式响应
         content = ""
         for line in resp.content.split(b'\n'):
             try:
@@ -328,32 +488,11 @@ image_prompt 必须固定为："FIXED_REVIEW_WITH_CHAR"
                     if json_str and json_str != '[DONE]':
                         chunk = json.loads(json_str)
                         delta = chunk.get('choices', [{}])[0].get('delta', {})
-                        delta_content = delta.get('content') or delta.get('reasoning_content', '')
-                        # 提取思考内容（用于调试）
-                        reasoning = delta.get('reasoning_content') or ''
-                        # 提取实际内容
                         delta_content = delta.get('content') or ''
-                        # 如果没有 content，可能是 thinking 模式
-                        if not delta_content and reasoning:
-                            # 在 thinking 模式下，思考结束后应该还有 content
-                            # 这里我们只取 reasoning 最后部分
-                            pass
                         if isinstance(delta_content, str):
                             content += delta_content
             except Exception:
                 continue
-        
-        # 如果没有获取到内容，尝试直接解析响应
-        if not content.strip():
-            try:
-                result_data = resp.json()
-                if 'choices' in result_data:
-                    delta = result_data['choices'][0].get('delta', {})
-                    content = delta.get('content') or delta.get('reasoning_content', '')
-                elif 'error' in result_data:
-                    raise Exception(f"API Error: {result_data['error']}")
-            except:
-                pass
         
         # 清理响应
         content = content.strip()
@@ -364,21 +503,21 @@ image_prompt 必须固定为："FIXED_REVIEW_WITH_CHAR"
                 content = content[4:]
             content = content.strip()
         
-        # 确保 content 是正确的字符串
         if isinstance(content, bytes):
             content = content.decode('utf-8', errors='replace')
         
         data = json.loads(content)
-        segments = data.get('segments', [])
-        
-        return segments
+        return {
+            'segments': data.get('segments', []),
+            'episode_info': data.get('episode_info', {})
+        }
         
     except json.JSONDecodeError as e:
         logger.error(f"JSON 解析失败: {e}, content: {content[:500] if content else 'N/A'}")
-        return []
+        return {'segments': [], 'episode_info': {}}
     except Exception as e:
         logger.error(f"LLM 调用失败: {e}")
-        return []
+        return {'segments': [], 'episode_info': {}}
 
 
 def _build_review_summary(segments: List[Dict[str, Any]]) -> str:

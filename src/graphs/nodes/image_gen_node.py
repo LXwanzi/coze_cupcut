@@ -306,8 +306,14 @@ def generate_images(state: Dict[str, Any]) -> Dict[str, Any]:
             image_url = _extract_image_url(response)
 
             if image_url:
-                oss_url = upload_image_to_oss(image_url, i)
-                asset_url = oss_url if oss_url else image_url
+                # 先下载图片再上传到 OSS
+                import requests as req
+                resp = req.get(image_url, timeout=30)
+                if resp.status_code == 200:
+                    oss_url = upload_image_to_oss(resp.content, f"scene_{i}")
+                    asset_url = oss_url if oss_url else image_url
+                else:
+                    asset_url = image_url
 
                 updated_scene = {
                     "start": scene.get("start", 0),
