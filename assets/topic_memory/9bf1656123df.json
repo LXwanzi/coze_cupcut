@@ -6,67 +6,48 @@
       "episode_num": 1,
       "sentences": [
         "I have a reservation.",
-        "Could I check in early?"
+        "Could I check in early?",
+        "Is breakfast included?",
+        "Could I have a room with a city view?",
+        "What time is check-out?"
       ],
-      "scene": "酒店入住必备英语",
+      "scene": "酒店入住必备高频句",
       "hook": "",
-      "preview": "下集教你应对入住突发状况的表达",
-      "created_at": "2026-06-25T22:52:35.380852"
+      "preview": "下集解锁酒店入住后必用的隐藏句式",
+      "created_at": "2026-06-25T23:30:47.512334"
     },
     {
       "episode_num": 2,
       "sentences": [
-        "Can I get a room with a view?",
-        "Do you have anything on a higher floor?"
-      ],
-      "scene": "酒店入住实用英语",
-      "hook": "",
-      "preview": "下集还有酒店入住更实用的隐藏表达哦",
-      "created_at": "2026-06-25T22:54:10.880355"
-    },
-    {
-      "episode_num": 3,
-      "sentences": [
-        "I have a reservation under the name Wang.",
-        "Could I check in early?",
-        "Is breakfast included?",
+        "I have a reservation under the name Li Ming.",
+        "Can I get an extra key card?",
+        "Is there free Wi-Fi in the room?",
         "Could I have a quieter room?",
         "What time is check-out?"
       ],
-      "scene": "酒店入住必备英语",
-      "hook": "",
-      "preview": "下集学入住后遇问题的实用口语哦",
-      "created_at": "2026-06-25T22:55:18.641624"
-    },
-    {
-      "episode_num": 4,
-      "sentences": [
-        "I have a reservation.",
-        "Could I check in early?",
-        "Is breakfast included?"
-      ],
       "scene": "酒店入住实用英语",
       "hook": "",
-      "preview": "下集教你入住后遇到问题怎么说哦",
-      "created_at": "2026-06-25T22:58:23.054956"
+      "preview": "下集教你酒店遇突发状况怎么沟通哦",
+      "created_at": "2026-06-25T23:33:39.939964"
     }
   ],
   "all_sentences": [
     "I have a reservation.",
     "Could I check in early?",
-    "Can I get a room with a view?",
-    "Do you have anything on a higher floor?",
-    "I have a reservation under the name Wang.",
     "Is breakfast included?",
-    "Could I have a quieter room?",
-    "What time is check-out?"
+    "Could I have a room with a city view?",
+    "What time is check-out?",
+    "I have a reservation under the name Li Ming.",
+    "Can I get an extra key card?",
+    "Is there free Wi-Fi in the room?",
+    "Could I have a quieter room?"
   ],
   "scenes_used": [
-    "酒店入住必备英语",
+    "酒店入住必备高频句",
     "酒店入住实用英语"
   ],
   "last_hook": "",
-  "next_preview": "下集教你入住后遇到问题怎么说哦",
-  "created_at": "2026-06-25T22:52:14.862191",
-  "updated_at": "2026-06-25T22:58:23.057006"
+  "next_preview": "下集教你酒店遇突发状况怎么沟通哦",
+  "created_at": "2026-06-25T23:30:12.714730",
+  "updated_at": "2026-06-25T23:33:39.940007"
 }
