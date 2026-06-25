@@ -12,6 +12,7 @@ AI 图片生成节点
 """
 import logging
 from typing import Dict, Any
+from concurrent.futures import ThreadPoolExecutor, as_completed
 from coze_coding_dev_sdk import ImageGenerationClient
 from coze_coding_utils.runtime_ctx.context import new_context
 from graphs.nodes.oss_uploader import upload_image_to_oss
@@ -108,73 +109,95 @@ def generate_images(state: Dict[str, Any]) -> Dict[str, Any]:
             })
     
     scenes = video_plan.get("scenes", [])
+    
+    # 如果 video_plan 中没有 scenes，从 segments 构建
+    if not scenes and segments:
+        for seg in segments:
+            scenes.append({
+                "start": 0,
+                "end": int(seg.get("duration", 4.0) * 1000000),
+                "type": "image",
+                "prompt": seg.get("image_prompt", ""),
+                "visual_role": seg.get("scene", "scene")
+            })
+    
     if not scenes:
         return {
             "scenes": None,
-            "error": "video_plan 中缺少 scenes"
+            "error": "缺少 scenes，无法生成图片"
         }
 
-    updated_scenes = []
+    # 使用线程池并行生成图片
+    updated_scenes = [None] * len(scenes)
     errors = []
 
-    for i, scene in enumerate(scenes):
+    def generate_single_scene(i: int, scene: Dict[str, Any], client: Any) -> tuple:
+        """并行生成单张图片"""
         original_prompt = scene.get("prompt", "")
         if not original_prompt:
-            errors.append(f"Scene {i} 缺少 prompt")
-            continue
+            return i, None, f"Scene {i} 缺少 prompt"
 
-        # 应用统一风格
         prompt = _apply_style(original_prompt)
-        logger.info(f"Generating image for scene {i}: {prompt[:100]}...")
+        logger.info(f"Generating image for scene {i}: {prompt[:80]}...")
 
         try:
-            # 生成 2K 竖屏图片，使用角色参考图进行图生图
             response = client.generate(
                 prompt=prompt,
                 size="2K",
                 watermark=False,
-                image=CHARACTER_REFERENCE_IMAGE_URL  # 传入角色参考图
+                image=CHARACTER_REFERENCE_IMAGE_URL
             )
 
-            # 提取图片 URL
             image_url = _extract_image_url(response)
 
             if image_url:
-                # 上传到 OSS，生成公网 URL
                 oss_url = upload_image_to_oss(image_url, i)
-                
-                # 如果 OSS 上传成功，使用 OSS URL；否则回退到原 URL
                 asset_url = oss_url if oss_url else image_url
-                
-                # 构建带 asset_url 的 scene
+
                 updated_scene = {
                     "start": scene.get("start", 0),
                     "end": scene.get("end", 0),
                     "type": scene.get("type", "image"),
                     "visual_role": scene.get("visual_role", ""),
-                    "prompt": original_prompt,  # 保留原始 prompt
+                    "prompt": original_prompt,
                     "asset_url": asset_url,
-                    "coze_url": image_url  # 保留原始 coze URL
+                    "coze_url": image_url
                 }
-                updated_scenes.append(updated_scene)
-                logger.info(f"Scene {i} asset_url: {asset_url[:80]}...")
+                logger.info(f"Scene {i} asset_url: {asset_url[:60]}...")
+                return i, updated_scene, None
             else:
-                errors.append(f"Scene {i} 未获取到图片 URL")
-                logger.error(f"Scene {i} image generation failed: {response}")
+                return i, None, f"Scene {i} 未获取到图片 URL"
 
         except Exception as e:
-            errors.append(f"Scene {i} 生成失败: {str(e)}")
-            logger.error(f"Scene {i} exception: {str(e)}")
+            return i, None, f"Scene {i} 生成失败: {str(e)}"
+
+    # 并行生成所有图片（最多 3 个并发）
+    with ThreadPoolExecutor(max_workers=3) as executor:
+        futures = {
+            executor.submit(generate_single_scene, i, scene, client): i
+            for i, scene in enumerate(scenes)
+        }
+
+        for future in as_completed(futures):
+            idx, result_scene, error = future.result()
+            if error:
+                errors.append(error)
+                logger.error(error)
+            else:
+                updated_scenes[idx] = result_scene
+
+    # 移除 None 项（失败的场景）
+    valid_scenes = [s for s in updated_scenes if s is not None]
 
     if errors:
         return {
-            "scenes": updated_scenes if updated_scenes else None,
+            "scenes": valid_scenes if valid_scenes else None,
             "image_errors": errors,
-            "error": f"部分图片生成失败: {', '.join(errors)}"
+            "error": f"部分图片生成失败: {', '.join(errors[:3])}"
         }
 
     return {
-        "scenes": updated_scenes
+        "scenes": valid_scenes
     }
 
 
