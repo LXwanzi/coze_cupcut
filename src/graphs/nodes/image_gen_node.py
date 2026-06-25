@@ -327,10 +327,36 @@ def generate_images(state: Dict[str, Any]) -> Dict[str, Any]:
                 logger.info(f"Scene {i} asset_url: {asset_url[:60]}...")
                 return i, updated_scene, None
             else:
-                return i, None, f"Scene {i} 未获取到图片 URL"
+                # 未获取到图片 URL，使用备用图片
+                logger.warning(f"Scene {i} 未获取到图片 URL，使用备用图片")
+                fallback_url = FIXED_HOOK_IMAGE_URL
+                fallback_scene = {
+                    "start": scene.get("start", 0),
+                    "end": scene.get("end", 0),
+                    "type": scene.get("type", "image"),
+                    "visual_role": scene.get("visual_role", ""),
+                    "prompt": original_prompt,
+                    "asset_url": fallback_url,
+                    "coze_url": fallback_url,
+                    "is_fallback": True
+                }
+                return i, fallback_scene, None
 
         except Exception as e:
-            return i, None, f"Scene {i} 生成失败: {str(e)}"
+            # 图片生成失败，使用固定图片作为备用
+            logger.warning(f"Scene {i} 生成失败: {str(e)}，使用备用图片")
+            fallback_url = FIXED_HOOK_IMAGE_URL  # 使用钩子图作为备用
+            fallback_scene = {
+                "start": scene.get("start", 0),
+                "end": scene.get("end", 0),
+                "type": scene.get("type", "image"),
+                "visual_role": scene.get("visual_role", ""),
+                "prompt": original_prompt,
+                "asset_url": fallback_url,
+                "coze_url": fallback_url,
+                "is_fallback": True
+            }
+            return i, fallback_scene, None
 
     # 并行生成所有图片（最多 3 个并发）
     with ThreadPoolExecutor(max_workers=3) as executor:

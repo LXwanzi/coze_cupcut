@@ -29,6 +29,20 @@
       "hook": "",
       "preview": "下集教你酒店遇突发状况怎么沟通哦",
       "created_at": "2026-06-25T23:33:39.939964"
+    },
+    {
+      "episode_num": 3,
+      "sentences": [
+        "I have a reservation.",
+        "Could I check in early?",
+        "Is breakfast included?",
+        "Could I have a quieter room?",
+        "What time is check-out?"
+      ],
+      "scene": "酒店入住实用英语",
+      "hook": "",
+      "preview": "下集教你酒店退房不踩坑的专属表达哦",
+      "created_at": "2026-06-25T23:41:43.861613"
     }
   ],
   "all_sentences": [
@@ -47,7 +61,7 @@
     "酒店入住实用英语"
   ],
   "last_hook": "",
-  "next_preview": "下集教你酒店遇突发状况怎么沟通哦",
+  "next_preview": "下集教你酒店退房不踩坑的专属表达哦",
   "created_at": "2026-06-25T23:30:12.714730",
-  "updated_at": "2026-06-25T23:33:39.940007"
+  "updated_at": "2026-06-25T23:41:43.861645"
 }
