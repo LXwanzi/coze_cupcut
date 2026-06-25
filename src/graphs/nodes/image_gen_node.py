@@ -8,9 +8,12 @@ AI 图片生成节点
 画面元素少，主体明确，底部预留字幕区域，色彩明亮，扁平化插画风格。
 竖屏比例 9:16，适合 1080x1920 视频。
 
+复习页使用固定复习卡背景图，不生成AI图片。
+
 生成后自动上传到 OSS，CapCut Mate 可直接访问。
 """
 import logging
+import requests
 from typing import Dict, Any
 from concurrent.futures import ThreadPoolExecutor, as_completed
 from coze_coding_dev_sdk import ImageGenerationClient
@@ -25,6 +28,17 @@ CHARACTER_REFERENCE_IMAGE_URL = (
     "coze_storage_7654517760407470089/character/xiaowanzi_reference_025ac01d.png"
     "?sign=1813840450-6d264531cf-0-98731a4230b5a6d4f921455f1f0f76e47a690a7e486f6a0e53b2c4637f455532"
 )
+
+# 固定复习卡背景图 URL（纯色渐变背景，无文字）
+# 使用 Coze 图像生成一张干净的复习卡背景
+FIXED_REVIEW_BACKGROUND_URL = (
+    "https://coze-coding-project.tos.coze.site/"
+    "coze_storage_7654517760407470089/review/review_card_bg.png"
+    "?sign=xxx"
+)
+
+# 固定复习卡背景图（备用，如果上传的固定图片不可用，则生成一张）
+FIXED_REVIEW_BACKGROUND_GENERATED = None
 
 # 统一图片风格后缀（角色一致性要求）
 STYLE_SUFFIX = (
@@ -52,6 +66,70 @@ FORBIDDEN_STYLES = [
     "dark style", "oil painting", "complex background", "anime",
     "manga", "children book", "childish", "text in image"
 ]
+
+
+def _generate_fixed_review_background(i: int, scene: Dict[str, Any], client: Any) -> tuple:
+    """生成固定复习卡背景图（纯色渐变背景，无文字无人物）"""
+    global FIXED_REVIEW_BACKGROUND_GENERATED
+
+    try:
+        # 如果已经有生成的背景图，直接使用
+        if FIXED_REVIEW_BACKGROUND_GENERATED:
+            oss_url = upload_image_to_oss(FIXED_REVIEW_BACKGROUND_GENERATED, f"review_bg_{i}")
+            asset_url = oss_url if oss_url else FIXED_REVIEW_BACKGROUND_GENERATED
+
+            updated_scene = {
+                "start": scene.get("start", 0),
+                "end": scene.get("end", 0),
+                "type": "image",
+                "visual_role": scene.get("visual_role", ""),
+                "prompt": "FIXED_REVIEW_BACKGROUND",
+                "asset_url": asset_url,
+                "coze_url": FIXED_REVIEW_BACKGROUND_GENERATED
+            }
+            logger.info(f"Scene {i} using cached review background")
+            return i, updated_scene, None
+
+        # 生成一张干净的复习卡背景图
+        review_bg_prompt = (
+            "clean minimalist review card background, soft gradient from light blue to white, "
+            "simple geometric shapes as decoration, no text, no characters, no people, "
+            "no logos, completely empty center area for text overlay, "
+            "warm friendly atmosphere, flat illustration style, 9:16 vertical format"
+        )
+
+        logger.info(f"Generating fixed review background for scene {i}...")
+        response = client.generate(
+            prompt=review_bg_prompt,
+            size="2K",
+            watermark=False
+        )
+
+        image_url = _extract_image_url(response)
+
+        if image_url:
+            # 缓存结果
+            FIXED_REVIEW_BACKGROUND_GENERATED = image_url
+
+            oss_url = upload_image_to_oss(image_url, f"review_bg_{i}")
+            asset_url = oss_url if oss_url else image_url
+
+            updated_scene = {
+                "start": scene.get("start", 0),
+                "end": scene.get("end", 0),
+                "type": "image",
+                "visual_role": scene.get("visual_role", ""),
+                "prompt": "FIXED_REVIEW_BACKGROUND",
+                "asset_url": asset_url,
+                "coze_url": image_url
+            }
+            logger.info(f"Scene {i} review background: {asset_url[:60]}...")
+            return i, updated_scene, None
+        else:
+            return i, None, f"Scene {i} 复习背景图生成失败"
+
+    except Exception as e:
+        return i, None, f"Scene {i} 复习背景图生成异常: {str(e)}"
 
 
 def _apply_style(prompt: str, scene_type: str = "", use_reference: bool = True) -> str:
@@ -164,6 +242,12 @@ def generate_images(state: Dict[str, Any]) -> Dict[str, Any]:
 
         # 获取场景类型，用于添加位置约束
         scene_type = scene.get("visual_role", "") or scene.get("scene", "")
+
+        # 检查是否是固定复习卡背景
+        if original_prompt == "FIXED_REVIEW_BACKGROUND":
+            logger.info(f"Generating fixed review background for scene {i}")
+            return _generate_fixed_review_background(i, scene, client)
+
         prompt = _apply_style(original_prompt, scene_type=scene_type)
         logger.info(f"Generating image for scene {i} ({scene_type}): {prompt[:80]}...")
 
