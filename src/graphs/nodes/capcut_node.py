@@ -281,9 +281,9 @@ def create_capcut_draft(state: Dict[str, Any]) -> Dict[str, Any]:
                     "shadow_distance": 2,
                     "shadow_angle": -45
                 },
-                # 顶部8%安全区，不遮挡右上角小丸子
+                # 字幕位置Y轴
                 "transform_x": 0,
-                "transform_y": 80
+                "transform_y": 630
             }
 
             add_captions_response = _safe_post("/add_captions", add_captions_payload)

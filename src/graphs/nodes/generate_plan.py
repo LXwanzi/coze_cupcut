@@ -378,7 +378,6 @@ def _normalize_segments_for_retention(
             continue
 
         updated = dict(segment)
-        updated['caption'] = _compact_caption(updated.get('caption', ''), max_lines=2)
         updated['tts'] = _sanitize_tts_text(updated.get('tts', ''))
 
         if '复习' in scene or '汇总' in scene or '总结' in scene:
@@ -386,12 +385,18 @@ def _normalize_segments_for_retention(
             updated['tts'] = '这几句先收藏，下一集继续学同一场景。'
             updated['duration'] = SUMMARY_SEGMENT_SECONDS
             updated['image_prompt'] = 'FIXED_REVIEW_WITH_CHAR'
+            # 复习页面不限制行数，显示所有句子
+            updated['caption'] = updated.get('caption', '')
         elif '预告' in scene:
             updated['duration'] = PREVIEW_SEGMENT_SECONDS
             updated['image_prompt'] = 'FIXED_HOOK_IMAGE'
+            updated['caption'] = _compact_caption(updated.get('caption', ''), max_lines=2)
         elif '钩子' in scene:
             updated['duration'] = min(float(updated.get('duration', 2.0)), 2.0)
             updated['image_prompt'] = 'FIXED_HOOK_IMAGE'
+            updated['caption'] = _compact_caption(updated.get('caption', ''), max_lines=2)
+        else:
+            updated['caption'] = _compact_caption(updated.get('caption', ''), max_lines=2)
 
         normalized.append(updated)
 
