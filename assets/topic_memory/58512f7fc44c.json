@@ -43,6 +43,34 @@
       "hook": "",
       "preview": "下集解锁机场安检实用地道表达",
       "created_at": "2026-06-26T11:23:56.847297"
+    },
+    {
+      "episode_num": 4,
+      "sentences": [
+        "I'd like to check out, please.",
+        "Can I have my bill, please?",
+        "Could you please check the bill for me?",
+        "I left my charger in the room.",
+        "Can I get a receipt, please?"
+      ],
+      "scene": "酒店退房实用英语",
+      "hook": "",
+      "preview": "下集教你应对酒店账单纠纷的表达哦",
+      "created_at": "2026-06-26T12:05:48.287885"
+    },
+    {
+      "episode_num": 5,
+      "sentences": [
+        "I'd like to check out, please.",
+        "Could I have the bill, please?",
+        "Can I pay by credit card?",
+        "Can I get a receipt, please?",
+        "Can I leave my luggage here for 2 hours?"
+      ],
+      "scene": "酒店退房实用英语",
+      "hook": "",
+      "preview": "下集我们学酒店突发问题的实用表达哦",
+      "created_at": "2026-06-26T12:08:06.092937"
     }
   ],
   "all_sentences": [
@@ -60,15 +88,24 @@
     "Here is my passport.",
     "Can I have an aisle seat?",
     "How many bags can I check?",
-    "Where is the boarding gate?"
+    "Where is the boarding gate?",
+    "I'd like to check out, please.",
+    "Can I have my bill, please?",
+    "Could you please check the bill for me?",
+    "I left my charger in the room.",
+    "Can I get a receipt, please?",
+    "Could I have the bill, please?",
+    "Can I pay by credit card?",
+    "Can I leave my luggage here for 2 hours?"
   ],
   "scenes_used": [
     "酒店入住实用英语",
     "酒店房间问题/换房英语",
-    "旅行英语·机场值机实用句"
+    "旅行英语·机场值机实用句",
+    "酒店退房实用英语"
   ],
   "last_hook": "",
-  "next_preview": "下集解锁机场安检实用地道表达",
+  "next_preview": "下集我们学酒店突发问题的实用表达哦",
   "created_at": "2026-06-26T07:12:24.143480",
-  "updated_at": "2026-06-26T11:23:56.847323"
+  "updated_at": "2026-06-26T12:08:06.092974"
 }
