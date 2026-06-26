@@ -15,6 +15,20 @@
       "hook": "",
       "preview": "接下来学值机必备的实用口语哦",
       "created_at": "2026-06-26T11:30:42.744191"
+    },
+    {
+      "episode_num": 2,
+      "sentences": [
+        "Do I need to take this out?",
+        "Is this line for security?",
+        "My gate has changed.",
+        "When does boarding start?",
+        "May I board now?"
+      ],
+      "scene": "旅行英语之安检登机",
+      "hook": "",
+      "preview": "下集学飞机上的超实用英语表达哦",
+      "created_at": "2026-06-26T13:10:25.394883"
     }
   ],
   "all_sentences": [
@@ -28,7 +42,7 @@
     "旅行英语之安检登机"
   ],
   "last_hook": "",
-  "next_preview": "接下来学值机必备的实用口语哦",
+  "next_preview": "下集学飞机上的超实用英语表达哦",
   "created_at": "2026-06-26T11:30:13.367774",
-  "updated_at": "2026-06-26T11:30:42.746394"
+  "updated_at": "2026-06-26T13:10:25.394909"
 }
