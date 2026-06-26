@@ -29,6 +29,20 @@
       "hook": "",
       "preview": "下集教你酒店退房不踩坑的实用英语",
       "created_at": "2026-06-26T07:15:07.166770"
+    },
+    {
+      "episode_num": 3,
+      "sentences": [
+        "I'd like to check in.",
+        "Here is my passport.",
+        "Can I have an aisle seat?",
+        "How many bags can I check?",
+        "Where is the boarding gate?"
+      ],
+      "scene": "旅行英语·机场值机实用句",
+      "hook": "",
+      "preview": "下集解锁机场安检实用地道表达",
+      "created_at": "2026-06-26T11:23:56.847297"
     }
   ],
   "all_sentences": [
@@ -41,14 +55,20 @@
     "Could I change to another room?",
     "The air conditioning is not working.",
     "Is there a quieter room available?",
-    "I'd like to speak to the manager, please."
+    "I'd like to speak to the manager, please.",
+    "I'd like to check in.",
+    "Here is my passport.",
+    "Can I have an aisle seat?",
+    "How many bags can I check?",
+    "Where is the boarding gate?"
   ],
   "scenes_used": [
     "酒店入住实用英语",
-    "酒店房间问题/换房英语"
+    "酒店房间问题/换房英语",
+    "旅行英语·机场值机实用句"
   ],
   "last_hook": "",
-  "next_preview": "下集教你酒店退房不踩坑的实用英语",
+  "next_preview": "下集解锁机场安检实用地道表达",
   "created_at": "2026-06-26T07:12:24.143480",
-  "updated_at": "2026-06-26T07:15:07.166794"
+  "updated_at": "2026-06-26T11:23:56.847323"
 }
