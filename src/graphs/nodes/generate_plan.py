@@ -13,13 +13,16 @@ import re
 import logging
 from typing import Dict, Any, List, Optional
 
-from langchain_openai import ChatOpenAI
-from langchain_core.messages import HumanMessage
-
-from coze_coding_utils.runtime_ctx.context import default_headers, new_context
 from graphs.nodes.topic_memory import get_topic_memory
 
 logger = logging.getLogger(__name__)
+
+DEFAULT_SENTENCE_COUNT = 3
+MAX_SENTENCE_COUNT = 5
+DEFAULT_TARGET_DURATION_SECONDS = 28
+MAX_SENTENCE_SEGMENT_SECONDS = 5.0
+SUMMARY_SEGMENT_SECONDS = 2.5
+PREVIEW_SEGMENT_SECONDS = 2.0
 
 # LLM 配置
 LLM_CONFIG_PATH = os.path.join(
@@ -49,6 +52,9 @@ def _load_llm_config() -> Dict[str, Any]:
 
 def _get_llm():
     """获取 LLM 实例"""
+    from langchain_openai import ChatOpenAI
+    from coze_coding_utils.runtime_ctx.context import default_headers, new_context
+
     cfg = _load_llm_config()
     api_key = os.getenv("COZE_WORKLOAD_IDENTITY_API_KEY")
     base_url = os.getenv("COZE_INTEGRATION_MODEL_BASE_URL")
@@ -99,7 +105,8 @@ def generate_plan(state: Dict[str, Any]) -> Dict[str, Any]:
             }
         
         scene = state.get('scene', 'travel')
-        duration_seconds = state.get('duration_seconds', 60)
+        duration_seconds = state.get('duration_seconds', DEFAULT_TARGET_DURATION_SECONDS)
+        sentence_count = _normalize_sentence_count(state.get('sentence_count', DEFAULT_SENTENCE_COUNT))
         canvas_width = state.get('canvas_width', 1080)
         canvas_height = state.get('canvas_height', 1920)
         
@@ -116,6 +123,7 @@ def generate_plan(state: Dict[str, Any]) -> Dict[str, Any]:
             user_input=user_input,
             scene=scene,
             duration_seconds=duration_seconds,
+            sentence_count=sentence_count,
             memory_context=memory_context
         )
         
@@ -137,7 +145,7 @@ def generate_plan(state: Dict[str, Any]) -> Dict[str, Any]:
         episode_data = {
             "sentences": _extract_sentences(segments),
             "scene": _extract_scene_name(segments),
-            "hook": episode_info.get('review', ''),
+            "hook": _extract_hook(segments),
             "preview": episode_info.get('preview', '')
         }
         memory.add_episode(episode_data)
@@ -149,9 +157,12 @@ def generate_plan(state: Dict[str, Any]) -> Dict[str, Any]:
         
         # 5. 构建内容元数据
         content_meta = {
-            'selected_topic': _extract_topic(segments),
+            'selected_topic': _extract_topic(segments, user_input),
             'scene': scene,
             'duration_seconds': sum(seg.get('duration', 5) for seg in segments),
+            'target_duration_seconds': duration_seconds,
+            'sentence_count': sentence_count,
+            'format': 'retention_short',
             'originality_check': '所有内容基于用户提供的原始素材生成',
             'safety_note': '未涉及教材原文复述',
             'topic_id': topic_id
@@ -159,10 +170,10 @@ def generate_plan(state: Dict[str, Any]) -> Dict[str, Any]:
         
         # 6. 构建发布信息
         publish_pack = {
-            'title': f"跟小丸子学{content_meta['selected_topic']}",
+            'title': f"小丸子救场英语｜{content_meta['selected_topic']}",
             'cover_text': f"{content_meta['selected_topic']}",
-            'description': f"每天跟读3遍，一周熟练运用！#英语学习 #跟读练习",
-            'hashtags': ['英语学习', '跟读练习', '实用英语']
+            'description': f"每天进步一点点。{sentence_count}句真实场景英语，先收藏，关键时候能接上话。#英语学习 #实用英语 #救场英语",
+            'hashtags': ['英语学习', '实用英语', '救场英语']
         }
         
         # 7. 构建复习卡片
@@ -179,8 +190,8 @@ def generate_plan(state: Dict[str, Any]) -> Dict[str, Any]:
                     })
         
         review_card = {
-            'today_expressions': expressions[:5],
-            'quick_review': '每天跟读3遍，一周就能熟练运用！'
+            'today_expressions': expressions[:sentence_count],
+            'quick_review': '先收藏，下一集继续同一场景。'
         }
         
         return {
@@ -221,11 +232,14 @@ def _generate_topic_id(user_input: str, scene: str) -> str:
     topic_categories = {
         'hotel': ['酒店', 'hotel', 'check in', 'check out', 'check-in', 'check-out', '退房', '入住', '换房', '房间'],
         'travel': ['旅行', 'travel', '旅游', '出行', '行程', 'itinerary', '护照', 'passport', '航班', 'flight'],
+        'emergency': ['救场', 'emergency', '听不清', '不会说', '卡壳', '迷路', '丢东西', '付款失败'],
         'restaurant': ['餐厅', 'restaurant', '点餐', '用餐', '吃饭'],
         'airport': ['机场', 'airport', '登机'],
         'shopping': ['购物', 'shopping', '商店', '买'],
         'transport': ['打车', 'taxi', '地铁', '公交', '问路', '导航'],
         'office': ['办公室', 'office', '工作', '会议'],
+        'business': ['商务', 'business', '客户', '谈判', '合同', '报价'],
+        'parent_child': ['亲子', 'parent', 'child', '孩子', '绘本'],
         'daily': ['日常', 'daily', '生活'],
     }
     
@@ -260,12 +274,23 @@ def _extract_sentences(segments: List[Dict]) -> List[str]:
 
 def _extract_scene_name(segments: List[Dict]) -> str:
     """从片段中提取场景名称"""
+    hook = _extract_hook(segments)
+    if hook:
+        return hook
     for seg in segments:
         if '标题' in seg.get('scene', ''):
             caption = seg.get('caption', '')
             if '\n' in caption:
                 return caption.split('\n')[-1].strip()
             return caption.strip()
+    return ''
+
+
+def _extract_hook(segments: List[Dict]) -> str:
+    """Extract the current episode hook for topic memory."""
+    for seg in segments:
+        if '钩子' in seg.get('scene', ''):
+            return seg.get('caption', '').replace('\n', ' ').strip()
     return ''
 
 
@@ -282,7 +307,7 @@ def _extract_season_name(segments: List[Dict], user_input: str) -> str:
     return user_input[:20] if len(user_input) > 20 else user_input
 
 
-def _extract_topic(segments: List[Dict]) -> str:
+def _extract_topic(segments: List[Dict], user_input: str = '') -> str:
     """从片段中提取主题"""
     for seg in segments:
         scene = seg.get('scene', '')
@@ -290,13 +315,139 @@ def _extract_topic(segments: List[Dict]) -> str:
             caption = seg.get('caption', '')
             # 提取第一行作为标题
             return caption.split('\n')[0].strip()
-    return '英语跟读'
+    hook = _extract_hook(segments)
+    if hook:
+        return hook[:18]
+    return user_input[:18] if user_input else '真实场景英语'
+
+
+def _normalize_sentence_count(value: Any) -> int:
+    """Normalize requested sentence count for short-video retention testing."""
+    try:
+        count = int(value)
+    except (TypeError, ValueError):
+        count = DEFAULT_SENTENCE_COUNT
+    return max(1, min(count, MAX_SENTENCE_COUNT))
+
+
+def _is_sentence_segment(segment: Dict[str, Any]) -> bool:
+    scene = segment.get('scene', '')
+    return scene.startswith('第') and ('句' in scene or '跟读' in scene)
+
+
+def _sanitize_tts_text(text: str) -> str:
+    """Remove legacy repeated read-aloud wording that stretches retention videos."""
+    text = (text or '').strip()
+    text = re.sub(r'再来一遍[:：]?.*$', '', text).strip()
+    text = re.sub(r'\s+', ' ', text)
+    return text
+
+
+def _compact_caption(caption: str, max_lines: int = 2) -> str:
+    lines = [line.strip() for line in (caption or '').splitlines() if line.strip()]
+    return "\n".join(lines[:max_lines])
+
+
+def _normalize_segments_for_retention(
+    segments: List[Dict[str, Any]],
+    sentence_count: int
+) -> List[Dict[str, Any]]:
+    """Keep the generated plan in the fast short-video shape."""
+    normalized: List[Dict[str, Any]] = []
+    sentence_seen = 0
+
+    for segment in segments:
+        if not isinstance(segment, dict):
+            continue
+        scene = segment.get('scene', '')
+
+        if '回顾' in scene or '标题' in scene:
+            continue
+
+        if _is_sentence_segment(segment):
+            sentence_seen += 1
+            if sentence_seen > sentence_count:
+                continue
+
+            updated = dict(segment)
+            updated['scene'] = f"第{sentence_seen}句跟读"
+            updated['caption'] = _compact_caption(updated.get('caption', ''), max_lines=2)
+            updated['tts'] = _sanitize_tts_text(updated.get('tts', ''))
+            updated['duration'] = min(float(updated.get('duration', MAX_SENTENCE_SEGMENT_SECONDS)), MAX_SENTENCE_SEGMENT_SECONDS)
+            normalized.append(updated)
+            continue
+
+        updated = dict(segment)
+        updated['caption'] = _compact_caption(updated.get('caption', ''), max_lines=2)
+        updated['tts'] = _sanitize_tts_text(updated.get('tts', ''))
+
+        if '复习' in scene or '汇总' in scene or '总结' in scene:
+            updated['scene'] = '快速汇总页'
+            updated['tts'] = '这几句先收藏，下一集继续学同一场景。'
+            updated['duration'] = SUMMARY_SEGMENT_SECONDS
+            updated['image_prompt'] = 'FIXED_REVIEW_WITH_CHAR'
+        elif '预告' in scene:
+            updated['duration'] = PREVIEW_SEGMENT_SECONDS
+            updated['image_prompt'] = 'FIXED_HOOK_IMAGE'
+        elif '钩子' in scene:
+            updated['duration'] = min(float(updated.get('duration', 2.0)), 2.0)
+            updated['image_prompt'] = 'FIXED_HOOK_IMAGE'
+
+        normalized.append(updated)
+
+    if not any('预告' in seg.get('scene', '') for seg in normalized):
+        normalized.append({
+            'scene': '预告页',
+            'caption': '下一集继续救场',
+            'tts': '下一集继续学同一场景。',
+            'image_prompt': 'FIXED_HOOK_IMAGE',
+            'duration': PREVIEW_SEGMENT_SECONDS
+        })
+
+    return normalized
+
+
+def _extract_chat_content(resp: Any) -> str:
+    """Extract assistant content from both standard JSON and SSE-like responses."""
+    content = ""
+
+    try:
+        payload = resp.json()
+        choices = payload.get('choices') or []
+        if choices:
+            message = choices[0].get('message') or {}
+            content = message.get('content') or ''
+            if content:
+                return content
+            delta = choices[0].get('delta') or {}
+            content = delta.get('content') or ''
+            if content:
+                return content
+    except Exception:
+        pass
+
+    for line in resp.content.split(b'\n'):
+        try:
+            line_str = line.decode('utf-8', errors='replace').strip()
+            if line_str.startswith('data:'):
+                json_str = line_str[5:].strip()
+                if json_str and json_str != '[DONE]':
+                    chunk = json.loads(json_str)
+                    delta = chunk.get('choices', [{}])[0].get('delta', {})
+                    delta_content = delta.get('content') or ''
+                    if isinstance(delta_content, str):
+                        content += delta_content
+        except Exception:
+            continue
+
+    return content
 
 
 def _generate_video_plan(
     user_input: str,
     scene: str,
     duration_seconds: int,
+    sentence_count: int = DEFAULT_SENTENCE_COUNT,
     memory_context: Dict[str, Any] = None
 ) -> Dict[str, Any]:
     """
@@ -307,8 +458,6 @@ def _generate_video_plan(
     - 本集新内容
     - 下集预告
     """
-    llm = _get_llm()
-    
     # 构建记忆上下文
     if memory_context is None:
         memory_context = {}
@@ -330,7 +479,13 @@ def _generate_video_plan(
     learned_list = "\n".join([f"- {s}" for s in learned_sentences[-10:]]) if learned_sentences else "无"
     
     # 构建提示词
-    prompt = f"""你是一个英语短视频内容策划助手。用户会提供英语学习内容，你需要生成一个**专题追剧式**的跟读视频计划。
+    prompt = f"""你是“小丸子英语”短视频策划助手。你的目标不是做完整课程，而是做高完播率的真实场景救场英语短视频。
+
+## 账号定位
+- 主角：小丸子，年轻女性打工人英语学习搭子
+- 气质：亲切、元气、有陪伴感，不说教，不过度搞笑
+- 内容方向：碎片时间学真实场景英语
+- 当前优化目标：提高完播率，视频必须短、快、真实、有下一集连续感
 
 ## 用户输入
 {user_input}
@@ -346,17 +501,25 @@ def _generate_video_plan(
 {learned_list}
 
 ## 视频结构（必须按此顺序）
-1. 回顾页（2秒）→ 2. 钩子页（2.5秒）→ 3. 标题页（3秒）→ 4. 跟读句1-5（每句6秒）→ 5. 预告页（3秒）→ 6. 结尾复习页（8秒）
+1. 钩子页（1.5-2秒）→ 2. 跟读句1-{sentence_count}（每句4-5秒）→ 3. 快速汇总页（2-3秒）→ 4. 预告/互动页（2秒）
+
+## 时长目标
+- 目标总时长：{duration_seconds}秒以内
+- 每张图不要超过5秒
+- 禁止为了凑时长拉长图片或重复朗读
+- 不要生成回顾页和标题页，开头直接进入强场景钩子
 
 ## 任务要求
 1. 理解用户提供的英语内容，识别用户想要学习的英语表达
-2. **跟读句必须正好5个**：
-   - 如果用户提供了5个或以上句子，从中选择5个最合适的
-   - 如果用户提供的句子不足5个，根据同一主题自动补充相关句子到5个
+2. **跟读句必须正好{sentence_count}个**：
+   - 如果用户提供了{sentence_count}个或以上句子，从中选择最能救场、最真实的{sentence_count}个
+   - 如果用户提供的句子不足{sentence_count}个，根据同一主题自动补充到{sentence_count}个
    - 补充的句子必须与用户提供的句子属于同一场景、难度相当
-3. 生成回顾文案（如果有已学过的句子）
-4. 生成一个吸引人的"钩子页"文案
-5. 生成预告文案（留悬念）
+3. 生成一个真实尴尬场景钩子，不要普通标题式开头
+4. 每句 TTS 固定格式：第N句。英文句子。中文意思。跟我读：英文句子。
+5. 禁止出现“再来一遍”
+6. 汇总页只展示本集句子，TTS 只说一句：这几句先收藏，下一集继续学同一场景。
+7. 预告页要承接同一场景，带轻互动，不要只说关注
 
 ## 输出格式
 请直接输出 JSON，不要有其他内容：
@@ -369,87 +532,67 @@ def _generate_video_plan(
     }},
     "segments": [
         {{
-            "scene": "回顾页",
-            "caption": "上集回顾\\n简短回顾文案",
-            "tts": "上次我们学了...这次继续...",
+            "scene": "钩子页",
+            "caption": "真实尴尬场景钩子（18字以内）",
+            "tts": "真实尴尬场景钩子，短促直接",
             "image_prompt": "FIXED_HOOK_IMAGE",
             "duration": 2.0
         }},
         {{
-            "scene": "钩子页",
-            "caption": "钩子文案（12-18字以内）",
-            "tts": "钩子文案（慢速、直接）",
-            "image_prompt": "FIXED_HOOK_IMAGE",
-            "duration": 2.5
-        }},
-        {{
-            "scene": "标题页",
-            "caption": "英文标题\\n中文标题",
-            "tts": "标题语音内容",
-            "image_prompt": "简洁的场景描述，小丸子站立在中下区域，头顶留白 25%",
-            "duration": 3.0
-        }},
-        {{
             "scene": "第1句跟读",
             "caption": "英语句子\\n中文意思",
-            "tts": "第1句。英语句子 中文意思。跟我读：英语句子 再来一遍：英语句子",
+            "tts": "第1句。英语句子。中文意思。跟我读：英语句子。",
             "image_prompt": "场景描述，小丸子站立在中下区域，头顶留白 25%",
-            "duration": 6.0
+            "duration": 4.5
         }},
         ...
         {{
-            "scene": "预告页",
-            "caption": "预告\\n悬念文案",
-            "tts": "接下来，我们学更实用的说法...",
-            "image_prompt": "FIXED_HOOK_IMAGE",
-            "duration": 3.0
+            "scene": "快速汇总页",
+            "caption": "1. 句子1\\n2. 句子2\\n3. 句子3",
+            "tts": "这几句先收藏，下一集继续学同一场景。",
+            "image_prompt": "FIXED_REVIEW_WITH_CHAR",
+            "duration": 2.5
         }},
         {{
-            "scene": "结尾复习页",
-            "caption": "本集X句跟读复习\\n1. 句子1 - 意思1\\n2. 句子2 - 意思2\\n...",
-            "tts": "来复习一下今天学的X句话...",
-            "image_prompt": "FIXED_REVIEW_WITH_CHAR",
-            "duration": 8.0
+            "scene": "预告页",
+            "caption": "下集预告\\n轻互动文案",
+            "tts": "轻互动预告，比如：评论区打酒店，我继续更下一集。",
+            "image_prompt": "FIXED_HOOK_IMAGE",
+            "duration": 2.0
         }}
     ]
 }}
 
-## 回顾页规则（首次跳过）
-- 如果没有已学过的句子，回顾页文案为空，duration设为0
-- 如果有已学过的句子，用一句话回顾上集内容
-- 示例："上次我们学了check in，这次继续学..."
-
 ## 钩子页规则
-1. **必须和本期5句英语内容强相关**
-2. 文字要短，12-18个字以内
-3. 优先使用反差型、痛点型、悬念型风格
+1. **必须和本期{sentence_count}句英语内容强相关**
+2. 文字要短，18字以内
+3. 必须指向真实尴尬场景，优先使用反差型、痛点型、悬念型风格
 4. 示例：
-   - "这句英语，今天就能用。"
-   - "最后一句，才是最实用的。"
-   - "这5句，真的能救场。"
+   - "酒店问押金，别只会yes"
+   - "机场问行李，这句能救场"
+   - "入境官追问，先背这几句"
 
 ## 预告页规则（必须留悬念！）
-1. 预告接下来要学的内容
-2. 制造期待感，让人想继续看
+1. 预告接下来要学的同一场景内容
+2. 制造期待感，并带轻互动
 3. 示例：
-   - "接下来，我们学更自然的说法"
-   - "还有一句更像老外会说的"
-   - "下一句更实用哦"
+   - "下集学房间投诉，评论区打酒店"
+   - "下一集学账单多收费怎么说"
+   - "这句你敢不敢跟读一遍？"
 
 ## image_prompt 规则
-- 钩子页、回顾页、预告页：固定为 "FIXED_HOOK_IMAGE"
+- 钩子页、预告页：固定为 "FIXED_HOOK_IMAGE"
 - 标题页、跟读句：描述场景，小丸子在中下区域
-- 结尾复习页：固定为 "FIXED_REVIEW_WITH_CHAR"
+- 快速汇总页：固定为 "FIXED_REVIEW_WITH_CHAR"
 
 ## 重要规则
-1. **必须使用用户提供的原始英语句子**，不要自己编造
+1. 优先使用用户提供的原始英语句子；不足时才补充
 2. **不要重复已学过的句子**
-3. 每个跟读句的 duration 设为 6.0 秒
+3. 每个跟读句的 duration 设为 4.0-5.0 秒
 4. 只输出 JSON，不要有 ```json 之类的标记
-5. **禁止出现"第X集"概念**：
-   - 标题页 tts 只说主题，如"旅行英语，出发前确认行程"
-   - 不要说"第1集"、"第二集"等
-   - 用户会手动添加合集，不需要在视频中提及集数
+5. 字幕每屏最多两行，英文在上，中文在下
+6. 不要生成“每天跟读3遍”“一周熟练运用”等慢课式文案
+7. 不要出现"第X集"概念，用户会手动添加合集
 """
     
     try:
@@ -482,25 +625,10 @@ def _generate_video_plan(
             json=data,
             timeout=120
         )
-        
-        # 解析 SSE 流式响应
-        content = ""
-        for line in resp.content.split(b'\n'):
-            try:
-                line_str = line.decode('utf-8', errors='replace').strip()
-                if line_str.startswith('data:'):
-                    json_str = line_str[5:].strip()
-                    if json_str and json_str != '[DONE]':
-                        chunk = json.loads(json_str)
-                        delta = chunk.get('choices', [{}])[0].get('delta', {})
-                        delta_content = delta.get('content') or ''
-                        if isinstance(delta_content, str):
-                            content += delta_content
-            except Exception:
-                continue
+        resp.raise_for_status()
         
         # 清理响应
-        content = content.strip()
+        content = _extract_chat_content(resp).strip()
         if content.startswith('```'):
             parts = content.split('```')
             content = parts[1] if len(parts) > 1 else content
@@ -512,8 +640,12 @@ def _generate_video_plan(
             content = content.decode('utf-8', errors='replace')
         
         data = json.loads(content)
+        segments = _normalize_segments_for_retention(
+            data.get('segments', []),
+            sentence_count=sentence_count
+        )
         return {
-            'segments': data.get('segments', []),
+            'segments': segments,
             'episode_info': data.get('episode_info', {})
         }
         

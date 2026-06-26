@@ -7,6 +7,16 @@ TTS 配音节点
 支持多种音色选择（见 TTS_VOICES 配置）。
 """
 
+import logging
+import time
+import wave
+import os
+from typing import Dict, Any, List, Optional
+import requests
+from coze_coding_dev_sdk import TTSClient
+from coze_coding_utils.runtime_ctx.context import new_context
+from graphs.nodes.oss_uploader import upload_audio_to_oss
+
 # ========== TTS 音色配置 ==========
 # 可选音色：
 # - zh_female_xiaohe_uranus_bigtts (小禾 - 默认，通用女声)
@@ -52,19 +62,10 @@ TTS_VOICES = {
 }
 
 DEFAULT_VOICE = "zh_female_xiaohe_uranus_bigtts"
-# 语速设置：0.8-0.85 为慢速，便于跟读
-TTS_SPEED = 0.85
+# 短视频默认要更利落。若底层 TTS SDK 不支持 speed 参数，也会靠更短文案控时长。
+TTS_SPEED = float(os.getenv("TTS_SPEED", "1.05"))
+TARGET_TOTAL_DURATION_SECONDS = float(os.getenv("TARGET_TOTAL_DURATION_SECONDS", "28"))
 # =================================
-
-import logging
-import time
-import wave
-import os
-from typing import Dict, Any, List, Optional
-import requests
-from coze_coding_dev_sdk import TTSClient
-from coze_coding_utils.runtime_ctx.context import new_context
-from graphs.nodes.oss_uploader import upload_audio_to_oss
 
 logger = logging.getLogger(__name__)
 
@@ -152,13 +153,22 @@ def _generate_segment_audio(
         # 清理临时文件名中的空格
         safe_uid = f"segment_{segment_index}_{int(time.time())}".replace(" ", "_")
         
-        audio_url, audio_size = client.synthesize(
-            uid=safe_uid,
-            text=text,
-            speaker=speaker,
-            audio_format="mp3",
-            sample_rate=24000
-        )
+        synthesize_kwargs = {
+            "uid": safe_uid,
+            "text": text,
+            "speaker": speaker,
+            "audio_format": "mp3",
+            "sample_rate": 24000,
+        }
+        if speed:
+            synthesize_kwargs["speed"] = speed
+
+        try:
+            audio_url, audio_size = client.synthesize(**synthesize_kwargs)
+        except TypeError:
+            # Some Coze runtimes do not expose speed control on TTSClient yet.
+            synthesize_kwargs.pop("speed", None)
+            audio_url, audio_size = client.synthesize(**synthesize_kwargs)
         
         # 上传到 OSS
         oss_url = upload_audio_to_oss(audio_url)
@@ -306,6 +316,16 @@ def tts_synthesize(state: Dict[str, Any]) -> Dict[str, Any]:
         }
     
     total_duration = current_time_us
+    target_duration_us = int(
+        state.get("content_meta", {}).get("target_duration_seconds", TARGET_TOTAL_DURATION_SECONDS)
+        * MICROSECONDS_PER_SECOND
+    )
+    if total_duration > target_duration_us:
+        logger.warning(
+            "TTS total duration %.2fs exceeds target %.2fs; shorten generated TTS text or reduce sentence_count.",
+            total_duration / MICROSECONDS_PER_SECOND,
+            target_duration_us / MICROSECONDS_PER_SECOND,
+        )
     
     logger.info(
         f"TTS completed: {len(audio_segments)} segments, "

@@ -14,7 +14,8 @@ def test_workflow():
     # 初始化输入
     initial_state = {
         "topic": "出国旅行酒店入住英语",
-        "duration_seconds": 60,
+        "duration_seconds": 28,
+        "sentence_count": 3,
         "style": "旅行英语",
         "canvas_width": 1080,
         "canvas_height": 1920,

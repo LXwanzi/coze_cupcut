@@ -16,6 +16,8 @@ from coze_coding_utils.runtime_ctx.context import default_headers, new_context
 from graphs.graph import create_workflow
 
 logger = logging.getLogger(__name__)
+DEFAULT_SHORT_DURATION_SECONDS = 28
+DEFAULT_SHORT_SENTENCE_COUNT = 3
 
 # LLM 配置
 LLM_CONFIG_PATH = os.path.join(
@@ -81,18 +83,38 @@ def _parse_user_input(message: str) -> Dict[str, Any]:
             content_part = parts[1].strip()
             
             # 判断是否是场景描述
-            scene_keywords = ['酒店', '旅行', '机场', '餐厅', '购物', '医院', '银行', '办公室']
+            scene_keywords = ['酒店', '旅行', '机场', '餐厅', '购物', '医院', '银行', '办公室', '商务', '亲子', '救场', '生活']
             if any(kw in topic_part for kw in scene_keywords):
                 result['topic'] = topic_part
                 result['learning_note'] = content_part
+                result['scene'] = _detect_scene(topic_part)
             else:
                 result['learning_note'] = message
         else:
             result['learning_note'] = message
     else:
         result['learning_note'] = message
+        result['scene'] = _detect_scene(message)
     
     return result
+
+
+def _detect_scene(text: str) -> str:
+    """Map Chinese topic hints to the coarse scene used by the workflow memory."""
+    text = text or ''
+    scene_map = [
+        ('emergency', ['救场', '卡壳', '听不清', '不会说', '付款失败', '迷路', '丢东西']),
+        ('hotel', ['酒店', '入住', '退房', '房间', '前台', '押金', '早餐']),
+        ('office', ['办公室', '开会', '请假', '催进度', '汇报', '同事']),
+        ('business', ['商务', '客户', '合同', '谈判', '报价', '提案']),
+        ('parent_child', ['亲子', '孩子', '绘本', '睡前']),
+        ('daily', ['日常', '生活', '咖啡', '外卖', '超市', '理发']),
+        ('travel', ['旅行', '机场', '入境', '航班', '行李', '登机', '护照']),
+    ]
+    for scene, keywords in scene_map:
+        if any(keyword in text for keyword in keywords):
+            return scene
+    return 'travel'
 
 
 async def _run_workflow(user_input: Dict[str, Any]) -> Dict[str, Any]:
@@ -105,7 +127,8 @@ async def _run_workflow(user_input: Dict[str, Any]) -> Dict[str, Any]:
             'learning_note': user_input.get('learning_note', ''),
             'topic': user_input.get('topic', ''),
             'scene': user_input.get('scene', 'travel'),
-            'duration_seconds': 60,
+            'duration_seconds': DEFAULT_SHORT_DURATION_SECONDS,
+            'sentence_count': DEFAULT_SHORT_SENTENCE_COUNT,
             'canvas_width': 1080,
             'canvas_height': 1920
         }
@@ -177,7 +200,8 @@ def agent_node(state: MessagesState) -> Dict[str, Any]:
             'learning_note': user_input.get('learning_note', ''),
             'topic': user_input.get('topic', ''),
             'scene': user_input.get('scene', 'travel'),
-            'duration_seconds': 60,
+            'duration_seconds': DEFAULT_SHORT_DURATION_SECONDS,
+            'sentence_count': DEFAULT_SHORT_SENTENCE_COUNT,
             'canvas_width': 1080,
             'canvas_height': 1920
         }
