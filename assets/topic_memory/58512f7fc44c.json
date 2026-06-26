@@ -71,6 +71,20 @@
       "hook": "",
       "preview": "下集我们学酒店突发问题的实用表达哦",
       "created_at": "2026-06-26T12:08:06.092937"
+    },
+    {
+      "episode_num": 6,
+      "sentences": [
+        "I'd like to check out, please.",
+        "Could I have my bill, please?",
+        "Can I pay by credit card?",
+        "Please return my deposit, thank you.",
+        "Could you call a taxi for me?"
+      ],
+      "scene": "酒店退房实用英语",
+      "hook": "",
+      "preview": "下集教你押金有问题怎么沟通哦",
+      "created_at": "2026-06-26T13:17:32.012602"
     }
   ],
   "all_sentences": [
@@ -96,7 +110,10 @@
     "Can I get a receipt, please?",
     "Could I have the bill, please?",
     "Can I pay by credit card?",
-    "Can I leave my luggage here for 2 hours?"
+    "Can I leave my luggage here for 2 hours?",
+    "Could I have my bill, please?",
+    "Please return my deposit, thank you.",
+    "Could you call a taxi for me?"
   ],
   "scenes_used": [
     "酒店入住实用英语",
@@ -105,7 +122,7 @@
     "酒店退房实用英语"
   ],
   "last_hook": "",
-  "next_preview": "下集我们学酒店突发问题的实用表达哦",
+  "next_preview": "下集教你押金有问题怎么沟通哦",
   "created_at": "2026-06-26T07:12:24.143480",
-  "updated_at": "2026-06-26T12:08:06.092974"
+  "updated_at": "2026-06-26T13:17:32.012627"
 }

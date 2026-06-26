@@ -50,8 +50,13 @@ def upload_image_to_oss(image_data: bytes, scene_index: str) -> Optional[str]:
         # 生成 OSS 文件名
         file_name = f"video_images/scene_{scene_index}.png"
         
-        # 上传到 OSS（确保是 bytes 类型）
-        bucket.put_object(file_name, image_data)
+        # 上传到 OSS，设置正确的 Content-Type 和 Content-Disposition
+        # 使用 inline 让文件可以在线预览，而不是强制下载
+        headers = {
+            'Content-Type': 'image/png',
+            'Content-Disposition': 'inline'
+        }
+        bucket.put_object(file_name, image_data, headers=headers)
         
         # 生成 OSS URL
         oss_url = f"https://{OSS_BUCKET}.{OSS_ENDPOINT.replace('https://', '')}/{file_name}"
@@ -88,8 +93,13 @@ def upload_audio_to_oss(audio_url: str) -> Optional[str]:
         timestamp = int(time.time() * 1000)
         file_name = f"tts_audio/audio_{timestamp}.mp3"
         
-        # 上传到 OSS（确保是 bytes 类型）
-        bucket.put_object(file_name, audio_data)
+        # 上传到 OSS，设置正确的 Content-Type 和 Content-Disposition
+        # 使用 inline 让文件可以在线播放，而不是强制下载
+        headers = {
+            'Content-Type': 'audio/mpeg',
+            'Content-Disposition': 'inline'
+        }
+        bucket.put_object(file_name, audio_data, headers=headers)
         
         # 生成 OSS URL
         oss_url = f"https://{OSS_BUCKET}.{OSS_ENDPOINT.replace('https://', '')}/{file_name}"
