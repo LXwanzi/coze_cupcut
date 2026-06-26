@@ -109,13 +109,18 @@ class MemoryManager:
 
         # 4. 尝试创建连接池和 checkpointer
         try:
+            # 使用 open=True 直接打开连接池
+            # 注意：这在新版本中会有弃用警告，但功能正常
+            # 未来版本需要重构为异步初始化模式
             self._pool = AsyncConnectionPool(
                 conninfo=db_url,
                 timeout=DB_CONNECTION_TIMEOUT,
                 min_size=1,
                 max_idle=300,
                 check=AsyncConnectionPool.check_connection,
+                open=True,  # 直接打开连接池
             )
+            
             self._checkpointer = AsyncPostgresSaver(self._pool)
             logger.info("AsyncPostgresSaver initialized successfully")
         except Exception as e:
