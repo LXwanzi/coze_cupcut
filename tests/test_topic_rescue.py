@@ -29,6 +29,14 @@ def test_parse_topic_input_routes_plane_attendant_as_scene_collection():
     assert parsed["content_mode"] == "scene_collection"
 
 
+def test_parse_topic_input_routes_plane_attendant_synonym_as_scene_collection():
+    parsed = parse_topic_input("飞机上寻求空乘帮助")
+
+    assert parsed["topic"] == "飞机上找空乘"
+    assert parsed["sub_scene"] == "in_flight_attendant"
+    assert parsed["content_mode"] == "scene_collection"
+
+
 def test_build_topic_brief_adds_rescue_answer_levels():
     brief = build_topic_brief("痛点式：机场值机")
 
@@ -50,6 +58,25 @@ def test_build_topic_brief_adds_scene_collection_expressions():
     assert brief["expressions"][0]["english"] == "Excuse me, could you help me?"
     assert brief["quality_review"]["is_reasonable"] is True
     assert brief["voice_profile"]["voice"] == "playful"
+
+
+def test_painpoint_plane_attendant_uses_meaningful_contrast():
+    brief = build_topic_brief("痛点式：飞机上寻求空乘帮助")
+
+    assert brief["content_mode"] == "painpoint_contrast"
+    assert brief["wrong_expression"] == "Yes."
+    assert "没说清楚" in brief["why_wrong"]
+    assert brief["answer_levels"][0]["english"] == "Could you help me?"
+    assert brief["answer_levels"][1]["english"] == "Could you help me put this up?"
+    assert brief["answer_levels"][0]["english"] != "Yes, please."
+
+
+def test_fallback_painpoint_avoids_weak_yes_to_yes_please_contrast():
+    brief = build_topic_brief("痛点式：咖啡店杯子太小")
+
+    assert brief["wrong_expression"] == "Help me."
+    assert brief["answer_levels"][0]["english"] == "Could you help me with this?"
+    assert all(item["english"] != "Yes, please." for item in brief["answer_levels"])
 
 
 def test_build_rescue_segments_contains_scene_and_layered_answers():

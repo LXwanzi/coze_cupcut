@@ -10,6 +10,7 @@ from typing import Dict, Any, List
 logger = logging.getLogger(__name__)
 DEFAULT_SHORT_DURATION_SECONDS = 28
 DEFAULT_SHORT_SENTENCE_COUNT = 3
+CONTENT_MODE_PREFIXES = ['场景式', '场景', '合集', '痛点式', '痛点', '反差', '纠错']
 
 # LLM 配置
 LLM_CONFIG_PATH = os.path.join(
@@ -78,6 +79,14 @@ def _parse_user_input(message: str) -> Dict[str, Any]:
         if len(parts) == 2:
             topic_part = parts[0].strip()
             content_part = parts[1].strip()
+
+            if topic_part in CONTENT_MODE_PREFIXES:
+                result['raw_topic'] = f"{topic_part}：{content_part}"
+                result['topic'] = f"{topic_part}：{content_part}"
+                result['learning_note'] = ''
+                result['scene'] = _detect_scene(content_part)
+                result['auto_generate_expressions'] = True
+                return result
             
             # 判断是否是场景描述
             scene_keywords = ['酒店', '旅行', '机场', '餐厅', '购物', '医院', '银行', '办公室', '商务', '亲子', '救场', '生活']

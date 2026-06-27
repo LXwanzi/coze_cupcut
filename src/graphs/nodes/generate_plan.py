@@ -360,6 +360,8 @@ def _build_publish_pack(
 
 
 def _build_painpoint_title(topic: str, pain_point: str) -> str:
+    if "空乘" in pain_point or "空姐" in pain_point:
+        return f"【{topic}】别只会yes，这句才有用"
     if "托运" in pain_point or "行李" in pain_point:
         return f"【{topic}】不会说托运行李？这句能救场"
     if "账单" in pain_point:
