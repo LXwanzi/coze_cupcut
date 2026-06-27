@@ -41,6 +41,43 @@
       "hook": "登机口临时改了？别慌说这几句",
       "preview": "下集学习过安检实用英语表达",
       "created_at": "2026-06-27T00:11:58.513373"
+    },
+    {
+      "episode_num": 4,
+      "sentences": [
+        "Yes, one bag.",
+        "I have one bag to check.",
+        "I'd like to check this bag."
+      ],
+      "scene": "机场托运行李，别说 send my bag",
+      "hook": "机场托运行李，别说 send my bag",
+      "preview": "下集讲选座别说 window place。",
+      "pain_point": "机场托运行李，别说 send my bag",
+      "wrong_expression": "I want to send my bag.",
+      "answer_levels": [
+        {
+          "level": "survival",
+          "label": "最短能救场",
+          "english": "Yes, one bag.",
+          "chinese": "有，一个包。",
+          "usage": "听懂问题后先接住，不用憋完整句。"
+        },
+        {
+          "level": "standard",
+          "label": "完整一点",
+          "english": "I have one bag to check.",
+          "chinese": "我有一个包要托运。",
+          "usage": "回答工作人员询问时最自然。"
+        },
+        {
+          "level": "polite",
+          "label": "想主动说",
+          "english": "I'd like to check this bag.",
+          "chinese": "我想托运这个包。",
+          "usage": "主动提出要托运行李时用。"
+        }
+      ],
+      "created_at": "2026-06-27T12:15:12.266166"
     }
   ],
   "all_sentences": [
@@ -51,14 +88,24 @@
     "May I board now?",
     "Has the gate changed?",
     "Which gate should I go to now?",
-    "Is boarding already started?"
+    "Is boarding already started?",
+    "Yes, one bag.",
+    "I have one bag to check.",
+    "I'd like to check this bag."
   ],
   "scenes_used": [
     "旅行英语之安检登机",
-    "登机口临时改了？别慌说这几句"
+    "登机口临时改了？别慌说这几句",
+    "机场托运行李，别说 send my bag"
   ],
   "last_hook": "",
-  "next_preview": "下集学习过安检实用英语表达",
+  "next_preview": "下集讲选座别说 window place。",
   "created_at": "2026-06-26T11:30:13.367774",
-  "updated_at": "2026-06-27T00:11:58.513396"
+  "updated_at": "2026-06-27T12:15:12.266183",
+  "pain_points_used": [
+    "机场托运行李，别说 send my bag"
+  ],
+  "wrong_expressions_used": [
+    "I want to send my bag."
+  ]
 }
