@@ -78,6 +78,43 @@
         }
       ],
       "created_at": "2026-06-27T12:15:12.266166"
+    },
+    {
+      "episode_num": 5,
+      "sentences": [
+        "Yes, one bag.",
+        "I have one bag to check.",
+        "I'd like to check this bag."
+      ],
+      "scene": "机场托运行李，别说 send my bag",
+      "hook": "机场托运行李，别说 send my bag",
+      "preview": "下集讲选座别说 window place。",
+      "pain_point": "机场托运行李，别说 send my bag",
+      "wrong_expression": "I want to send my bag.",
+      "answer_levels": [
+        {
+          "level": "survival",
+          "label": "最短能救场",
+          "english": "Yes, one bag.",
+          "chinese": "有，一个包。",
+          "usage": "听懂问题后先接住，不用憋完整句。"
+        },
+        {
+          "level": "standard",
+          "label": "完整一点",
+          "english": "I have one bag to check.",
+          "chinese": "我有一个包要托运。",
+          "usage": "回答工作人员询问时最自然。"
+        },
+        {
+          "level": "polite",
+          "label": "想主动说",
+          "english": "I'd like to check this bag.",
+          "chinese": "我想托运这个包。",
+          "usage": "主动提出要托运行李时用。"
+        }
+      ],
+      "created_at": "2026-06-27T12:48:22.572391"
     }
   ],
   "all_sentences": [
@@ -101,7 +138,7 @@
   "last_hook": "",
   "next_preview": "下集讲选座别说 window place。",
   "created_at": "2026-06-26T11:30:13.367774",
-  "updated_at": "2026-06-27T12:15:12.266183",
+  "updated_at": "2026-06-27T12:48:22.572402",
   "pain_points_used": [
     "机场托运行李，别说 send my bag"
   ],

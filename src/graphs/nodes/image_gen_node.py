@@ -54,7 +54,8 @@ STYLE_SUFFIX = (
     "Minimalist round-headed cartoon character Xiao Wanzi, young office worker "
     "learning English in everyday spare moments, wearing wireless earbuds and carrying a laptop bag, "
     "short black hair, light-colored top, crossbody bag, line art style, "
-    "character fixed in middle-lower area (head should not exceed middle line), "
+    "character prominently displayed in center of frame, large and clear, "
+    "taking up about 40-50% of the image height, positioned vertically centered, "
     "no text inside the image, bright colors, flat illustration, 9:16 vertical frame"
 )
 

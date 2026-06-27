@@ -95,6 +95,21 @@
       "hook": "过安检不会说？别乱比划",
       "preview": "下集学登机口实用救场英语",
       "created_at": "2026-06-27T08:06:16.284167"
+    },
+    {
+      "episode_num": 8,
+      "sentences": [
+        "Is my bag overweight?",
+        "How much is the overweight fee?",
+        "Can I take something out?"
+      ],
+      "scene": "机场行李超重？快背这几句",
+      "hook": "机场行李超重？快背这几句",
+      "preview": "下集学超重缴费实用表达",
+      "pain_point": "",
+      "wrong_expression": "",
+      "answer_levels": [],
+      "created_at": "2026-06-27T13:12:28.161945"
     }
   ],
   "all_sentences": [
@@ -113,17 +128,20 @@
     "Can I take some items out?",
     "Do I need to remove my laptop?",
     "Is this liquid allowed?",
-    "Should I take off my shoes?"
+    "Should I take off my shoes?",
+    "How much is the overweight fee?",
+    "Can I take something out?"
   ],
   "scenes_used": [
     "出发前确认行程",
     "旅行英语：出发前确认行程",
     "旅行英语：飞机上沟通",
     "行李超重？这几句直接用",
-    "过安检不会说？别乱比划"
+    "过安检不会说？别乱比划",
+    "机场行李超重？快背这几句"
   ],
   "last_hook": "",
-  "next_preview": "下集学登机口实用救场英语",
+  "next_preview": "下集学超重缴费实用表达",
   "created_at": "2026-06-26T07:25:09.292153",
-  "updated_at": "2026-06-27T08:06:16.284188"
+  "updated_at": "2026-06-27T13:12:28.161977"
 }
