@@ -36,7 +36,7 @@ from graphs.nodes.oss_uploader import upload_audio_to_oss
 # - saturn_zh_female_cancan_tob (才女)
 
 TTS_VOICES = {
-    "default": "ICL_uranus_en_female_charlie_tob",
+    "default": "zh_female_yingyujiaoxue_uranus_bigtts",
     "xiaohao": "zh_female_xiaohe_uranus_bigtts",
     "vivi": "zh_female_vv_uranus_bigtts",
     "children": "zh_female_xueayi_saturn_bigtts",
@@ -61,7 +61,7 @@ TTS_VOICES = {
     "smart": "saturn_zh_female_cancan_tob",
 }
 
-DEFAULT_VOICE = "ICL_uranus_en_female_charlie_tob"
+DEFAULT_VOICE = "zh_female_yingyujiaoxue_uranus_bigtts"
 # 短视频默认要更利落。若底层 TTS SDK 不支持 speed 参数，也会靠更短文案控时长。
 TTS_SPEED = float(os.getenv("TTS_SPEED", "1.05"))
 TARGET_TOTAL_DURATION_SECONDS = float(os.getenv("TARGET_TOTAL_DURATION_SECONDS", "28"))
