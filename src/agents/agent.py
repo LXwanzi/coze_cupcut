@@ -6,14 +6,6 @@ import os
 import json
 import logging
 from typing import Dict, Any, List
-from langchain_core.messages import HumanMessage, AIMessage, SystemMessage
-from langchain_openai import ChatOpenAI
-from langgraph.graph import StateGraph, MessagesState, END
-from langgraph.graph.state import CompiledStateGraph
-from langgraph.checkpoint.memory import MemorySaver
-
-from coze_coding_utils.runtime_ctx.context import default_headers, new_context
-from graphs.graph import create_workflow
 
 logger = logging.getLogger(__name__)
 DEFAULT_SHORT_DURATION_SECONDS = 28
@@ -41,6 +33,9 @@ def _load_llm_config() -> Dict[str, Any]:
 
 def _get_llm():
     """获取 LLM 实例"""
+    from langchain_openai import ChatOpenAI
+    from coze_coding_utils.runtime_ctx.context import default_headers, new_context
+
     cfg = _load_llm_config()
     api_key = os.getenv("COZE_WORKLOAD_IDENTITY_API_KEY")
     base_url = os.getenv("COZE_INTEGRATION_MODEL_BASE_URL")
@@ -65,9 +60,11 @@ def _parse_user_input(message: str) -> Dict[str, Any]:
     3. 带场景的文本：如"旅行英语：机场值机"
     """
     result = {
+        'raw_topic': '',
         'learning_note': '',
         'topic': '',
-        'scene': 'travel'
+        'scene': 'travel',
+        'auto_generate_expressions': True,
     }
     
     if not message or not message.strip():
@@ -88,15 +85,26 @@ def _parse_user_input(message: str) -> Dict[str, Any]:
                 result['topic'] = topic_part
                 result['learning_note'] = content_part
                 result['scene'] = _detect_scene(topic_part)
+                result['raw_topic'] = topic_part
+                result['auto_generate_expressions'] = not _contains_english(content_part)
             else:
                 result['learning_note'] = message
+                result['auto_generate_expressions'] = False
         else:
             result['learning_note'] = message
+            result['auto_generate_expressions'] = False
     else:
-        result['learning_note'] = message
+        result['raw_topic'] = message
+        result['topic'] = message
+        result['learning_note'] = ''
         result['scene'] = _detect_scene(message)
+        result['auto_generate_expressions'] = True
     
     return result
+
+
+def _contains_english(text: str) -> bool:
+    return bool(text and any(("A" <= ch <= "Z") or ("a" <= ch <= "z") for ch in text))
 
 
 def _detect_scene(text: str) -> str:
@@ -120,13 +128,17 @@ def _detect_scene(text: str) -> str:
 async def _run_workflow(user_input: Dict[str, Any]) -> Dict[str, Any]:
     """运行视频生成工作流"""
     try:
+        from graphs.graph import create_workflow
+
         workflow = create_workflow()
         
         # 构建工作流输入
         workflow_input = {
+            'raw_topic': user_input.get('raw_topic', ''),
             'learning_note': user_input.get('learning_note', ''),
             'topic': user_input.get('topic', ''),
             'scene': user_input.get('scene', 'travel'),
+            'auto_generate_expressions': user_input.get('auto_generate_expressions', True),
             'duration_seconds': DEFAULT_SHORT_DURATION_SECONDS,
             'sentence_count': DEFAULT_SHORT_SENTENCE_COUNT,
             'canvas_width': 1080,
@@ -145,7 +157,7 @@ async def _run_workflow(user_input: Dict[str, Any]) -> Dict[str, Any]:
         }
 
 
-def agent_node(state: MessagesState) -> Dict[str, Any]:
+def agent_node(state: Dict[str, Any]) -> Dict[str, Any]:
     """
     Agent 节点：处理用户消息并生成视频
     
@@ -156,13 +168,14 @@ def agent_node(state: MessagesState) -> Dict[str, Any]:
     4. 返回视频生成结果
     """
     import asyncio
+    from langchain_core.messages import AIMessage, HumanMessage
     
     messages = state.get('messages', [])
     
     # 获取最后一条用户消息
     user_message = None
     for msg in reversed(messages):
-        if isinstance(msg, HumanMessage):
+        if isinstance(msg, HumanMessage) or getattr(msg, "type", "") == "human":
             # content 可能是字符串或列表
             content = msg.content
             if isinstance(content, list):
@@ -193,13 +206,17 @@ def agent_node(state: MessagesState) -> Dict[str, Any]:
     
     # 运行工作流（同步方式）
     try:
+        from graphs.graph import create_workflow
+
         workflow = create_workflow()
         
         # 构建工作流输入
         workflow_input = {
+            'raw_topic': user_input.get('raw_topic', ''),
             'learning_note': user_input.get('learning_note', ''),
             'topic': user_input.get('topic', ''),
             'scene': user_input.get('scene', 'travel'),
+            'auto_generate_expressions': user_input.get('auto_generate_expressions', True),
             'duration_seconds': DEFAULT_SHORT_DURATION_SECONDS,
             'sentence_count': DEFAULT_SHORT_SENTENCE_COUNT,
             'canvas_width': 1080,
@@ -226,6 +243,11 @@ def agent_node(state: MessagesState) -> Dict[str, Any]:
     
     response = f"✅ 视频生成成功！\n\n"
     response += f"主题：{topic}\n"
+    content_meta = result.get('content_meta', {}) or {}
+    if content_meta.get('pain_point'):
+        response += f"本集痛点：{content_meta.get('pain_point')}\n"
+    if content_meta.get('content_mode'):
+        response += f"内容模式：{content_meta.get('content_mode')}\n"
     
     if draft_url:
         response += f"剪映草稿链接：{draft_url}\n"
@@ -235,9 +257,10 @@ def agent_node(state: MessagesState) -> Dict[str, Any]:
     if segments:
         response += f"\n视频包含 {len(segments)} 个片段：\n"
         for i, seg in enumerate(segments[:3], 1):
-            subtitle = seg.get('subtitle', '')
-            if subtitle:
-                response += f"{i}. {subtitle[:50]}...\n" if len(subtitle) > 50 else f"{i}. {subtitle}\n"
+            summary = seg.get('caption') or seg.get('scene', '')
+            if summary:
+                summary = summary.replace('\n', ' / ')
+                response += f"{i}. {summary[:50]}...\n" if len(summary) > 50 else f"{i}. {summary}\n"
     
     response += "\n请在剪映中打开草稿链接进行编辑和导出。"
     
@@ -246,7 +269,7 @@ def agent_node(state: MessagesState) -> Dict[str, Any]:
     }
 
 
-def build_agent(ctx=None) -> CompiledStateGraph:
+def build_agent(ctx=None):
     """
     构建聊天 Agent
     
@@ -256,6 +279,9 @@ def build_agent(ctx=None) -> CompiledStateGraph:
     3. 调用视频生成工作流
     4. 返回视频生成结果
     """
+    from langgraph.graph import StateGraph, MessagesState, END
+    from langgraph.checkpoint.memory import MemorySaver
+
     # 创建 Agent 图
     workflow = StateGraph(MessagesState)
     

@@ -14,6 +14,13 @@ import logging
 from typing import Dict, Any, List, Optional
 
 from graphs.nodes.topic_memory import get_topic_memory
+from graphs.nodes.topic_rescue_node import (
+    build_rescue_segments,
+    build_topic_brief,
+    detect_scene as detect_topic_scene,
+    extract_answer_sentences,
+    parse_topic_input,
+)
 
 logger = logging.getLogger(__name__)
 
@@ -92,6 +99,8 @@ def generate_plan(state: Dict[str, Any]) -> Dict[str, Any]:
         learning_note = state.get('learning_note', '')
         topic = state.get('topic', '')
         topic_id = state.get('topic_id', '')
+        raw_topic = state.get('raw_topic', '') or topic or learning_note
+        auto_generate_expressions = bool(state.get('auto_generate_expressions'))
         user_input = learning_note or topic
         
         if not user_input:
@@ -104,7 +113,7 @@ def generate_plan(state: Dict[str, Any]) -> Dict[str, Any]:
                 'episode_info': {}
             }
         
-        scene = state.get('scene', 'travel')
+        scene = state.get('scene') or detect_topic_scene(raw_topic)
         duration_seconds = state.get('duration_seconds', DEFAULT_TARGET_DURATION_SECONDS)
         sentence_count = _normalize_sentence_count(state.get('sentence_count', DEFAULT_SENTENCE_COUNT))
         canvas_width = state.get('canvas_width', 1080)
@@ -113,19 +122,34 @@ def generate_plan(state: Dict[str, Any]) -> Dict[str, Any]:
         # 2. 获取或创建专题记忆表
         if not topic_id:
             # 从用户输入生成 topic_id
-            topic_id = _generate_topic_id(user_input, scene)
+            topic_id = _generate_topic_id(raw_topic or user_input, scene)
         
         memory = get_topic_memory(topic_id)
         memory_context = memory.get_context_for_plan()
         
         # 3. 调用 LLM 生成视频计划（带记忆上下文）
-        result = _generate_video_plan(
-            user_input=user_input,
-            scene=scene,
-            duration_seconds=duration_seconds,
-            sentence_count=sentence_count,
-            memory_context=memory_context
-        )
+        topic_brief = {}
+        topic_meta = parse_topic_input(raw_topic or user_input)
+        if auto_generate_expressions or _should_auto_generate_from_topic(learning_note, topic):
+            topic_brief = build_topic_brief(raw_topic or user_input, memory_context=memory_context)
+            scene = topic_brief.get('scene', scene)
+            topic_id = topic_brief.get('topic_id') or topic_id
+            result = {
+                'segments': build_rescue_segments(topic_brief, duration_seconds=duration_seconds),
+                'episode_info': {
+                    'season_name': topic_brief.get('topic', raw_topic or user_input),
+                    'review': '',
+                    'preview': topic_brief.get('next_preview', '')
+                }
+            }
+        else:
+            result = _generate_video_plan(
+                user_input=user_input,
+                scene=scene,
+                duration_seconds=duration_seconds,
+                sentence_count=sentence_count,
+                memory_context=memory_context
+            )
         
         if not result or not result.get('segments'):
             return {
@@ -143,10 +167,13 @@ def generate_plan(state: Dict[str, Any]) -> Dict[str, Any]:
         
         # 4. 更新记忆表
         episode_data = {
-            "sentences": _extract_sentences(segments),
+            "sentences": extract_answer_sentences(topic_brief) or _extract_sentences(segments),
             "scene": _extract_scene_name(segments),
             "hook": _extract_hook(segments),
-            "preview": episode_info.get('preview', '')
+            "preview": episode_info.get('preview', ''),
+            "pain_point": topic_brief.get("pain_point", ""),
+            "wrong_expression": topic_brief.get("wrong_expression", ""),
+            "answer_levels": topic_brief.get("answer_levels", []),
         }
         memory.add_episode(episode_data)
         
@@ -159,10 +186,14 @@ def generate_plan(state: Dict[str, Any]) -> Dict[str, Any]:
         content_meta = {
             'selected_topic': _extract_topic(segments, user_input),
             'scene': scene,
+            'sub_scene': topic_brief.get('sub_scene') or topic_meta.get('sub_scene'),
             'duration_seconds': sum(seg.get('duration', 5) for seg in segments),
             'target_duration_seconds': duration_seconds,
             'sentence_count': sentence_count,
-            'format': 'retention_short',
+            'format': 'topic_rescue_hybrid' if topic_brief else 'retention_short',
+            'content_mode': topic_brief.get('content_mode') or topic_meta.get('content_mode', 'hybrid'),
+            'pain_point': topic_brief.get('pain_point', ''),
+            'wrong_expression': topic_brief.get('wrong_expression', ''),
             'originality_check': '所有内容基于用户提供的原始素材生成',
             'safety_note': '未涉及教材原文复述',
             'topic_id': topic_id
@@ -191,6 +222,7 @@ def generate_plan(state: Dict[str, Any]) -> Dict[str, Any]:
         
         review_card = {
             'today_expressions': expressions[:sentence_count],
+            'answer_levels': topic_brief.get('answer_levels', []),
             'quick_review': '先收藏，下一集继续同一场景。'
         }
         
@@ -257,6 +289,18 @@ def _generate_topic_id(user_input: str, scene: str) -> str:
     
     key = f"{scene}_{topic_category}"
     return hashlib.md5(key.encode()).hexdigest()[:12]
+
+
+def _should_auto_generate_from_topic(learning_note: str, topic: str) -> bool:
+    """Treat a topic-only request as an instruction to generate expressions."""
+    if not topic:
+        return False
+    if not learning_note:
+        return True
+    # If the user provides English text, keep the legacy sentence-selection path.
+    if re.search(r"[A-Za-z]{2,}", learning_note):
+        return False
+    return len(learning_note.strip()) <= 20
 
 
 def _extract_sentences(segments: List[Dict]) -> List[str]:

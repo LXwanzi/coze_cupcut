@@ -17,9 +17,14 @@ logger = logging.getLogger(__name__)
 class VideoWorkflowState(dict):
     """工作流状态"""
     # 输入字段
+    raw_topic: str
     learning_note: str
+    topic: str
     scene: str
+    auto_generate_expressions: bool
+    content_mode: str
     duration_seconds: int
+    sentence_count: int
     audience: str
     tone: str
     canvas_width: int
@@ -89,6 +94,7 @@ def generate_plan_node(state: VideoWorkflowState) -> Dict[str, Any]:
         "content_meta": result.get("content_meta"),
         "publish_pack": result.get("publish_pack"),
         "review_card": result.get("review_card"),
+        "episode_info": result.get("episode_info"),
         "voice_text": result.get("voice_text"),
         "segments": result.get("segments", []),
         "video_plan": result.get("video_plan"),

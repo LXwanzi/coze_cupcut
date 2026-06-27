@@ -10,8 +10,9 @@ from typing import Optional
 from datetime import datetime
 
 
-# 记忆表存储路径
-MEMORY_DIR = os.path.join(os.getenv("COZE_WORKSPACE_PATH", "/workspace/projects"), "assets", "topic_memory")
+def _get_memory_dir() -> str:
+    """Resolve memory directory at runtime for Coze and local tests."""
+    return os.path.join(os.getenv("COZE_WORKSPACE_PATH", "/workspace/projects"), "assets", "topic_memory")
 
 
 class TopicMemory:
@@ -23,8 +24,9 @@ class TopicMemory:
     
     def _get_file_path(self) -> str:
         """获取记忆表文件路径"""
-        os.makedirs(MEMORY_DIR, exist_ok=True)
-        return os.path.join(MEMORY_DIR, f"{self.topic_id}.json")
+        memory_dir = _get_memory_dir()
+        os.makedirs(memory_dir, exist_ok=True)
+        return os.path.join(memory_dir, f"{self.topic_id}.json")
     
     def _load(self) -> dict:
         """加载记忆表"""
@@ -42,6 +44,8 @@ class TopicMemory:
             "episodes": [],
             "all_sentences": [],
             "scenes_used": [],
+            "pain_points_used": [],
+            "wrong_expressions_used": [],
             "last_hook": "",
             "next_preview": "",
             "created_at": datetime.now().isoformat(),
@@ -95,6 +99,9 @@ class TopicMemory:
             "scene": episode_data.get("scene", ""),
             "hook": episode_data.get("hook", ""),
             "preview": episode_data.get("preview", ""),
+            "pain_point": episode_data.get("pain_point", ""),
+            "wrong_expression": episode_data.get("wrong_expression", ""),
+            "answer_levels": episode_data.get("answer_levels", []),
             "created_at": datetime.now().isoformat()
         }
         
@@ -108,6 +115,14 @@ class TopicMemory:
         # 更新已用场景
         if episode["scene"] and episode["scene"] not in self.data["scenes_used"]:
             self.data["scenes_used"].append(episode["scene"])
+
+        pain_point = episode.get("pain_point")
+        if pain_point and pain_point not in self.data.setdefault("pain_points_used", []):
+            self.data["pain_points_used"].append(pain_point)
+
+        wrong_expression = episode.get("wrong_expression")
+        if wrong_expression and wrong_expression not in self.data.setdefault("wrong_expressions_used", []):
+            self.data["wrong_expressions_used"].append(wrong_expression)
         
         # 更新下一集预告
         self.data["next_preview"] = episode.get("preview", "")
@@ -131,7 +146,9 @@ class TopicMemory:
             "last_scene": last_ep["scene"] if last_ep else "",
             "last_preview": self.data.get("next_preview", ""),
             "all_sentences": self.data["all_sentences"],
-            "scenes_used": self.data["scenes_used"]
+            "scenes_used": self.data["scenes_used"],
+            "used_pain_points": self.data.get("pain_points_used", []),
+            "wrong_expressions_used": self.data.get("wrong_expressions_used", []),
         }
 
 
@@ -142,9 +159,10 @@ def get_topic_memory(topic_id: str) -> TopicMemory:
 
 def list_topics() -> list:
     """列出所有专题"""
-    os.makedirs(MEMORY_DIR, exist_ok=True)
+    memory_dir = _get_memory_dir()
+    os.makedirs(memory_dir, exist_ok=True)
     topics = []
-    for f in os.listdir(MEMORY_DIR):
+    for f in os.listdir(memory_dir):
         if f.endswith('.json'):
             topic_id = f[:-5]
             memory = TopicMemory(topic_id)
@@ -159,5 +177,6 @@ def list_topics() -> list:
 def clear_all_topics():
     """清除所有专题记忆（用于测试）"""
     import shutil
-    if os.path.exists(MEMORY_DIR):
-        shutil.rmtree(MEMORY_DIR)
+    memory_dir = _get_memory_dir()
+    if os.path.exists(memory_dir):
+        shutil.rmtree(memory_dir)
