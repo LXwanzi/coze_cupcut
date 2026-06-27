@@ -403,6 +403,23 @@
       "wrong_expression": "",
       "answer_levels": [],
       "created_at": "2026-06-28T00:10:36.375148"
+    },
+    {
+      "episode_num": 22,
+      "sentences": [
+        "I'm allergic to peanuts.",
+        "Can I get a vegetarian meal?",
+        "I don't eat lamb.",
+        "Can I swap this for another meal?",
+        "Do you have pork-free meals?"
+      ],
+      "scene": "飞机餐提忌口必备5句英文",
+      "hook": "飞机餐提忌口必备5句英文",
+      "preview": "下集教你飞机上申请升舱的地道表达",
+      "pain_point": "",
+      "wrong_expression": "",
+      "answer_levels": [],
+      "created_at": "2026-06-28T00:32:34.481260"
     }
   ],
   "all_sentences": [
@@ -454,7 +471,12 @@
     "Can I have the vegetarian meal please?",
     "I don't eat pork, any other options?",
     "No ice in my drink please, room temp is fine.",
-    "This has dairy in it, can I swap it please?"
+    "This has dairy in it, can I swap it please?",
+    "I'm allergic to peanuts.",
+    "Can I get a vegetarian meal?",
+    "I don't eat lamb.",
+    "Can I swap this for another meal?",
+    "Do you have pork-free meals?"
   ],
   "scenes_used": [
     "出发前确认行程",
@@ -474,12 +496,13 @@
     "机场行李超重，别慌说这几句",
     "坐飞机怕踩忌口坑？快学这几句",
     "机场行李超重，别只会傻站着",
-    "坐飞机怕踩忌口雷？快存这几句"
+    "坐飞机怕踩忌口雷？快存这几句",
+    "飞机餐提忌口必备5句英文"
   ],
   "last_hook": "",
-  "next_preview": "下集教你飞机上申请升舱的实用口语",
+  "next_preview": "下集教你飞机上申请升舱的地道表达",
   "created_at": "2026-06-26T07:25:09.292153",
-  "updated_at": "2026-06-28T00:10:36.375172",
+  "updated_at": "2026-06-28T00:32:34.481293",
   "pain_points_used": [
     "飞机上找空乘帮忙时，别只会说 yes",
     "飞机上找空乘\nExcuse me, could you help me? / 不好意思，可以帮我一下吗？\nCould you help me put this up? / 可以帮我把这个放上去吗？\nMay I have a blanket? / 可以给我一条毯子吗？\nCould I have some water? / 可以给我一些水吗？\nMy seat screen isn't working. / 我的座位屏幕不能用。时，别只会说 yes",
