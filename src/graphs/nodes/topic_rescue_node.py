@@ -45,6 +45,16 @@ SCENE_MAP = ACCOUNT_PACK.get("modes", {}).get("scene_map") or [
     ["travel", ["旅行", "机场", "入境", "航班", "行李", "登机", "护照", "值机"]],
 ]
 VOICE_PROFILES = ACCOUNT_PACK.get("modes", {}).get("voice_profiles") or {}
+GENERIC_SCENE_EXPRESSIONS = {
+    "excuse me could you help me",
+    "could you help me",
+    "could you help me with this",
+    "id like to ask about this",
+    "could you confirm that for me",
+    "could you say that again",
+    "thanks that helps a lot",
+    "thank you that helps a lot",
+}
 
 
 def _configured_presets(key: str) -> List[Dict[str, Any]]:
@@ -91,7 +101,7 @@ def build_topic_brief(
         preset = select_scene_collection_preset(clean_topic, memory_context)
         brief = (
             {k: v for k, v in preset.items() if k != "keywords"}
-            if preset else build_fallback_scene_collection(clean_topic)
+            if preset else build_dynamic_scene_collection_stub(clean_topic)
         )
         brief["content_mode"] = "scene_collection"
     else:
@@ -107,6 +117,51 @@ def build_topic_brief(
     brief["quality_review"] = review_topic_brief(brief, clean_topic)
     brief["voice_profile"] = voice_profile_for_mode(brief.get("content_mode"), brief.get("scene"))
     brief["topic_id"] = generate_topic_id(brief.get("topic", clean_topic), brief.get("scene", "travel"))
+    return brief
+
+
+def normalize_dynamic_scene_collection_brief(
+    raw_topic: str,
+    scene: str,
+    payload: Dict[str, Any]
+) -> Dict[str, Any]:
+    """Normalize LLM-generated scene collection data into a renderable brief."""
+    topic = (payload.get("topic") or raw_topic or "真实场景英语").strip()
+    expressions = []
+    for item in payload.get("expressions", []):
+        if not isinstance(item, dict):
+            continue
+        english = (item.get("english") or "").strip()
+        chinese = (item.get("chinese") or "").strip()
+        if not english or not chinese:
+            continue
+        expressions.append({
+            "label": (item.get("label") or f"第{len(expressions) + 1}句").strip(),
+            "english": english,
+            "chinese": chinese,
+            "usage": (item.get("usage") or "").strip(),
+        })
+
+    brief = {
+        "id": slugify_topic(topic),
+        "scene": scene or detect_scene(raw_topic),
+        "sub_scene": slugify_topic(topic),
+        "topic": topic,
+        "raw_topic": raw_topic,
+        "real_scene": (payload.get("real_scene") or f"{topic}这个具体场景").strip(),
+        "hook": (payload.get("hook") or f"{topic}，这 5 句先收藏。").strip(),
+        "setup": (payload.get("setup") or f"围绕{topic}，只学真实能用的表达。").strip(),
+        "expressions": expressions[:5],
+        "summary_tts": (payload.get("summary_tts") or f"这 5 句先收藏，{topic}时可以直接用。").strip(),
+        "next_preview": (payload.get("next_preview") or f"下集继续讲{topic}里的高频表达。").strip(),
+        "interaction": (payload.get("interaction") or f"你在{topic}还卡过哪句？评论区说说。").strip(),
+        "title": (payload.get("title") or f"【{topic[:10]}】这5句真的能救场").strip(),
+        "content_mode": "scene_collection",
+        "source": "dynamic_llm",
+    }
+    brief["quality_review"] = review_topic_brief(brief, raw_topic)
+    brief["voice_profile"] = voice_profile_for_mode(brief.get("content_mode"), brief.get("scene"))
+    brief["topic_id"] = generate_topic_id(brief.get("topic", raw_topic), brief.get("scene", "travel"))
     return brief
 
 
@@ -344,6 +399,9 @@ def review_topic_brief(brief: Dict[str, Any], raw_topic: str) -> Dict[str, Any]:
 
     if mode == "scene_collection":
         expressions = brief.get("expressions") or []
+        if brief.get("needs_dynamic_generation"):
+            issues.append("场景式主题未命中预设，需要动态生成具体表达。")
+            suggestions.append("调用动态场景生成器，禁止直接使用万能句兜底。")
         if len(expressions) < 4:
             issues.append("场景式内容少于 4 句，收藏价值偏弱。")
             suggestions.append("补足到同一场景下 4-5 个连续动作。")
@@ -353,6 +411,13 @@ def review_topic_brief(brief: Dict[str, Any], raw_topic: str) -> Dict[str, Any]:
         if _looks_cross_scene(brief):
             issues.append("句子疑似跨了多个场景。")
             suggestions.append("拆成多条视频，单条只讲一个具体场景。")
+        generic_items = find_generic_scene_expressions(expressions)
+        if generic_items and (brief.get("source") == "dynamic_llm" or len(generic_items) >= 2):
+            issues.append(f"场景式内容包含万能句：{', '.join(generic_items[:3])}")
+            suggestions.append("改成和用户主题强相关的具体动作句，不能用万能求助/确认句凑数。")
+        if expressions and brief.get("source") == "dynamic_llm" and not _has_topic_overlap(raw_topic, expressions):
+            issues.append("句子和用户主题关键词关联偏弱。")
+            suggestions.append("重新生成，确保每句都能直接用于用户描述的具体场景。")
         target_duration = SCENE_COLLECTION_DURATION_SECONDS
         suggested_sentence_count = min(max(len(expressions), 4), 5) if expressions else 5
     else:
@@ -457,6 +522,47 @@ def _looks_cross_scene(brief: Dict[str, Any]) -> bool:
     return frozenset(scene_hits) not in allowed_pairs
 
 
+def find_generic_scene_expressions(expressions: List[Dict[str, Any]]) -> List[str]:
+    generic = []
+    for item in expressions:
+        english = _normalize_english_for_match(item.get("english", ""))
+        if english in GENERIC_SCENE_EXPRESSIONS:
+            generic.append(item.get("english", "").strip())
+    return generic
+
+
+def _has_topic_overlap(raw_topic: str, expressions: List[Dict[str, Any]]) -> bool:
+    topic_tokens = _topic_tokens(raw_topic)
+    if not topic_tokens:
+        return True
+    expression_text = " ".join(
+        f"{item.get('label', '')} {item.get('english', '')} {item.get('chinese', '')} {item.get('usage', '')}"
+        for item in expressions
+    ).lower()
+    return any(token.lower() in expression_text for token in topic_tokens)
+
+
+def _topic_tokens(text: str) -> List[str]:
+    text = (text or "").strip()
+    tokens = []
+    zh_keywords = [
+        "飞机餐", "忌口", "过敏", "素食", "花生", "海鲜", "猪肉", "鸡肉",
+        "行李", "托运", "值机", "空乘", "酒店", "账单", "退房", "早餐",
+        "入境", "办公室", "会议", "咖啡", "外卖",
+    ]
+    tokens.extend(keyword for keyword in zh_keywords if keyword in text)
+    tokens.extend(re.findall(r"[A-Za-z]{3,}", text))
+    if tokens:
+        return tokens
+    return [text] if len(text) <= 8 else []
+
+
+def _normalize_english_for_match(text: str) -> str:
+    text = (text or "").lower()
+    text = re.sub(r"[^a-z\s]", "", text)
+    return re.sub(r"\s+", " ", text).strip()
+
+
 def find_topic_preset(topic: str) -> Dict[str, Any] | None:
     topic_lower = (topic or "").lower()
     for preset in TOPIC_PRESETS:
@@ -544,52 +650,22 @@ def build_fallback_brief(topic: str) -> Dict[str, Any]:
     }
 
 
-def build_fallback_scene_collection(topic: str) -> Dict[str, Any]:
+def build_dynamic_scene_collection_stub(topic: str) -> Dict[str, Any]:
     scene = detect_scene(topic)
     return {
         "id": slugify_topic(topic),
         "scene": scene,
         "sub_scene": slugify_topic(topic),
         "topic": topic,
-        "real_scene": f"{topic}这个具体场景里，先学最容易用上的几句。",
-        "hook": f"{topic}别硬憋英文，这 5 句先收藏。",
-        "setup": "先按真实对话顺序学，开口、说明需求、确认信息都覆盖。",
-        "expressions": [
-            {
-                "label": "先开口",
-                "english": "Excuse me, could you help me?",
-                "chinese": "不好意思，可以帮我一下吗？",
-                "usage": "不知道怎么开始时先用。",
-            },
-            {
-                "label": "说明需求",
-                "english": "I'd like to ask about this.",
-                "chinese": "我想问一下这个。",
-                "usage": "把问题递给对方。",
-            },
-            {
-                "label": "确认信息",
-                "english": "Could you confirm that for me?",
-                "chinese": "可以帮我确认一下吗？",
-                "usage": "听到信息后再核对。",
-            },
-            {
-                "label": "没听清",
-                "english": "Could you say that again?",
-                "chinese": "可以再说一遍吗？",
-                "usage": "没听清时别硬猜。",
-            },
-            {
-                "label": "表达感谢",
-                "english": "Thanks, that helps a lot.",
-                "chinese": "谢谢，这帮了我很多。",
-                "usage": "结束沟通时自然收尾。",
-            },
-        ],
+        "real_scene": f"{topic}这个具体场景",
+        "hook": f"{topic}，这 5 句先收藏。",
+        "setup": f"围绕{topic}，只学真实能用的表达。",
+        "expressions": [],
         "summary_tts": f"这 5 句先收藏，{topic}时可以直接用。",
         "next_preview": f"下集继续讲{topic}里的高频卡壳句。",
         "interaction": f"你在{topic}还卡过哪句？评论区说说。",
         "title": f"【{topic[:8]}】不会开口？这5句能救场",
+        "needs_dynamic_generation": True,
     }
 
 

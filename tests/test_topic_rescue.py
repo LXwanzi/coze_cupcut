@@ -5,6 +5,8 @@ from graphs.nodes.topic_rescue_node import (
     build_scene_collection_segments,
     build_scene_tts,
     build_topic_brief,
+    find_generic_scene_expressions,
+    normalize_dynamic_scene_collection_brief,
     parse_topic_input,
     review_topic_brief,
 )
@@ -120,6 +122,59 @@ def test_review_topic_brief_marks_scene_collection_reasonable():
     assert review["issues"] == []
 
 
+def test_unknown_scene_collection_marks_dynamic_generation_needed():
+    brief = build_topic_brief("场景式：飞机餐忌口")
+
+    assert brief["content_mode"] == "scene_collection"
+    assert brief["needs_dynamic_generation"] is True
+    assert brief["expressions"] == []
+    assert brief["quality_review"]["is_reasonable"] is False
+
+
+def test_dynamic_scene_collection_brief_passes_for_specific_topic():
+    brief = normalize_dynamic_scene_collection_brief(
+        "飞机餐忌口",
+        "travel",
+        {
+            "topic": "飞机餐忌口",
+            "real_scene": "你在飞机上拿到餐食前想确认忌口",
+            "hook": "飞机餐忌口，这5句先会",
+            "setup": "素食、过敏、不吃猪肉、换餐都覆盖。",
+            "expressions": [
+                {"label": "问素食", "english": "Do you have a vegetarian option?", "chinese": "有素食选择吗？"},
+                {"label": "说花生忌口", "english": "I can't eat peanuts.", "chinese": "我不能吃花生。"},
+                {"label": "说海鲜过敏", "english": "I'm allergic to seafood.", "chinese": "我对海鲜过敏。"},
+                {"label": "确认猪肉", "english": "Does this have pork in it?", "chinese": "这里面有猪肉吗？"},
+                {"label": "换鸡肉", "english": "Could I have the chicken instead?", "chinese": "我可以换成鸡肉吗？"},
+            ],
+        }
+    )
+
+    assert brief["quality_review"]["is_reasonable"] is True
+    assert len(brief["expressions"]) == 5
+    assert not find_generic_scene_expressions(brief["expressions"])
+
+
+def test_scene_collection_quality_blocks_generic_expressions():
+    brief = normalize_dynamic_scene_collection_brief(
+        "飞机餐忌口",
+        "travel",
+        {
+            "topic": "飞机餐忌口",
+            "expressions": [
+                {"label": "先开口", "english": "Excuse me, could you help me?", "chinese": "不好意思，可以帮我一下吗？"},
+                {"label": "说明需求", "english": "I'd like to ask about this.", "chinese": "我想问一下这个。"},
+                {"label": "确认", "english": "Could you confirm that for me?", "chinese": "可以帮我确认一下吗？"},
+                {"label": "没听清", "english": "Could you say that again?", "chinese": "可以再说一遍吗？"},
+                {"label": "感谢", "english": "Thanks, that helps a lot.", "chinese": "谢谢，这帮了我很多。"},
+            ],
+        }
+    )
+
+    assert brief["quality_review"]["is_reasonable"] is False
+    assert any("万能句" in issue for issue in brief["quality_review"]["issues"])
+
+
 def test_build_scene_tts_removes_duplicate_you_are_in_prefix():
     brief = build_topic_brief("痛点式：机场值机")
 
@@ -173,6 +228,50 @@ def test_generate_plan_topic_only_uses_scene_collection_mode(tmp_path, monkeypat
         "场景代入",
         "第1句场景句",
     ]
+
+
+def test_generate_plan_dynamic_scene_collection_uses_generated_expressions(tmp_path, monkeypatch):
+    monkeypatch.setenv("COZE_WORKSPACE_PATH", str(tmp_path))
+
+    from graphs.nodes import generate_plan as generate_plan_module
+
+    def fake_generate_dynamic_scene_collection_brief(raw_topic, scene, memory_context):
+        return normalize_dynamic_scene_collection_brief(
+            raw_topic,
+            scene,
+            {
+                "topic": "飞机餐忌口",
+                "hook": "飞机餐忌口，这5句先会",
+                "setup": "素食、过敏、不吃猪肉、换餐都覆盖。",
+                "expressions": [
+                    {"label": "问素食", "english": "Do you have a vegetarian option?", "chinese": "有素食选择吗？"},
+                    {"label": "说花生忌口", "english": "I can't eat peanuts.", "chinese": "我不能吃花生。"},
+                    {"label": "说海鲜过敏", "english": "I'm allergic to seafood.", "chinese": "我对海鲜过敏。"},
+                    {"label": "确认猪肉", "english": "Does this have pork in it?", "chinese": "这里面有猪肉吗？"},
+                    {"label": "换鸡肉", "english": "Could I have the chicken instead?", "chinese": "我可以换成鸡肉吗？"},
+                ],
+                "title": "【飞机餐忌口】这5句一定要会",
+            }
+        )
+
+    monkeypatch.setattr(
+        generate_plan_module,
+        "_generate_dynamic_scene_collection_brief",
+        fake_generate_dynamic_scene_collection_brief,
+    )
+
+    result = generate_plan({
+        "raw_topic": "场景式：飞机餐忌口",
+        "topic": "场景式：飞机餐忌口",
+        "auto_generate_expressions": True,
+        "duration_seconds": 28,
+        "sentence_count": 3,
+    })
+
+    assert result["content_meta"]["format"] == "scene_collection"
+    assert result["content_meta"]["quality_review"]["is_reasonable"] is True
+    assert result["review_card"]["today_expressions"][0]["english"] == "Do you have a vegetarian option?"
+    assert "Could you help me?" not in "\n".join(seg["caption"] for seg in result["segments"])
 
 
 def test_tts_resolves_voice_profile_speed():

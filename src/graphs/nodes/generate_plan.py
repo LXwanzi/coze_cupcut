@@ -20,6 +20,7 @@ from graphs.nodes.topic_rescue_node import (
     build_topic_brief,
     detect_scene as detect_topic_scene,
     extract_answer_sentences,
+    normalize_dynamic_scene_collection_brief,
     parse_topic_input,
     SCENE_COLLECTION_DURATION_SECONDS,
 )
@@ -144,6 +145,28 @@ def generate_plan(state: Dict[str, Any]) -> Dict[str, Any]:
             if content_mode == "scene_collection":
                 if duration_seconds == DEFAULT_TARGET_DURATION_SECONDS:
                     duration_seconds = SCENE_COLLECTION_DURATION_SECONDS
+                if topic_brief.get("needs_dynamic_generation"):
+                    generated_brief = _generate_dynamic_scene_collection_brief(
+                        raw_topic=topic_brief.get("raw_topic") or raw_topic or user_input,
+                        scene=scene,
+                        memory_context=memory_context,
+                    )
+                    if generated_brief:
+                        topic_brief = generated_brief
+                        scene = topic_brief.get('scene', scene)
+                        topic_id = topic_brief.get('topic_id') or topic_id
+                    else:
+                        return _build_quality_error(
+                            "动态生成场景式内容失败，请换一个更具体的主题再试。",
+                            topic_id
+                        )
+                quality_review = topic_brief.get("quality_review", {})
+                if not quality_review.get("is_reasonable", True):
+                    return _build_quality_error(
+                        "场景式内容质量未通过，已停止生成视频。",
+                        topic_id,
+                        quality_review
+                    )
                 segments = build_scene_collection_segments(topic_brief, duration_seconds=duration_seconds)
             else:
                 segments = build_rescue_segments(topic_brief, duration_seconds=duration_seconds)
@@ -317,6 +340,126 @@ def _should_auto_generate_from_topic(learning_note: str, topic: str) -> bool:
     if re.search(r"[A-Za-z]{2,}", learning_note):
         return False
     return len(learning_note.strip()) <= 20
+
+
+def _build_quality_error(
+    message: str,
+    topic_id: str = "",
+    quality_review: Optional[Dict[str, Any]] = None
+) -> Dict[str, Any]:
+    return {
+        'error': message,
+        'segments': [],
+        'content_meta': {
+            'quality_review': quality_review or {},
+        },
+        'publish_pack': {},
+        'review_card': {},
+        'episode_info': {},
+        'topic_id': topic_id,
+    }
+
+
+def _generate_dynamic_scene_collection_brief(
+    raw_topic: str,
+    scene: str,
+    memory_context: Dict[str, Any]
+) -> Optional[Dict[str, Any]]:
+    """Use LLM to generate concrete same-scene expressions when no preset matches."""
+    learned_sentences = memory_context.get('learned_sentences', []) if memory_context else []
+    learned_list = "\n".join(f"- {s}" for s in learned_sentences[-20:]) or "无"
+    prompt = f"""你是“小丸子英语”的短视频脚本专家。请根据用户主题动态生成一个【场景式】英语短视频脚本 brief。
+
+## 用户主题
+{raw_topic}
+
+## 场景大类
+{scene}
+
+## 已学过的句子，禁止重复
+{learned_list}
+
+## 目标
+生成 5 句同一个具体场景里的真实英语表达，适合 30-45 秒短视频，提升收藏价值。
+
+## 硬性规则
+1. 必须正好 5 句 expressions。
+2. 5 句必须强相关于用户主题，不能用万能句凑数。
+3. 每句都要能在该具体场景直接开口使用。
+4. 5 句之间要覆盖不同动作，不能重复表达同一件事。
+5. 英文自然、简短、口语化，适合初学者。
+6. 禁止使用这些泛句作为主体：
+   - Excuse me, could you help me?
+   - Could you help me?
+   - Could you help me with this?
+   - I'd like to ask about this.
+   - Could you confirm that for me?
+   - Could you say that again?
+   - Thanks, that helps a lot.
+7. 如果主题是“飞机餐忌口”，应该围绕素食、过敏、不吃某类食物、换餐等具体动作，而不是泛泛求助。
+
+## 输出 JSON，不要 Markdown
+{{
+  "topic": "短主题名",
+  "real_scene": "一句话真实场景",
+  "hook": "18字以内强钩子",
+  "setup": "一句话说明这5句覆盖什么",
+  "expressions": [
+    {{
+      "label": "动作标签",
+      "english": "English sentence",
+      "chinese": "中文意思",
+      "usage": "这句什么时候用"
+    }}
+  ],
+  "summary_tts": "这5句先收藏...",
+  "next_preview": "下集预告",
+  "interaction": "评论区互动问题",
+  "title": "【主题】吸引眼球标题"
+}}
+"""
+    try:
+        import requests
+        from coze_coding_utils.runtime_ctx.context import default_headers, new_context
+
+        api_key = os.getenv("COZE_WORKLOAD_IDENTITY_API_KEY")
+        base_url = os.getenv("COZE_INTEGRATION_MODEL_BASE_URL")
+        if not api_key or not base_url:
+            logger.warning("缺少 LLM 环境变量，无法动态生成场景式内容")
+            return None
+
+        ctx = new_context(method="dynamic_scene_collection")
+        headers = {
+            "Authorization": f"Bearer {api_key}",
+            "Content-Type": "application/json",
+        }
+        headers.update(default_headers(ctx))
+        data = {
+            "model": "doubao-seed-2-0-pro-260215",
+            "messages": [{"role": "user", "content": prompt}],
+            "max_tokens": 4000,
+            "temperature": 0.45,
+            "stream": False,
+        }
+        resp = requests.post(
+            f"{base_url}/chat/completions",
+            headers=headers,
+            json=data,
+            timeout=120,
+        )
+        resp.raise_for_status()
+        content = _extract_chat_content(resp).strip()
+        if content.startswith('```'):
+            parts = content.split('```')
+            content = parts[1] if len(parts) > 1 else content
+            if content.startswith('json'):
+                content = content[4:]
+            content = content.strip()
+        payload = json.loads(content)
+        return normalize_dynamic_scene_collection_brief(raw_topic, scene, payload)
+    except Exception as e:
+        logger.error(f"动态场景式内容生成失败: {e}")
+        return None
 
 
 def _format_for_topic_brief(topic_brief: Dict[str, Any]) -> str:
