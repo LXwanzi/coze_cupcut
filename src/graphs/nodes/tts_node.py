@@ -80,6 +80,30 @@ def _seconds_to_us(seconds: float) -> int:
     return max(1, int(round(seconds * MICROSECONDS_PER_SECOND)))
 
 
+def _resolve_voice_and_speed(content_meta: Dict[str, Any]) -> tuple[str, float]:
+    """Resolve configured voice profile into concrete TTS speaker and speed."""
+    content_meta = content_meta or {}
+    voice_profile = content_meta.get("voice_profile") or {}
+    voice_key = (
+        voice_profile.get("voice") or
+        content_meta.get("voice") or
+        content_meta.get("scene") or
+        "default"
+    )
+    scene = content_meta.get("scene")
+    if scene == "parent_child" and "voice" not in voice_profile:
+        voice_key = "parent_child"
+    elif scene in ["business", "bec"] and "voice" not in voice_profile:
+        voice_key = "business"
+
+    try:
+        speed = float(voice_profile.get("speed", TTS_SPEED))
+    except (TypeError, ValueError):
+        speed = TTS_SPEED
+    speed = max(0.8, min(speed, 1.3))
+    return TTS_VOICES.get(voice_key, DEFAULT_VOICE), speed
+
+
 def _get_audio_duration_from_capcut(mp3_url: str) -> Optional[int]:
     """通过 capcut-mate 获取音频时长，返回微秒。"""
     try:
@@ -226,21 +250,22 @@ def tts_synthesize(state: Dict[str, Any]) -> Dict[str, Any]:
             }
         
         # 获取音色配置：优先使用用户指定的音色，其次根据场景选择
-        voice_key = (
-            state.get("content_meta", {}).get("voice") or
-            state.get("content_meta", {}).get("scene") or
-            "default"
-        )
-        speaker = TTS_VOICES.get(voice_key, DEFAULT_VOICE)
+        speaker, speed = _resolve_voice_and_speed(state.get("content_meta", {}))
         
         try:
-            audio_url, audio_size = client.synthesize(
-                uid="english-content-assistant",
-                text=voice_text,
-                speaker=speaker,
-                audio_format="mp3",
-                sample_rate=24000
-            )
+            synthesize_kwargs = {
+                "uid": "english-content-assistant",
+                "text": voice_text,
+                "speaker": speaker,
+                "audio_format": "mp3",
+                "sample_rate": 24000,
+                "speed": speed,
+            }
+            try:
+                audio_url, audio_size = client.synthesize(**synthesize_kwargs)
+            except TypeError:
+                synthesize_kwargs.pop("speed", None)
+                audio_url, audio_size = client.synthesize(**synthesize_kwargs)
             
             oss_url = upload_audio_to_oss(audio_url)
             final_url = oss_url if oss_url else audio_url
@@ -262,14 +287,8 @@ def tts_synthesize(state: Dict[str, Any]) -> Dict[str, Any]:
                 "error": f"TTS 生成失败: {str(e)}"
             }
     
-    # 根据场景选择音色
-    scene = state.get("content_meta", {}).get("scene", "general")
-    if scene == "parent_child":
-        speaker = "zh_female_xueayi_saturn_bigtts"
-    elif scene == "business" or scene == "bec":
-        speaker = "zh_female_meilinvyou_saturn_bigtts"
-    else:
-        speaker = "zh_female_xiaohe_uranus_bigtts"
+    # 根据内容模式选择音色和语速
+    speaker, speed = _resolve_voice_and_speed(state.get("content_meta", {}))
     
     # 为每个片段生成音频
     audio_segments = []
@@ -284,7 +303,7 @@ def tts_synthesize(state: Dict[str, Any]) -> Dict[str, Any]:
         if not tts_text:
             continue
         
-        result = _generate_segment_audio(client, tts_text, speaker, i, ctx)
+        result = _generate_segment_audio(client, tts_text, speaker, i, ctx, speed=speed)
         
         if result:
             duration_us = int(result["duration_us"])

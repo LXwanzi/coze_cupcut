@@ -1,8 +1,12 @@
+import pytest
+
 from graphs.nodes.topic_rescue_node import (
     build_rescue_segments,
+    build_scene_collection_segments,
     build_scene_tts,
     build_topic_brief,
     parse_topic_input,
+    review_topic_brief,
 )
 from graphs.nodes.generate_plan import generate_plan
 
@@ -16,8 +20,17 @@ def test_parse_topic_input_routes_airport_checkin():
     assert parsed["auto_generate_expressions"] is True
 
 
+def test_parse_topic_input_routes_plane_attendant_as_scene_collection():
+    parsed = parse_topic_input("飞机上找空乘")
+
+    assert parsed["topic"] == "飞机上找空乘"
+    assert parsed["scene"] == "travel"
+    assert parsed["sub_scene"] == "in_flight_attendant"
+    assert parsed["content_mode"] == "scene_collection"
+
+
 def test_build_topic_brief_adds_rescue_answer_levels():
-    brief = build_topic_brief("机场值机")
+    brief = build_topic_brief("痛点式：机场值机")
 
     assert brief["pain_point"] == "机场托运行李，别说 send my bag"
     assert brief["wrong_expression"] == "I want to send my bag."
@@ -29,8 +42,18 @@ def test_build_topic_brief_adds_rescue_answer_levels():
     assert brief["answer_levels"][0]["english"] == "Yes, one bag."
 
 
+def test_build_topic_brief_adds_scene_collection_expressions():
+    brief = build_topic_brief("飞机上找空乘")
+
+    assert brief["content_mode"] == "scene_collection"
+    assert len(brief["expressions"]) == 5
+    assert brief["expressions"][0]["english"] == "Excuse me, could you help me?"
+    assert brief["quality_review"]["is_reasonable"] is True
+    assert brief["voice_profile"]["voice"] == "playful"
+
+
 def test_build_rescue_segments_contains_scene_and_layered_answers():
-    brief = build_topic_brief("机场值机")
+    brief = build_topic_brief("痛点式：机场值机")
     segments = build_rescue_segments(brief)
 
     scenes = [segment["scene"] for segment in segments]
@@ -49,8 +72,29 @@ def test_build_rescue_segments_contains_scene_and_layered_answers():
     assert sum(segment["duration"] for segment in segments) <= 30
 
 
+def test_build_scene_collection_segments_keeps_five_sentences_fast():
+    brief = build_topic_brief("飞机上找空乘")
+    segments = build_scene_collection_segments(brief)
+
+    sentence_segments = [segment for segment in segments if segment["scene"].startswith("第")]
+    assert len(sentence_segments) == 5
+    assert sentence_segments[0]["caption"].startswith("Excuse me, could you help me?")
+    assert segments[0]["scene"] == "钩子页"
+    assert segments[-1]["scene"] == "互动页"
+    assert sum(segment["duration"] for segment in segments) <= 38
+
+
+def test_review_topic_brief_marks_scene_collection_reasonable():
+    brief = build_topic_brief("飞机上找空乘")
+    review = review_topic_brief(brief, "飞机上找空乘")
+
+    assert review["content_mode"] == "scene_collection"
+    assert review["suggested_sentence_count"] == 5
+    assert review["issues"] == []
+
+
 def test_build_scene_tts_removes_duplicate_you_are_in_prefix():
-    brief = build_topic_brief("机场值机")
+    brief = build_topic_brief("痛点式：机场值机")
 
     assert build_scene_tts(brief).startswith("现在你在机场值机柜台")
     assert "你在你在" not in build_scene_tts(brief)
@@ -60,8 +104,8 @@ def test_generate_plan_topic_only_uses_rescue_mode(tmp_path, monkeypatch):
     monkeypatch.setenv("COZE_WORKSPACE_PATH", str(tmp_path))
 
     result = generate_plan({
-        "raw_topic": "机场值机",
-        "topic": "机场值机",
+        "raw_topic": "痛点式：机场值机",
+        "topic": "痛点式：机场值机",
         "auto_generate_expressions": True,
         "duration_seconds": 28,
         "sentence_count": 3,
@@ -77,3 +121,41 @@ def test_generate_plan_topic_only_uses_rescue_mode(tmp_path, monkeypatch):
         "错误表达",
         "最短能救场",
     ]
+
+
+def test_generate_plan_topic_only_uses_scene_collection_mode(tmp_path, monkeypatch):
+    monkeypatch.setenv("COZE_WORKSPACE_PATH", str(tmp_path))
+
+    result = generate_plan({
+        "raw_topic": "飞机上找空乘",
+        "topic": "飞机上找空乘",
+        "auto_generate_expressions": True,
+        "duration_seconds": 28,
+        "sentence_count": 3,
+    })
+
+    assert result["error"] is None if "error" in result else True
+    assert result["content_meta"]["format"] == "scene_collection"
+    assert result["content_meta"]["content_mode"] == "scene_collection"
+    assert result["content_meta"]["sentence_count"] == 5
+    assert result["content_meta"]["quality_review"]["is_reasonable"] is True
+    assert result["publish_pack"]["title"].startswith("【飞机上找空乘】")
+    assert len(result["review_card"]["today_expressions"]) == 5
+    assert [segment["scene"] for segment in result["segments"][:3]] == [
+        "钩子页",
+        "场景代入",
+        "第1句场景句",
+    ]
+
+
+def test_tts_resolves_voice_profile_speed():
+    pytest.importorskip("coze_coding_dev_sdk")
+    from graphs.nodes.tts_node import _resolve_voice_and_speed
+
+    speaker, speed = _resolve_voice_and_speed({
+        "scene": "travel",
+        "voice_profile": {"voice": "playful", "speed": 1.1},
+    })
+
+    assert speaker == "saturn_zh_female_tiaopigongzhu_tob"
+    assert speed == 1.1

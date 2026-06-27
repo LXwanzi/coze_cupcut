@@ -16,10 +16,12 @@ from typing import Dict, Any, List, Optional
 from graphs.nodes.topic_memory import get_topic_memory
 from graphs.nodes.topic_rescue_node import (
     build_rescue_segments,
+    build_scene_collection_segments,
     build_topic_brief,
     detect_scene as detect_topic_scene,
     extract_answer_sentences,
     parse_topic_input,
+    SCENE_COLLECTION_DURATION_SECONDS,
 )
 
 logger = logging.getLogger(__name__)
@@ -131,11 +133,22 @@ def generate_plan(state: Dict[str, Any]) -> Dict[str, Any]:
         topic_brief = {}
         topic_meta = parse_topic_input(raw_topic or user_input)
         if auto_generate_expressions or _should_auto_generate_from_topic(learning_note, topic):
-            topic_brief = build_topic_brief(raw_topic or user_input, memory_context=memory_context)
+            topic_brief = build_topic_brief(
+                raw_topic or user_input,
+                memory_context=memory_context,
+                content_mode=topic_meta.get("content_mode"),
+            )
             scene = topic_brief.get('scene', scene)
             topic_id = topic_brief.get('topic_id') or topic_id
+            content_mode = topic_brief.get("content_mode", "painpoint_contrast")
+            if content_mode == "scene_collection":
+                if duration_seconds == DEFAULT_TARGET_DURATION_SECONDS:
+                    duration_seconds = SCENE_COLLECTION_DURATION_SECONDS
+                segments = build_scene_collection_segments(topic_brief, duration_seconds=duration_seconds)
+            else:
+                segments = build_rescue_segments(topic_brief, duration_seconds=duration_seconds)
             result = {
-                'segments': build_rescue_segments(topic_brief, duration_seconds=duration_seconds),
+                'segments': segments,
                 'episode_info': {
                     'season_name': topic_brief.get('topic', raw_topic or user_input),
                     'review': '',
@@ -164,6 +177,10 @@ def generate_plan(state: Dict[str, Any]) -> Dict[str, Any]:
         
         segments = result['segments']
         episode_info = result.get('episode_info', {})
+        effective_sentence_count = (
+            len(extract_answer_sentences(topic_brief))
+            if topic_brief else sentence_count
+        )
         
         # 4. 更新记忆表
         episode_data = {
@@ -174,6 +191,8 @@ def generate_plan(state: Dict[str, Any]) -> Dict[str, Any]:
             "pain_point": topic_brief.get("pain_point", ""),
             "wrong_expression": topic_brief.get("wrong_expression", ""),
             "answer_levels": topic_brief.get("answer_levels", []),
+            "content_mode": topic_brief.get("content_mode", ""),
+            "quality_review": topic_brief.get("quality_review", {}),
         }
         memory.add_episode(episode_data)
         
@@ -189,28 +208,25 @@ def generate_plan(state: Dict[str, Any]) -> Dict[str, Any]:
             'sub_scene': topic_brief.get('sub_scene') or topic_meta.get('sub_scene'),
             'duration_seconds': sum(seg.get('duration', 5) for seg in segments),
             'target_duration_seconds': duration_seconds,
-            'sentence_count': sentence_count,
-            'format': 'topic_rescue_hybrid' if topic_brief else 'retention_short',
+            'sentence_count': effective_sentence_count,
+            'format': _format_for_topic_brief(topic_brief) if topic_brief else 'retention_short',
             'content_mode': topic_brief.get('content_mode') or topic_meta.get('content_mode', 'hybrid'),
             'pain_point': topic_brief.get('pain_point', ''),
             'wrong_expression': topic_brief.get('wrong_expression', ''),
+            'quality_review': topic_brief.get('quality_review', {}),
+            'voice_profile': topic_brief.get('voice_profile', {}),
             'originality_check': '所有内容基于用户提供的原始素材生成',
             'safety_note': '未涉及教材原文复述',
             'topic_id': topic_id
         }
         
         # 6. 构建发布信息
-        publish_pack = {
-            'title': f"小丸子救场英语｜{content_meta['selected_topic']}",
-            'cover_text': f"{content_meta['selected_topic']}",
-            'description': f"每天进步一点点。{sentence_count}句真实场景英语，先收藏，关键时候能接上话。#英语学习 #实用英语 #救场英语",
-            'hashtags': ['英语学习', '实用英语', '救场英语']
-        }
+        publish_pack = _build_publish_pack(content_meta, topic_brief, segments)
         
         # 7. 构建复习卡片
         expressions = []
         for seg in segments:
-            if seg.get('scene', '').startswith('第') and '跟读' in seg.get('scene', ''):
+            if _is_sentence_segment(seg):
                 caption = seg.get('caption', '')
                 if '\n' in caption:
                     parts = caption.split('\n')
@@ -221,7 +237,7 @@ def generate_plan(state: Dict[str, Any]) -> Dict[str, Any]:
                     })
         
         review_card = {
-            'today_expressions': expressions[:sentence_count],
+            'today_expressions': expressions[:effective_sentence_count],
             'answer_levels': topic_brief.get('answer_levels', []),
             'quick_review': '先收藏，下一集继续同一场景。'
         }
@@ -301,6 +317,58 @@ def _should_auto_generate_from_topic(learning_note: str, topic: str) -> bool:
     if re.search(r"[A-Za-z]{2,}", learning_note):
         return False
     return len(learning_note.strip()) <= 20
+
+
+def _format_for_topic_brief(topic_brief: Dict[str, Any]) -> str:
+    if not topic_brief:
+        return 'retention_short'
+    if topic_brief.get('content_mode') == 'scene_collection':
+        return 'scene_collection'
+    return 'topic_rescue_hybrid'
+
+
+def _build_publish_pack(
+    content_meta: Dict[str, Any],
+    topic_brief: Dict[str, Any],
+    segments: List[Dict[str, Any]]
+) -> Dict[str, Any]:
+    topic = topic_brief.get('topic') or content_meta.get('selected_topic') or '真实场景英语'
+    mode = topic_brief.get('content_mode') or content_meta.get('content_mode')
+
+    if mode == 'scene_collection':
+        title = topic_brief.get('title') or f"【{topic}】这5句英语真的能救场"
+        description = (
+            f"每天进步一点点。{topic}真实场景 5 句英语，先收藏，"
+            "关键时候能直接用。#英语学习 #实用英语 #旅游英语"
+        )
+        hashtags = ['英语学习', '实用英语', '旅游英语']
+    else:
+        pain_point = topic_brief.get('pain_point') or content_meta.get('selected_topic') or topic
+        title = _build_painpoint_title(topic, pain_point)
+        description = (
+            f"每天进步一点点。别再硬翻译，{topic}这句先学会。"
+            "#英语学习 #实用英语 #救场英语"
+        )
+        hashtags = ['英语学习', '实用英语', '救场英语']
+
+    return {
+        'title': title[:30],
+        'cover_text': topic[:12],
+        'description': description,
+        'hashtags': hashtags,
+    }
+
+
+def _build_painpoint_title(topic: str, pain_point: str) -> str:
+    if "托运" in pain_point or "行李" in pain_point:
+        return f"【{topic}】不会说托运行李？这句能救场"
+    if "账单" in pain_point:
+        return f"【{topic}】账单多收费？这句一定要会"
+    if "太吵" in pain_point or "换房" in pain_point:
+        return f"【{topic}】房间太吵？这句帮你换房"
+    if "入境" in pain_point:
+        return f"【{topic}】被问来干嘛？别只会travel"
+    return f"【{topic}】不会开口？这句能救场"
 
 
 def _extract_sentences(segments: List[Dict]) -> List[str]:
