@@ -1,0 +1,39 @@
+{
+  "mode_aliases": {
+    "场景式": "scene_collection",
+    "场景": "scene_collection",
+    "合集": "scene_collection",
+    "痛点式": "painpoint_contrast",
+    "痛点": "painpoint_contrast",
+    "反差": "painpoint_contrast",
+    "纠错": "painpoint_contrast"
+  },
+  "painpoint_triggers": [
+    "别说",
+    "不要说",
+    "中式英语",
+    "不会说",
+    "说错",
+    "怎么说",
+    "不是",
+    "容易说错",
+    "只会说",
+    "救场"
+  ],
+  "scene_map": [
+    ["emergency", ["救场", "卡壳", "听不清", "不会说", "付款失败", "迷路", "丢东西"]],
+    ["hotel", ["酒店", "入住", "退房", "房间", "前台", "押金", "早餐"]],
+    ["office", ["办公室", "开会", "请假", "催进度", "汇报", "同事", "进度"]],
+    ["business", ["商务", "客户", "合同", "谈判", "报价", "提案"]],
+    ["parent_child", ["亲子", "孩子", "绘本", "睡前"]],
+    ["daily", ["日常", "生活", "咖啡", "外卖", "超市", "理发"]],
+    ["travel", ["旅行", "机场", "入境", "航班", "行李", "登机", "护照", "值机"]]
+  ],
+  "voice_profiles": {
+    "business": {"voice": "business", "speed": 1.08, "style": "professional_clear"},
+    "parent_child": {"voice": "cute", "speed": 1.05, "style": "warm_parent_child"},
+    "scene_collection": {"voice": "playful", "speed": 1.1, "style": "bright_companion"},
+    "painpoint_contrast": {"voice": "playful", "speed": 1.12, "style": "snappy_contrast"},
+    "default": {"voice": "vivi", "speed": 1.08, "style": "clear_bilingual"}
+  }
+}

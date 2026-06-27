@@ -7,10 +7,22 @@ import json
 import logging
 from typing import Dict, Any, List
 
+from content.account_loader import get_account_pack
+
 logger = logging.getLogger(__name__)
 DEFAULT_SHORT_DURATION_SECONDS = 28
 DEFAULT_SHORT_SENTENCE_COUNT = 3
-CONTENT_MODE_PREFIXES = ['场景式', '场景', '合集', '痛点式', '痛点', '反差', '纠错']
+CONTENT_MODE_PREFIXES = list(
+    (get_account_pack().get("modes", {}).get("mode_aliases") or {
+        '场景式': 'scene_collection',
+        '场景': 'scene_collection',
+        '合集': 'scene_collection',
+        '痛点式': 'painpoint_contrast',
+        '痛点': 'painpoint_contrast',
+        '反差': 'painpoint_contrast',
+        '纠错': 'painpoint_contrast',
+    }).keys()
+)
 
 # LLM 配置
 LLM_CONFIG_PATH = os.path.join(

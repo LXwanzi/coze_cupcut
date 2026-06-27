@@ -1,0 +1,153 @@
+[
+  {
+    "id": "plane_attendant_help",
+    "keywords": [
+      "飞机上找空乘",
+      "飞机上找空姐",
+      "找空乘",
+      "找空姐",
+      "飞机上求助",
+      "飞机上寻求帮助",
+      "飞机上寻求空乘帮助",
+      "空乘帮忙",
+      "空乘帮助",
+      "寻求空乘帮助",
+      "叫空乘帮忙",
+      "找空乘帮忙"
+    ],
+    "scene": "travel",
+    "sub_scene": "in_flight_attendant",
+    "topic": "飞机上找空乘",
+    "real_scene": "你在飞机上想找空乘帮忙，但一开口就卡住",
+    "hook": "飞机上想找空乘，别只会 hello。",
+    "setup": "这 5 句按顺序学，求助、放行李、要东西、报故障都能用。",
+    "expressions": [
+      {
+        "label": "先开口求助",
+        "english": "Excuse me, could you help me?",
+        "chinese": "不好意思，可以帮我一下吗？",
+        "usage": "不知道怎么开始时先用这句。"
+      },
+      {
+        "label": "请人放行李",
+        "english": "Could you help me put this up?",
+        "chinese": "可以帮我把这个放上去吗？",
+        "usage": "指着行李说 this 就够自然。"
+      },
+      {
+        "label": "想要毯子",
+        "english": "May I have a blanket?",
+        "chinese": "可以给我一条毯子吗？",
+        "usage": "要服务物品时很礼貌。"
+      },
+      {
+        "label": "想要水",
+        "english": "Could I have some water?",
+        "chinese": "可以给我一些水吗？",
+        "usage": "比 water please 更完整。"
+      },
+      {
+        "label": "座位屏幕坏了",
+        "english": "My seat screen isn't working.",
+        "chinese": "我的座位屏幕不能用。",
+        "usage": "报故障时直接说明哪里不能用。"
+      }
+    ],
+    "summary_tts": "这 5 句先收藏，飞机上找空乘真的用得上。",
+    "next_preview": "下集讲飞机上换座位怎么说。",
+    "interaction": "你在飞机上还卡过哪句英语？评论区说说。",
+    "title": "【飞机上找空乘】不会开口求助？这5句能救场"
+  },
+  {
+    "id": "airport_checkin_collection",
+    "keywords": ["机场值机", "值机", "机场柜台", "check in", "check-in"],
+    "scene": "travel",
+    "sub_scene": "airport_checkin",
+    "topic": "机场值机",
+    "real_scene": "你在机场值机柜台，需要办理登机和行李",
+    "hook": "机场值机别慌，这 5 句按顺序说就够。",
+    "setup": "从办理值机到确认登机口，一条视频学完整。",
+    "expressions": [
+      {
+        "label": "办理值机",
+        "english": "I'd like to check in for this flight.",
+        "chinese": "我想办理这趟航班的值机。",
+        "usage": "到柜台第一句可以这样开口。"
+      },
+      {
+        "label": "托运行李",
+        "english": "I have one bag to check.",
+        "chinese": "我有一个包要托运。",
+        "usage": "回答有没有托运行李。"
+      },
+      {
+        "label": "确认随身行李",
+        "english": "Is my carry-on okay?",
+        "chinese": "我的随身行李可以吗？",
+        "usage": "担心尺寸或重量时用。"
+      },
+      {
+        "label": "想要靠窗",
+        "english": "Could I have a window seat?",
+        "chinese": "可以给我靠窗座位吗？",
+        "usage": "选座时礼貌表达。"
+      },
+      {
+        "label": "问登机口",
+        "english": "Which gate should I go to?",
+        "chinese": "我应该去哪个登机口？",
+        "usage": "离开柜台前确认路线。"
+      }
+    ],
+    "summary_tts": "这 5 句先收藏，机场值机一套就顺了。",
+    "next_preview": "下集讲行李超重怎么说。",
+    "interaction": "你值机时最怕被问什么？评论区说说。",
+    "title": "【机场值机】不会办托运？这5句直接用"
+  },
+  {
+    "id": "hotel_checkout_collection",
+    "keywords": ["酒店退房", "退房", "check out", "checkout"],
+    "scene": "hotel",
+    "sub_scene": "hotel_checkout",
+    "topic": "酒店退房",
+    "real_scene": "你在酒店前台准备退房，需要确认账单和寄存行李",
+    "hook": "酒店退房别只会 check out，这 5 句更完整。",
+    "setup": "从退房、查账单到寄存行李，一次学会。",
+    "expressions": [
+      {
+        "label": "我要退房",
+        "english": "I'd like to check out, please.",
+        "chinese": "我想办理退房。",
+        "usage": "到前台第一句。"
+      },
+      {
+        "label": "核对账单",
+        "english": "Could you check the bill for me?",
+        "chinese": "可以帮我核对一下账单吗？",
+        "usage": "担心多收费时用。"
+      },
+      {
+        "label": "指出多收费",
+        "english": "I think there is an extra charge here.",
+        "chinese": "我觉得这里多收了一项费用。",
+        "usage": "发现问题时更具体。"
+      },
+      {
+        "label": "寄存行李",
+        "english": "Could I leave my luggage here for a few hours?",
+        "chinese": "我可以把行李寄存在这里几个小时吗？",
+        "usage": "退房后还要出去逛时用。"
+      },
+      {
+        "label": "要收据",
+        "english": "Could I have a receipt, please?",
+        "chinese": "可以给我一张收据吗？",
+        "usage": "商务或报销场景常用。"
+      }
+    ],
+    "summary_tts": "这 5 句先收藏，退房查账单都能用。",
+    "next_preview": "下集讲押金没退怎么说。",
+    "interaction": "你退房时遇到过什么尴尬？评论区说说。",
+    "title": "【酒店退房】怕账单多收费？这5句要会"
+  }
+]

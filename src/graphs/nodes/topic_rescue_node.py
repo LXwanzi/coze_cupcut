@@ -10,17 +10,19 @@ import hashlib
 import re
 from typing import Any, Dict, List
 
+from content.account_loader import get_account_pack
+
 
 DEFAULT_TOPIC_DURATION_SECONDS = 30
 DEFAULT_TOPIC_SENTENCE_COUNT = 3
 SCENE_COLLECTION_DURATION_SECONDS = 38
 
-PAINPOINT_TRIGGERS = [
+DEFAULT_PAINPOINT_TRIGGERS = [
     "别说", "不要说", "中式英语", "不会说", "说错", "怎么说", "不是",
     "容易说错", "只会说", "救场",
 ]
 
-MODE_ALIASES = {
+DEFAULT_MODE_ALIASES = {
     "场景式": "scene_collection",
     "场景": "scene_collection",
     "合集": "scene_collection",
@@ -30,393 +32,28 @@ MODE_ALIASES = {
     "纠错": "painpoint_contrast",
 }
 
-
-TOPIC_PRESETS: List[Dict[str, Any]] = [
-    {
-        "id": "airport_checkin_bag",
-        "keywords": ["机场值机", "值机", "托运行李", "行李托运", "check in", "check-in"],
-        "scene": "travel",
-        "sub_scene": "airport_checkin",
-        "topic": "机场值机",
-        "real_scene": "你在机场值机柜台，工作人员问你有没有托运行李",
-        "staff_line": "Do you have any bags to check?",
-        "staff_line_cn": "你有托运行李吗？",
-        "pain_point": "机场托运行李，别说 send my bag",
-        "wrong_expression": "I want to send my bag.",
-        "why_wrong": "send 更像寄包裹，不是机场托运行李。",
-        "communication_intent": "回答自己有一个包要托运",
-        "answer_levels": [
-            {
-                "level": "survival",
-                "label": "最短能救场",
-                "english": "Yes, one bag.",
-                "chinese": "有，一个包。",
-                "usage": "听懂问题后先接住，不用憋完整句。",
-            },
-            {
-                "level": "standard",
-                "label": "完整一点",
-                "english": "I have one bag to check.",
-                "chinese": "我有一个包要托运。",
-                "usage": "回答工作人员询问时最自然。",
-            },
-            {
-                "level": "polite",
-                "label": "想主动说",
-                "english": "I'd like to check this bag.",
-                "chinese": "我想托运这个包。",
-                "usage": "主动提出要托运行李时用。",
-            },
-        ],
-        "next_preview": "下集讲选座别说 window place。",
-        "interaction": "你在机场遇到过哪些英语卡壳？评论区说说。",
-    },
-    {
-        "id": "plane_attendant_help_painpoint",
-        "keywords": [
-            "飞机上找空乘", "飞机上找空姐", "找空乘", "找空姐",
-            "飞机上求助", "飞机上寻求帮助", "飞机上寻求空乘帮助",
-            "空乘帮忙", "空乘帮助", "寻求空乘帮助", "叫空乘帮忙", "找空乘帮忙",
-        ],
-        "scene": "travel",
-        "sub_scene": "in_flight_attendant",
-        "topic": "飞机上找空乘",
-        "real_scene": "你在飞机上，空乘问你需不需要帮助",
-        "staff_line": "Do you need any help?",
-        "staff_line_cn": "你需要帮忙吗？",
-        "pain_point": "飞机上找空乘，别只会说 yes",
-        "wrong_expression": "Yes.",
-        "why_wrong": "yes 只表示要，但没说清楚你要对方帮什么。",
-        "communication_intent": "明确说出自己需要空乘帮忙的具体事情",
-        "answer_levels": [
-            {
-                "level": "survival",
-                "label": "最短能救场",
-                "english": "Could you help me?",
-                "chinese": "可以帮我一下吗？",
-                "usage": "先把求助意图说清楚。",
-            },
-            {
-                "level": "standard",
-                "label": "完整一点",
-                "english": "Could you help me put this up?",
-                "chinese": "可以帮我把这个放上去吗？",
-                "usage": "指着行李说 this，比只说 yes 有用得多。",
-            },
-            {
-                "level": "polite",
-                "label": "更具体一点",
-                "english": "Could you help me put my bag in the overhead bin?",
-                "chinese": "可以帮我把包放进行李架吗？",
-                "usage": "对方能立刻知道你需要什么帮助。",
-            },
-        ],
-        "next_preview": "下集讲飞机上要水和毯子怎么说。",
-        "interaction": "你在飞机上最怕哪句英语卡住？评论区说说。",
-    },
-    {
-        "id": "hotel_checkout_bill",
-        "keywords": ["酒店退房", "退房", "账单", "check out", "checkout"],
-        "scene": "hotel",
-        "sub_scene": "hotel_checkout",
-        "topic": "酒店退房",
-        "real_scene": "你在酒店前台退房，想确认账单有没有多收费",
-        "staff_line": "Would you like to check the bill?",
-        "staff_line_cn": "你要核对一下账单吗？",
-        "pain_point": "退房看账单，别只说 bill problem",
-        "wrong_expression": "The bill has a problem.",
-        "why_wrong": "能听懂，但太硬，前台场景不够自然。",
-        "communication_intent": "礼貌地请前台帮你核对账单",
-        "answer_levels": [
-            {
-                "level": "survival",
-                "label": "最短能救场",
-                "english": "Could you check this?",
-                "chinese": "能帮我看一下吗？",
-                "usage": "先把问题递给前台。",
-            },
-            {
-                "level": "standard",
-                "label": "完整一点",
-                "english": "Could you check the bill for me?",
-                "chinese": "可以帮我核对一下账单吗？",
-                "usage": "退房时最稳妥。",
-            },
-            {
-                "level": "polite",
-                "label": "更具体一点",
-                "english": "I think there is an extra charge here.",
-                "chinese": "我觉得这里多收了一项费用。",
-                "usage": "指出具体多收费时用。",
-            },
-        ],
-        "next_preview": "下集讲押金没退怎么说。",
-        "interaction": "你退房时遇到过什么账单问题？评论区说说。",
-    },
-    {
-        "id": "room_too_noisy",
-        "keywords": ["房间太吵", "太吵", "安静房间", "换房"],
-        "scene": "hotel",
-        "sub_scene": "quiet_room",
-        "topic": "房间太吵",
-        "real_scene": "你入住后发现房间太吵，想请前台换一个安静点的房间",
-        "staff_line": "How can I help you?",
-        "staff_line_cn": "有什么可以帮您？",
-        "pain_point": "房间太吵，别只会说 too noisy",
-        "wrong_expression": "My room is too noisy.",
-        "why_wrong": "这句能用，但后面最好接具体请求，不然对方不知道你想要什么。",
-        "communication_intent": "请求换到安静一点的房间",
-        "answer_levels": [
-            {
-                "level": "survival",
-                "label": "最短能救场",
-                "english": "It's too noisy.",
-                "chinese": "太吵了。",
-                "usage": "先说明问题。",
-            },
-            {
-                "level": "standard",
-                "label": "完整一点",
-                "english": "Could I have a quieter room?",
-                "chinese": "可以给我一间安静点的房间吗？",
-                "usage": "直接提出换房需求。",
-            },
-            {
-                "level": "polite",
-                "label": "更礼貌一点",
-                "english": "Would it be possible to move to a quieter room?",
-                "chinese": "可以换到安静一点的房间吗？",
-                "usage": "更委婉，适合酒店前台。",
-            },
-        ],
-        "next_preview": "下集讲空调坏了怎么说。",
-        "interaction": "你住酒店最怕遇到什么问题？评论区说说。",
-    },
-    {
-        "id": "immigration_purpose",
-        "keywords": ["入境", "入境目的", "海关", "来干嘛"],
-        "scene": "travel",
-        "sub_scene": "immigration",
-        "topic": "入境被问目的",
-        "real_scene": "你在入境柜台，工作人员问你来这里做什么",
-        "staff_line": "What's the purpose of your visit?",
-        "staff_line_cn": "你此行目的是什么？",
-        "pain_point": "入境被问目的，别只会说 travel",
-        "wrong_expression": "Travel.",
-        "why_wrong": "单说 travel 太短，容易显得不清楚。",
-        "communication_intent": "说明自己是来旅游的",
-        "answer_levels": [
-            {
-                "level": "survival",
-                "label": "最短能救场",
-                "english": "For vacation.",
-                "chinese": "来度假。",
-                "usage": "紧张时先接住问题。",
-            },
-            {
-                "level": "standard",
-                "label": "完整一点",
-                "english": "I'm here for vacation.",
-                "chinese": "我是来度假的。",
-                "usage": "入境回答最稳。",
-            },
-            {
-                "level": "polite",
-                "label": "再补一句",
-                "english": "I'll stay for seven days.",
-                "chinese": "我会停留七天。",
-                "usage": "对方继续问行程时用。",
-            },
-        ],
-        "next_preview": "下集讲入境被问住哪里。",
-        "interaction": "你最怕入境官问什么？评论区说说。",
-    },
-    {
-        "id": "office_follow_up",
-        "keywords": ["办公室催进度", "催进度", "进度", "跟进"],
-        "scene": "office",
-        "sub_scene": "follow_up",
-        "topic": "办公室催进度",
-        "real_scene": "你想问同事任务进展，但不想听起来像催命",
-        "staff_line": "Do you need anything from me?",
-        "staff_line_cn": "你需要我配合什么吗？",
-        "pain_point": "催进度，别说 hurry up",
-        "wrong_expression": "Please hurry up.",
-        "why_wrong": "这句太冲，办公室里容易冒犯。",
-        "communication_intent": "礼貌询问进展",
-        "answer_levels": [
-            {
-                "level": "survival",
-                "label": "最短能救场",
-                "english": "Any update?",
-                "chinese": "有进展吗？",
-                "usage": "熟人之间快速问。",
-            },
-            {
-                "level": "standard",
-                "label": "完整一点",
-                "english": "Do you have any updates on this?",
-                "chinese": "这个有新进展吗？",
-                "usage": "办公室沟通最常用。",
-            },
-            {
-                "level": "polite",
-                "label": "更礼貌一点",
-                "english": "Just checking in on the progress.",
-                "chinese": "我来跟进一下进度。",
-                "usage": "邮件和聊天都自然。",
-            },
-        ],
-        "next_preview": "下集讲会议里打断别人怎么说。",
-        "interaction": "你还想学哪句办公室英语？评论区说说。",
-    },
+ACCOUNT_PACK = get_account_pack()
+MODE_ALIASES = ACCOUNT_PACK.get("modes", {}).get("mode_aliases") or DEFAULT_MODE_ALIASES
+PAINPOINT_TRIGGERS = ACCOUNT_PACK.get("modes", {}).get("painpoint_triggers") or DEFAULT_PAINPOINT_TRIGGERS
+SCENE_MAP = ACCOUNT_PACK.get("modes", {}).get("scene_map") or [
+    ["emergency", ["救场", "卡壳", "听不清", "不会说", "付款失败", "迷路", "丢东西"]],
+    ["hotel", ["酒店", "入住", "退房", "房间", "前台", "押金", "早餐"]],
+    ["office", ["办公室", "开会", "请假", "催进度", "汇报", "同事", "进度"]],
+    ["business", ["商务", "客户", "合同", "谈判", "报价", "提案"]],
+    ["parent_child", ["亲子", "孩子", "绘本", "睡前"]],
+    ["daily", ["日常", "生活", "咖啡", "外卖", "超市", "理发"]],
+    ["travel", ["旅行", "机场", "入境", "航班", "行李", "登机", "护照", "值机"]],
 ]
+VOICE_PROFILES = ACCOUNT_PACK.get("modes", {}).get("voice_profiles") or {}
 
 
-SCENE_COLLECTION_PRESETS: List[Dict[str, Any]] = [
-    {
-        "id": "plane_attendant_help",
-        "keywords": [
-            "飞机上找空乘", "飞机上找空姐", "找空乘", "找空姐",
-            "飞机上求助", "飞机上寻求帮助", "飞机上寻求空乘帮助",
-            "空乘帮忙", "空乘帮助", "寻求空乘帮助", "叫空乘帮忙", "找空乘帮忙",
-        ],
-        "scene": "travel",
-        "sub_scene": "in_flight_attendant",
-        "topic": "飞机上找空乘",
-        "real_scene": "你在飞机上想找空乘帮忙，但一开口就卡住",
-        "hook": "飞机上想找空乘，别只会 hello。",
-        "setup": "这 5 句按顺序学，求助、放行李、要东西、报故障都能用。",
-        "expressions": [
-            {
-                "label": "先开口求助",
-                "english": "Excuse me, could you help me?",
-                "chinese": "不好意思，可以帮我一下吗？",
-                "usage": "不知道怎么开始时先用这句。",
-            },
-            {
-                "label": "请人放行李",
-                "english": "Could you help me put this up?",
-                "chinese": "可以帮我把这个放上去吗？",
-                "usage": "指着行李说 this 就够自然。",
-            },
-            {
-                "label": "想要毯子",
-                "english": "May I have a blanket?",
-                "chinese": "可以给我一条毯子吗？",
-                "usage": "要服务物品时很礼貌。",
-            },
-            {
-                "label": "想要水",
-                "english": "Could I have some water?",
-                "chinese": "可以给我一些水吗？",
-                "usage": "比 water please 更完整。",
-            },
-            {
-                "label": "座位屏幕坏了",
-                "english": "My seat screen isn't working.",
-                "chinese": "我的座位屏幕不能用。",
-                "usage": "报故障时直接说明哪里不能用。",
-            },
-        ],
-        "summary_tts": "这 5 句先收藏，飞机上找空乘真的用得上。",
-        "next_preview": "下集讲飞机上换座位怎么说。",
-        "interaction": "你在飞机上还卡过哪句英语？评论区说说。",
-        "title": "【飞机上找空乘】不会开口求助？这5句能救场",
-    },
-    {
-        "id": "airport_checkin_collection",
-        "keywords": ["机场值机", "值机", "机场柜台", "check in", "check-in"],
-        "scene": "travel",
-        "sub_scene": "airport_checkin",
-        "topic": "机场值机",
-        "real_scene": "你在机场值机柜台，需要办理登机和行李",
-        "hook": "机场值机别慌，这 5 句按顺序说就够。",
-        "setup": "从办理值机到确认登机口，一条视频学完整。",
-        "expressions": [
-            {
-                "label": "办理值机",
-                "english": "I'd like to check in for this flight.",
-                "chinese": "我想办理这趟航班的值机。",
-                "usage": "到柜台第一句可以这样开口。",
-            },
-            {
-                "label": "托运行李",
-                "english": "I have one bag to check.",
-                "chinese": "我有一个包要托运。",
-                "usage": "回答有没有托运行李。",
-            },
-            {
-                "label": "确认随身行李",
-                "english": "Is my carry-on okay?",
-                "chinese": "我的随身行李可以吗？",
-                "usage": "担心尺寸或重量时用。",
-            },
-            {
-                "label": "想要靠窗",
-                "english": "Could I have a window seat?",
-                "chinese": "可以给我靠窗座位吗？",
-                "usage": "选座时礼貌表达。",
-            },
-            {
-                "label": "问登机口",
-                "english": "Which gate should I go to?",
-                "chinese": "我应该去哪个登机口？",
-                "usage": "离开柜台前确认路线。",
-            },
-        ],
-        "summary_tts": "这 5 句先收藏，机场值机一套就顺了。",
-        "next_preview": "下集讲行李超重怎么说。",
-        "interaction": "你值机时最怕被问什么？评论区说说。",
-        "title": "【机场值机】不会办托运？这5句直接用",
-    },
-    {
-        "id": "hotel_checkout_collection",
-        "keywords": ["酒店退房", "退房", "check out", "checkout"],
-        "scene": "hotel",
-        "sub_scene": "hotel_checkout",
-        "topic": "酒店退房",
-        "real_scene": "你在酒店前台准备退房，需要确认账单和寄存行李",
-        "hook": "酒店退房别只会 check out，这 5 句更完整。",
-        "setup": "从退房、查账单到寄存行李，一次学会。",
-        "expressions": [
-            {
-                "label": "我要退房",
-                "english": "I'd like to check out, please.",
-                "chinese": "我想办理退房。",
-                "usage": "到前台第一句。",
-            },
-            {
-                "label": "核对账单",
-                "english": "Could you check the bill for me?",
-                "chinese": "可以帮我核对一下账单吗？",
-                "usage": "担心多收费时用。",
-            },
-            {
-                "label": "指出多收费",
-                "english": "I think there is an extra charge here.",
-                "chinese": "我觉得这里多收了一项费用。",
-                "usage": "发现问题时更具体。",
-            },
-            {
-                "label": "寄存行李",
-                "english": "Could I leave my luggage here for a few hours?",
-                "chinese": "我可以把行李寄存在这里几个小时吗？",
-                "usage": "退房后还要出去逛时用。",
-            },
-            {
-                "label": "要收据",
-                "english": "Could I have a receipt, please?",
-                "chinese": "可以给我一张收据吗？",
-                "usage": "商务或报销场景常用。",
-            },
-        ],
-        "summary_tts": "这 5 句先收藏，退房查账单都能用。",
-        "next_preview": "下集讲押金没退怎么说。",
-        "interaction": "你退房时遇到过什么尴尬？评论区说说。",
-        "title": "【酒店退房】怕账单多收费？这5句要会",
-    },
-]
+def _configured_presets(key: str) -> List[Dict[str, Any]]:
+    presets = ACCOUNT_PACK.get(key)
+    return presets if isinstance(presets, list) else []
+
+
+TOPIC_PRESETS: List[Dict[str, Any]] = _configured_presets("painpoint_presets")
+SCENE_COLLECTION_PRESETS: List[Dict[str, Any]] = _configured_presets("scene_collection_presets")
 
 
 def parse_topic_input(raw_text: str) -> Dict[str, Any]:
@@ -742,15 +379,14 @@ def review_topic_brief(brief: Dict[str, Any], raw_topic: str) -> Dict[str, Any]:
 
 def voice_profile_for_mode(content_mode: str | None, scene: str | None = None) -> Dict[str, Any]:
     """Recommend TTS voice and speed for each short-video format."""
-    if scene == "business":
-        return {"voice": "business", "speed": 1.08, "style": "professional_clear"}
-    if scene == "parent_child":
-        return {"voice": "cute", "speed": 1.05, "style": "warm_parent_child"}
-    if content_mode == "scene_collection":
-        return {"voice": "playful", "speed": 1.10, "style": "bright_companion"}
-    if content_mode == "painpoint_contrast":
-        return {"voice": "playful", "speed": 1.12, "style": "snappy_contrast"}
-    return {"voice": "vivi", "speed": 1.08, "style": "clear_bilingual"}
+    if scene in VOICE_PROFILES:
+        return VOICE_PROFILES[scene]
+    if content_mode in VOICE_PROFILES:
+        return VOICE_PROFILES[content_mode]
+    return VOICE_PROFILES.get(
+        "default",
+        {"voice": "vivi", "speed": 1.08, "style": "clear_bilingual"}
+    )
 
 
 def build_collection_sentence_tts(index: int, expression: Dict[str, Any]) -> str:
@@ -848,16 +484,7 @@ def select_topic_preset(raw_topic: str, memory_context: Dict[str, Any]) -> Dict[
 
 def detect_scene(text: str) -> str:
     text = text or ""
-    scene_map = [
-        ("emergency", ["救场", "卡壳", "听不清", "不会说", "付款失败", "迷路", "丢东西"]),
-        ("hotel", ["酒店", "入住", "退房", "房间", "前台", "押金", "早餐"]),
-        ("office", ["办公室", "开会", "请假", "催进度", "汇报", "同事", "进度"]),
-        ("business", ["商务", "客户", "合同", "谈判", "报价", "提案"]),
-        ("parent_child", ["亲子", "孩子", "绘本", "睡前"]),
-        ("daily", ["日常", "生活", "咖啡", "外卖", "超市", "理发"]),
-        ("travel", ["旅行", "机场", "入境", "航班", "行李", "登机", "护照", "值机"]),
-    ]
-    for scene, keywords in scene_map:
+    for scene, keywords in SCENE_MAP:
         if any(keyword in text for keyword in keywords):
             return scene
     return "travel"
