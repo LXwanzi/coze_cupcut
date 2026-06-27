@@ -110,6 +110,80 @@
       "wrong_expression": "",
       "answer_levels": [],
       "created_at": "2026-06-27T13:12:28.161945"
+    },
+    {
+      "episode_num": 9,
+      "sentences": [
+        "Yes, please.",
+        "Could you help me with this?",
+        "Could you please take a look at this?"
+      ],
+      "scene": "飞机上找空乘帮忙时，别只会说 yes",
+      "hook": "飞机上找空乘帮忙时，别只会说 yes",
+      "preview": "下集继续讲飞机上找空乘帮忙里的卡壳表达。",
+      "pain_point": "飞机上找空乘帮忙时，别只会说 yes",
+      "wrong_expression": "Yes.",
+      "answer_levels": [
+        {
+          "level": "survival",
+          "label": "最短能救场",
+          "english": "Yes, please.",
+          "chinese": "好的，麻烦了。",
+          "usage": "先礼貌接住。"
+        },
+        {
+          "level": "standard",
+          "label": "完整一点",
+          "english": "Could you help me with this?",
+          "chinese": "可以帮我处理一下这个吗？",
+          "usage": "不确定怎么说时很万能。"
+        },
+        {
+          "level": "polite",
+          "label": "更礼貌一点",
+          "english": "Could you please take a look at this?",
+          "chinese": "可以麻烦你看一下这个吗？",
+          "usage": "需要对方帮忙查看时用。"
+        }
+      ],
+      "created_at": "2026-06-27T13:24:48.587504"
+    },
+    {
+      "episode_num": 10,
+      "sentences": [
+        "Yes, please.",
+        "Could you help me with this?",
+        "Could you please take a look at this?"
+      ],
+      "scene": "飞机上找空乘 Excuse me, could you help me? / 不好意思，可以帮我一下吗？",
+      "hook": "飞机上找空乘 Excuse me, could you help me? / 不好意思，可以帮我一下吗？",
+      "preview": "下集继续讲飞机上找空乘\nExcuse me, could you help me? / 不好意思，可以帮我一下吗？\nCould you help me put this up? / 可以帮我把这个放上去吗？\nMay I have a blanket? / 可以给我一条毯子吗？\nCould I have some water? / 可以给我一些水吗？\nMy seat screen isn't working. / 我的座位屏幕不能用。里的卡壳表达。",
+      "pain_point": "飞机上找空乘\nExcuse me, could you help me? / 不好意思，可以帮我一下吗？\nCould you help me put this up? / 可以帮我把这个放上去吗？\nMay I have a blanket? / 可以给我一条毯子吗？\nCould I have some water? / 可以给我一些水吗？\nMy seat screen isn't working. / 我的座位屏幕不能用。时，别只会说 yes",
+      "wrong_expression": "Yes.",
+      "answer_levels": [
+        {
+          "level": "survival",
+          "label": "最短能救场",
+          "english": "Yes, please.",
+          "chinese": "好的，麻烦了。",
+          "usage": "先礼貌接住。"
+        },
+        {
+          "level": "standard",
+          "label": "完整一点",
+          "english": "Could you help me with this?",
+          "chinese": "可以帮我处理一下这个吗？",
+          "usage": "不确定怎么说时很万能。"
+        },
+        {
+          "level": "polite",
+          "label": "更礼貌一点",
+          "english": "Could you please take a look at this?",
+          "chinese": "可以麻烦你看一下这个吗？",
+          "usage": "需要对方帮忙查看时用。"
+        }
+      ],
+      "created_at": "2026-06-27T13:33:07.334486"
     }
   ],
   "all_sentences": [
@@ -130,7 +204,10 @@
     "Is this liquid allowed?",
     "Should I take off my shoes?",
     "How much is the overweight fee?",
-    "Can I take something out?"
+    "Can I take something out?",
+    "Yes, please.",
+    "Could you help me with this?",
+    "Could you please take a look at this?"
   ],
   "scenes_used": [
     "出发前确认行程",
@@ -138,10 +215,19 @@
     "旅行英语：飞机上沟通",
     "行李超重？这几句直接用",
     "过安检不会说？别乱比划",
-    "机场行李超重？快背这几句"
+    "机场行李超重？快背这几句",
+    "飞机上找空乘帮忙时，别只会说 yes",
+    "飞机上找空乘 Excuse me, could you help me? / 不好意思，可以帮我一下吗？"
   ],
   "last_hook": "",
-  "next_preview": "下集学超重缴费实用表达",
+  "next_preview": "下集继续讲飞机上找空乘\nExcuse me, could you help me? / 不好意思，可以帮我一下吗？\nCould you help me put this up? / 可以帮我把这个放上去吗？\nMay I have a blanket? / 可以给我一条毯子吗？\nCould I have some water? / 可以给我一些水吗？\nMy seat screen isn't working. / 我的座位屏幕不能用。里的卡壳表达。",
   "created_at": "2026-06-26T07:25:09.292153",
-  "updated_at": "2026-06-27T13:12:28.161977"
+  "updated_at": "2026-06-27T13:33:07.334495",
+  "pain_points_used": [
+    "飞机上找空乘帮忙时，别只会说 yes",
+    "飞机上找空乘\nExcuse me, could you help me? / 不好意思，可以帮我一下吗？\nCould you help me put this up? / 可以帮我把这个放上去吗？\nMay I have a blanket? / 可以给我一条毯子吗？\nCould I have some water? / 可以给我一些水吗？\nMy seat screen isn't working. / 我的座位屏幕不能用。时，别只会说 yes"
+  ],
+  "wrong_expressions_used": [
+    "Yes."
+  ]
 }

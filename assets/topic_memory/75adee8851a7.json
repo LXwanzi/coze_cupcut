@@ -115,6 +115,43 @@
         }
       ],
       "created_at": "2026-06-27T12:48:22.572391"
+    },
+    {
+      "episode_num": 6,
+      "sentences": [
+        "Yes, please.",
+        "Could you help me with this?",
+        "Could you please take a look at this?"
+      ],
+      "scene": "登机口临时变化时，别只会说 yes",
+      "hook": "登机口临时变化时，别只会说 yes",
+      "preview": "下集继续讲登机口临时变化里的卡壳表达。",
+      "pain_point": "登机口临时变化时，别只会说 yes",
+      "wrong_expression": "Yes.",
+      "answer_levels": [
+        {
+          "level": "survival",
+          "label": "最短能救场",
+          "english": "Yes, please.",
+          "chinese": "好的，麻烦了。",
+          "usage": "先礼貌接住。"
+        },
+        {
+          "level": "standard",
+          "label": "完整一点",
+          "english": "Could you help me with this?",
+          "chinese": "可以帮我处理一下这个吗？",
+          "usage": "不确定怎么说时很万能。"
+        },
+        {
+          "level": "polite",
+          "label": "更礼貌一点",
+          "english": "Could you please take a look at this?",
+          "chinese": "可以麻烦你看一下这个吗？",
+          "usage": "需要对方帮忙查看时用。"
+        }
+      ],
+      "created_at": "2026-06-27T13:19:15.864246"
     }
   ],
   "all_sentences": [
@@ -128,21 +165,27 @@
     "Is boarding already started?",
     "Yes, one bag.",
     "I have one bag to check.",
-    "I'd like to check this bag."
+    "I'd like to check this bag.",
+    "Yes, please.",
+    "Could you help me with this?",
+    "Could you please take a look at this?"
   ],
   "scenes_used": [
     "旅行英语之安检登机",
     "登机口临时改了？别慌说这几句",
-    "机场托运行李，别说 send my bag"
+    "机场托运行李，别说 send my bag",
+    "登机口临时变化时，别只会说 yes"
   ],
   "last_hook": "",
-  "next_preview": "下集讲选座别说 window place。",
+  "next_preview": "下集继续讲登机口临时变化里的卡壳表达。",
   "created_at": "2026-06-26T11:30:13.367774",
-  "updated_at": "2026-06-27T12:48:22.572402",
+  "updated_at": "2026-06-27T13:19:15.864257",
   "pain_points_used": [
-    "机场托运行李，别说 send my bag"
+    "机场托运行李，别说 send my bag",
+    "登机口临时变化时，别只会说 yes"
   ],
   "wrong_expressions_used": [
-    "I want to send my bag."
+    "I want to send my bag.",
+    "Yes."
   ]
 }
