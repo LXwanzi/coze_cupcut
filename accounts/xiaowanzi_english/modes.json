@@ -32,7 +32,7 @@
   "voice_profiles": {
     "business": {"voice": "business", "speed": 1.08, "style": "professional_clear"},
     "parent_child": {"voice": "cute", "speed": 1.05, "style": "warm_parent_child"},
-    "scene_collection": {"voice": "playful", "speed": 1.1, "style": "bright_companion"},
+    "scene_collection": {"voice": "default", "speed": 1.1, "style": "bright_companion"},
     "painpoint_contrast": {"voice": "playful", "speed": 1.12, "style": "snappy_contrast"},
     "default": {"voice": "vivi", "speed": 1.08, "style": "clear_bilingual"}
   }
