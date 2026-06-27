@@ -53,7 +53,7 @@ TOPIC_PRESETS: List[Dict[str, Any]] = [
             },
         ],
         "next_preview": "下集讲选座别说 window place。",
-        "interaction": "你在机场还卡过哪句？评论区打机场。",
+        "interaction": "你在机场遇到过哪些英语卡壳？评论区说说。",
     },
     {
         "id": "hotel_checkout_bill",
@@ -92,7 +92,7 @@ TOPIC_PRESETS: List[Dict[str, Any]] = [
             },
         ],
         "next_preview": "下集讲押金没退怎么说。",
-        "interaction": "你退房时遇到过账单问题吗？评论区打酒店。",
+        "interaction": "你退房时遇到过什么账单问题？评论区说说。",
     },
     {
         "id": "room_too_noisy",
@@ -131,7 +131,7 @@ TOPIC_PRESETS: List[Dict[str, Any]] = [
             },
         ],
         "next_preview": "下集讲空调坏了怎么说。",
-        "interaction": "你住酒店最怕什么问题？评论区打酒店。",
+        "interaction": "你住酒店最怕遇到什么问题？评论区说说。",
     },
     {
         "id": "immigration_purpose",
@@ -170,7 +170,7 @@ TOPIC_PRESETS: List[Dict[str, Any]] = [
             },
         ],
         "next_preview": "下集讲入境被问住哪里。",
-        "interaction": "你最怕入境官问什么？评论区打入境。",
+        "interaction": "你最怕入境官问什么？评论区说说。",
     },
     {
         "id": "office_follow_up",
@@ -209,7 +209,7 @@ TOPIC_PRESETS: List[Dict[str, Any]] = [
             },
         ],
         "next_preview": "下集讲会议里打断别人怎么说。",
-        "interaction": "你还想学哪句办公室英语？评论区打办公。",
+        "interaction": "你还想学哪句办公室英语？评论区说说。",
     },
 ]
 
@@ -269,7 +269,7 @@ def build_rescue_segments(
         {
             "scene": "沉浸场景",
             "caption": f"{brief.get('staff_line', '')}\n{brief.get('staff_line_cn', '')}".strip(),
-            "tts": f"现在你在{brief.get('real_scene', '真实场景里')}。对方问：{brief.get('staff_line', '')}",
+            "tts": build_scene_tts(brief),
             "image_prompt": _scene_prompt(brief, "conversation"),
             "duration": 4.0,
         },
@@ -451,6 +451,16 @@ def sanitize_tts(text: str) -> str:
     text = re.sub(r"再来一遍[:：]?.*$", "", text).strip()
     text = re.sub(r"\s+", " ", text)
     return text
+
+
+def build_scene_tts(brief: Dict[str, Any]) -> str:
+    """Build immersive scene narration without duplicated location prefixes."""
+    real_scene = (brief.get("real_scene") or "真实场景里").strip()
+    real_scene = re.sub(r"^(现在)?你在", "", real_scene).strip("，。 ")
+    staff_line = (brief.get("staff_line") or "").strip()
+    if staff_line:
+        return f"现在你在{real_scene}。对方问：{staff_line}"
+    return f"现在你在{real_scene}。"
 
 
 def compact_caption(caption: str, max_lines: int = 2) -> str:

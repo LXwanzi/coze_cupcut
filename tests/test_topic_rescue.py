@@ -1,5 +1,6 @@
 from graphs.nodes.topic_rescue_node import (
     build_rescue_segments,
+    build_scene_tts,
     build_topic_brief,
     parse_topic_input,
 )
@@ -42,8 +43,17 @@ def test_build_rescue_segments_contains_scene_and_layered_answers():
     ]
     assert any("Yes, one bag." in segment["caption"] for segment in segments)
     assert any("I have one bag to check." in segment["caption"] for segment in segments)
+    assert "你在你在" not in segments[1]["tts"]
+    assert "评论区说说" in segments[-1]["tts"]
     assert segments[-1]["scene"] == "预告页"
     assert sum(segment["duration"] for segment in segments) <= 30
+
+
+def test_build_scene_tts_removes_duplicate_you_are_in_prefix():
+    brief = build_topic_brief("机场值机")
+
+    assert build_scene_tts(brief).startswith("现在你在机场值机柜台")
+    assert "你在你在" not in build_scene_tts(brief)
 
 
 def test_generate_plan_topic_only_uses_rescue_mode(tmp_path, monkeypatch):
