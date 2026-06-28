@@ -1,0 +1,31 @@
+{
+  "today_expressions": [
+    {
+      "english": "I'm here for sightseeing.",
+      "chinese": "我是来旅游观光的",
+      "usage": ""
+    },
+    {
+      "english": "I'm here on a business trip.",
+      "chinese": "我是来这里出差的",
+      "usage": ""
+    },
+    {
+      "english": "I'm here to visit my family.",
+      "chinese": "我是来探亲的",
+      "usage": ""
+    },
+    {
+      "english": "I'm here as an international student.",
+      "chinese": "我是来留学的",
+      "usage": ""
+    },
+    {
+      "english": "I'll be staying for 7 days.",
+      "chinese": "我会在这里停留7天",
+      "usage": ""
+    }
+  ],
+  "answer_levels": [],
+  "quick_review": "先收藏，下一集继续同一场景。"
+}

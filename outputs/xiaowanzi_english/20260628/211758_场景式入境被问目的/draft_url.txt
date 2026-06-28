@@ -1,0 +1,1 @@
+http://123.57.144.37:30000/openapi/capcut-mate/v1/get_draft?draft_id=20260628211756ad5feff9

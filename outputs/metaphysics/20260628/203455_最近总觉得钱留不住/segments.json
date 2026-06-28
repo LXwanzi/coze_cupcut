@@ -1,0 +1,145 @@
+[
+  {
+    "scene": "痛点命中",
+    "caption": "刚发工资就没了？先别急着怪自己赚得少。",
+    "tts": "刚发工资就没了？先别急着怪自己赚得少。",
+    "image_prompt": "最近总觉得钱留不住, metaphysics lifestyle short video, moment: opening, abstract black-gold guardian portrait, lotus halo, incense mist, quiet mystical atmosphere, no text, no speech bubbles, no product props, no lucky object pile",
+    "duration": 2.6,
+    "animation": {
+      "image": "slow_zoom_in",
+      "caption": "fade_in",
+      "keyword": "soft_glow"
+    },
+    "audio_url": "https://wanzioss.oss-cn-beijing.aliyuncs.com/tts_audio/audio_1782649993365.mp3",
+    "audio_duration": 4248000,
+    "audio_duration_seconds": 4.248,
+    "start": 0,
+    "end": 4248000,
+    "asset_url": "https://wanzioss.oss-cn-beijing.aliyuncs.com/video_images/scene_scene_0.png",
+    "image_url": "https://wanzioss.oss-cn-beijing.aliyuncs.com/video_images/scene_scene_0.png"
+  },
+  {
+    "scene": "具体表现",
+    "caption": "刚到账就花掉，付款太随手，买完又后悔",
+    "tts": "如果你也有这些情况：刚到账就花掉，付款太随手，买完又后悔。",
+    "image_prompt": "最近总觉得钱留不住, metaphysics lifestyle short video, moment: life scene, abstract black-gold guardian portrait, lotus halo, incense mist, quiet mystical atmosphere, no text, no speech bubbles, no product props, no lucky object pile",
+    "duration": 4.4,
+    "animation": {
+      "image": "slow_zoom_in",
+      "caption": "fade_in",
+      "keyword": "soft_glow"
+    },
+    "audio_url": "https://wanzioss.oss-cn-beijing.aliyuncs.com/tts_audio/audio_1782649995300.mp3",
+    "audio_duration": 6816000,
+    "audio_duration_seconds": 6.816,
+    "start": 4248000,
+    "end": 11064000,
+    "asset_url": "https://wanzioss.oss-cn-beijing.aliyuncs.com/video_images/scene_scene_1.png",
+    "image_url": "https://wanzioss.oss-cn-beijing.aliyuncs.com/video_images/scene_scene_1.png"
+  },
+  {
+    "scene": "玄学解释",
+    "caption": "传统说法里，这种状态容易被叫作财气不聚。",
+    "tts": "传统说法里，这种状态容易被叫作财气不聚。",
+    "image_prompt": "最近总觉得钱留不住, metaphysics lifestyle short video, moment: mystic view, abstract black-gold guardian portrait, lotus halo, incense mist, quiet mystical atmosphere, no text, no speech bubbles, no product props, no lucky object pile",
+    "duration": 3.8,
+    "animation": {
+      "image": "slow_zoom_in",
+      "caption": "fade_in",
+      "keyword": "soft_glow"
+    },
+    "audio_url": "https://wanzioss.oss-cn-beijing.aliyuncs.com/tts_audio/audio_1782649996871.mp3",
+    "audio_duration": 4848000,
+    "audio_duration_seconds": 4.848,
+    "start": 11064000,
+    "end": 15912000,
+    "asset_url": "https://wanzioss.oss-cn-beijing.aliyuncs.com/video_images/scene_scene_2.png",
+    "image_url": "https://wanzioss.oss-cn-beijing.aliyuncs.com/video_images/scene_scene_2.png"
+  },
+  {
+    "scene": "现实解释",
+    "caption": "现实一点说，是花钱前少了一个让自己停一下的提醒。",
+    "tts": "现实一点说，是花钱前少了一个让自己停一下的提醒。",
+    "image_prompt": "最近总觉得钱留不住, metaphysics lifestyle short video, moment: real life view, abstract black-gold guardian portrait, lotus halo, incense mist, quiet mystical atmosphere, no text, no speech bubbles, no product props, no lucky object pile",
+    "duration": 3.8,
+    "animation": {
+      "image": "slow_zoom_in",
+      "caption": "fade_in",
+      "keyword": "soft_glow"
+    },
+    "audio_url": "https://wanzioss.oss-cn-beijing.aliyuncs.com/tts_audio/audio_1782649998671.mp3",
+    "audio_duration": 5856000,
+    "audio_duration_seconds": 5.856,
+    "start": 15912000,
+    "end": 21768000,
+    "asset_url": "https://wanzioss.oss-cn-beijing.aliyuncs.com/video_images/scene_scene_3.png",
+    "image_url": "https://wanzioss.oss-cn-beijing.aliyuncs.com/video_images/scene_scene_3.png"
+  },
+  {
+    "scene": "产品桥接",
+    "caption": "五帝钱\n五帝钱适合做一个守财感提醒，寓意是守财感、平安感、传统寓意。",
+    "tts": "这时候可以看看五帝钱适合做一个守财感提醒，寓意是守财感、平安感、传统寓意。",
+    "image_prompt": "最近总觉得钱留不住, metaphysics lifestyle short video, moment: product close up, abstract black-gold guardian portrait, lotus halo, incense mist, quiet mystical atmosphere, no text, no speech bubbles, show only one matching product type: 五帝钱, single product close-up in lower third, no other lucky objects",
+    "keywords": [
+      "五帝钱"
+    ],
+    "duration": 4.8,
+    "animation": {
+      "image": "slow_zoom_in",
+      "caption": "fade_in",
+      "keyword": "soft_glow"
+    },
+    "caption_highlight": {
+      "keywords": [
+        "五帝钱"
+      ],
+      "mode": "keyword_badge",
+      "color": "#B45309"
+    },
+    "audio_url": "https://wanzioss.oss-cn-beijing.aliyuncs.com/tts_audio/audio_1782650000710.mp3",
+    "audio_duration": 8256000,
+    "audio_duration_seconds": 8.256,
+    "start": 21768000,
+    "end": 30024000,
+    "asset_url": "https://wanzioss.oss-cn-beijing.aliyuncs.com/video_images/scene_scene_4.png",
+    "image_url": "https://wanzioss.oss-cn-beijing.aliyuncs.com/video_images/scene_scene_4.png"
+  },
+  {
+    "scene": "使用建议",
+    "caption": "可以放在钱包、玄关或每天会看到的位置，重点是提醒自己少冲动消费。",
+    "tts": "可以放在钱包、玄关或每天会看到的位置，重点是提醒自己少冲动消费。它不承诺结果，只是给自己一个慢下来的仪式感。",
+    "image_prompt": "最近总觉得钱留不住, metaphysics lifestyle short video, moment: usage tips, abstract black-gold guardian portrait, lotus halo, incense mist, quiet mystical atmosphere, no text, no speech bubbles, show only one matching product type: 五帝钱, single product close-up in lower third, no other lucky objects",
+    "duration": 5.0,
+    "animation": {
+      "image": "slow_zoom_in",
+      "caption": "fade_in",
+      "keyword": "soft_glow"
+    },
+    "audio_url": "https://wanzioss.oss-cn-beijing.aliyuncs.com/tts_audio/audio_1782650002891.mp3",
+    "audio_duration": 10656000,
+    "audio_duration_seconds": 10.656,
+    "start": 30024000,
+    "end": 40680000,
+    "asset_url": "https://wanzioss.oss-cn-beijing.aliyuncs.com/video_images/scene_scene_5.png",
+    "image_url": "https://wanzioss.oss-cn-beijing.aliyuncs.com/video_images/scene_scene_5.png"
+  },
+  {
+    "scene": "自然问句",
+    "caption": "你最近是钱留不住，还是心里总觉得不踏实？",
+    "tts": "你最近是钱留不住，还是心里总觉得不踏实？",
+    "image_prompt": "最近总觉得钱留不住, metaphysics lifestyle short video, moment: soft interaction, abstract black-gold guardian portrait, lotus halo, incense mist, quiet mystical atmosphere, no text, no speech bubbles, no product props, no lucky object pile",
+    "duration": 3.2,
+    "animation": {
+      "image": "slow_zoom_in",
+      "caption": "fade_in",
+      "keyword": "soft_glow"
+    },
+    "audio_url": "https://wanzioss.oss-cn-beijing.aliyuncs.com/tts_audio/audio_1782650004282.mp3",
+    "audio_duration": 4248000,
+    "audio_duration_seconds": 4.248,
+    "start": 40680000,
+    "end": 44928000,
+    "asset_url": "https://wanzioss.oss-cn-beijing.aliyuncs.com/video_images/scene_scene_6.png",
+    "image_url": "https://wanzioss.oss-cn-beijing.aliyuncs.com/video_images/scene_scene_6.png"
+  }
+]

@@ -1,0 +1,685 @@
+{
+  "success": true,
+  "draft_url": "http://123.57.144.37:30000/openapi/capcut-mate/v1/get_draft?draft_id=20260628211756ad5feff9",
+  "content_meta": {
+    "account_id": "xiaowanzi_english",
+    "selected_topic": "场景式：入境被问目的",
+    "scene": "travel",
+    "sub_scene": "入境回答来访目的",
+    "duration_seconds": 25.6,
+    "target_duration_seconds": 34,
+    "sentence_count": 5,
+    "format": "scene_collection",
+    "content_mode": "scene_collection",
+    "pain_point": "",
+    "wrong_expression": "",
+    "quality_review": {
+      "is_reasonable": true,
+      "content_mode": "scene_collection",
+      "topic": "入境回答来访目的",
+      "suggested_sentence_count": 5,
+      "target_duration_seconds": 34,
+      "issues": [],
+      "suggestions": []
+    },
+    "voice_profile": {
+      "voice": "default",
+      "speed": 1.16,
+      "style": "bright_companion"
+    },
+    "originality_check": "所有内容基于用户提供的原始素材生成",
+    "safety_note": "未涉及教材原文复述",
+    "topic_id": "b8107f8774e6"
+  },
+  "publish_pack": {
+    "title": "【入境英语】被问来访目的5句万能应答",
+    "cover_text": "入境回答来访目的",
+    "description": "每天进步一点点。入境回答来访目的真实场景 5 句英语，先收藏，关键时候能直接用。#英语学习 #实用英语 #旅游英语",
+    "hashtags": [
+      "英语学习",
+      "实用英语",
+      "旅游英语"
+    ]
+  },
+  "review_card": {
+    "today_expressions": [
+      {
+        "english": "I'm here for sightseeing.",
+        "chinese": "我是来旅游观光的",
+        "usage": ""
+      },
+      {
+        "english": "I'm here on a business trip.",
+        "chinese": "我是来这里出差的",
+        "usage": ""
+      },
+      {
+        "english": "I'm here to visit my family.",
+        "chinese": "我是来探亲的",
+        "usage": ""
+      },
+      {
+        "english": "I'm here as an international student.",
+        "chinese": "我是来留学的",
+        "usage": ""
+      },
+      {
+        "english": "I'll be staying for 7 days.",
+        "chinese": "我会在这里停留7天",
+        "usage": ""
+      }
+    ],
+    "answer_levels": [],
+    "quick_review": "先收藏，下一集继续同一场景。"
+  },
+  "material_bank": [],
+  "segments": [
+    {
+      "scene": "开场总览页",
+      "caption": "入境被问目的再也不慌\n收藏这 5 句，覆盖旅游、出差、探亲、留学等常见入境目的应答\n1. I'm here for sightseeing.\n2. I'm here on a business trip.\n3. I'm here to visit my family.\n4. I'm here as an international student.\n5. I'll be staying for 7 days.",
+      "tts": "入境被问目的再也不慌 收藏这 5 句，覆盖旅游、出差、探亲、留学等常见入境目的应答",
+      "image_prompt": "FIXED_REVIEW_WITH_CHAR",
+      "duration": 3.8,
+      "keywords": [
+        "I'm",
+        "here"
+      ],
+      "caption_highlight": {
+        "enabled": true,
+        "mode": "keyword_badge",
+        "highlight_color": "#2563EB",
+        "keywords": [
+          "I'm",
+          "here"
+        ]
+      },
+      "animation": {
+        "image": "slow_zoom_in",
+        "caption": "fade_in",
+        "keyword": "pop"
+      },
+      "audio_url": "https://wanzioss.oss-cn-beijing.aliyuncs.com/tts_audio/audio_1782652607124.mp3",
+      "audio_duration": 8448000,
+      "audio_duration_seconds": 8.448,
+      "start": 0,
+      "end": 8448000,
+      "asset_url": "https://wanzioss.oss-cn-beijing.aliyuncs.com/video_images/scene_review_bg_0.png",
+      "image_url": "https://wanzioss.oss-cn-beijing.aliyuncs.com/video_images/scene_review_bg_0.png"
+    },
+    {
+      "scene": "第1句场景句",
+      "caption": "I'm here for sightseeing.\n我是来旅游观光的",
+      "tts": "第 1 句：I'm here for sightseeing。我是来旅游观光的",
+      "image_prompt": "入境回答来访目的, 你入境外国过海关，边检官员询问你此次来访目的, moment: 回答来旅游, Xiao Wanzi helping a young office worker speak English, minimal props, clear real-life setting",
+      "keywords": [
+        "sightseeing"
+      ],
+      "duration": 4.0,
+      "caption_highlight": {
+        "enabled": true,
+        "mode": "keyword_badge",
+        "highlight_color": "#2563EB",
+        "keywords": [
+          "sightseeing"
+        ]
+      },
+      "animation": {
+        "image": "slow_zoom_in",
+        "caption": "fade_in",
+        "keyword": "pop"
+      },
+      "audio_url": "https://wanzioss.oss-cn-beijing.aliyuncs.com/tts_audio/audio_1782652608886.mp3",
+      "audio_duration": 5064000,
+      "audio_duration_seconds": 5.064,
+      "start": 8448000,
+      "end": 13512000,
+      "asset_url": "https://wanzioss.oss-cn-beijing.aliyuncs.com/video_images/scene_scene_1.png",
+      "image_url": "https://wanzioss.oss-cn-beijing.aliyuncs.com/video_images/scene_scene_1.png"
+    },
+    {
+      "scene": "第2句场景句",
+      "caption": "I'm here on a business trip.\n我是来这里出差的",
+      "tts": "第 2 句：I'm here on a business trip。我是来这里出差的",
+      "image_prompt": "入境回答来访目的, 你入境外国过海关，边检官员询问你此次来访目的, moment: 回答来出差, Xiao Wanzi helping a young office worker speak English, minimal props, clear real-life setting",
+      "keywords": [
+        "business trip"
+      ],
+      "duration": 4.0,
+      "caption_highlight": {
+        "enabled": true,
+        "mode": "keyword_badge",
+        "highlight_color": "#2563EB",
+        "keywords": [
+          "business trip"
+        ]
+      },
+      "animation": {
+        "image": "slow_zoom_in",
+        "caption": "fade_in",
+        "keyword": "pop"
+      },
+      "audio_url": "https://wanzioss.oss-cn-beijing.aliyuncs.com/tts_audio/audio_1782652610444.mp3",
+      "audio_duration": 5088000,
+      "audio_duration_seconds": 5.088,
+      "start": 13512000,
+      "end": 18600000,
+      "asset_url": "https://wanzioss.oss-cn-beijing.aliyuncs.com/video_images/scene_scene_2.png",
+      "image_url": "https://wanzioss.oss-cn-beijing.aliyuncs.com/video_images/scene_scene_2.png"
+    },
+    {
+      "scene": "第3句场景句",
+      "caption": "I'm here to visit my family.\n我是来探亲的",
+      "tts": "第 3 句：I'm here to visit my family。我是来探亲的",
+      "image_prompt": "入境回答来访目的, 你入境外国过海关，边检官员询问你此次来访目的, moment: 回答来探亲, Xiao Wanzi helping a young office worker speak English, minimal props, clear real-life setting",
+      "keywords": [
+        "visit family"
+      ],
+      "duration": 4.0,
+      "caption_highlight": {
+        "enabled": true,
+        "mode": "keyword_badge",
+        "highlight_color": "#2563EB",
+        "keywords": [
+          "visit family"
+        ]
+      },
+      "animation": {
+        "image": "slow_zoom_in",
+        "caption": "fade_in",
+        "keyword": "pop"
+      },
+      "audio_url": "https://wanzioss.oss-cn-beijing.aliyuncs.com/tts_audio/audio_1782652611845.mp3",
+      "audio_duration": 4824000,
+      "audio_duration_seconds": 4.824,
+      "start": 18600000,
+      "end": 23424000,
+      "asset_url": "https://wanzioss.oss-cn-beijing.aliyuncs.com/video_images/scene_scene_3.png",
+      "image_url": "https://wanzioss.oss-cn-beijing.aliyuncs.com/video_images/scene_scene_3.png"
+    },
+    {
+      "scene": "第4句场景句",
+      "caption": "I'm here as an international student.\n我是来留学的",
+      "tts": "第 4 句：I'm here as an international student。我是来留学的",
+      "image_prompt": "入境回答来访目的, 你入境外国过海关，边检官员询问你此次来访目的, moment: 回答来留学, Xiao Wanzi helping a young office worker speak English, minimal props, clear real-life setting",
+      "keywords": [
+        "international student"
+      ],
+      "duration": 4.0,
+      "caption_highlight": {
+        "enabled": true,
+        "mode": "keyword_badge",
+        "highlight_color": "#2563EB",
+        "keywords": [
+          "international student"
+        ]
+      },
+      "animation": {
+        "image": "slow_zoom_in",
+        "caption": "fade_in",
+        "keyword": "pop"
+      },
+      "audio_url": "https://wanzioss.oss-cn-beijing.aliyuncs.com/tts_audio/audio_1782652613325.mp3",
+      "audio_duration": 5256000,
+      "audio_duration_seconds": 5.256,
+      "start": 23424000,
+      "end": 28680000,
+      "asset_url": "https://wanzioss.oss-cn-beijing.aliyuncs.com/video_images/scene_scene_4.png",
+      "image_url": "https://wanzioss.oss-cn-beijing.aliyuncs.com/video_images/scene_scene_4.png"
+    },
+    {
+      "scene": "第5句场景句",
+      "caption": "I'll be staying for 7 days.\n我会在这里停留7天",
+      "tts": "第 5 句：I'll be staying for 7 days。我会在这里停留7天",
+      "image_prompt": "入境回答来访目的, 你入境外国过海关，边检官员询问你此次来访目的, moment: 补充停留时长, Xiao Wanzi helping a young office worker speak English, minimal props, clear real-life setting",
+      "keywords": [
+        "staying"
+      ],
+      "duration": 4.0,
+      "caption_highlight": {
+        "enabled": true,
+        "mode": "keyword_badge",
+        "highlight_color": "#2563EB",
+        "keywords": [
+          "staying"
+        ]
+      },
+      "animation": {
+        "image": "slow_zoom_in",
+        "caption": "fade_in",
+        "keyword": "pop"
+      },
+      "audio_url": "https://wanzioss.oss-cn-beijing.aliyuncs.com/tts_audio/audio_1782652614929.mp3",
+      "audio_duration": 5832000,
+      "audio_duration_seconds": 5.832,
+      "start": 28680000,
+      "end": 34512000,
+      "asset_url": "https://wanzioss.oss-cn-beijing.aliyuncs.com/video_images/scene_scene_5.png",
+      "image_url": "https://wanzioss.oss-cn-beijing.aliyuncs.com/video_images/scene_scene_5.png"
+    },
+    {
+      "scene": "互动页",
+      "caption": "你最近一次出国是去做什么呀？",
+      "tts": "你最近一次出国是去做什么呀？",
+      "image_prompt": "FIXED_HOOK_IMAGE",
+      "duration": 1.8,
+      "keywords": [],
+      "caption_highlight": {
+        "enabled": true,
+        "mode": "keyword_badge",
+        "highlight_color": "#2563EB",
+        "keywords": []
+      },
+      "animation": {
+        "image": "slow_zoom_in",
+        "caption": "fade_in",
+        "keyword": "pop"
+      },
+      "audio_url": "https://wanzioss.oss-cn-beijing.aliyuncs.com/tts_audio/audio_1782652616166.mp3",
+      "audio_duration": 2424000,
+      "audio_duration_seconds": 2.424,
+      "start": 34512000,
+      "end": 36936000,
+      "asset_url": "https://wanzioss.oss-cn-beijing.aliyuncs.com/video_images/scene_hook_img_6.png",
+      "image_url": "https://wanzioss.oss-cn-beijing.aliyuncs.com/video_images/scene_hook_img_6.png"
+    }
+  ],
+  "duration": 36936000,
+  "duration_seconds": 36.94,
+  "scene_count": 7,
+  "caption_count": 7,
+  "timeline_segments": [
+    {
+      "index": 0,
+      "start": 0,
+      "end": 8448000,
+      "duration": 8448000,
+      "caption": "入境被问目的再也不慌\n收藏这 5 句，覆盖旅游、出差、探亲、留学等常见入境目的应答\n1. I'm here for sightseeing.\n2. I'm here on a business trip.\n3. I'm here to visit my family.\n4. I'm here as an international student.\n5. I'll be staying for 7 days.",
+      "keywords": [
+        "I'm",
+        "here"
+      ],
+      "caption_highlight": {
+        "enabled": true,
+        "mode": "keyword_badge",
+        "highlight_color": "#2563EB",
+        "keywords": [
+          "I'm",
+          "here"
+        ]
+      },
+      "animation": {
+        "image": "slow_zoom_in",
+        "caption": "fade_in",
+        "keyword": "pop"
+      },
+      "audio_url": "https://wanzioss.oss-cn-beijing.aliyuncs.com/tts_audio/audio_1782652607124.mp3",
+      "asset_url": "https://wanzioss.oss-cn-beijing.aliyuncs.com/video_images/scene_review_bg_0.png",
+      "scene": "开场总览页"
+    },
+    {
+      "index": 1,
+      "start": 8448000,
+      "end": 13512000,
+      "duration": 5064000,
+      "caption": "I'm here for sightseeing.\n我是来旅游观光的",
+      "keywords": [
+        "sightseeing"
+      ],
+      "caption_highlight": {
+        "enabled": true,
+        "mode": "keyword_badge",
+        "highlight_color": "#2563EB",
+        "keywords": [
+          "sightseeing"
+        ]
+      },
+      "animation": {
+        "image": "slow_zoom_in",
+        "caption": "fade_in",
+        "keyword": "pop"
+      },
+      "audio_url": "https://wanzioss.oss-cn-beijing.aliyuncs.com/tts_audio/audio_1782652608886.mp3",
+      "asset_url": "https://wanzioss.oss-cn-beijing.aliyuncs.com/video_images/scene_scene_1.png",
+      "scene": "第1句场景句"
+    },
+    {
+      "index": 2,
+      "start": 13512000,
+      "end": 18600000,
+      "duration": 5088000,
+      "caption": "I'm here on a business trip.\n我是来这里出差的",
+      "keywords": [
+        "business trip"
+      ],
+      "caption_highlight": {
+        "enabled": true,
+        "mode": "keyword_badge",
+        "highlight_color": "#2563EB",
+        "keywords": [
+          "business trip"
+        ]
+      },
+      "animation": {
+        "image": "slow_zoom_in",
+        "caption": "fade_in",
+        "keyword": "pop"
+      },
+      "audio_url": "https://wanzioss.oss-cn-beijing.aliyuncs.com/tts_audio/audio_1782652610444.mp3",
+      "asset_url": "https://wanzioss.oss-cn-beijing.aliyuncs.com/video_images/scene_scene_2.png",
+      "scene": "第2句场景句"
+    },
+    {
+      "index": 3,
+      "start": 18600000,
+      "end": 23424000,
+      "duration": 4824000,
+      "caption": "I'm here to visit my family.\n我是来探亲的",
+      "keywords": [
+        "visit family"
+      ],
+      "caption_highlight": {
+        "enabled": true,
+        "mode": "keyword_badge",
+        "highlight_color": "#2563EB",
+        "keywords": [
+          "visit family"
+        ]
+      },
+      "animation": {
+        "image": "slow_zoom_in",
+        "caption": "fade_in",
+        "keyword": "pop"
+      },
+      "audio_url": "https://wanzioss.oss-cn-beijing.aliyuncs.com/tts_audio/audio_1782652611845.mp3",
+      "asset_url": "https://wanzioss.oss-cn-beijing.aliyuncs.com/video_images/scene_scene_3.png",
+      "scene": "第3句场景句"
+    },
+    {
+      "index": 4,
+      "start": 23424000,
+      "end": 28680000,
+      "duration": 5256000,
+      "caption": "I'm here as an international student.\n我是来留学的",
+      "keywords": [
+        "international student"
+      ],
+      "caption_highlight": {
+        "enabled": true,
+        "mode": "keyword_badge",
+        "highlight_color": "#2563EB",
+        "keywords": [
+          "international student"
+        ]
+      },
+      "animation": {
+        "image": "slow_zoom_in",
+        "caption": "fade_in",
+        "keyword": "pop"
+      },
+      "audio_url": "https://wanzioss.oss-cn-beijing.aliyuncs.com/tts_audio/audio_1782652613325.mp3",
+      "asset_url": "https://wanzioss.oss-cn-beijing.aliyuncs.com/video_images/scene_scene_4.png",
+      "scene": "第4句场景句"
+    },
+    {
+      "index": 5,
+      "start": 28680000,
+      "end": 34512000,
+      "duration": 5832000,
+      "caption": "I'll be staying for 7 days.\n我会在这里停留7天",
+      "keywords": [
+        "staying"
+      ],
+      "caption_highlight": {
+        "enabled": true,
+        "mode": "keyword_badge",
+        "highlight_color": "#2563EB",
+        "keywords": [
+          "staying"
+        ]
+      },
+      "animation": {
+        "image": "slow_zoom_in",
+        "caption": "fade_in",
+        "keyword": "pop"
+      },
+      "audio_url": "https://wanzioss.oss-cn-beijing.aliyuncs.com/tts_audio/audio_1782652614929.mp3",
+      "asset_url": "https://wanzioss.oss-cn-beijing.aliyuncs.com/video_images/scene_scene_5.png",
+      "scene": "第5句场景句"
+    },
+    {
+      "index": 6,
+      "start": 34512000,
+      "end": 36936000,
+      "duration": 2424000,
+      "caption": "你最近一次出国是去做什么呀？",
+      "keywords": [],
+      "caption_highlight": {
+        "enabled": true,
+        "mode": "keyword_badge",
+        "highlight_color": "#2563EB",
+        "keywords": []
+      },
+      "animation": {
+        "image": "slow_zoom_in",
+        "caption": "fade_in",
+        "keyword": "pop"
+      },
+      "audio_url": "https://wanzioss.oss-cn-beijing.aliyuncs.com/tts_audio/audio_1782652616166.mp3",
+      "asset_url": "https://wanzioss.oss-cn-beijing.aliyuncs.com/video_images/scene_hook_img_6.png",
+      "scene": "互动页"
+    }
+  ],
+  "steps_status": [
+    {
+      "step": "create_draft",
+      "url": "http://123.57.144.37:30000/openapi/capcut-mate/v1/create_draft",
+      "request": {
+        "width": 1080,
+        "height": 1920
+      },
+      "response": {
+        "code": 0,
+        "message": "成功",
+        "draft_url": "http://123.57.144.37:30000/openapi/capcut-mate/v1/get_draft?draft_id=20260628211756ad5feff9",
+        "tip_url": "https://docs.jcaigc.cn/"
+      }
+    },
+    {
+      "step": "add_images",
+      "url": "http://123.57.144.37:30000/openapi/capcut-mate/v1/add_images",
+      "request": {
+        "draft_url": "http://123.57.144.37:30000/openapi/capcut-mate/v1/get_draft?draft_id=20260628211756ad5feff9",
+        "image_infos": "[{\"image_url\": \"https://wanzioss.oss-cn-beijing.aliyuncs.com/video_images/scene_review_bg_0.png\", \"width\": 1080, \"height\": 1920, \"start\": 0, \"end\": 8448000}, {\"image_url\": \"https://wanzioss.oss-cn-beijing.aliyuncs.com/video_images/scene_scene_1.png\", \"width\": 1080, \"height\": 1920, \"start\": 8448000, \"end\": 13512000}, {\"image_url\": \"https://wanzioss.oss-cn-beijing.aliyuncs.com/video_images/scene_scene_2.png\", \"width\": 1080, \"height\": 1920, \"start\": 13512000, \"end\": 18600000}, {\"image_url\": \"https://wanzioss.oss-cn-beijing.aliyuncs.com/video_images/scene_scene_3.png\", \"width\": 1080, \"height\": 1920, \"start\": 18600000, \"end\": 23424000}, {\"image_url\": \"https://wanzioss.oss-cn-beijing.aliyuncs.com/video_images/scene_scene_4.png\", \"width\": 1080, \"height\": 1920, \"start\": 23424000, \"end\": 28680000}, {\"image_url\": \"https://wanzioss.oss-cn-beijing.aliyuncs.com/video_images/scene_scene_5.png\", \"width\": 1080, \"height\": 1920, \"start\": 28680000, \"end\": 34512000}, {\"image_url\": \"https://wanzioss.oss-cn-beijing.aliyuncs.com/video_images/scene_hook_img_6.png\", \"width\": 1080, \"height\": 1920, \"start\": 34512000, \"end\": 36936000}]",
+        "scale_x": 1.0,
+        "scale_y": 1.0,
+        "transform_x": 0,
+        "transform_y": 0
+      },
+      "response": {
+        "code": 0,
+        "message": "成功",
+        "draft_url": "http://123.57.144.37:30000/openapi/capcut-mate/v1/get_draft?draft_id=20260628211756ad5feff9",
+        "track_id": "33f4edbe17834d3c9892c956cb13869f",
+        "image_ids": [
+          "a03cd3e3d50347a2a0f7416146a5a533",
+          "7779c607335a43038592e45c4cd00f9d",
+          "10e871d70ee349598467a65d094136cd",
+          "25f79c2d7b234e3a943f58e3ebb9da97",
+          "4f5f732d5f01445095ae7f572b2ee0fc",
+          "622f38c9944c4452ab0ef0d0e68dd256",
+          "21c6103309374b34a9cf30cea434f63d"
+        ],
+        "segment_ids": [
+          "63fcf9345d784f408c87336f5d5cf755",
+          "5cd9e67b158944499e3149904584e828",
+          "ef7f9eed16aa4ff8be61af015ff52e4f",
+          "15521c5adaf34aa9aa6d911c7fdd6dbf",
+          "c5cf4caef397490685b8629103ee1daf",
+          "a56def0fd8f547ebabec5e2c5bcb69a2",
+          "02e770d47fb8449ca0c003627aeebd92"
+        ],
+        "segment_infos": [
+          {
+            "id": "63fcf9345d784f408c87336f5d5cf755",
+            "start": 0,
+            "end": 8448000
+          },
+          {
+            "id": "5cd9e67b158944499e3149904584e828",
+            "start": 8448000,
+            "end": 13512000
+          },
+          {
+            "id": "ef7f9eed16aa4ff8be61af015ff52e4f",
+            "start": 13512000,
+            "end": 18600000
+          },
+          {
+            "id": "15521c5adaf34aa9aa6d911c7fdd6dbf",
+            "start": 18600000,
+            "end": 23424000
+          },
+          {
+            "id": "c5cf4caef397490685b8629103ee1daf",
+            "start": 23424000,
+            "end": 28680000
+          },
+          {
+            "id": "a56def0fd8f547ebabec5e2c5bcb69a2",
+            "start": 28680000,
+            "end": 34512000
+          },
+          {
+            "id": "02e770d47fb8449ca0c003627aeebd92",
+            "start": 34512000,
+            "end": 36936000
+          }
+        ]
+      }
+    },
+    {
+      "step": "add_captions",
+      "url": "http://123.57.144.37:30000/openapi/capcut-mate/v1/add_captions",
+      "request": {
+        "draft_url": "http://123.57.144.37:30000/openapi/capcut-mate/v1/get_draft?draft_id=20260628211756ad5feff9",
+        "captions": "[{\"start\": 0, \"end\": 8448000, \"text\": \"入境被问目的再也不慌\\n收藏这 5 句，覆盖旅游、出差、探亲、留学等常见入境目的应答\\n1. I'm here for sightseeing.\\n2. I'm here on a business trip.\\n3. I'm here to visit my family.\\n4. I'm here as an international student.\\n5. I'll be staying for 7 days.\", \"font_size\": 10}, {\"start\": 8448000, \"end\": 13512000, \"text\": \"I'm here for sightseeing.\\n我是来旅游观光的\", \"font_size\": 10}, {\"start\": 13512000, \"end\": 18600000, \"text\": \"I'm here on a business trip.\\n我是来这里出差的\", \"font_size\": 10}, {\"start\": 18600000, \"end\": 23424000, \"text\": \"I'm here to visit my family.\\n我是来探亲的\", \"font_size\": 10}, {\"start\": 23424000, \"end\": 28680000, \"text\": \"I'm here as an international student.\\n我是来留学的\", \"font_size\": 10}, {\"start\": 28680000, \"end\": 34512000, \"text\": \"I'll be staying for 7 days.\\n我会在这里停留7天\", \"font_size\": 10}, {\"start\": 34512000, \"end\": 36936000, \"text\": \"你最近一次出国是去做什么呀？\", \"font_size\": 10}]",
+        "text_color": "#111111",
+        "border_color": "#FFFFFF",
+        "border_width": 2,
+        "alignment": 1,
+        "font_size": 10,
+        "alpha": 1.0,
+        "bold": true,
+        "italic": true,
+        "line_spacing": 2,
+        "has_shadow": true,
+        "shadow_info": {
+          "shadow_color": "#000000",
+          "shadow_alpha": 0.3,
+          "shadow_diffuse": 4,
+          "shadow_distance": 2,
+          "shadow_angle": -45
+        },
+        "transform_x": 0,
+        "transform_y": 630
+      },
+      "response": {
+        "code": 0,
+        "message": "成功",
+        "draft_url": "http://123.57.144.37:30000/openapi/capcut-mate/v1/get_draft?draft_id=20260628211756ad5feff9",
+        "track_id": "f8077e4398e646dd9d6ea6601b60e74d",
+        "text_ids": [
+          "ded723e709844ac8a8d1d0587f7336c8",
+          "0111773af2774a2182bc3afb97a48ae5",
+          "a0b0e085de264acca9bedb351f832e01",
+          "102dddd1db6440cbb67706e6487ce720",
+          "c0fbb7d3459246189e02ffc2d5d9e919",
+          "8bc56d3ccb504602a4d4e4f45449c5cf",
+          "19ce9a253d9c44ce8024b7a5b038aa3d"
+        ],
+        "segment_ids": [
+          "6612b3318f3b4482a7d087b5657d1690",
+          "e709cc27829f437990c3aef561065d6c",
+          "2da26185ac1040d5b9925b4974a43844",
+          "3a64a0f4a8ac4674b511e6d08de6212c",
+          "829fad27f72649ef92b4a7ece0c14fd8",
+          "a1bad4ef79304d898240213209a1ed44",
+          "82612541ba7c44068d3e6c36160acde3"
+        ],
+        "segment_infos": [
+          {
+            "id": "6612b3318f3b4482a7d087b5657d1690",
+            "start": 0,
+            "end": 8448000
+          },
+          {
+            "id": "e709cc27829f437990c3aef561065d6c",
+            "start": 8448000,
+            "end": 13512000
+          },
+          {
+            "id": "2da26185ac1040d5b9925b4974a43844",
+            "start": 13512000,
+            "end": 18600000
+          },
+          {
+            "id": "3a64a0f4a8ac4674b511e6d08de6212c",
+            "start": 18600000,
+            "end": 23424000
+          },
+          {
+            "id": "829fad27f72649ef92b4a7ece0c14fd8",
+            "start": 23424000,
+            "end": 28680000
+          },
+          {
+            "id": "a1bad4ef79304d898240213209a1ed44",
+            "start": 28680000,
+            "end": 34512000
+          },
+          {
+            "id": "82612541ba7c44068d3e6c36160acde3",
+            "start": 34512000,
+            "end": 36936000
+          }
+        ]
+      }
+    },
+    {
+      "step": "add_audios",
+      "url": "http://123.57.144.37:30000/openapi/capcut-mate/v1/add_audios",
+      "request": {
+        "draft_url": "http://123.57.144.37:30000/openapi/capcut-mate/v1/get_draft?draft_id=20260628211756ad5feff9",
+        "audio_infos": "[{\"audio_url\": \"https://wanzioss.oss-cn-beijing.aliyuncs.com/tts_audio/audio_1782652607124.mp3\", \"start\": 0, \"end\": 8448000, \"duration\": 8448000, \"volume\": 1.0}, {\"audio_url\": \"https://wanzioss.oss-cn-beijing.aliyuncs.com/tts_audio/audio_1782652608886.mp3\", \"start\": 8448000, \"end\": 13512000, \"duration\": 5064000, \"volume\": 1.0}, {\"audio_url\": \"https://wanzioss.oss-cn-beijing.aliyuncs.com/tts_audio/audio_1782652610444.mp3\", \"start\": 13512000, \"end\": 18600000, \"duration\": 5088000, \"volume\": 1.0}, {\"audio_url\": \"https://wanzioss.oss-cn-beijing.aliyuncs.com/tts_audio/audio_1782652611845.mp3\", \"start\": 18600000, \"end\": 23424000, \"duration\": 4824000, \"volume\": 1.0}, {\"audio_url\": \"https://wanzioss.oss-cn-beijing.aliyuncs.com/tts_audio/audio_1782652613325.mp3\", \"start\": 23424000, \"end\": 28680000, \"duration\": 5256000, \"volume\": 1.0}, {\"audio_url\": \"https://wanzioss.oss-cn-beijing.aliyuncs.com/tts_audio/audio_1782652614929.mp3\", \"start\": 28680000, \"end\": 34512000, \"duration\": 5832000, \"volume\": 1.0}, {\"audio_url\": \"https://wanzioss.oss-cn-beijing.aliyuncs.com/tts_audio/audio_1782652616166.mp3\", \"start\": 34512000, \"end\": 36936000, \"duration\": 2424000, \"volume\": 1.0}]"
+      },
+      "response": {
+        "code": 0,
+        "message": "成功",
+        "draft_url": "http://123.57.144.37:30000/openapi/capcut-mate/v1/get_draft?draft_id=20260628211756ad5feff9",
+        "track_id": "5ba5c1f9a74b4404b48816e11d6bc991",
+        "audio_ids": [
+          "ffcd977ff9784ecc85ff35ee2e49c482",
+          "c526f9cbf80e450390eeec15125bb6d7",
+          "5238eb6139b44c95b1f80f0b28510f06",
+          "dc6c144cbfbe4339b8b1dfda498610ac",
+          "c7c66512793644799d0c57596f78f68c",
+          "a8b8ee3ecb77430793ee2bdeb303f5a1",
+          "72832d7fde0e4f5684eef515ea5c76af"
+        ]
+      }
+    },
+    {
+      "step": "save_draft",
+      "url": "http://123.57.144.37:30000/openapi/capcut-mate/v1/save_draft",
+      "request": {
+        "draft_url": "http://123.57.144.37:30000/openapi/capcut-mate/v1/get_draft?draft_id=20260628211756ad5feff9"
+      },
+      "response": {
+        "code": 0,
+        "message": "成功",
+        "draft_url": "http://123.57.144.37:30000/openapi/capcut-mate/v1/get_draft?draft_id=20260628211756ad5feff9"
+      }
+    }
+  ],
+  "message": "剪映草稿已生成，请用 CapCut Mate 桌面端导入剪映。"
+}
