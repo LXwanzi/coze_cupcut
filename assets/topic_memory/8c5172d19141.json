@@ -1,0 +1,39 @@
+{
+  "topic_id": "8c5172d19141",
+  "season_name": "场景式：办公室英语\n早上到工位\nMorn",
+  "episodes": [
+    {
+      "episode_num": 1,
+      "sentences": [
+        "Morning, how's your day looking?",
+        "I have a few things to finish.",
+        "Let me check my calendar first.",
+        "I have a meeting at ten.",
+        "I'll start with the urgent tasks."
+      ],
+      "scene": "早到工位别只会说hi",
+      "hook": "早到工位别只会说hi",
+      "preview": "下集教你办公室找同事对接工作的实用表达",
+      "pain_point": "",
+      "wrong_expression": "",
+      "answer_levels": [],
+      "created_at": "2026-06-28T14:20:38.713815"
+    }
+  ],
+  "all_sentences": [
+    "Morning, how's your day looking?",
+    "I have a few things to finish.",
+    "Let me check my calendar first.",
+    "I have a meeting at ten.",
+    "I'll start with the urgent tasks."
+  ],
+  "scenes_used": [
+    "早到工位别只会说hi"
+  ],
+  "pain_points_used": [],
+  "wrong_expressions_used": [],
+  "last_hook": "",
+  "next_preview": "下集教你办公室找同事对接工作的实用表达",
+  "created_at": "2026-06-28T14:20:13.339462",
+  "updated_at": "2026-06-28T14:20:38.715309"
+}

@@ -1,0 +1,818 @@
+{
+  "success": true,
+  "draft_url": "http://123.57.144.37:30000/openapi/capcut-mate/v1/get_draft?draft_id=2026062814222013cf02f4",
+  "content_meta": {
+    "selected_topic": "早到工位别只会说hi",
+    "scene": "office",
+    "sub_scene": "早到工位办公室英语",
+    "duration_seconds": 34.0,
+    "target_duration_seconds": 38,
+    "sentence_count": 5,
+    "format": "scene_collection",
+    "content_mode": "scene_collection",
+    "pain_point": "",
+    "wrong_expression": "",
+    "quality_review": {
+      "is_reasonable": true,
+      "content_mode": "scene_collection",
+      "topic": "早到工位办公室英语",
+      "suggested_sentence_count": 5,
+      "target_duration_seconds": 38,
+      "issues": [],
+      "suggestions": []
+    },
+    "voice_profile": {
+      "voice": "default",
+      "speed": 1.1,
+      "style": "bright_companion"
+    },
+    "originality_check": "所有内容基于用户提供的原始素材生成",
+    "safety_note": "未涉及教材原文复述",
+    "topic_id": "200337e1b80a"
+  },
+  "publish_pack": {
+    "title": "【办公室英语】早到工位和同事搭话的5句高频口语",
+    "cover_text": "早到工位办公室英语",
+    "description": "每天进步一点点。早到工位办公室英语真实场景 5 句英语，先收藏，关键时候能直接用。#英语学习 #实用英语 #旅游英语",
+    "hashtags": [
+      "英语学习",
+      "实用英语",
+      "旅游英语"
+    ]
+  },
+  "review_card": {
+    "today_expressions": [
+      {
+        "english": "Morning, how's your day looking?",
+        "chinese": "早，你今天安排多吗？",
+        "usage": ""
+      },
+      {
+        "english": "I have a few things to finish.",
+        "chinese": "我有几件事要完成。",
+        "usage": ""
+      },
+      {
+        "english": "Let me check my calendar first.",
+        "chinese": "我先看一下日历。",
+        "usage": ""
+      },
+      {
+        "english": "I have a meeting at ten.",
+        "chinese": "我十点有个会。",
+        "usage": ""
+      },
+      {
+        "english": "I'll start with the urgent tasks.",
+        "chinese": "我先处理紧急任务。",
+        "usage": ""
+      }
+    ],
+    "answer_levels": [],
+    "quick_review": "先收藏，下一集继续同一场景。"
+  },
+  "material_bank": [],
+  "segments": [
+    {
+      "scene": "钩子页",
+      "caption": "早到工位别只会说hi",
+      "tts": "早到工位别只会说hi",
+      "image_prompt": "FIXED_HOOK_IMAGE",
+      "duration": 2.0,
+      "keywords": [
+        "hi"
+      ],
+      "caption_highlight": {
+        "enabled": true,
+        "mode": "keyword_badge",
+        "highlight_color": "#2563EB",
+        "keywords": [
+          "hi"
+        ]
+      },
+      "animation": {
+        "image": "slow_zoom_in",
+        "caption": "fade_in",
+        "keyword": "pop"
+      },
+      "audio_url": "https://wanzioss.oss-cn-beijing.aliyuncs.com/tts_audio/audio_1782627640297.mp3",
+      "audio_duration": 2256000,
+      "audio_duration_seconds": 2.256,
+      "start": 0,
+      "end": 2256000,
+      "asset_url": "https://wanzioss.oss-cn-beijing.aliyuncs.com/video_images/scene_hook_img_0.png",
+      "image_url": "https://wanzioss.oss-cn-beijing.aliyuncs.com/video_images/scene_hook_img_0.png"
+    },
+    {
+      "scene": "场景代入",
+      "caption": "这5句覆盖早到工位和同事聊当日安排的全场景实用表达",
+      "tts": "这5句覆盖早到工位和同事聊当日安排的全场景实用表达",
+      "image_prompt": "早到工位办公室英语, 早上刚到公司工位，和邻座同事打招呼闲聊当日工作安排, moment: real scene setup, Xiao Wanzi helping a young office worker speak English, minimal props, clear real-life setting",
+      "duration": 3.0,
+      "keywords": [],
+      "caption_highlight": {
+        "enabled": true,
+        "mode": "keyword_badge",
+        "highlight_color": "#2563EB",
+        "keywords": []
+      },
+      "animation": {
+        "image": "slow_zoom_in",
+        "caption": "fade_in",
+        "keyword": "pop"
+      },
+      "audio_url": "https://wanzioss.oss-cn-beijing.aliyuncs.com/tts_audio/audio_1782627642157.mp3",
+      "audio_duration": 6288000,
+      "audio_duration_seconds": 6.288,
+      "start": 2256000,
+      "end": 8544000,
+      "asset_url": "https://wanzioss.oss-cn-beijing.aliyuncs.com/video_images/scene_scene_1.png",
+      "image_url": "https://wanzioss.oss-cn-beijing.aliyuncs.com/video_images/scene_scene_1.png"
+    },
+    {
+      "scene": "第1句场景句",
+      "caption": "Morning, how's your day looking?\n早，你今天安排多吗？",
+      "tts": "第 1 句，打招呼问同事日程：Morning, how's your day looking?。早，你今天安排多吗？",
+      "image_prompt": "早到工位办公室英语, 早上刚到公司工位，和邻座同事打招呼闲聊当日工作安排, moment: 打招呼问同事日程, Xiao Wanzi helping a young office worker speak English, minimal props, clear real-life setting",
+      "keywords": [
+        "day"
+      ],
+      "duration": 4.8,
+      "caption_highlight": {
+        "enabled": true,
+        "mode": "keyword_badge",
+        "highlight_color": "#2563EB",
+        "keywords": [
+          "day"
+        ]
+      },
+      "animation": {
+        "image": "slow_zoom_in",
+        "caption": "fade_in",
+        "keyword": "pop"
+      },
+      "audio_url": "https://wanzioss.oss-cn-beijing.aliyuncs.com/tts_audio/audio_1782627644064.mp3",
+      "audio_duration": 7080000,
+      "audio_duration_seconds": 7.08,
+      "start": 8544000,
+      "end": 15624000,
+      "asset_url": "https://wanzioss.oss-cn-beijing.aliyuncs.com/video_images/scene_scene_2.png",
+      "image_url": "https://wanzioss.oss-cn-beijing.aliyuncs.com/video_images/scene_scene_2.png"
+    },
+    {
+      "scene": "第2句场景句",
+      "caption": "I have a few things to finish.\n我有几件事要完成。",
+      "tts": "第 2 句，回应待办工作量：I have a few things to finish.。我有几件事要完成。",
+      "image_prompt": "早到工位办公室英语, 早上刚到公司工位，和邻座同事打招呼闲聊当日工作安排, moment: 回应待办工作量, Xiao Wanzi helping a young office worker speak English, minimal props, clear real-life setting",
+      "keywords": [
+        "finish"
+      ],
+      "duration": 4.8,
+      "caption_highlight": {
+        "enabled": true,
+        "mode": "keyword_badge",
+        "highlight_color": "#2563EB",
+        "keywords": [
+          "finish"
+        ]
+      },
+      "animation": {
+        "image": "slow_zoom_in",
+        "caption": "fade_in",
+        "keyword": "pop"
+      },
+      "audio_url": "https://wanzioss.oss-cn-beijing.aliyuncs.com/tts_audio/audio_1782627645885.mp3",
+      "audio_duration": 6672000,
+      "audio_duration_seconds": 6.672,
+      "start": 15624000,
+      "end": 22296000,
+      "asset_url": "https://wanzioss.oss-cn-beijing.aliyuncs.com/video_images/scene_scene_3.png",
+      "image_url": "https://wanzioss.oss-cn-beijing.aliyuncs.com/video_images/scene_scene_3.png"
+    },
+    {
+      "scene": "第3句场景句",
+      "caption": "Let me check my calendar first.\n我先看一下日历。",
+      "tts": "第 3 句，说明要先查日程：Let me check my calendar first.。我先看一下日历。",
+      "image_prompt": "早到工位办公室英语, 早上刚到公司工位，和邻座同事打招呼闲聊当日工作安排, moment: 说明要先查日程, Xiao Wanzi helping a young office worker speak English, minimal props, clear real-life setting",
+      "keywords": [
+        "calendar"
+      ],
+      "duration": 4.8,
+      "caption_highlight": {
+        "enabled": true,
+        "mode": "keyword_badge",
+        "highlight_color": "#2563EB",
+        "keywords": [
+          "calendar"
+        ]
+      },
+      "animation": {
+        "image": "slow_zoom_in",
+        "caption": "fade_in",
+        "keyword": "pop"
+      },
+      "audio_url": "https://wanzioss.oss-cn-beijing.aliyuncs.com/tts_audio/audio_1782627647563.mp3",
+      "audio_duration": 7056000,
+      "audio_duration_seconds": 7.056,
+      "start": 22296000,
+      "end": 29352000,
+      "asset_url": "https://wanzioss.oss-cn-beijing.aliyuncs.com/video_images/scene_scene_4.png",
+      "image_url": "https://wanzioss.oss-cn-beijing.aliyuncs.com/video_images/scene_scene_4.png"
+    },
+    {
+      "scene": "第4句场景句",
+      "caption": "I have a meeting at ten.\n我十点有个会。",
+      "tts": "第 4 句，告知具体会议安排：I have a meeting at ten.。我十点有个会。",
+      "image_prompt": "早到工位办公室英语, 早上刚到公司工位，和邻座同事打招呼闲聊当日工作安排, moment: 告知具体会议安排, Xiao Wanzi helping a young office worker speak English, minimal props, clear real-life setting",
+      "keywords": [
+        "meeting"
+      ],
+      "duration": 4.8,
+      "caption_highlight": {
+        "enabled": true,
+        "mode": "keyword_badge",
+        "highlight_color": "#2563EB",
+        "keywords": [
+          "meeting"
+        ]
+      },
+      "animation": {
+        "image": "slow_zoom_in",
+        "caption": "fade_in",
+        "keyword": "pop"
+      },
+      "audio_url": "https://wanzioss.oss-cn-beijing.aliyuncs.com/tts_audio/audio_1782627649192.mp3",
+      "audio_duration": 7056000,
+      "audio_duration_seconds": 7.056,
+      "start": 29352000,
+      "end": 36408000,
+      "asset_url": "https://wanzioss.oss-cn-beijing.aliyuncs.com/video_images/scene_scene_5.png",
+      "image_url": "https://wanzioss.oss-cn-beijing.aliyuncs.com/video_images/scene_scene_5.png"
+    },
+    {
+      "scene": "第5句场景句",
+      "caption": "I'll start with the urgent tasks.\n我先处理紧急任务。",
+      "tts": "第 5 句，说明工作优先级：I'll start with the urgent tasks.。我先处理紧急任务。",
+      "image_prompt": "早到工位办公室英语, 早上刚到公司工位，和邻座同事打招呼闲聊当日工作安排, moment: 说明工作优先级, Xiao Wanzi helping a young office worker speak English, minimal props, clear real-life setting",
+      "keywords": [
+        "urgent"
+      ],
+      "duration": 4.8,
+      "caption_highlight": {
+        "enabled": true,
+        "mode": "keyword_badge",
+        "highlight_color": "#2563EB",
+        "keywords": [
+          "urgent"
+        ]
+      },
+      "animation": {
+        "image": "slow_zoom_in",
+        "caption": "fade_in",
+        "keyword": "pop"
+      },
+      "audio_url": "https://wanzioss.oss-cn-beijing.aliyuncs.com/tts_audio/audio_1782627650897.mp3",
+      "audio_duration": 7632000,
+      "audio_duration_seconds": 7.632,
+      "start": 36408000,
+      "end": 44040000,
+      "asset_url": "https://wanzioss.oss-cn-beijing.aliyuncs.com/video_images/scene_scene_6.png",
+      "image_url": "https://wanzioss.oss-cn-beijing.aliyuncs.com/video_images/scene_scene_6.png"
+    },
+    {
+      "scene": "快速汇总页",
+      "caption": "1. Morning, how's your day looking?\n2. I have a few things to finish.\n3. Let me check my calendar first.\n4. I have a meeting at ten.\n5. I'll start with the urgent tasks.",
+      "tts": "这5句早到工位常用英语先收藏，上班开口就能用",
+      "image_prompt": "FIXED_REVIEW_WITH_CHAR",
+      "duration": 3.0,
+      "keywords": [
+        "Morning",
+        "how's"
+      ],
+      "caption_highlight": {
+        "enabled": true,
+        "mode": "keyword_badge",
+        "highlight_color": "#2563EB",
+        "keywords": [
+          "Morning",
+          "how's"
+        ]
+      },
+      "animation": {
+        "image": "slow_zoom_in",
+        "caption": "fade_in",
+        "keyword": "pop"
+      },
+      "audio_url": "https://wanzioss.oss-cn-beijing.aliyuncs.com/tts_audio/audio_1782627652539.mp3",
+      "audio_duration": 5472000,
+      "audio_duration_seconds": 5.472,
+      "start": 44040000,
+      "end": 49512000,
+      "asset_url": "https://wanzioss.oss-cn-beijing.aliyuncs.com/video_images/scene_review_bg_7.png",
+      "image_url": "https://wanzioss.oss-cn-beijing.aliyuncs.com/video_images/scene_review_bg_7.png"
+    },
+    {
+      "scene": "互动页",
+      "caption": "你今早到工位做的第一件事是什么？",
+      "tts": "你今早到工位做的第一件事是什么？",
+      "image_prompt": "FIXED_HOOK_IMAGE",
+      "duration": 2.0,
+      "keywords": [],
+      "caption_highlight": {
+        "enabled": true,
+        "mode": "keyword_badge",
+        "highlight_color": "#2563EB",
+        "keywords": []
+      },
+      "animation": {
+        "image": "slow_zoom_in",
+        "caption": "fade_in",
+        "keyword": "pop"
+      },
+      "audio_url": "https://wanzioss.oss-cn-beijing.aliyuncs.com/tts_audio/audio_1782627653884.mp3",
+      "audio_duration": 3072000,
+      "audio_duration_seconds": 3.072,
+      "start": 49512000,
+      "end": 52584000,
+      "asset_url": "https://wanzioss.oss-cn-beijing.aliyuncs.com/video_images/scene_hook_img_8.png",
+      "image_url": "https://wanzioss.oss-cn-beijing.aliyuncs.com/video_images/scene_hook_img_8.png"
+    }
+  ],
+  "duration": 52584000,
+  "duration_seconds": 52.58,
+  "scene_count": 9,
+  "caption_count": 9,
+  "timeline_segments": [
+    {
+      "index": 0,
+      "start": 0,
+      "end": 2256000,
+      "duration": 2256000,
+      "caption": "早到工位别只会说hi",
+      "keywords": [
+        "hi"
+      ],
+      "caption_highlight": {
+        "enabled": true,
+        "mode": "keyword_badge",
+        "highlight_color": "#2563EB",
+        "keywords": [
+          "hi"
+        ]
+      },
+      "animation": {
+        "image": "slow_zoom_in",
+        "caption": "fade_in",
+        "keyword": "pop"
+      },
+      "audio_url": "https://wanzioss.oss-cn-beijing.aliyuncs.com/tts_audio/audio_1782627640297.mp3",
+      "asset_url": "https://wanzioss.oss-cn-beijing.aliyuncs.com/video_images/scene_hook_img_0.png",
+      "scene": "钩子页"
+    },
+    {
+      "index": 1,
+      "start": 2256000,
+      "end": 8544000,
+      "duration": 6288000,
+      "caption": "这5句覆盖早到工位和同事聊当日安排的全场景实用表达",
+      "keywords": [],
+      "caption_highlight": {
+        "enabled": true,
+        "mode": "keyword_badge",
+        "highlight_color": "#2563EB",
+        "keywords": []
+      },
+      "animation": {
+        "image": "slow_zoom_in",
+        "caption": "fade_in",
+        "keyword": "pop"
+      },
+      "audio_url": "https://wanzioss.oss-cn-beijing.aliyuncs.com/tts_audio/audio_1782627642157.mp3",
+      "asset_url": "https://wanzioss.oss-cn-beijing.aliyuncs.com/video_images/scene_scene_1.png",
+      "scene": "场景代入"
+    },
+    {
+      "index": 2,
+      "start": 8544000,
+      "end": 15624000,
+      "duration": 7080000,
+      "caption": "Morning, how's your day looking?\n早，你今天安排多吗？",
+      "keywords": [
+        "day"
+      ],
+      "caption_highlight": {
+        "enabled": true,
+        "mode": "keyword_badge",
+        "highlight_color": "#2563EB",
+        "keywords": [
+          "day"
+        ]
+      },
+      "animation": {
+        "image": "slow_zoom_in",
+        "caption": "fade_in",
+        "keyword": "pop"
+      },
+      "audio_url": "https://wanzioss.oss-cn-beijing.aliyuncs.com/tts_audio/audio_1782627644064.mp3",
+      "asset_url": "https://wanzioss.oss-cn-beijing.aliyuncs.com/video_images/scene_scene_2.png",
+      "scene": "第1句场景句"
+    },
+    {
+      "index": 3,
+      "start": 15624000,
+      "end": 22296000,
+      "duration": 6672000,
+      "caption": "I have a few things to finish.\n我有几件事要完成。",
+      "keywords": [
+        "finish"
+      ],
+      "caption_highlight": {
+        "enabled": true,
+        "mode": "keyword_badge",
+        "highlight_color": "#2563EB",
+        "keywords": [
+          "finish"
+        ]
+      },
+      "animation": {
+        "image": "slow_zoom_in",
+        "caption": "fade_in",
+        "keyword": "pop"
+      },
+      "audio_url": "https://wanzioss.oss-cn-beijing.aliyuncs.com/tts_audio/audio_1782627645885.mp3",
+      "asset_url": "https://wanzioss.oss-cn-beijing.aliyuncs.com/video_images/scene_scene_3.png",
+      "scene": "第2句场景句"
+    },
+    {
+      "index": 4,
+      "start": 22296000,
+      "end": 29352000,
+      "duration": 7056000,
+      "caption": "Let me check my calendar first.\n我先看一下日历。",
+      "keywords": [
+        "calendar"
+      ],
+      "caption_highlight": {
+        "enabled": true,
+        "mode": "keyword_badge",
+        "highlight_color": "#2563EB",
+        "keywords": [
+          "calendar"
+        ]
+      },
+      "animation": {
+        "image": "slow_zoom_in",
+        "caption": "fade_in",
+        "keyword": "pop"
+      },
+      "audio_url": "https://wanzioss.oss-cn-beijing.aliyuncs.com/tts_audio/audio_1782627647563.mp3",
+      "asset_url": "https://wanzioss.oss-cn-beijing.aliyuncs.com/video_images/scene_scene_4.png",
+      "scene": "第3句场景句"
+    },
+    {
+      "index": 5,
+      "start": 29352000,
+      "end": 36408000,
+      "duration": 7056000,
+      "caption": "I have a meeting at ten.\n我十点有个会。",
+      "keywords": [
+        "meeting"
+      ],
+      "caption_highlight": {
+        "enabled": true,
+        "mode": "keyword_badge",
+        "highlight_color": "#2563EB",
+        "keywords": [
+          "meeting"
+        ]
+      },
+      "animation": {
+        "image": "slow_zoom_in",
+        "caption": "fade_in",
+        "keyword": "pop"
+      },
+      "audio_url": "https://wanzioss.oss-cn-beijing.aliyuncs.com/tts_audio/audio_1782627649192.mp3",
+      "asset_url": "https://wanzioss.oss-cn-beijing.aliyuncs.com/video_images/scene_scene_5.png",
+      "scene": "第4句场景句"
+    },
+    {
+      "index": 6,
+      "start": 36408000,
+      "end": 44040000,
+      "duration": 7632000,
+      "caption": "I'll start with the urgent tasks.\n我先处理紧急任务。",
+      "keywords": [
+        "urgent"
+      ],
+      "caption_highlight": {
+        "enabled": true,
+        "mode": "keyword_badge",
+        "highlight_color": "#2563EB",
+        "keywords": [
+          "urgent"
+        ]
+      },
+      "animation": {
+        "image": "slow_zoom_in",
+        "caption": "fade_in",
+        "keyword": "pop"
+      },
+      "audio_url": "https://wanzioss.oss-cn-beijing.aliyuncs.com/tts_audio/audio_1782627650897.mp3",
+      "asset_url": "https://wanzioss.oss-cn-beijing.aliyuncs.com/video_images/scene_scene_6.png",
+      "scene": "第5句场景句"
+    },
+    {
+      "index": 7,
+      "start": 44040000,
+      "end": 49512000,
+      "duration": 5472000,
+      "caption": "1. Morning, how's your day looking?\n2. I have a few things to finish.\n3. Let me check my calendar first.\n4. I have a meeting at ten.\n5. I'll start with the urgent tasks.",
+      "keywords": [
+        "Morning",
+        "how's"
+      ],
+      "caption_highlight": {
+        "enabled": true,
+        "mode": "keyword_badge",
+        "highlight_color": "#2563EB",
+        "keywords": [
+          "Morning",
+          "how's"
+        ]
+      },
+      "animation": {
+        "image": "slow_zoom_in",
+        "caption": "fade_in",
+        "keyword": "pop"
+      },
+      "audio_url": "https://wanzioss.oss-cn-beijing.aliyuncs.com/tts_audio/audio_1782627652539.mp3",
+      "asset_url": "https://wanzioss.oss-cn-beijing.aliyuncs.com/video_images/scene_review_bg_7.png",
+      "scene": "快速汇总页"
+    },
+    {
+      "index": 8,
+      "start": 49512000,
+      "end": 52584000,
+      "duration": 3072000,
+      "caption": "你今早到工位做的第一件事是什么？",
+      "keywords": [],
+      "caption_highlight": {
+        "enabled": true,
+        "mode": "keyword_badge",
+        "highlight_color": "#2563EB",
+        "keywords": []
+      },
+      "animation": {
+        "image": "slow_zoom_in",
+        "caption": "fade_in",
+        "keyword": "pop"
+      },
+      "audio_url": "https://wanzioss.oss-cn-beijing.aliyuncs.com/tts_audio/audio_1782627653884.mp3",
+      "asset_url": "https://wanzioss.oss-cn-beijing.aliyuncs.com/video_images/scene_hook_img_8.png",
+      "scene": "互动页"
+    }
+  ],
+  "steps_status": [
+    {
+      "step": "create_draft",
+      "url": "http://123.57.144.37:30000/openapi/capcut-mate/v1/create_draft",
+      "request": {
+        "width": 1080,
+        "height": 1920
+      },
+      "response": {
+        "code": 0,
+        "message": "成功",
+        "draft_url": "http://123.57.144.37:30000/openapi/capcut-mate/v1/get_draft?draft_id=2026062814222013cf02f4",
+        "tip_url": "https://docs.jcaigc.cn/"
+      }
+    },
+    {
+      "step": "add_images",
+      "url": "http://123.57.144.37:30000/openapi/capcut-mate/v1/add_images",
+      "request": {
+        "draft_url": "http://123.57.144.37:30000/openapi/capcut-mate/v1/get_draft?draft_id=2026062814222013cf02f4",
+        "image_infos": "[{\"image_url\": \"https://wanzioss.oss-cn-beijing.aliyuncs.com/video_images/scene_hook_img_0.png\", \"width\": 1080, \"height\": 1920, \"start\": 0, \"end\": 2256000}, {\"image_url\": \"https://wanzioss.oss-cn-beijing.aliyuncs.com/video_images/scene_scene_1.png\", \"width\": 1080, \"height\": 1920, \"start\": 2256000, \"end\": 8544000}, {\"image_url\": \"https://wanzioss.oss-cn-beijing.aliyuncs.com/video_images/scene_scene_2.png\", \"width\": 1080, \"height\": 1920, \"start\": 8544000, \"end\": 15624000}, {\"image_url\": \"https://wanzioss.oss-cn-beijing.aliyuncs.com/video_images/scene_scene_3.png\", \"width\": 1080, \"height\": 1920, \"start\": 15624000, \"end\": 22296000}, {\"image_url\": \"https://wanzioss.oss-cn-beijing.aliyuncs.com/video_images/scene_scene_4.png\", \"width\": 1080, \"height\": 1920, \"start\": 22296000, \"end\": 29352000}, {\"image_url\": \"https://wanzioss.oss-cn-beijing.aliyuncs.com/video_images/scene_scene_5.png\", \"width\": 1080, \"height\": 1920, \"start\": 29352000, \"end\": 36408000}, {\"image_url\": \"https://wanzioss.oss-cn-beijing.aliyuncs.com/video_images/scene_scene_6.png\", \"width\": 1080, \"height\": 1920, \"start\": 36408000, \"end\": 44040000}, {\"image_url\": \"https://wanzioss.oss-cn-beijing.aliyuncs.com/video_images/scene_review_bg_7.png\", \"width\": 1080, \"height\": 1920, \"start\": 44040000, \"end\": 49512000}, {\"image_url\": \"https://wanzioss.oss-cn-beijing.aliyuncs.com/video_images/scene_hook_img_8.png\", \"width\": 1080, \"height\": 1920, \"start\": 49512000, \"end\": 52584000}]",
+        "scale_x": 1.0,
+        "scale_y": 1.0,
+        "transform_x": 0,
+        "transform_y": 0
+      },
+      "response": {
+        "code": 0,
+        "message": "成功",
+        "draft_url": "http://123.57.144.37:30000/openapi/capcut-mate/v1/get_draft?draft_id=2026062814222013cf02f4",
+        "track_id": "943e913d726247599c8f8a22f7cf3732",
+        "image_ids": [
+          "583be471220f4a2a8e09e684fe11023e",
+          "2f97cf76d2e0436b87825fbc2a4bef6e",
+          "978777d1b356430ea11292a2f77cf9d9",
+          "88bd3c0a3ec94c7c8c55d62020a50364",
+          "9827e11c02df4d9e9faeb713635f0b67",
+          "95798289d5be432997a1cb23798c544e",
+          "0d9ed1af3cd84102a7e01467a18b3667",
+          "c0385789d63948cdadd6de2b6589f41f",
+          "3e21c0adef3745449998565400b20fe3"
+        ],
+        "segment_ids": [
+          "78391654221e4e0ebf91bdf849f8c00f",
+          "2a14f1e0db914d6e9a80776a11528331",
+          "59a09d54c51b49568e9a20aa0a566ed2",
+          "2b502933e24f433e82c53934f02f949d",
+          "b6b2f766e7b94042a54d823c46364a2c",
+          "af337cf9bd27471ba5ab6c82786c8937",
+          "42667828d37e4ed3aa5a3772c3ada641",
+          "98d962791171429aadcf6841ddb98d67",
+          "817ef00d96274b3c923ba0ac169a7d10"
+        ],
+        "segment_infos": [
+          {
+            "id": "78391654221e4e0ebf91bdf849f8c00f",
+            "start": 0,
+            "end": 2256000
+          },
+          {
+            "id": "2a14f1e0db914d6e9a80776a11528331",
+            "start": 2256000,
+            "end": 8544000
+          },
+          {
+            "id": "59a09d54c51b49568e9a20aa0a566ed2",
+            "start": 8544000,
+            "end": 15624000
+          },
+          {
+            "id": "2b502933e24f433e82c53934f02f949d",
+            "start": 15624000,
+            "end": 22296000
+          },
+          {
+            "id": "b6b2f766e7b94042a54d823c46364a2c",
+            "start": 22296000,
+            "end": 29352000
+          },
+          {
+            "id": "af337cf9bd27471ba5ab6c82786c8937",
+            "start": 29352000,
+            "end": 36408000
+          },
+          {
+            "id": "42667828d37e4ed3aa5a3772c3ada641",
+            "start": 36408000,
+            "end": 44040000
+          },
+          {
+            "id": "98d962791171429aadcf6841ddb98d67",
+            "start": 44040000,
+            "end": 49512000
+          },
+          {
+            "id": "817ef00d96274b3c923ba0ac169a7d10",
+            "start": 49512000,
+            "end": 52584000
+          }
+        ]
+      }
+    },
+    {
+      "step": "add_captions",
+      "url": "http://123.57.144.37:30000/openapi/capcut-mate/v1/add_captions",
+      "request": {
+        "draft_url": "http://123.57.144.37:30000/openapi/capcut-mate/v1/get_draft?draft_id=2026062814222013cf02f4",
+        "captions": "[{\"start\": 0, \"end\": 2256000, \"text\": \"早到工位别只会说hi\", \"font_size\": 10}, {\"start\": 2256000, \"end\": 8544000, \"text\": \"这5句覆盖早到工位和同事聊当日安排的全场景实用表达\", \"font_size\": 10}, {\"start\": 8544000, \"end\": 15624000, \"text\": \"Morning, how's your day looking?\\n早，你今天安排多吗？\", \"font_size\": 10}, {\"start\": 15624000, \"end\": 22296000, \"text\": \"I have a few things to finish.\\n我有几件事要完成。\", \"font_size\": 10}, {\"start\": 22296000, \"end\": 29352000, \"text\": \"Let me check my calendar first.\\n我先看一下日历。\", \"font_size\": 10}, {\"start\": 29352000, \"end\": 36408000, \"text\": \"I have a meeting at ten.\\n我十点有个会。\", \"font_size\": 10}, {\"start\": 36408000, \"end\": 44040000, \"text\": \"I'll start with the urgent tasks.\\n我先处理紧急任务。\", \"font_size\": 10}, {\"start\": 44040000, \"end\": 49512000, \"text\": \"1. Morning, how's your day looking?\\n2. I have a few things to finish.\\n3. Let me check my calendar first.\\n4. I have a meeting at ten.\\n5. I'll start with the urgent tasks.\", \"font_size\": 10}, {\"start\": 49512000, \"end\": 52584000, \"text\": \"你今早到工位做的第一件事是什么？\", \"font_size\": 10}]",
+        "text_color": "#111111",
+        "border_color": "#FFFFFF",
+        "border_width": 2,
+        "alignment": 1,
+        "font_size": 10,
+        "alpha": 1.0,
+        "bold": true,
+        "italic": true,
+        "line_spacing": 2,
+        "has_shadow": true,
+        "shadow_info": {
+          "shadow_color": "#000000",
+          "shadow_alpha": 0.3,
+          "shadow_diffuse": 4,
+          "shadow_distance": 2,
+          "shadow_angle": -45
+        },
+        "transform_x": 0,
+        "transform_y": 630
+      },
+      "response": {
+        "code": 0,
+        "message": "成功",
+        "draft_url": "http://123.57.144.37:30000/openapi/capcut-mate/v1/get_draft?draft_id=2026062814222013cf02f4",
+        "track_id": "2e74293e81e24090991696b46c68f4b8",
+        "text_ids": [
+          "e3b581bcdd5345ffb8c5742c8d485532",
+          "ff63e4519610414bb9016b0f0879e58b",
+          "554613659c674652b38dabc875a97c12",
+          "f926c40fb45c446d93186bc117b28a9b",
+          "441bbdbfb9a14b009c3a45251390d6c8",
+          "3ef85a04ec1b426a90006c00f5e8c992",
+          "f74570cbe0d6466598c8c06cbb9c1965",
+          "aff8b6c433cc440189a1fa97d8d31b01",
+          "f89480670d6b472caebeea2f1adbbd6e"
+        ],
+        "segment_ids": [
+          "572cd5dbedd54dc3b985572fa2e9ca22",
+          "637988ebd95240469f54f56ce2a96988",
+          "55ebea6478714ac0a68fdb3fcf56d729",
+          "ea66f4ed76a14005a19787b6c5193383",
+          "cee5cb6238fc43eeb2953afc860bd2fe",
+          "e585164276c446949a3c85228b5bc8b5",
+          "40146d248ed84d23ac82bdea76ef46f3",
+          "3adb9bc424b241aea36d16e248c683b2",
+          "db5efeb1241d451f83dd43f0b04793de"
+        ],
+        "segment_infos": [
+          {
+            "id": "572cd5dbedd54dc3b985572fa2e9ca22",
+            "start": 0,
+            "end": 2256000
+          },
+          {
+            "id": "637988ebd95240469f54f56ce2a96988",
+            "start": 2256000,
+            "end": 8544000
+          },
+          {
+            "id": "55ebea6478714ac0a68fdb3fcf56d729",
+            "start": 8544000,
+            "end": 15624000
+          },
+          {
+            "id": "ea66f4ed76a14005a19787b6c5193383",
+            "start": 15624000,
+            "end": 22296000
+          },
+          {
+            "id": "cee5cb6238fc43eeb2953afc860bd2fe",
+            "start": 22296000,
+            "end": 29352000
+          },
+          {
+            "id": "e585164276c446949a3c85228b5bc8b5",
+            "start": 29352000,
+            "end": 36408000
+          },
+          {
+            "id": "40146d248ed84d23ac82bdea76ef46f3",
+            "start": 36408000,
+            "end": 44040000
+          },
+          {
+            "id": "3adb9bc424b241aea36d16e248c683b2",
+            "start": 44040000,
+            "end": 49512000
+          },
+          {
+            "id": "db5efeb1241d451f83dd43f0b04793de",
+            "start": 49512000,
+            "end": 52584000
+          }
+        ]
+      }
+    },
+    {
+      "step": "add_audios",
+      "url": "http://123.57.144.37:30000/openapi/capcut-mate/v1/add_audios",
+      "request": {
+        "draft_url": "http://123.57.144.37:30000/openapi/capcut-mate/v1/get_draft?draft_id=2026062814222013cf02f4",
+        "audio_infos": "[{\"audio_url\": \"https://wanzioss.oss-cn-beijing.aliyuncs.com/tts_audio/audio_1782627640297.mp3\", \"start\": 0, \"end\": 2256000, \"duration\": 2256000, \"volume\": 1.0}, {\"audio_url\": \"https://wanzioss.oss-cn-beijing.aliyuncs.com/tts_audio/audio_1782627642157.mp3\", \"start\": 2256000, \"end\": 8544000, \"duration\": 6288000, \"volume\": 1.0}, {\"audio_url\": \"https://wanzioss.oss-cn-beijing.aliyuncs.com/tts_audio/audio_1782627644064.mp3\", \"start\": 8544000, \"end\": 15624000, \"duration\": 7080000, \"volume\": 1.0}, {\"audio_url\": \"https://wanzioss.oss-cn-beijing.aliyuncs.com/tts_audio/audio_1782627645885.mp3\", \"start\": 15624000, \"end\": 22296000, \"duration\": 6672000, \"volume\": 1.0}, {\"audio_url\": \"https://wanzioss.oss-cn-beijing.aliyuncs.com/tts_audio/audio_1782627647563.mp3\", \"start\": 22296000, \"end\": 29352000, \"duration\": 7056000, \"volume\": 1.0}, {\"audio_url\": \"https://wanzioss.oss-cn-beijing.aliyuncs.com/tts_audio/audio_1782627649192.mp3\", \"start\": 29352000, \"end\": 36408000, \"duration\": 7056000, \"volume\": 1.0}, {\"audio_url\": \"https://wanzioss.oss-cn-beijing.aliyuncs.com/tts_audio/audio_1782627650897.mp3\", \"start\": 36408000, \"end\": 44040000, \"duration\": 7632000, \"volume\": 1.0}, {\"audio_url\": \"https://wanzioss.oss-cn-beijing.aliyuncs.com/tts_audio/audio_1782627652539.mp3\", \"start\": 44040000, \"end\": 49512000, \"duration\": 5472000, \"volume\": 1.0}, {\"audio_url\": \"https://wanzioss.oss-cn-beijing.aliyuncs.com/tts_audio/audio_1782627653884.mp3\", \"start\": 49512000, \"end\": 52584000, \"duration\": 3072000, \"volume\": 1.0}]"
+      },
+      "response": {
+        "code": 0,
+        "message": "成功",
+        "draft_url": "http://123.57.144.37:30000/openapi/capcut-mate/v1/get_draft?draft_id=2026062814222013cf02f4",
+        "track_id": "223ad68a1d6c456cae4a20ce43afe7e2",
+        "audio_ids": [
+          "374b5e40bc3a4b52bb1fdf8e8437400b",
+          "518803c778b54f56b506cbc8663a4294",
+          "1551806d2f3f4bad8f4e37e0cbb371bf",
+          "a3e3cb90260449088c725c48cceb4b02",
+          "864282f8bac84c3daef6778cc18cee92",
+          "94e1d149159e4fc0b07e388437349a96",
+          "11e138fdeb874b4f818b31c309af016e",
+          "b2e7ad969b614f37932d6323f7ec0b32",
+          "c53b8c5190274a069ba2ee26b601031b"
+        ]
+      }
+    },
+    {
+      "step": "save_draft",
+      "url": "http://123.57.144.37:30000/openapi/capcut-mate/v1/save_draft",
+      "request": {
+        "draft_url": "http://123.57.144.37:30000/openapi/capcut-mate/v1/get_draft?draft_id=2026062814222013cf02f4"
+      },
+      "response": {
+        "code": 0,
+        "message": "成功",
+        "draft_url": "http://123.57.144.37:30000/openapi/capcut-mate/v1/get_draft?draft_id=2026062814222013cf02f4"
+      }
+    }
+  ],
+  "message": "剪映草稿已生成，请用 CapCut Mate 桌面端导入剪映。"
+}

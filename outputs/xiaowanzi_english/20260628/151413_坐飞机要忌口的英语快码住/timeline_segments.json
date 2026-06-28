@@ -1,0 +1,230 @@
+[
+  {
+    "index": 0,
+    "start": 0,
+    "end": 3072000,
+    "duration": 3072000,
+    "caption": "坐飞机要忌口的英语快码住",
+    "keywords": [],
+    "caption_highlight": {
+      "enabled": true,
+      "mode": "keyword_badge",
+      "highlight_color": "#2563EB",
+      "keywords": []
+    },
+    "animation": {
+      "image": "slow_zoom_in",
+      "caption": "fade_in",
+      "keyword": "pop"
+    },
+    "audio_url": "https://wanzioss.oss-cn-beijing.aliyuncs.com/tts_audio/audio_1782630745787.mp3",
+    "asset_url": "https://wanzioss.oss-cn-beijing.aliyuncs.com/video_images/scene_hook_img_0.png",
+    "scene": "钩子页"
+  },
+  {
+    "index": 1,
+    "start": 3072000,
+    "end": 8712000,
+    "duration": 5640000,
+    "caption": "这5句覆盖报过敏、要素食、换餐等全忌口场景",
+    "keywords": [],
+    "caption_highlight": {
+      "enabled": true,
+      "mode": "keyword_badge",
+      "highlight_color": "#2563EB",
+      "keywords": []
+    },
+    "animation": {
+      "image": "slow_zoom_in",
+      "caption": "fade_in",
+      "keyword": "pop"
+    },
+    "audio_url": "https://wanzioss.oss-cn-beijing.aliyuncs.com/tts_audio/audio_1782630747644.mp3",
+    "asset_url": "https://wanzioss.oss-cn-beijing.aliyuncs.com/video_images/scene_scene_1.png",
+    "scene": "场景代入"
+  },
+  {
+    "index": 2,
+    "start": 8712000,
+    "end": 18552000,
+    "duration": 9840000,
+    "caption": "I'm allergic to nuts, no nut meals please.\n我对坚果过敏，请不要给我含坚果的餐",
+    "keywords": [
+      "allergic",
+      "nuts"
+    ],
+    "caption_highlight": {
+      "enabled": true,
+      "mode": "keyword_badge",
+      "highlight_color": "#2563EB",
+      "keywords": [
+        "allergic",
+        "nuts"
+      ]
+    },
+    "animation": {
+      "image": "slow_zoom_in",
+      "caption": "fade_in",
+      "keyword": "pop"
+    },
+    "audio_url": "https://wanzioss.oss-cn-beijing.aliyuncs.com/tts_audio/audio_1782630749736.mp3",
+    "asset_url": "https://wanzioss.oss-cn-beijing.aliyuncs.com/video_images/scene_scene_2.png",
+    "scene": "第1句场景句"
+  },
+  {
+    "index": 3,
+    "start": 18552000,
+    "end": 26808000,
+    "duration": 8256000,
+    "caption": "Can I have a vegetarian meal please?\n请问我可以要一份素食餐吗？",
+    "keywords": [
+      "vegetarian"
+    ],
+    "caption_highlight": {
+      "enabled": true,
+      "mode": "keyword_badge",
+      "highlight_color": "#2563EB",
+      "keywords": [
+        "vegetarian"
+      ]
+    },
+    "animation": {
+      "image": "slow_zoom_in",
+      "caption": "fade_in",
+      "keyword": "pop"
+    },
+    "audio_url": "https://wanzioss.oss-cn-beijing.aliyuncs.com/tts_audio/audio_1782630751913.mp3",
+    "asset_url": "https://wanzioss.oss-cn-beijing.aliyuncs.com/video_images/scene_scene_3.png",
+    "scene": "第2句场景句"
+  },
+  {
+    "index": 4,
+    "start": 26808000,
+    "end": 36432000,
+    "duration": 9624000,
+    "caption": "I don't eat beef, can I get another option?\n我不吃牛肉，能给我换另一种餐吗？",
+    "keywords": [
+      "beef",
+      "option"
+    ],
+    "caption_highlight": {
+      "enabled": true,
+      "mode": "keyword_badge",
+      "highlight_color": "#2563EB",
+      "keywords": [
+        "beef",
+        "option"
+      ]
+    },
+    "animation": {
+      "image": "slow_zoom_in",
+      "caption": "fade_in",
+      "keyword": "pop"
+    },
+    "audio_url": "https://wanzioss.oss-cn-beijing.aliyuncs.com/tts_audio/audio_1782630753926.mp3",
+    "asset_url": "https://wanzioss.oss-cn-beijing.aliyuncs.com/video_images/scene_scene_4.png",
+    "scene": "第3句场景句"
+  },
+  {
+    "index": 5,
+    "start": 36432000,
+    "end": 45288000,
+    "duration": 8856000,
+    "caption": "Do you have lactose-free meals available?\n你们有没有不含乳糖的餐食呀？",
+    "keywords": [
+      "lactose-free"
+    ],
+    "caption_highlight": {
+      "enabled": true,
+      "mode": "keyword_badge",
+      "highlight_color": "#2563EB",
+      "keywords": [
+        "lactose-free"
+      ]
+    },
+    "animation": {
+      "image": "slow_zoom_in",
+      "caption": "fade_in",
+      "keyword": "pop"
+    },
+    "audio_url": "https://wanzioss.oss-cn-beijing.aliyuncs.com/tts_audio/audio_1782630755698.mp3",
+    "asset_url": "https://wanzioss.oss-cn-beijing.aliyuncs.com/video_images/scene_scene_5.png",
+    "scene": "第4句场景句"
+  },
+  {
+    "index": 6,
+    "start": 45288000,
+    "end": 55200000,
+    "duration": 9912000,
+    "caption": "Please don't add any sauce to my meal.\n请不要给我的餐食加任何酱料",
+    "keywords": [
+      "sauce"
+    ],
+    "caption_highlight": {
+      "enabled": true,
+      "mode": "keyword_badge",
+      "highlight_color": "#2563EB",
+      "keywords": [
+        "sauce"
+      ]
+    },
+    "animation": {
+      "image": "slow_zoom_in",
+      "caption": "fade_in",
+      "keyword": "pop"
+    },
+    "audio_url": "https://wanzioss.oss-cn-beijing.aliyuncs.com/tts_audio/audio_1782630757826.mp3",
+    "asset_url": "https://wanzioss.oss-cn-beijing.aliyuncs.com/video_images/scene_scene_6.png",
+    "scene": "第5句场景句"
+  },
+  {
+    "index": 7,
+    "start": 55200000,
+    "end": 61488000,
+    "duration": 6288000,
+    "caption": "1. I'm allergic to nuts, no nut meals please.\n2. Can I have a vegetarian meal please?\n3. I don't eat beef, can I get another option?\n4. Do you have lactose-free meals available?\n5. Please don't add any sauce to my meal.",
+    "keywords": [
+      "I'm",
+      "allergic"
+    ],
+    "caption_highlight": {
+      "enabled": true,
+      "mode": "keyword_badge",
+      "highlight_color": "#2563EB",
+      "keywords": [
+        "I'm",
+        "allergic"
+      ]
+    },
+    "animation": {
+      "image": "slow_zoom_in",
+      "caption": "fade_in",
+      "keyword": "pop"
+    },
+    "audio_url": "https://wanzioss.oss-cn-beijing.aliyuncs.com/tts_audio/audio_1782630759491.mp3",
+    "asset_url": "https://wanzioss.oss-cn-beijing.aliyuncs.com/video_images/scene_review_bg_7.png",
+    "scene": "快速汇总页"
+  },
+  {
+    "index": 8,
+    "start": 61488000,
+    "end": 64944000,
+    "duration": 3456000,
+    "caption": "你坐飞机有过什么特殊的饮食忌口需求吗？",
+    "keywords": [],
+    "caption_highlight": {
+      "enabled": true,
+      "mode": "keyword_badge",
+      "highlight_color": "#2563EB",
+      "keywords": []
+    },
+    "animation": {
+      "image": "slow_zoom_in",
+      "caption": "fade_in",
+      "keyword": "pop"
+    },
+    "audio_url": "https://wanzioss.oss-cn-beijing.aliyuncs.com/tts_audio/audio_1782630760833.mp3",
+    "asset_url": "https://wanzioss.oss-cn-beijing.aliyuncs.com/video_images/scene_hook_img_8.png",
+    "scene": "互动页"
+  }
+]

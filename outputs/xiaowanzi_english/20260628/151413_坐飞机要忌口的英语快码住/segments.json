@@ -1,0 +1,266 @@
+[
+  {
+    "scene": "钩子页",
+    "caption": "坐飞机要忌口的英语快码住",
+    "tts": "坐飞机要忌口的英语快码住",
+    "image_prompt": "FIXED_HOOK_IMAGE",
+    "duration": 2.0,
+    "keywords": [],
+    "caption_highlight": {
+      "enabled": true,
+      "mode": "keyword_badge",
+      "highlight_color": "#2563EB",
+      "keywords": []
+    },
+    "animation": {
+      "image": "slow_zoom_in",
+      "caption": "fade_in",
+      "keyword": "pop"
+    },
+    "audio_url": "https://wanzioss.oss-cn-beijing.aliyuncs.com/tts_audio/audio_1782630745787.mp3",
+    "audio_duration": 3072000,
+    "audio_duration_seconds": 3.072,
+    "start": 0,
+    "end": 3072000,
+    "asset_url": "https://wanzioss.oss-cn-beijing.aliyuncs.com/video_images/scene_hook_img_0.png",
+    "image_url": "https://wanzioss.oss-cn-beijing.aliyuncs.com/video_images/scene_hook_img_0.png"
+  },
+  {
+    "scene": "场景代入",
+    "caption": "这5句覆盖报过敏、要素食、换餐等全忌口场景",
+    "tts": "这5句覆盖报过敏、要素食、换餐等全忌口场景",
+    "image_prompt": "飞机餐忌口英语, 国际航班上空乘派发餐食时你需要告知饮食禁忌的场景, moment: real scene setup, Xiao Wanzi helping a young office worker speak English, minimal props, clear real-life setting",
+    "duration": 3.0,
+    "keywords": [],
+    "caption_highlight": {
+      "enabled": true,
+      "mode": "keyword_badge",
+      "highlight_color": "#2563EB",
+      "keywords": []
+    },
+    "animation": {
+      "image": "slow_zoom_in",
+      "caption": "fade_in",
+      "keyword": "pop"
+    },
+    "audio_url": "https://wanzioss.oss-cn-beijing.aliyuncs.com/tts_audio/audio_1782630747644.mp3",
+    "audio_duration": 5640000,
+    "audio_duration_seconds": 5.64,
+    "start": 3072000,
+    "end": 8712000,
+    "asset_url": "https://wanzioss.oss-cn-beijing.aliyuncs.com/video_images/scene_scene_1.png",
+    "image_url": "https://wanzioss.oss-cn-beijing.aliyuncs.com/video_images/scene_scene_1.png"
+  },
+  {
+    "scene": "第1句场景句",
+    "caption": "I'm allergic to nuts, no nut meals please.\n我对坚果过敏，请不要给我含坚果的餐",
+    "tts": "第 1 句，说明食物过敏：I'm allergic to nuts, no nut meals please.。我对坚果过敏，请不要给我含坚果的餐",
+    "image_prompt": "飞机餐忌口英语, 国际航班上空乘派发餐食时你需要告知饮食禁忌的场景, moment: 说明食物过敏, Xiao Wanzi helping a young office worker speak English, minimal props, clear real-life setting",
+    "keywords": [
+      "allergic",
+      "nuts"
+    ],
+    "duration": 4.8,
+    "caption_highlight": {
+      "enabled": true,
+      "mode": "keyword_badge",
+      "highlight_color": "#2563EB",
+      "keywords": [
+        "allergic",
+        "nuts"
+      ]
+    },
+    "animation": {
+      "image": "slow_zoom_in",
+      "caption": "fade_in",
+      "keyword": "pop"
+    },
+    "audio_url": "https://wanzioss.oss-cn-beijing.aliyuncs.com/tts_audio/audio_1782630749736.mp3",
+    "audio_duration": 9840000,
+    "audio_duration_seconds": 9.84,
+    "start": 8712000,
+    "end": 18552000,
+    "asset_url": "https://wanzioss.oss-cn-beijing.aliyuncs.com/video_images/scene_scene_2.png",
+    "image_url": "https://wanzioss.oss-cn-beijing.aliyuncs.com/video_images/scene_scene_2.png"
+  },
+  {
+    "scene": "第2句场景句",
+    "caption": "Can I have a vegetarian meal please?\n请问我可以要一份素食餐吗？",
+    "tts": "第 2 句，申请素食餐：Can I have a vegetarian meal please?。请问我可以要一份素食餐吗？",
+    "image_prompt": "飞机餐忌口英语, 国际航班上空乘派发餐食时你需要告知饮食禁忌的场景, moment: 申请素食餐, Xiao Wanzi helping a young office worker speak English, minimal props, clear real-life setting",
+    "keywords": [
+      "vegetarian"
+    ],
+    "duration": 4.8,
+    "caption_highlight": {
+      "enabled": true,
+      "mode": "keyword_badge",
+      "highlight_color": "#2563EB",
+      "keywords": [
+        "vegetarian"
+      ]
+    },
+    "animation": {
+      "image": "slow_zoom_in",
+      "caption": "fade_in",
+      "keyword": "pop"
+    },
+    "audio_url": "https://wanzioss.oss-cn-beijing.aliyuncs.com/tts_audio/audio_1782630751913.mp3",
+    "audio_duration": 8256000,
+    "audio_duration_seconds": 8.256,
+    "start": 18552000,
+    "end": 26808000,
+    "asset_url": "https://wanzioss.oss-cn-beijing.aliyuncs.com/video_images/scene_scene_3.png",
+    "image_url": "https://wanzioss.oss-cn-beijing.aliyuncs.com/video_images/scene_scene_3.png"
+  },
+  {
+    "scene": "第3句场景句",
+    "caption": "I don't eat beef, can I get another option?\n我不吃牛肉，能给我换另一种餐吗？",
+    "tts": "第 3 句，忌口食材换餐：I don't eat beef, can I get another option?。我不吃牛肉，能给我换另一种餐吗？",
+    "image_prompt": "飞机餐忌口英语, 国际航班上空乘派发餐食时你需要告知饮食禁忌的场景, moment: 忌口食材换餐, Xiao Wanzi helping a young office worker speak English, minimal props, clear real-life setting",
+    "keywords": [
+      "beef",
+      "option"
+    ],
+    "duration": 4.8,
+    "caption_highlight": {
+      "enabled": true,
+      "mode": "keyword_badge",
+      "highlight_color": "#2563EB",
+      "keywords": [
+        "beef",
+        "option"
+      ]
+    },
+    "animation": {
+      "image": "slow_zoom_in",
+      "caption": "fade_in",
+      "keyword": "pop"
+    },
+    "audio_url": "https://wanzioss.oss-cn-beijing.aliyuncs.com/tts_audio/audio_1782630753926.mp3",
+    "audio_duration": 9624000,
+    "audio_duration_seconds": 9.624,
+    "start": 26808000,
+    "end": 36432000,
+    "asset_url": "https://wanzioss.oss-cn-beijing.aliyuncs.com/video_images/scene_scene_4.png",
+    "image_url": "https://wanzioss.oss-cn-beijing.aliyuncs.com/video_images/scene_scene_4.png"
+  },
+  {
+    "scene": "第4句场景句",
+    "caption": "Do you have lactose-free meals available?\n你们有没有不含乳糖的餐食呀？",
+    "tts": "第 4 句，询问特殊餐食：Do you have lactose-free meals available?。你们有没有不含乳糖的餐食呀？",
+    "image_prompt": "飞机餐忌口英语, 国际航班上空乘派发餐食时你需要告知饮食禁忌的场景, moment: 询问特殊餐食, Xiao Wanzi helping a young office worker speak English, minimal props, clear real-life setting",
+    "keywords": [
+      "lactose-free"
+    ],
+    "duration": 4.8,
+    "caption_highlight": {
+      "enabled": true,
+      "mode": "keyword_badge",
+      "highlight_color": "#2563EB",
+      "keywords": [
+        "lactose-free"
+      ]
+    },
+    "animation": {
+      "image": "slow_zoom_in",
+      "caption": "fade_in",
+      "keyword": "pop"
+    },
+    "audio_url": "https://wanzioss.oss-cn-beijing.aliyuncs.com/tts_audio/audio_1782630755698.mp3",
+    "audio_duration": 8856000,
+    "audio_duration_seconds": 8.856,
+    "start": 36432000,
+    "end": 45288000,
+    "asset_url": "https://wanzioss.oss-cn-beijing.aliyuncs.com/video_images/scene_scene_5.png",
+    "image_url": "https://wanzioss.oss-cn-beijing.aliyuncs.com/video_images/scene_scene_5.png"
+  },
+  {
+    "scene": "第5句场景句",
+    "caption": "Please don't add any sauce to my meal.\n请不要给我的餐食加任何酱料",
+    "tts": "第 5 句，要求餐食调整：Please don't add any sauce to my meal.。请不要给我的餐食加任何酱料",
+    "image_prompt": "飞机餐忌口英语, 国际航班上空乘派发餐食时你需要告知饮食禁忌的场景, moment: 要求餐食调整, Xiao Wanzi helping a young office worker speak English, minimal props, clear real-life setting",
+    "keywords": [
+      "sauce"
+    ],
+    "duration": 4.8,
+    "caption_highlight": {
+      "enabled": true,
+      "mode": "keyword_badge",
+      "highlight_color": "#2563EB",
+      "keywords": [
+        "sauce"
+      ]
+    },
+    "animation": {
+      "image": "slow_zoom_in",
+      "caption": "fade_in",
+      "keyword": "pop"
+    },
+    "audio_url": "https://wanzioss.oss-cn-beijing.aliyuncs.com/tts_audio/audio_1782630757826.mp3",
+    "audio_duration": 9912000,
+    "audio_duration_seconds": 9.912,
+    "start": 45288000,
+    "end": 55200000,
+    "asset_url": "https://wanzioss.oss-cn-beijing.aliyuncs.com/video_images/scene_scene_6.png",
+    "image_url": "https://wanzioss.oss-cn-beijing.aliyuncs.com/video_images/scene_scene_6.png"
+  },
+  {
+    "scene": "快速汇总页",
+    "caption": "1. I'm allergic to nuts, no nut meals please.\n2. Can I have a vegetarian meal please?\n3. I don't eat beef, can I get another option?\n4. Do you have lactose-free meals available?\n5. Please don't add any sauce to my meal.",
+    "tts": "这5句飞机餐忌口的实用表达快收藏，下次出国坐飞机肯定用得上~",
+    "image_prompt": "FIXED_REVIEW_WITH_CHAR",
+    "duration": 3.0,
+    "keywords": [
+      "I'm",
+      "allergic"
+    ],
+    "caption_highlight": {
+      "enabled": true,
+      "mode": "keyword_badge",
+      "highlight_color": "#2563EB",
+      "keywords": [
+        "I'm",
+        "allergic"
+      ]
+    },
+    "animation": {
+      "image": "slow_zoom_in",
+      "caption": "fade_in",
+      "keyword": "pop"
+    },
+    "audio_url": "https://wanzioss.oss-cn-beijing.aliyuncs.com/tts_audio/audio_1782630759491.mp3",
+    "audio_duration": 6288000,
+    "audio_duration_seconds": 6.288,
+    "start": 55200000,
+    "end": 61488000,
+    "asset_url": "https://wanzioss.oss-cn-beijing.aliyuncs.com/video_images/scene_review_bg_7.png",
+    "image_url": "https://wanzioss.oss-cn-beijing.aliyuncs.com/video_images/scene_review_bg_7.png"
+  },
+  {
+    "scene": "互动页",
+    "caption": "你坐飞机有过什么特殊的饮食忌口需求吗？",
+    "tts": "你坐飞机有过什么特殊的饮食忌口需求吗？",
+    "image_prompt": "FIXED_HOOK_IMAGE",
+    "duration": 2.0,
+    "keywords": [],
+    "caption_highlight": {
+      "enabled": true,
+      "mode": "keyword_badge",
+      "highlight_color": "#2563EB",
+      "keywords": []
+    },
+    "animation": {
+      "image": "slow_zoom_in",
+      "caption": "fade_in",
+      "keyword": "pop"
+    },
+    "audio_url": "https://wanzioss.oss-cn-beijing.aliyuncs.com/tts_audio/audio_1782630760833.mp3",
+    "audio_duration": 3456000,
+    "audio_duration_seconds": 3.456,
+    "start": 61488000,
+    "end": 64944000,
+    "asset_url": "https://wanzioss.oss-cn-beijing.aliyuncs.com/video_images/scene_hook_img_8.png",
+    "image_url": "https://wanzioss.oss-cn-beijing.aliyuncs.com/video_images/scene_hook_img_8.png"
+  }
+]

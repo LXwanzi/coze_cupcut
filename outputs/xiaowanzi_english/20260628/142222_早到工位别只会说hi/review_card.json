@@ -1,0 +1,31 @@
+{
+  "today_expressions": [
+    {
+      "english": "Morning, how's your day looking?",
+      "chinese": "早，你今天安排多吗？",
+      "usage": ""
+    },
+    {
+      "english": "I have a few things to finish.",
+      "chinese": "我有几件事要完成。",
+      "usage": ""
+    },
+    {
+      "english": "Let me check my calendar first.",
+      "chinese": "我先看一下日历。",
+      "usage": ""
+    },
+    {
+      "english": "I have a meeting at ten.",
+      "chinese": "我十点有个会。",
+      "usage": ""
+    },
+    {
+      "english": "I'll start with the urgent tasks.",
+      "chinese": "我先处理紧急任务。",
+      "usage": ""
+    }
+  ],
+  "answer_levels": [],
+  "quick_review": "先收藏，下一集继续同一场景。"
+}

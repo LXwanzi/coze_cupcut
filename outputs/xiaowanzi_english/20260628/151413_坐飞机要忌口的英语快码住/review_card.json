@@ -1,0 +1,31 @@
+{
+  "today_expressions": [
+    {
+      "english": "I'm allergic to nuts, no nut meals please.",
+      "chinese": "我对坚果过敏，请不要给我含坚果的餐",
+      "usage": ""
+    },
+    {
+      "english": "Can I have a vegetarian meal please?",
+      "chinese": "请问我可以要一份素食餐吗？",
+      "usage": ""
+    },
+    {
+      "english": "I don't eat beef, can I get another option?",
+      "chinese": "我不吃牛肉，能给我换另一种餐吗？",
+      "usage": ""
+    },
+    {
+      "english": "Do you have lactose-free meals available?",
+      "chinese": "你们有没有不含乳糖的餐食呀？",
+      "usage": ""
+    },
+    {
+      "english": "Please don't add any sauce to my meal.",
+      "chinese": "请不要给我的餐食加任何酱料",
+      "usage": ""
+    }
+  ],
+  "answer_levels": [],
+  "quick_review": "先收藏，下一集继续同一场景。"
+}

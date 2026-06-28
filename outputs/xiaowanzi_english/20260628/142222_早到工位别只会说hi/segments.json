@@ -1,0 +1,266 @@
+[
+  {
+    "scene": "钩子页",
+    "caption": "早到工位别只会说hi",
+    "tts": "早到工位别只会说hi",
+    "image_prompt": "FIXED_HOOK_IMAGE",
+    "duration": 2.0,
+    "keywords": [
+      "hi"
+    ],
+    "caption_highlight": {
+      "enabled": true,
+      "mode": "keyword_badge",
+      "highlight_color": "#2563EB",
+      "keywords": [
+        "hi"
+      ]
+    },
+    "animation": {
+      "image": "slow_zoom_in",
+      "caption": "fade_in",
+      "keyword": "pop"
+    },
+    "audio_url": "https://wanzioss.oss-cn-beijing.aliyuncs.com/tts_audio/audio_1782627640297.mp3",
+    "audio_duration": 2256000,
+    "audio_duration_seconds": 2.256,
+    "start": 0,
+    "end": 2256000,
+    "asset_url": "https://wanzioss.oss-cn-beijing.aliyuncs.com/video_images/scene_hook_img_0.png",
+    "image_url": "https://wanzioss.oss-cn-beijing.aliyuncs.com/video_images/scene_hook_img_0.png"
+  },
+  {
+    "scene": "场景代入",
+    "caption": "这5句覆盖早到工位和同事聊当日安排的全场景实用表达",
+    "tts": "这5句覆盖早到工位和同事聊当日安排的全场景实用表达",
+    "image_prompt": "早到工位办公室英语, 早上刚到公司工位，和邻座同事打招呼闲聊当日工作安排, moment: real scene setup, Xiao Wanzi helping a young office worker speak English, minimal props, clear real-life setting",
+    "duration": 3.0,
+    "keywords": [],
+    "caption_highlight": {
+      "enabled": true,
+      "mode": "keyword_badge",
+      "highlight_color": "#2563EB",
+      "keywords": []
+    },
+    "animation": {
+      "image": "slow_zoom_in",
+      "caption": "fade_in",
+      "keyword": "pop"
+    },
+    "audio_url": "https://wanzioss.oss-cn-beijing.aliyuncs.com/tts_audio/audio_1782627642157.mp3",
+    "audio_duration": 6288000,
+    "audio_duration_seconds": 6.288,
+    "start": 2256000,
+    "end": 8544000,
+    "asset_url": "https://wanzioss.oss-cn-beijing.aliyuncs.com/video_images/scene_scene_1.png",
+    "image_url": "https://wanzioss.oss-cn-beijing.aliyuncs.com/video_images/scene_scene_1.png"
+  },
+  {
+    "scene": "第1句场景句",
+    "caption": "Morning, how's your day looking?\n早，你今天安排多吗？",
+    "tts": "第 1 句，打招呼问同事日程：Morning, how's your day looking?。早，你今天安排多吗？",
+    "image_prompt": "早到工位办公室英语, 早上刚到公司工位，和邻座同事打招呼闲聊当日工作安排, moment: 打招呼问同事日程, Xiao Wanzi helping a young office worker speak English, minimal props, clear real-life setting",
+    "keywords": [
+      "day"
+    ],
+    "duration": 4.8,
+    "caption_highlight": {
+      "enabled": true,
+      "mode": "keyword_badge",
+      "highlight_color": "#2563EB",
+      "keywords": [
+        "day"
+      ]
+    },
+    "animation": {
+      "image": "slow_zoom_in",
+      "caption": "fade_in",
+      "keyword": "pop"
+    },
+    "audio_url": "https://wanzioss.oss-cn-beijing.aliyuncs.com/tts_audio/audio_1782627644064.mp3",
+    "audio_duration": 7080000,
+    "audio_duration_seconds": 7.08,
+    "start": 8544000,
+    "end": 15624000,
+    "asset_url": "https://wanzioss.oss-cn-beijing.aliyuncs.com/video_images/scene_scene_2.png",
+    "image_url": "https://wanzioss.oss-cn-beijing.aliyuncs.com/video_images/scene_scene_2.png"
+  },
+  {
+    "scene": "第2句场景句",
+    "caption": "I have a few things to finish.\n我有几件事要完成。",
+    "tts": "第 2 句，回应待办工作量：I have a few things to finish.。我有几件事要完成。",
+    "image_prompt": "早到工位办公室英语, 早上刚到公司工位，和邻座同事打招呼闲聊当日工作安排, moment: 回应待办工作量, Xiao Wanzi helping a young office worker speak English, minimal props, clear real-life setting",
+    "keywords": [
+      "finish"
+    ],
+    "duration": 4.8,
+    "caption_highlight": {
+      "enabled": true,
+      "mode": "keyword_badge",
+      "highlight_color": "#2563EB",
+      "keywords": [
+        "finish"
+      ]
+    },
+    "animation": {
+      "image": "slow_zoom_in",
+      "caption": "fade_in",
+      "keyword": "pop"
+    },
+    "audio_url": "https://wanzioss.oss-cn-beijing.aliyuncs.com/tts_audio/audio_1782627645885.mp3",
+    "audio_duration": 6672000,
+    "audio_duration_seconds": 6.672,
+    "start": 15624000,
+    "end": 22296000,
+    "asset_url": "https://wanzioss.oss-cn-beijing.aliyuncs.com/video_images/scene_scene_3.png",
+    "image_url": "https://wanzioss.oss-cn-beijing.aliyuncs.com/video_images/scene_scene_3.png"
+  },
+  {
+    "scene": "第3句场景句",
+    "caption": "Let me check my calendar first.\n我先看一下日历。",
+    "tts": "第 3 句，说明要先查日程：Let me check my calendar first.。我先看一下日历。",
+    "image_prompt": "早到工位办公室英语, 早上刚到公司工位，和邻座同事打招呼闲聊当日工作安排, moment: 说明要先查日程, Xiao Wanzi helping a young office worker speak English, minimal props, clear real-life setting",
+    "keywords": [
+      "calendar"
+    ],
+    "duration": 4.8,
+    "caption_highlight": {
+      "enabled": true,
+      "mode": "keyword_badge",
+      "highlight_color": "#2563EB",
+      "keywords": [
+        "calendar"
+      ]
+    },
+    "animation": {
+      "image": "slow_zoom_in",
+      "caption": "fade_in",
+      "keyword": "pop"
+    },
+    "audio_url": "https://wanzioss.oss-cn-beijing.aliyuncs.com/tts_audio/audio_1782627647563.mp3",
+    "audio_duration": 7056000,
+    "audio_duration_seconds": 7.056,
+    "start": 22296000,
+    "end": 29352000,
+    "asset_url": "https://wanzioss.oss-cn-beijing.aliyuncs.com/video_images/scene_scene_4.png",
+    "image_url": "https://wanzioss.oss-cn-beijing.aliyuncs.com/video_images/scene_scene_4.png"
+  },
+  {
+    "scene": "第4句场景句",
+    "caption": "I have a meeting at ten.\n我十点有个会。",
+    "tts": "第 4 句，告知具体会议安排：I have a meeting at ten.。我十点有个会。",
+    "image_prompt": "早到工位办公室英语, 早上刚到公司工位，和邻座同事打招呼闲聊当日工作安排, moment: 告知具体会议安排, Xiao Wanzi helping a young office worker speak English, minimal props, clear real-life setting",
+    "keywords": [
+      "meeting"
+    ],
+    "duration": 4.8,
+    "caption_highlight": {
+      "enabled": true,
+      "mode": "keyword_badge",
+      "highlight_color": "#2563EB",
+      "keywords": [
+        "meeting"
+      ]
+    },
+    "animation": {
+      "image": "slow_zoom_in",
+      "caption": "fade_in",
+      "keyword": "pop"
+    },
+    "audio_url": "https://wanzioss.oss-cn-beijing.aliyuncs.com/tts_audio/audio_1782627649192.mp3",
+    "audio_duration": 7056000,
+    "audio_duration_seconds": 7.056,
+    "start": 29352000,
+    "end": 36408000,
+    "asset_url": "https://wanzioss.oss-cn-beijing.aliyuncs.com/video_images/scene_scene_5.png",
+    "image_url": "https://wanzioss.oss-cn-beijing.aliyuncs.com/video_images/scene_scene_5.png"
+  },
+  {
+    "scene": "第5句场景句",
+    "caption": "I'll start with the urgent tasks.\n我先处理紧急任务。",
+    "tts": "第 5 句，说明工作优先级：I'll start with the urgent tasks.。我先处理紧急任务。",
+    "image_prompt": "早到工位办公室英语, 早上刚到公司工位，和邻座同事打招呼闲聊当日工作安排, moment: 说明工作优先级, Xiao Wanzi helping a young office worker speak English, minimal props, clear real-life setting",
+    "keywords": [
+      "urgent"
+    ],
+    "duration": 4.8,
+    "caption_highlight": {
+      "enabled": true,
+      "mode": "keyword_badge",
+      "highlight_color": "#2563EB",
+      "keywords": [
+        "urgent"
+      ]
+    },
+    "animation": {
+      "image": "slow_zoom_in",
+      "caption": "fade_in",
+      "keyword": "pop"
+    },
+    "audio_url": "https://wanzioss.oss-cn-beijing.aliyuncs.com/tts_audio/audio_1782627650897.mp3",
+    "audio_duration": 7632000,
+    "audio_duration_seconds": 7.632,
+    "start": 36408000,
+    "end": 44040000,
+    "asset_url": "https://wanzioss.oss-cn-beijing.aliyuncs.com/video_images/scene_scene_6.png",
+    "image_url": "https://wanzioss.oss-cn-beijing.aliyuncs.com/video_images/scene_scene_6.png"
+  },
+  {
+    "scene": "快速汇总页",
+    "caption": "1. Morning, how's your day looking?\n2. I have a few things to finish.\n3. Let me check my calendar first.\n4. I have a meeting at ten.\n5. I'll start with the urgent tasks.",
+    "tts": "这5句早到工位常用英语先收藏，上班开口就能用",
+    "image_prompt": "FIXED_REVIEW_WITH_CHAR",
+    "duration": 3.0,
+    "keywords": [
+      "Morning",
+      "how's"
+    ],
+    "caption_highlight": {
+      "enabled": true,
+      "mode": "keyword_badge",
+      "highlight_color": "#2563EB",
+      "keywords": [
+        "Morning",
+        "how's"
+      ]
+    },
+    "animation": {
+      "image": "slow_zoom_in",
+      "caption": "fade_in",
+      "keyword": "pop"
+    },
+    "audio_url": "https://wanzioss.oss-cn-beijing.aliyuncs.com/tts_audio/audio_1782627652539.mp3",
+    "audio_duration": 5472000,
+    "audio_duration_seconds": 5.472,
+    "start": 44040000,
+    "end": 49512000,
+    "asset_url": "https://wanzioss.oss-cn-beijing.aliyuncs.com/video_images/scene_review_bg_7.png",
+    "image_url": "https://wanzioss.oss-cn-beijing.aliyuncs.com/video_images/scene_review_bg_7.png"
+  },
+  {
+    "scene": "互动页",
+    "caption": "你今早到工位做的第一件事是什么？",
+    "tts": "你今早到工位做的第一件事是什么？",
+    "image_prompt": "FIXED_HOOK_IMAGE",
+    "duration": 2.0,
+    "keywords": [],
+    "caption_highlight": {
+      "enabled": true,
+      "mode": "keyword_badge",
+      "highlight_color": "#2563EB",
+      "keywords": []
+    },
+    "animation": {
+      "image": "slow_zoom_in",
+      "caption": "fade_in",
+      "keyword": "pop"
+    },
+    "audio_url": "https://wanzioss.oss-cn-beijing.aliyuncs.com/tts_audio/audio_1782627653884.mp3",
+    "audio_duration": 3072000,
+    "audio_duration_seconds": 3.072,
+    "start": 49512000,
+    "end": 52584000,
+    "asset_url": "https://wanzioss.oss-cn-beijing.aliyuncs.com/video_images/scene_hook_img_8.png",
+    "image_url": "https://wanzioss.oss-cn-beijing.aliyuncs.com/video_images/scene_hook_img_8.png"
+  }
+]
