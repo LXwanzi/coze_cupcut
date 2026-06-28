@@ -1,0 +1,755 @@
+{
+  "success": true,
+  "draft_url": "http://123.57.144.37:30000/openapi/capcut-mate/v1/get_draft?draft_id=20260628174353ea649e98",
+  "content_meta": {
+    "selected_topic": "玄学方向 最近总觉得钱留不住时，别只",
+    "scene": "travel",
+    "sub_scene": "玄学方向_最近总觉得钱留不住",
+    "duration_seconds": 29.0,
+    "target_duration_seconds": 28,
+    "sentence_count": 3,
+    "format": "topic_rescue_hybrid",
+    "content_mode": "painpoint_contrast",
+    "pain_point": "玄学方向 最近总觉得钱留不住时，别只会说 help me",
+    "wrong_expression": "Help me.",
+    "quality_review": {
+      "is_reasonable": true,
+      "content_mode": "painpoint_contrast",
+      "topic": "玄学方向 最近总觉得钱留不住",
+      "suggested_sentence_count": 3,
+      "target_duration_seconds": 30,
+      "issues": [],
+      "suggestions": []
+    },
+    "voice_profile": {
+      "voice": "playful",
+      "speed": 1.18,
+      "style": "snappy_contrast"
+    },
+    "originality_check": "所有内容基于用户提供的原始素材生成",
+    "safety_note": "未涉及教材原文复述",
+    "topic_id": "6f20d462d302"
+  },
+  "publish_pack": {
+    "title": "【玄学方向 最近总觉得钱留不住】不会开口？这句能救场",
+    "cover_text": "玄学方向 最近总觉得钱留",
+    "description": "每天进步一点点。别再硬翻译，玄学方向 最近总觉得钱留不住这句先学会。#英语学习 #实用英语 #救场英语",
+    "hashtags": [
+      "英语学习",
+      "实用英语",
+      "救场英语"
+    ]
+  },
+  "review_card": {
+    "today_expressions": [],
+    "answer_levels": [
+      {
+        "level": "survival",
+        "label": "最短能救场",
+        "english": "Could you help me with this?",
+        "chinese": "可以帮我处理一下这个吗？",
+        "usage": "先把求助意图说完整。"
+      },
+      {
+        "level": "standard",
+        "label": "完整一点",
+        "english": "Could you check this for me?",
+        "chinese": "可以帮我检查一下这个吗？",
+        "usage": "需要对方查看或确认时用。"
+      },
+      {
+        "level": "polite",
+        "label": "更具体一点",
+        "english": "Could you help me figure out what I should do next?",
+        "chinese": "可以帮我看看下一步该怎么处理吗？",
+        "usage": "不知道流程时，比单说 help me 更能推进事情。"
+      }
+    ],
+    "quick_review": "先收藏，下一集继续同一场景。"
+  },
+  "material_bank": [],
+  "segments": [
+    {
+      "scene": "钩子页",
+      "caption": "玄学方向 最近总觉得钱留不住时，别只会说 help me",
+      "tts": "玄学方向 最近总觉得钱留不住时，别只会说 help me",
+      "image_prompt": "FIXED_HOOK_IMAGE",
+      "duration": 2.0,
+      "keywords": [
+        "help"
+      ],
+      "caption_highlight": {
+        "enabled": true,
+        "mode": "keyword_badge",
+        "highlight_color": "#2563EB",
+        "keywords": [
+          "help"
+        ]
+      },
+      "animation": {
+        "image": "slow_zoom_in",
+        "caption": "fade_in",
+        "keyword": "pop"
+      },
+      "audio_url": "https://wanzioss.oss-cn-beijing.aliyuncs.com/tts_audio/audio_1782639732886.mp3",
+      "audio_duration": 6576000,
+      "audio_duration_seconds": 6.576,
+      "start": 0,
+      "end": 6576000,
+      "asset_url": "https://wanzioss.oss-cn-beijing.aliyuncs.com/video_images/scene_hook_img_0.png",
+      "image_url": "https://wanzioss.oss-cn-beijing.aliyuncs.com/video_images/scene_hook_img_0.png"
+    },
+    {
+      "scene": "沉浸场景",
+      "caption": "How can I help you?\n有什么可以帮你？",
+      "tts": "现在你在玄学方向 最近总觉得钱留不住这个真实场景里，你需要对方处理一个具体需求。对方问：How can I help you?",
+      "image_prompt": "玄学方向 最近总觉得钱留不住, 玄学方向 最近总觉得钱留不住这个真实场景里，你需要对方处理一个具体需求, moment: conversation, Xiao Wanzi helping a young office worker speak English, minimal props, clear real-life setting",
+      "duration": 4.0,
+      "keywords": [
+        "How",
+        "can"
+      ],
+      "caption_highlight": {
+        "enabled": true,
+        "mode": "keyword_badge",
+        "highlight_color": "#2563EB",
+        "keywords": [
+          "How",
+          "can"
+        ]
+      },
+      "animation": {
+        "image": "slow_zoom_in",
+        "caption": "fade_in",
+        "keyword": "pop"
+      },
+      "audio_url": "https://wanzioss.oss-cn-beijing.aliyuncs.com/tts_audio/audio_1782639738653.mp3",
+      "audio_duration": 10944000,
+      "audio_duration_seconds": 10.944,
+      "start": 6576000,
+      "end": 17520000,
+      "asset_url": "https://wanzioss.oss-cn-beijing.aliyuncs.com/video_images/scene_scene_1.png",
+      "image_url": "https://wanzioss.oss-cn-beijing.aliyuncs.com/video_images/scene_scene_1.png"
+    },
+    {
+      "scene": "错误表达",
+      "caption": "Help me.\n这句太空，对方不知道你到底要查、改、拿还是确认什么。",
+      "tts": "别说 Help me.。这句太空，对方不知道你到底要查、改、拿还是确认什么。",
+      "image_prompt": "玄学方向 最近总觉得钱留不住, 玄学方向 最近总觉得钱留不住这个真实场景里，你需要对方处理一个具体需求, moment: mistake, Xiao Wanzi helping a young office worker speak English, minimal props, clear real-life setting",
+      "duration": 4.0,
+      "keywords": [
+        "Help"
+      ],
+      "caption_highlight": {
+        "enabled": true,
+        "mode": "keyword_badge",
+        "highlight_color": "#2563EB",
+        "keywords": [
+          "Help"
+        ]
+      },
+      "animation": {
+        "image": "slow_zoom_in",
+        "caption": "fade_in",
+        "keyword": "pop"
+      },
+      "audio_url": "https://wanzioss.oss-cn-beijing.aliyuncs.com/tts_audio/audio_1782639743442.mp3",
+      "audio_duration": 8544000,
+      "audio_duration_seconds": 8.544,
+      "start": 17520000,
+      "end": 26064000,
+      "asset_url": "https://wanzioss.oss-cn-beijing.aliyuncs.com/video_images/scene_scene_2.png",
+      "image_url": "https://wanzioss.oss-cn-beijing.aliyuncs.com/video_images/scene_scene_2.png"
+    },
+    {
+      "scene": "最短能救场",
+      "caption": "Could you help me with this?\n可以帮我处理一下这个吗？",
+      "tts": "最短能救场：Could you help me with this?。可以帮我处理一下这个吗？",
+      "image_prompt": "玄学方向 最近总觉得钱留不住, 玄学方向 最近总觉得钱留不住这个真实场景里，你需要对方处理一个具体需求, moment: survival, Xiao Wanzi helping a young office worker speak English, minimal props, clear real-life setting",
+      "keywords": [
+        "help"
+      ],
+      "duration": 4.0,
+      "caption_highlight": {
+        "enabled": true,
+        "mode": "keyword_badge",
+        "highlight_color": "#2563EB",
+        "keywords": [
+          "help"
+        ]
+      },
+      "animation": {
+        "image": "slow_zoom_in",
+        "caption": "fade_in",
+        "keyword": "pop"
+      },
+      "audio_url": "https://wanzioss.oss-cn-beijing.aliyuncs.com/tts_audio/audio_1782639746859.mp3",
+      "audio_duration": 5712000,
+      "audio_duration_seconds": 5.712,
+      "start": 26064000,
+      "end": 31776000,
+      "asset_url": "https://wanzioss.oss-cn-beijing.aliyuncs.com/video_images/scene_scene_3.png",
+      "image_url": "https://wanzioss.oss-cn-beijing.aliyuncs.com/video_images/scene_scene_3.png"
+    },
+    {
+      "scene": "完整一点",
+      "caption": "Could you check this for me?\n可以帮我检查一下这个吗？",
+      "tts": "完整一点：Could you check this for me?。可以帮我检查一下这个吗？",
+      "image_prompt": "玄学方向 最近总觉得钱留不住, 玄学方向 最近总觉得钱留不住这个真实场景里，你需要对方处理一个具体需求, moment: standard, Xiao Wanzi helping a young office worker speak English, minimal props, clear real-life setting",
+      "keywords": [
+        "check"
+      ],
+      "duration": 4.5,
+      "caption_highlight": {
+        "enabled": true,
+        "mode": "keyword_badge",
+        "highlight_color": "#2563EB",
+        "keywords": [
+          "check"
+        ]
+      },
+      "animation": {
+        "image": "slow_zoom_in",
+        "caption": "fade_in",
+        "keyword": "pop"
+      },
+      "audio_url": "https://wanzioss.oss-cn-beijing.aliyuncs.com/tts_audio/audio_1782639750139.mp3",
+      "audio_duration": 5352000,
+      "audio_duration_seconds": 5.352,
+      "start": 31776000,
+      "end": 37128000,
+      "asset_url": "https://wanzioss.oss-cn-beijing.aliyuncs.com/video_images/scene_scene_4.png",
+      "image_url": "https://wanzioss.oss-cn-beijing.aliyuncs.com/video_images/scene_scene_4.png"
+    },
+    {
+      "scene": "更具体一点",
+      "caption": "Could you help me figure out what I should do next?\n可以帮我看看下一步该怎么处理吗？",
+      "tts": "更具体一点：Could you help me figure out what I should do next?。可以帮我看看下一步该怎么处理吗？",
+      "image_prompt": "玄学方向 最近总觉得钱留不住, 玄学方向 最近总觉得钱留不住这个真实场景里，你需要对方处理一个具体需求, moment: polite, Xiao Wanzi helping a young office worker speak English, minimal props, clear real-life setting",
+      "keywords": [
+        "help",
+        "figure"
+      ],
+      "duration": 4.5,
+      "caption_highlight": {
+        "enabled": true,
+        "mode": "keyword_badge",
+        "highlight_color": "#2563EB",
+        "keywords": [
+          "help",
+          "figure"
+        ]
+      },
+      "animation": {
+        "image": "slow_zoom_in",
+        "caption": "fade_in",
+        "keyword": "pop"
+      },
+      "audio_url": "https://wanzioss.oss-cn-beijing.aliyuncs.com/tts_audio/audio_1782639754789.mp3",
+      "audio_duration": 8880000,
+      "audio_duration_seconds": 8.88,
+      "start": 37128000,
+      "end": 46008000,
+      "asset_url": "https://wanzioss.oss-cn-beijing.aliyuncs.com/video_images/scene_scene_5.png",
+      "image_url": "https://wanzioss.oss-cn-beijing.aliyuncs.com/video_images/scene_scene_5.png"
+    },
+    {
+      "scene": "跟读打卡",
+      "caption": "Could you check this for me?\n跟小丸子读一遍",
+      "tts": "跟小丸子读一遍：Could you check this for me?",
+      "image_prompt": "玄学方向 最近总觉得钱留不住, 玄学方向 最近总觉得钱留不住这个真实场景里，你需要对方处理一个具体需求, moment: follow read, Xiao Wanzi helping a young office worker speak English, minimal props, clear real-life setting",
+      "duration": 4.0,
+      "keywords": [
+        "check"
+      ],
+      "caption_highlight": {
+        "enabled": true,
+        "mode": "keyword_badge",
+        "highlight_color": "#2563EB",
+        "keywords": [
+          "check"
+        ]
+      },
+      "animation": {
+        "image": "slow_zoom_in",
+        "caption": "fade_in",
+        "keyword": "pop"
+      },
+      "audio_url": "https://wanzioss.oss-cn-beijing.aliyuncs.com/tts_audio/audio_1782639757396.mp3",
+      "audio_duration": 4152000,
+      "audio_duration_seconds": 4.152,
+      "start": 46008000,
+      "end": 50160000,
+      "asset_url": "https://wanzioss.oss-cn-beijing.aliyuncs.com/video_images/scene_scene_6.png",
+      "image_url": "https://wanzioss.oss-cn-beijing.aliyuncs.com/video_images/scene_scene_6.png"
+    },
+    {
+      "scene": "预告页",
+      "caption": "你在玄学方向 最近总觉得钱留不住还卡过哪句？评论区告诉我。",
+      "tts": "你在玄学方向 最近总觉得钱留不住还卡过哪句？评论区告诉我。",
+      "image_prompt": "FIXED_HOOK_IMAGE",
+      "duration": 2.0,
+      "keywords": [],
+      "caption_highlight": {
+        "enabled": true,
+        "mode": "keyword_badge",
+        "highlight_color": "#2563EB",
+        "keywords": []
+      },
+      "animation": {
+        "image": "slow_zoom_in",
+        "caption": "fade_in",
+        "keyword": "pop"
+      },
+      "audio_url": "https://wanzioss.oss-cn-beijing.aliyuncs.com/tts_audio/audio_1782639761137.mp3",
+      "audio_duration": 6144000,
+      "audio_duration_seconds": 6.144,
+      "start": 50160000,
+      "end": 56304000,
+      "asset_url": "https://wanzioss.oss-cn-beijing.aliyuncs.com/video_images/scene_hook_img_7.png",
+      "image_url": "https://wanzioss.oss-cn-beijing.aliyuncs.com/video_images/scene_hook_img_7.png"
+    }
+  ],
+  "duration": 56304000,
+  "duration_seconds": 56.3,
+  "scene_count": 8,
+  "caption_count": 8,
+  "timeline_segments": [
+    {
+      "index": 0,
+      "start": 0,
+      "end": 6576000,
+      "duration": 6576000,
+      "caption": "玄学方向 最近总觉得钱留不住时，别只会说 help me",
+      "keywords": [
+        "help"
+      ],
+      "caption_highlight": {
+        "enabled": true,
+        "mode": "keyword_badge",
+        "highlight_color": "#2563EB",
+        "keywords": [
+          "help"
+        ]
+      },
+      "animation": {
+        "image": "slow_zoom_in",
+        "caption": "fade_in",
+        "keyword": "pop"
+      },
+      "audio_url": "https://wanzioss.oss-cn-beijing.aliyuncs.com/tts_audio/audio_1782639732886.mp3",
+      "asset_url": "https://wanzioss.oss-cn-beijing.aliyuncs.com/video_images/scene_hook_img_0.png",
+      "scene": "钩子页"
+    },
+    {
+      "index": 1,
+      "start": 6576000,
+      "end": 17520000,
+      "duration": 10944000,
+      "caption": "How can I help you?\n有什么可以帮你？",
+      "keywords": [
+        "How",
+        "can"
+      ],
+      "caption_highlight": {
+        "enabled": true,
+        "mode": "keyword_badge",
+        "highlight_color": "#2563EB",
+        "keywords": [
+          "How",
+          "can"
+        ]
+      },
+      "animation": {
+        "image": "slow_zoom_in",
+        "caption": "fade_in",
+        "keyword": "pop"
+      },
+      "audio_url": "https://wanzioss.oss-cn-beijing.aliyuncs.com/tts_audio/audio_1782639738653.mp3",
+      "asset_url": "https://wanzioss.oss-cn-beijing.aliyuncs.com/video_images/scene_scene_1.png",
+      "scene": "沉浸场景"
+    },
+    {
+      "index": 2,
+      "start": 17520000,
+      "end": 26064000,
+      "duration": 8544000,
+      "caption": "Help me.\n这句太空，对方不知道你到底要查、改、拿还是确认什么。",
+      "keywords": [
+        "Help"
+      ],
+      "caption_highlight": {
+        "enabled": true,
+        "mode": "keyword_badge",
+        "highlight_color": "#2563EB",
+        "keywords": [
+          "Help"
+        ]
+      },
+      "animation": {
+        "image": "slow_zoom_in",
+        "caption": "fade_in",
+        "keyword": "pop"
+      },
+      "audio_url": "https://wanzioss.oss-cn-beijing.aliyuncs.com/tts_audio/audio_1782639743442.mp3",
+      "asset_url": "https://wanzioss.oss-cn-beijing.aliyuncs.com/video_images/scene_scene_2.png",
+      "scene": "错误表达"
+    },
+    {
+      "index": 3,
+      "start": 26064000,
+      "end": 31776000,
+      "duration": 5712000,
+      "caption": "Could you help me with this?\n可以帮我处理一下这个吗？",
+      "keywords": [
+        "help"
+      ],
+      "caption_highlight": {
+        "enabled": true,
+        "mode": "keyword_badge",
+        "highlight_color": "#2563EB",
+        "keywords": [
+          "help"
+        ]
+      },
+      "animation": {
+        "image": "slow_zoom_in",
+        "caption": "fade_in",
+        "keyword": "pop"
+      },
+      "audio_url": "https://wanzioss.oss-cn-beijing.aliyuncs.com/tts_audio/audio_1782639746859.mp3",
+      "asset_url": "https://wanzioss.oss-cn-beijing.aliyuncs.com/video_images/scene_scene_3.png",
+      "scene": "最短能救场"
+    },
+    {
+      "index": 4,
+      "start": 31776000,
+      "end": 37128000,
+      "duration": 5352000,
+      "caption": "Could you check this for me?\n可以帮我检查一下这个吗？",
+      "keywords": [
+        "check"
+      ],
+      "caption_highlight": {
+        "enabled": true,
+        "mode": "keyword_badge",
+        "highlight_color": "#2563EB",
+        "keywords": [
+          "check"
+        ]
+      },
+      "animation": {
+        "image": "slow_zoom_in",
+        "caption": "fade_in",
+        "keyword": "pop"
+      },
+      "audio_url": "https://wanzioss.oss-cn-beijing.aliyuncs.com/tts_audio/audio_1782639750139.mp3",
+      "asset_url": "https://wanzioss.oss-cn-beijing.aliyuncs.com/video_images/scene_scene_4.png",
+      "scene": "完整一点"
+    },
+    {
+      "index": 5,
+      "start": 37128000,
+      "end": 46008000,
+      "duration": 8880000,
+      "caption": "Could you help me figure out what I should do next?\n可以帮我看看下一步该怎么处理吗？",
+      "keywords": [
+        "help",
+        "figure"
+      ],
+      "caption_highlight": {
+        "enabled": true,
+        "mode": "keyword_badge",
+        "highlight_color": "#2563EB",
+        "keywords": [
+          "help",
+          "figure"
+        ]
+      },
+      "animation": {
+        "image": "slow_zoom_in",
+        "caption": "fade_in",
+        "keyword": "pop"
+      },
+      "audio_url": "https://wanzioss.oss-cn-beijing.aliyuncs.com/tts_audio/audio_1782639754789.mp3",
+      "asset_url": "https://wanzioss.oss-cn-beijing.aliyuncs.com/video_images/scene_scene_5.png",
+      "scene": "更具体一点"
+    },
+    {
+      "index": 6,
+      "start": 46008000,
+      "end": 50160000,
+      "duration": 4152000,
+      "caption": "Could you check this for me?\n跟小丸子读一遍",
+      "keywords": [
+        "check"
+      ],
+      "caption_highlight": {
+        "enabled": true,
+        "mode": "keyword_badge",
+        "highlight_color": "#2563EB",
+        "keywords": [
+          "check"
+        ]
+      },
+      "animation": {
+        "image": "slow_zoom_in",
+        "caption": "fade_in",
+        "keyword": "pop"
+      },
+      "audio_url": "https://wanzioss.oss-cn-beijing.aliyuncs.com/tts_audio/audio_1782639757396.mp3",
+      "asset_url": "https://wanzioss.oss-cn-beijing.aliyuncs.com/video_images/scene_scene_6.png",
+      "scene": "跟读打卡"
+    },
+    {
+      "index": 7,
+      "start": 50160000,
+      "end": 56304000,
+      "duration": 6144000,
+      "caption": "你在玄学方向 最近总觉得钱留不住还卡过哪句？评论区告诉我。",
+      "keywords": [],
+      "caption_highlight": {
+        "enabled": true,
+        "mode": "keyword_badge",
+        "highlight_color": "#2563EB",
+        "keywords": []
+      },
+      "animation": {
+        "image": "slow_zoom_in",
+        "caption": "fade_in",
+        "keyword": "pop"
+      },
+      "audio_url": "https://wanzioss.oss-cn-beijing.aliyuncs.com/tts_audio/audio_1782639761137.mp3",
+      "asset_url": "https://wanzioss.oss-cn-beijing.aliyuncs.com/video_images/scene_hook_img_7.png",
+      "scene": "预告页"
+    }
+  ],
+  "steps_status": [
+    {
+      "step": "create_draft",
+      "url": "http://123.57.144.37:30000/openapi/capcut-mate/v1/create_draft",
+      "request": {
+        "width": 1080,
+        "height": 1920
+      },
+      "response": {
+        "code": 0,
+        "message": "成功",
+        "draft_url": "http://123.57.144.37:30000/openapi/capcut-mate/v1/get_draft?draft_id=20260628174353ea649e98",
+        "tip_url": "https://docs.jcaigc.cn/"
+      }
+    },
+    {
+      "step": "add_images",
+      "url": "http://123.57.144.37:30000/openapi/capcut-mate/v1/add_images",
+      "request": {
+        "draft_url": "http://123.57.144.37:30000/openapi/capcut-mate/v1/get_draft?draft_id=20260628174353ea649e98",
+        "image_infos": "[{\"image_url\": \"https://wanzioss.oss-cn-beijing.aliyuncs.com/video_images/scene_hook_img_0.png\", \"width\": 1080, \"height\": 1920, \"start\": 0, \"end\": 6576000}, {\"image_url\": \"https://wanzioss.oss-cn-beijing.aliyuncs.com/video_images/scene_scene_1.png\", \"width\": 1080, \"height\": 1920, \"start\": 6576000, \"end\": 17520000}, {\"image_url\": \"https://wanzioss.oss-cn-beijing.aliyuncs.com/video_images/scene_scene_2.png\", \"width\": 1080, \"height\": 1920, \"start\": 17520000, \"end\": 26064000}, {\"image_url\": \"https://wanzioss.oss-cn-beijing.aliyuncs.com/video_images/scene_scene_3.png\", \"width\": 1080, \"height\": 1920, \"start\": 26064000, \"end\": 31776000}, {\"image_url\": \"https://wanzioss.oss-cn-beijing.aliyuncs.com/video_images/scene_scene_4.png\", \"width\": 1080, \"height\": 1920, \"start\": 31776000, \"end\": 37128000}, {\"image_url\": \"https://wanzioss.oss-cn-beijing.aliyuncs.com/video_images/scene_scene_5.png\", \"width\": 1080, \"height\": 1920, \"start\": 37128000, \"end\": 46008000}, {\"image_url\": \"https://wanzioss.oss-cn-beijing.aliyuncs.com/video_images/scene_scene_6.png\", \"width\": 1080, \"height\": 1920, \"start\": 46008000, \"end\": 50160000}, {\"image_url\": \"https://wanzioss.oss-cn-beijing.aliyuncs.com/video_images/scene_hook_img_7.png\", \"width\": 1080, \"height\": 1920, \"start\": 50160000, \"end\": 56304000}]",
+        "scale_x": 1.0,
+        "scale_y": 1.0,
+        "transform_x": 0,
+        "transform_y": 0
+      },
+      "response": {
+        "code": 0,
+        "message": "成功",
+        "draft_url": "http://123.57.144.37:30000/openapi/capcut-mate/v1/get_draft?draft_id=20260628174353ea649e98",
+        "track_id": "6f81167a77de4d8da468bbb476e9241c",
+        "image_ids": [
+          "41e5472c4d6d4405823677f8759be0c6",
+          "01d6b3af5dcd41f4a3a401a5de47a417",
+          "1b93df8263b54d598a96527f5cc7b83c",
+          "ea4ecc8247684b98a9b07899987eab69",
+          "c2fe5d566be0452e88a3ee249802ff6d",
+          "a1ac0ef13dce4268b8d2b30713451660",
+          "487d333357fd46ef96d74fe980cb5a83",
+          "dc3f65ec0031429fbd4c887ac5926df2"
+        ],
+        "segment_ids": [
+          "c98c5864e9c742cfb675103ea228c13e",
+          "44c55384c80d4e62be5870c503cc7f9f",
+          "8949fb50c6514928a41ab7110d610293",
+          "43bddf5c75ab4d6ca2ca1b2b2a261015",
+          "6b62db6cfa7841a191669b107a012b3d",
+          "4d8b55c96c16485b9b1086e16dddbd3d",
+          "d859b0668b2f4d9d9090c843170df2e0",
+          "190dcffd6a7a4274b8c6c96daa7c3040"
+        ],
+        "segment_infos": [
+          {
+            "id": "c98c5864e9c742cfb675103ea228c13e",
+            "start": 0,
+            "end": 6576000
+          },
+          {
+            "id": "44c55384c80d4e62be5870c503cc7f9f",
+            "start": 6576000,
+            "end": 17520000
+          },
+          {
+            "id": "8949fb50c6514928a41ab7110d610293",
+            "start": 17520000,
+            "end": 26064000
+          },
+          {
+            "id": "43bddf5c75ab4d6ca2ca1b2b2a261015",
+            "start": 26064000,
+            "end": 31776000
+          },
+          {
+            "id": "6b62db6cfa7841a191669b107a012b3d",
+            "start": 31776000,
+            "end": 37128000
+          },
+          {
+            "id": "4d8b55c96c16485b9b1086e16dddbd3d",
+            "start": 37128000,
+            "end": 46008000
+          },
+          {
+            "id": "d859b0668b2f4d9d9090c843170df2e0",
+            "start": 46008000,
+            "end": 50160000
+          },
+          {
+            "id": "190dcffd6a7a4274b8c6c96daa7c3040",
+            "start": 50160000,
+            "end": 56304000
+          }
+        ]
+      }
+    },
+    {
+      "step": "add_captions",
+      "url": "http://123.57.144.37:30000/openapi/capcut-mate/v1/add_captions",
+      "request": {
+        "draft_url": "http://123.57.144.37:30000/openapi/capcut-mate/v1/get_draft?draft_id=20260628174353ea649e98",
+        "captions": "[{\"start\": 0, \"end\": 6576000, \"text\": \"玄学方向 最近总觉得钱留不住时，别只会说 help me\", \"font_size\": 10}, {\"start\": 6576000, \"end\": 17520000, \"text\": \"How can I help you?\\n有什么可以帮你？\", \"font_size\": 10}, {\"start\": 17520000, \"end\": 26064000, \"text\": \"Help me.\\n这句太空，对方不知道你到底要查、改、拿还是确认什么。\", \"font_size\": 10}, {\"start\": 26064000, \"end\": 31776000, \"text\": \"Could you help me with this?\\n可以帮我处理一下这个吗？\", \"font_size\": 10}, {\"start\": 31776000, \"end\": 37128000, \"text\": \"Could you check this for me?\\n可以帮我检查一下这个吗？\", \"font_size\": 10}, {\"start\": 37128000, \"end\": 46008000, \"text\": \"Could you help me figure out what I should do next?\\n可以帮我看看下一步该怎么处理吗？\", \"font_size\": 10}, {\"start\": 46008000, \"end\": 50160000, \"text\": \"Could you check this for me?\\n跟小丸子读一遍\", \"font_size\": 10}, {\"start\": 50160000, \"end\": 56304000, \"text\": \"你在玄学方向 最近总觉得钱留不住还卡过哪句？评论区告诉我。\", \"font_size\": 10}]",
+        "text_color": "#111111",
+        "border_color": "#FFFFFF",
+        "border_width": 2,
+        "alignment": 1,
+        "font_size": 10,
+        "alpha": 1.0,
+        "bold": true,
+        "italic": true,
+        "line_spacing": 2,
+        "has_shadow": true,
+        "shadow_info": {
+          "shadow_color": "#000000",
+          "shadow_alpha": 0.3,
+          "shadow_diffuse": 4,
+          "shadow_distance": 2,
+          "shadow_angle": -45
+        },
+        "transform_x": 0,
+        "transform_y": 630
+      },
+      "response": {
+        "code": 0,
+        "message": "成功",
+        "draft_url": "http://123.57.144.37:30000/openapi/capcut-mate/v1/get_draft?draft_id=20260628174353ea649e98",
+        "track_id": "8afdbb9e597c4e90a62b5d76651402f5",
+        "text_ids": [
+          "f99f96793c9740c8b63bd6593a29d974",
+          "b97f500ed3ec4e459cb46a1ce990a4b2",
+          "30f6af2b9d69493a9a12a419e68767fd",
+          "709cea2850b34325a25476aa3f5ef6bd",
+          "7102c7239ca84854ac10e5ecf91aec2d",
+          "c3c822b8df5e4e9caa0bf30cb66cf71b",
+          "da40142dad854dc6be52a922eaebe838",
+          "c937b1d8980c4567929f53d243ed7b84"
+        ],
+        "segment_ids": [
+          "154b9605a7ff4ac6807c0b2c64ef2552",
+          "8a38fa08ac5b49e4af61ace0c5bff24f",
+          "63aa41d1749e458795b4fe9fce498012",
+          "89b18cdcea734be0a65b510d27132543",
+          "26911febbe10409596c3b620231fe5e4",
+          "311d5eb2bda34ad48a8f1a39f6822403",
+          "24953deb6fb5419ea3a1b16d4401ab6d",
+          "bf461564438a4a6ba93d665dcd840422"
+        ],
+        "segment_infos": [
+          {
+            "id": "154b9605a7ff4ac6807c0b2c64ef2552",
+            "start": 0,
+            "end": 6576000
+          },
+          {
+            "id": "8a38fa08ac5b49e4af61ace0c5bff24f",
+            "start": 6576000,
+            "end": 17520000
+          },
+          {
+            "id": "63aa41d1749e458795b4fe9fce498012",
+            "start": 17520000,
+            "end": 26064000
+          },
+          {
+            "id": "89b18cdcea734be0a65b510d27132543",
+            "start": 26064000,
+            "end": 31776000
+          },
+          {
+            "id": "26911febbe10409596c3b620231fe5e4",
+            "start": 31776000,
+            "end": 37128000
+          },
+          {
+            "id": "311d5eb2bda34ad48a8f1a39f6822403",
+            "start": 37128000,
+            "end": 46008000
+          },
+          {
+            "id": "24953deb6fb5419ea3a1b16d4401ab6d",
+            "start": 46008000,
+            "end": 50160000
+          },
+          {
+            "id": "bf461564438a4a6ba93d665dcd840422",
+            "start": 50160000,
+            "end": 56304000
+          }
+        ]
+      }
+    },
+    {
+      "step": "add_audios",
+      "url": "http://123.57.144.37:30000/openapi/capcut-mate/v1/add_audios",
+      "request": {
+        "draft_url": "http://123.57.144.37:30000/openapi/capcut-mate/v1/get_draft?draft_id=20260628174353ea649e98",
+        "audio_infos": "[{\"audio_url\": \"https://wanzioss.oss-cn-beijing.aliyuncs.com/tts_audio/audio_1782639732886.mp3\", \"start\": 0, \"end\": 6576000, \"duration\": 6576000, \"volume\": 1.0}, {\"audio_url\": \"https://wanzioss.oss-cn-beijing.aliyuncs.com/tts_audio/audio_1782639738653.mp3\", \"start\": 6576000, \"end\": 17520000, \"duration\": 10944000, \"volume\": 1.0}, {\"audio_url\": \"https://wanzioss.oss-cn-beijing.aliyuncs.com/tts_audio/audio_1782639743442.mp3\", \"start\": 17520000, \"end\": 26064000, \"duration\": 8544000, \"volume\": 1.0}, {\"audio_url\": \"https://wanzioss.oss-cn-beijing.aliyuncs.com/tts_audio/audio_1782639746859.mp3\", \"start\": 26064000, \"end\": 31776000, \"duration\": 5712000, \"volume\": 1.0}, {\"audio_url\": \"https://wanzioss.oss-cn-beijing.aliyuncs.com/tts_audio/audio_1782639750139.mp3\", \"start\": 31776000, \"end\": 37128000, \"duration\": 5352000, \"volume\": 1.0}, {\"audio_url\": \"https://wanzioss.oss-cn-beijing.aliyuncs.com/tts_audio/audio_1782639754789.mp3\", \"start\": 37128000, \"end\": 46008000, \"duration\": 8880000, \"volume\": 1.0}, {\"audio_url\": \"https://wanzioss.oss-cn-beijing.aliyuncs.com/tts_audio/audio_1782639757396.mp3\", \"start\": 46008000, \"end\": 50160000, \"duration\": 4152000, \"volume\": 1.0}, {\"audio_url\": \"https://wanzioss.oss-cn-beijing.aliyuncs.com/tts_audio/audio_1782639761137.mp3\", \"start\": 50160000, \"end\": 56304000, \"duration\": 6144000, \"volume\": 1.0}]"
+      },
+      "response": {
+        "code": 0,
+        "message": "成功",
+        "draft_url": "http://123.57.144.37:30000/openapi/capcut-mate/v1/get_draft?draft_id=20260628174353ea649e98",
+        "track_id": "18f6184ec0344216836cc8674d116bb5",
+        "audio_ids": [
+          "fd95996fa7df44a6affeabffc5f55085",
+          "f3d5b202dd25444dac8617e02a623e67",
+          "d696dd3787bd4074913db501f78a27c4",
+          "2986bac626344e63a4068331266c0b09",
+          "1e93e4138537472aacb8b423d8ea2500",
+          "9b3223729cc842058f6319f2c92baa7e",
+          "947893481cf04f13b5f303f21fb18a76",
+          "0fea9471e24b4cedb5ef4db84ea08356"
+        ]
+      }
+    },
+    {
+      "step": "save_draft",
+      "url": "http://123.57.144.37:30000/openapi/capcut-mate/v1/save_draft",
+      "request": {
+        "draft_url": "http://123.57.144.37:30000/openapi/capcut-mate/v1/get_draft?draft_id=20260628174353ea649e98"
+      },
+      "response": {
+        "code": 0,
+        "message": "成功",
+        "draft_url": "http://123.57.144.37:30000/openapi/capcut-mate/v1/get_draft?draft_id=20260628174353ea649e98"
+      }
+    }
+  ],
+  "message": "剪映草稿已生成，请用 CapCut Mate 桌面端导入剪映。"
+}

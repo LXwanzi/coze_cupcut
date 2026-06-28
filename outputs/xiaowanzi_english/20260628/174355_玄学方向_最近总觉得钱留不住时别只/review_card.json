@@ -1,0 +1,27 @@
+{
+  "today_expressions": [],
+  "answer_levels": [
+    {
+      "level": "survival",
+      "label": "最短能救场",
+      "english": "Could you help me with this?",
+      "chinese": "可以帮我处理一下这个吗？",
+      "usage": "先把求助意图说完整。"
+    },
+    {
+      "level": "standard",
+      "label": "完整一点",
+      "english": "Could you check this for me?",
+      "chinese": "可以帮我检查一下这个吗？",
+      "usage": "需要对方查看或确认时用。"
+    },
+    {
+      "level": "polite",
+      "label": "更具体一点",
+      "english": "Could you help me figure out what I should do next?",
+      "chinese": "可以帮我看看下一步该怎么处理吗？",
+      "usage": "不知道流程时，比单说 help me 更能推进事情。"
+    }
+  ],
+  "quick_review": "先收藏，下一集继续同一场景。"
+}
