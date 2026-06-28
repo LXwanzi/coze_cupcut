@@ -1,0 +1,126 @@
+[
+  {
+    "scene": "痛点钩子",
+    "caption": "最近总觉得钱留不住，先别急着焦虑。\n适合先收藏慢慢看",
+    "tts": "最近总觉得钱留不住，先别急着焦虑。适合先收藏慢慢看。",
+    "image_prompt": "最近总觉得钱留不住, 五帝钱, metaphysics lifestyle short video, moment: opening, product-focused still life, no text, no speech bubbles",
+    "duration": 3.2,
+    "animation": {
+      "image": "slow_zoom_in",
+      "caption": "fade_in",
+      "keyword": "soft_glow"
+    },
+    "audio_url": "https://wanzioss.oss-cn-beijing.aliyuncs.com/tts_audio/audio_1782642113373.mp3",
+    "audio_duration": 5472000,
+    "audio_duration_seconds": 5.472,
+    "start": 0,
+    "end": 5472000,
+    "asset_url": "https://wanzioss.oss-cn-beijing.aliyuncs.com/video_images/scene_scene_0.png",
+    "image_url": "https://wanzioss.oss-cn-beijing.aliyuncs.com/video_images/scene_scene_0.png"
+  },
+  {
+    "scene": "场景代入",
+    "caption": "你最近总觉得钱留不住",
+    "tts": "你最近总觉得钱留不住",
+    "image_prompt": "最近总觉得钱留不住, 五帝钱, metaphysics lifestyle short video, moment: life scene, product-focused still life, no text, no speech bubbles",
+    "duration": 4.0,
+    "animation": {
+      "image": "slow_zoom_in",
+      "caption": "fade_in",
+      "keyword": "soft_glow"
+    },
+    "audio_url": "https://wanzioss.oss-cn-beijing.aliyuncs.com/tts_audio/audio_1782642114853.mp3",
+    "audio_duration": 2448000,
+    "audio_duration_seconds": 2.448,
+    "start": 5472000,
+    "end": 7920000,
+    "asset_url": "https://wanzioss.oss-cn-beijing.aliyuncs.com/video_images/scene_scene_1.png",
+    "image_url": "https://wanzioss.oss-cn-beijing.aliyuncs.com/video_images/scene_scene_1.png"
+  },
+  {
+    "scene": "传统说法",
+    "caption": "传统说法里，状态不稳时先看空间和随身物件的秩序感。",
+    "tts": "传统说法里，状态不稳时先看空间和随身物件的秩序感。",
+    "image_prompt": "最近总觉得钱留不住, 五帝钱, metaphysics lifestyle short video, moment: traditional view, product-focused still life, no text, no speech bubbles",
+    "duration": 4.2,
+    "animation": {
+      "image": "slow_zoom_in",
+      "caption": "fade_in",
+      "keyword": "soft_glow"
+    },
+    "audio_url": "https://wanzioss.oss-cn-beijing.aliyuncs.com/tts_audio/audio_1782642116304.mp3",
+    "audio_duration": 5448000,
+    "audio_duration_seconds": 5.448,
+    "start": 7920000,
+    "end": 13368000,
+    "asset_url": "https://wanzioss.oss-cn-beijing.aliyuncs.com/video_images/scene_scene_2.png",
+    "image_url": "https://wanzioss.oss-cn-beijing.aliyuncs.com/video_images/scene_scene_2.png"
+  },
+  {
+    "scene": "产品建议",
+    "caption": "五帝钱\n五帝钱更适合做一个守财感提醒，寓意是守财感、平安感、传统寓意。",
+    "tts": "可以看看五帝钱更适合做一个守财感提醒，寓意是守财感、平安感、传统寓意。",
+    "image_prompt": "最近总觉得钱留不住, 五帝钱, metaphysics lifestyle short video, moment: product close up, product-focused still life, no text, no speech bubbles",
+    "keywords": [
+      "五帝钱"
+    ],
+    "duration": 4.8,
+    "animation": {
+      "image": "slow_zoom_in",
+      "caption": "fade_in",
+      "keyword": "soft_glow"
+    },
+    "caption_highlight": {
+      "keywords": [
+        "五帝钱"
+      ],
+      "mode": "keyword_badge",
+      "color": "#B45309"
+    },
+    "audio_url": "https://wanzioss.oss-cn-beijing.aliyuncs.com/tts_audio/audio_1782642118137.mp3",
+    "audio_duration": 7464000,
+    "audio_duration_seconds": 7.464,
+    "start": 13368000,
+    "end": 20832000,
+    "asset_url": "https://wanzioss.oss-cn-beijing.aliyuncs.com/video_images/scene_scene_3.png",
+    "image_url": "https://wanzioss.oss-cn-beijing.aliyuncs.com/video_images/scene_scene_3.png"
+  },
+  {
+    "scene": "摆放建议",
+    "caption": "可以放在钱包、玄关或每天会看到的位置，重点是提醒自己少冲动消费。",
+    "tts": "可以放在钱包、玄关或每天会看到的位置，重点是提醒自己少冲动消费。",
+    "image_prompt": "最近总觉得钱留不住, 五帝钱, metaphysics lifestyle short video, moment: placement tips, product-focused still life, no text, no speech bubbles",
+    "duration": 4.2,
+    "animation": {
+      "image": "slow_zoom_in",
+      "caption": "fade_in",
+      "keyword": "soft_glow"
+    },
+    "audio_url": "https://wanzioss.oss-cn-beijing.aliyuncs.com/tts_audio/audio_1782642119862.mp3",
+    "audio_duration": 6648000,
+    "audio_duration_seconds": 6.648,
+    "start": 20832000,
+    "end": 27480000,
+    "asset_url": "https://wanzioss.oss-cn-beijing.aliyuncs.com/video_images/scene_scene_4.png",
+    "image_url": "https://wanzioss.oss-cn-beijing.aliyuncs.com/video_images/scene_scene_4.png"
+  },
+  {
+    "scene": "自然问句",
+    "caption": "你最近是钱留不住，还是心里总觉得不踏实？",
+    "tts": "你最近是钱留不住，还是心里总觉得不踏实？",
+    "image_prompt": "最近总觉得钱留不住, 五帝钱, metaphysics lifestyle short video, moment: soft interaction, product-focused still life, no text, no speech bubbles",
+    "duration": 3.2,
+    "animation": {
+      "image": "slow_zoom_in",
+      "caption": "fade_in",
+      "keyword": "soft_glow"
+    },
+    "audio_url": "https://wanzioss.oss-cn-beijing.aliyuncs.com/tts_audio/audio_1782642121435.mp3",
+    "audio_duration": 4032000,
+    "audio_duration_seconds": 4.032,
+    "start": 27480000,
+    "end": 31512000,
+    "asset_url": "https://wanzioss.oss-cn-beijing.aliyuncs.com/video_images/scene_scene_5.png",
+    "image_url": "https://wanzioss.oss-cn-beijing.aliyuncs.com/video_images/scene_scene_5.png"
+  }
+]

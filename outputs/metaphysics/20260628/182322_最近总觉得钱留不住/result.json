@@ -1,0 +1,497 @@
+{
+  "success": true,
+  "draft_url": "http://123.57.144.37:30000/openapi/capcut-mate/v1/get_draft?draft_id=202606281823204f6c7006",
+  "content_meta": {
+    "account_id": "metaphysics",
+    "selected_topic": "最近总觉得钱留不住",
+    "scene": "wallet",
+    "sub_scene": "wallet",
+    "duration_seconds": 23.6,
+    "target_duration_seconds": 28,
+    "sentence_count": 6,
+    "format": "metaphysics_product_seed",
+    "content_mode": "painpoint_conversion",
+    "voice_profile": {
+      "voice": "gentle",
+      "speed": 1.03,
+      "style": "warm_seed"
+    },
+    "product": {
+      "name": "五帝钱",
+      "scenes": [
+        "玄关",
+        "钱包",
+        "车内"
+      ],
+      "meaning": "守财感、平安感、传统寓意"
+    },
+    "topic_id": "16d479dbe3ae",
+    "safety_note": "玄学内容仅作传统寓意和生活仪式感参考，不承诺结果。"
+  },
+  "publish_pack": {
+    "title": "【最近总觉得钱留不住】最近不顺？先看这个",
+    "cover_text": "最近总觉得钱留不住",
+    "description": "给自己一个稳住的小仪式。分享开运小物、空间调整和玄学生活方式，不制造焦虑，只做温和参考。#玄学 #开运小物 #转运摆件",
+    "hashtags": [
+      "玄学",
+      "开运小物",
+      "转运摆件",
+      "生活仪式感"
+    ]
+  },
+  "review_card": {
+    "today_expressions": [],
+    "answer_levels": [],
+    "quick_review": "玄学小物只做寓意和提醒，不保证结果，关键还是自己的节奏。",
+    "product": {
+      "name": "五帝钱",
+      "scenes": [
+        "玄关",
+        "钱包",
+        "车内"
+      ],
+      "meaning": "守财感、平安感、传统寓意"
+    }
+  },
+  "material_bank": [],
+  "segments": [
+    {
+      "scene": "痛点钩子",
+      "caption": "最近总觉得钱留不住，先别急着焦虑。\n适合先收藏慢慢看",
+      "tts": "最近总觉得钱留不住，先别急着焦虑。适合先收藏慢慢看。",
+      "image_prompt": "最近总觉得钱留不住, 五帝钱, metaphysics lifestyle short video, moment: opening, product-focused still life, no text, no speech bubbles",
+      "duration": 3.2,
+      "animation": {
+        "image": "slow_zoom_in",
+        "caption": "fade_in",
+        "keyword": "soft_glow"
+      },
+      "audio_url": "https://wanzioss.oss-cn-beijing.aliyuncs.com/tts_audio/audio_1782642113373.mp3",
+      "audio_duration": 5472000,
+      "audio_duration_seconds": 5.472,
+      "start": 0,
+      "end": 5472000,
+      "asset_url": "https://wanzioss.oss-cn-beijing.aliyuncs.com/video_images/scene_scene_0.png",
+      "image_url": "https://wanzioss.oss-cn-beijing.aliyuncs.com/video_images/scene_scene_0.png"
+    },
+    {
+      "scene": "场景代入",
+      "caption": "你最近总觉得钱留不住",
+      "tts": "你最近总觉得钱留不住",
+      "image_prompt": "最近总觉得钱留不住, 五帝钱, metaphysics lifestyle short video, moment: life scene, product-focused still life, no text, no speech bubbles",
+      "duration": 4.0,
+      "animation": {
+        "image": "slow_zoom_in",
+        "caption": "fade_in",
+        "keyword": "soft_glow"
+      },
+      "audio_url": "https://wanzioss.oss-cn-beijing.aliyuncs.com/tts_audio/audio_1782642114853.mp3",
+      "audio_duration": 2448000,
+      "audio_duration_seconds": 2.448,
+      "start": 5472000,
+      "end": 7920000,
+      "asset_url": "https://wanzioss.oss-cn-beijing.aliyuncs.com/video_images/scene_scene_1.png",
+      "image_url": "https://wanzioss.oss-cn-beijing.aliyuncs.com/video_images/scene_scene_1.png"
+    },
+    {
+      "scene": "传统说法",
+      "caption": "传统说法里，状态不稳时先看空间和随身物件的秩序感。",
+      "tts": "传统说法里，状态不稳时先看空间和随身物件的秩序感。",
+      "image_prompt": "最近总觉得钱留不住, 五帝钱, metaphysics lifestyle short video, moment: traditional view, product-focused still life, no text, no speech bubbles",
+      "duration": 4.2,
+      "animation": {
+        "image": "slow_zoom_in",
+        "caption": "fade_in",
+        "keyword": "soft_glow"
+      },
+      "audio_url": "https://wanzioss.oss-cn-beijing.aliyuncs.com/tts_audio/audio_1782642116304.mp3",
+      "audio_duration": 5448000,
+      "audio_duration_seconds": 5.448,
+      "start": 7920000,
+      "end": 13368000,
+      "asset_url": "https://wanzioss.oss-cn-beijing.aliyuncs.com/video_images/scene_scene_2.png",
+      "image_url": "https://wanzioss.oss-cn-beijing.aliyuncs.com/video_images/scene_scene_2.png"
+    },
+    {
+      "scene": "产品建议",
+      "caption": "五帝钱\n五帝钱更适合做一个守财感提醒，寓意是守财感、平安感、传统寓意。",
+      "tts": "可以看看五帝钱更适合做一个守财感提醒，寓意是守财感、平安感、传统寓意。",
+      "image_prompt": "最近总觉得钱留不住, 五帝钱, metaphysics lifestyle short video, moment: product close up, product-focused still life, no text, no speech bubbles",
+      "keywords": [
+        "五帝钱"
+      ],
+      "duration": 4.8,
+      "animation": {
+        "image": "slow_zoom_in",
+        "caption": "fade_in",
+        "keyword": "soft_glow"
+      },
+      "caption_highlight": {
+        "keywords": [
+          "五帝钱"
+        ],
+        "mode": "keyword_badge",
+        "color": "#B45309"
+      },
+      "audio_url": "https://wanzioss.oss-cn-beijing.aliyuncs.com/tts_audio/audio_1782642118137.mp3",
+      "audio_duration": 7464000,
+      "audio_duration_seconds": 7.464,
+      "start": 13368000,
+      "end": 20832000,
+      "asset_url": "https://wanzioss.oss-cn-beijing.aliyuncs.com/video_images/scene_scene_3.png",
+      "image_url": "https://wanzioss.oss-cn-beijing.aliyuncs.com/video_images/scene_scene_3.png"
+    },
+    {
+      "scene": "摆放建议",
+      "caption": "可以放在钱包、玄关或每天会看到的位置，重点是提醒自己少冲动消费。",
+      "tts": "可以放在钱包、玄关或每天会看到的位置，重点是提醒自己少冲动消费。",
+      "image_prompt": "最近总觉得钱留不住, 五帝钱, metaphysics lifestyle short video, moment: placement tips, product-focused still life, no text, no speech bubbles",
+      "duration": 4.2,
+      "animation": {
+        "image": "slow_zoom_in",
+        "caption": "fade_in",
+        "keyword": "soft_glow"
+      },
+      "audio_url": "https://wanzioss.oss-cn-beijing.aliyuncs.com/tts_audio/audio_1782642119862.mp3",
+      "audio_duration": 6648000,
+      "audio_duration_seconds": 6.648,
+      "start": 20832000,
+      "end": 27480000,
+      "asset_url": "https://wanzioss.oss-cn-beijing.aliyuncs.com/video_images/scene_scene_4.png",
+      "image_url": "https://wanzioss.oss-cn-beijing.aliyuncs.com/video_images/scene_scene_4.png"
+    },
+    {
+      "scene": "自然问句",
+      "caption": "你最近是钱留不住，还是心里总觉得不踏实？",
+      "tts": "你最近是钱留不住，还是心里总觉得不踏实？",
+      "image_prompt": "最近总觉得钱留不住, 五帝钱, metaphysics lifestyle short video, moment: soft interaction, product-focused still life, no text, no speech bubbles",
+      "duration": 3.2,
+      "animation": {
+        "image": "slow_zoom_in",
+        "caption": "fade_in",
+        "keyword": "soft_glow"
+      },
+      "audio_url": "https://wanzioss.oss-cn-beijing.aliyuncs.com/tts_audio/audio_1782642121435.mp3",
+      "audio_duration": 4032000,
+      "audio_duration_seconds": 4.032,
+      "start": 27480000,
+      "end": 31512000,
+      "asset_url": "https://wanzioss.oss-cn-beijing.aliyuncs.com/video_images/scene_scene_5.png",
+      "image_url": "https://wanzioss.oss-cn-beijing.aliyuncs.com/video_images/scene_scene_5.png"
+    }
+  ],
+  "duration": 31512000,
+  "duration_seconds": 31.51,
+  "scene_count": 6,
+  "caption_count": 6,
+  "timeline_segments": [
+    {
+      "index": 0,
+      "start": 0,
+      "end": 5472000,
+      "duration": 5472000,
+      "caption": "最近总觉得钱留不住，先别急着焦虑。\n适合先收藏慢慢看",
+      "keywords": [],
+      "caption_highlight": {},
+      "animation": {
+        "image": "slow_zoom_in",
+        "caption": "fade_in",
+        "keyword": "soft_glow"
+      },
+      "audio_url": "https://wanzioss.oss-cn-beijing.aliyuncs.com/tts_audio/audio_1782642113373.mp3",
+      "asset_url": "https://wanzioss.oss-cn-beijing.aliyuncs.com/video_images/scene_scene_0.png",
+      "scene": "痛点钩子"
+    },
+    {
+      "index": 1,
+      "start": 5472000,
+      "end": 7920000,
+      "duration": 2448000,
+      "caption": "你最近总觉得钱留不住",
+      "keywords": [],
+      "caption_highlight": {},
+      "animation": {
+        "image": "slow_zoom_in",
+        "caption": "fade_in",
+        "keyword": "soft_glow"
+      },
+      "audio_url": "https://wanzioss.oss-cn-beijing.aliyuncs.com/tts_audio/audio_1782642114853.mp3",
+      "asset_url": "https://wanzioss.oss-cn-beijing.aliyuncs.com/video_images/scene_scene_1.png",
+      "scene": "场景代入"
+    },
+    {
+      "index": 2,
+      "start": 7920000,
+      "end": 13368000,
+      "duration": 5448000,
+      "caption": "传统说法里，状态不稳时先看空间和随身物件的秩序感。",
+      "keywords": [],
+      "caption_highlight": {},
+      "animation": {
+        "image": "slow_zoom_in",
+        "caption": "fade_in",
+        "keyword": "soft_glow"
+      },
+      "audio_url": "https://wanzioss.oss-cn-beijing.aliyuncs.com/tts_audio/audio_1782642116304.mp3",
+      "asset_url": "https://wanzioss.oss-cn-beijing.aliyuncs.com/video_images/scene_scene_2.png",
+      "scene": "传统说法"
+    },
+    {
+      "index": 3,
+      "start": 13368000,
+      "end": 20832000,
+      "duration": 7464000,
+      "caption": "五帝钱\n五帝钱更适合做一个守财感提醒，寓意是守财感、平安感、传统寓意。",
+      "keywords": [
+        "五帝钱"
+      ],
+      "caption_highlight": {
+        "keywords": [
+          "五帝钱"
+        ],
+        "mode": "keyword_badge",
+        "color": "#B45309"
+      },
+      "animation": {
+        "image": "slow_zoom_in",
+        "caption": "fade_in",
+        "keyword": "soft_glow"
+      },
+      "audio_url": "https://wanzioss.oss-cn-beijing.aliyuncs.com/tts_audio/audio_1782642118137.mp3",
+      "asset_url": "https://wanzioss.oss-cn-beijing.aliyuncs.com/video_images/scene_scene_3.png",
+      "scene": "产品建议"
+    },
+    {
+      "index": 4,
+      "start": 20832000,
+      "end": 27480000,
+      "duration": 6648000,
+      "caption": "可以放在钱包、玄关或每天会看到的位置，重点是提醒自己少冲动消费。",
+      "keywords": [],
+      "caption_highlight": {},
+      "animation": {
+        "image": "slow_zoom_in",
+        "caption": "fade_in",
+        "keyword": "soft_glow"
+      },
+      "audio_url": "https://wanzioss.oss-cn-beijing.aliyuncs.com/tts_audio/audio_1782642119862.mp3",
+      "asset_url": "https://wanzioss.oss-cn-beijing.aliyuncs.com/video_images/scene_scene_4.png",
+      "scene": "摆放建议"
+    },
+    {
+      "index": 5,
+      "start": 27480000,
+      "end": 31512000,
+      "duration": 4032000,
+      "caption": "你最近是钱留不住，还是心里总觉得不踏实？",
+      "keywords": [],
+      "caption_highlight": {},
+      "animation": {
+        "image": "slow_zoom_in",
+        "caption": "fade_in",
+        "keyword": "soft_glow"
+      },
+      "audio_url": "https://wanzioss.oss-cn-beijing.aliyuncs.com/tts_audio/audio_1782642121435.mp3",
+      "asset_url": "https://wanzioss.oss-cn-beijing.aliyuncs.com/video_images/scene_scene_5.png",
+      "scene": "自然问句"
+    }
+  ],
+  "steps_status": [
+    {
+      "step": "create_draft",
+      "url": "http://123.57.144.37:30000/openapi/capcut-mate/v1/create_draft",
+      "request": {
+        "width": 1080,
+        "height": 1920
+      },
+      "response": {
+        "code": 0,
+        "message": "成功",
+        "draft_url": "http://123.57.144.37:30000/openapi/capcut-mate/v1/get_draft?draft_id=202606281823204f6c7006",
+        "tip_url": "https://docs.jcaigc.cn/"
+      }
+    },
+    {
+      "step": "add_images",
+      "url": "http://123.57.144.37:30000/openapi/capcut-mate/v1/add_images",
+      "request": {
+        "draft_url": "http://123.57.144.37:30000/openapi/capcut-mate/v1/get_draft?draft_id=202606281823204f6c7006",
+        "image_infos": "[{\"image_url\": \"https://wanzioss.oss-cn-beijing.aliyuncs.com/video_images/scene_scene_0.png\", \"width\": 1080, \"height\": 1920, \"start\": 0, \"end\": 5472000}, {\"image_url\": \"https://wanzioss.oss-cn-beijing.aliyuncs.com/video_images/scene_scene_1.png\", \"width\": 1080, \"height\": 1920, \"start\": 5472000, \"end\": 7920000}, {\"image_url\": \"https://wanzioss.oss-cn-beijing.aliyuncs.com/video_images/scene_scene_2.png\", \"width\": 1080, \"height\": 1920, \"start\": 7920000, \"end\": 13368000}, {\"image_url\": \"https://wanzioss.oss-cn-beijing.aliyuncs.com/video_images/scene_scene_3.png\", \"width\": 1080, \"height\": 1920, \"start\": 13368000, \"end\": 20832000}, {\"image_url\": \"https://wanzioss.oss-cn-beijing.aliyuncs.com/video_images/scene_scene_4.png\", \"width\": 1080, \"height\": 1920, \"start\": 20832000, \"end\": 27480000}, {\"image_url\": \"https://wanzioss.oss-cn-beijing.aliyuncs.com/video_images/scene_scene_5.png\", \"width\": 1080, \"height\": 1920, \"start\": 27480000, \"end\": 31512000}]",
+        "scale_x": 1.0,
+        "scale_y": 1.0,
+        "transform_x": 0,
+        "transform_y": 0
+      },
+      "response": {
+        "code": 0,
+        "message": "成功",
+        "draft_url": "http://123.57.144.37:30000/openapi/capcut-mate/v1/get_draft?draft_id=202606281823204f6c7006",
+        "track_id": "b4f3c87f9104472c9fde96c450da5f34",
+        "image_ids": [
+          "6be9538216664e46a978cadf26464243",
+          "3b95748f1dc14b988407feaacbaa4771",
+          "307248e484d14ca59907d13d866a1d05",
+          "497c29d6f15543ebaa9cc53117fbf929",
+          "ac09c83f171542f08ad2f6c845597c9e",
+          "0dd5ec1f7c2e4b63af6ab501b7d3dfa9"
+        ],
+        "segment_ids": [
+          "a8c1fdae4c704f0fb72ecf7032ef5c87",
+          "371d2ddcfc7d441a8873d4b39dac8556",
+          "f5f1f592bbca4d0b9cb2664b56e03ed4",
+          "afc06b228e0b4ef7aac5929dd7f3a060",
+          "625f05a629f34e49ace4037ff67b0678",
+          "5d68d6dec2c244a0af5304837e463cce"
+        ],
+        "segment_infos": [
+          {
+            "id": "a8c1fdae4c704f0fb72ecf7032ef5c87",
+            "start": 0,
+            "end": 5472000
+          },
+          {
+            "id": "371d2ddcfc7d441a8873d4b39dac8556",
+            "start": 5472000,
+            "end": 7920000
+          },
+          {
+            "id": "f5f1f592bbca4d0b9cb2664b56e03ed4",
+            "start": 7920000,
+            "end": 13368000
+          },
+          {
+            "id": "afc06b228e0b4ef7aac5929dd7f3a060",
+            "start": 13368000,
+            "end": 20832000
+          },
+          {
+            "id": "625f05a629f34e49ace4037ff67b0678",
+            "start": 20832000,
+            "end": 27480000
+          },
+          {
+            "id": "5d68d6dec2c244a0af5304837e463cce",
+            "start": 27480000,
+            "end": 31512000
+          }
+        ]
+      }
+    },
+    {
+      "step": "add_captions",
+      "url": "http://123.57.144.37:30000/openapi/capcut-mate/v1/add_captions",
+      "request": {
+        "draft_url": "http://123.57.144.37:30000/openapi/capcut-mate/v1/get_draft?draft_id=202606281823204f6c7006",
+        "captions": "[{\"start\": 0, \"end\": 5472000, \"text\": \"最近总觉得钱留不住，先别急着焦虑。\\n适合先收藏慢慢看\", \"font_size\": 10}, {\"start\": 5472000, \"end\": 7920000, \"text\": \"你最近总觉得钱留不住\", \"font_size\": 10}, {\"start\": 7920000, \"end\": 13368000, \"text\": \"传统说法里，状态不稳时先看空间和随身物件的秩序感。\", \"font_size\": 10}, {\"start\": 13368000, \"end\": 20832000, \"text\": \"五帝钱\\n五帝钱更适合做一个守财感提醒，寓意是守财感、平安感、传统寓意。\", \"font_size\": 10}, {\"start\": 20832000, \"end\": 27480000, \"text\": \"可以放在钱包、玄关或每天会看到的位置，重点是提醒自己少冲动消费。\", \"font_size\": 10}, {\"start\": 27480000, \"end\": 31512000, \"text\": \"你最近是钱留不住，还是心里总觉得不踏实？\", \"font_size\": 10}]",
+        "text_color": "#111111",
+        "border_color": "#FFFFFF",
+        "border_width": 2,
+        "alignment": 1,
+        "font_size": 10,
+        "alpha": 1.0,
+        "bold": true,
+        "italic": true,
+        "line_spacing": 2,
+        "has_shadow": true,
+        "shadow_info": {
+          "shadow_color": "#000000",
+          "shadow_alpha": 0.3,
+          "shadow_diffuse": 4,
+          "shadow_distance": 2,
+          "shadow_angle": -45
+        },
+        "transform_x": 0,
+        "transform_y": 630
+      },
+      "response": {
+        "code": 0,
+        "message": "成功",
+        "draft_url": "http://123.57.144.37:30000/openapi/capcut-mate/v1/get_draft?draft_id=202606281823204f6c7006",
+        "track_id": "677829ab102346669220374149943f22",
+        "text_ids": [
+          "a49cd4675b20441ca73f5e549bad9dda",
+          "dcffb0baf096411f96c27f455a1f3d1f",
+          "63fd5e3f10214bda963f617aecd93a64",
+          "0d13e121cb864ed497a3a311941a4dbf",
+          "8f01cce3e06a41d0b7d229f0a5e44778",
+          "796a5ac15a8843c6be29ccd1f64b05ce"
+        ],
+        "segment_ids": [
+          "125439d09aca47cd947f92f78f48617c",
+          "c835cec79e24448baa2fb931a28bbdb9",
+          "b3706b8c13fd43f7b9b45f4862be0ef0",
+          "196af21e36174ddb8ad6eb5e1568395e",
+          "df940af606644441bba1746eb4ffd33a",
+          "97b554bfe5ee450391f97cd89cd39ccd"
+        ],
+        "segment_infos": [
+          {
+            "id": "125439d09aca47cd947f92f78f48617c",
+            "start": 0,
+            "end": 5472000
+          },
+          {
+            "id": "c835cec79e24448baa2fb931a28bbdb9",
+            "start": 5472000,
+            "end": 7920000
+          },
+          {
+            "id": "b3706b8c13fd43f7b9b45f4862be0ef0",
+            "start": 7920000,
+            "end": 13368000
+          },
+          {
+            "id": "196af21e36174ddb8ad6eb5e1568395e",
+            "start": 13368000,
+            "end": 20832000
+          },
+          {
+            "id": "df940af606644441bba1746eb4ffd33a",
+            "start": 20832000,
+            "end": 27480000
+          },
+          {
+            "id": "97b554bfe5ee450391f97cd89cd39ccd",
+            "start": 27480000,
+            "end": 31512000
+          }
+        ]
+      }
+    },
+    {
+      "step": "add_audios",
+      "url": "http://123.57.144.37:30000/openapi/capcut-mate/v1/add_audios",
+      "request": {
+        "draft_url": "http://123.57.144.37:30000/openapi/capcut-mate/v1/get_draft?draft_id=202606281823204f6c7006",
+        "audio_infos": "[{\"audio_url\": \"https://wanzioss.oss-cn-beijing.aliyuncs.com/tts_audio/audio_1782642113373.mp3\", \"start\": 0, \"end\": 5472000, \"duration\": 5472000, \"volume\": 1.0}, {\"audio_url\": \"https://wanzioss.oss-cn-beijing.aliyuncs.com/tts_audio/audio_1782642114853.mp3\", \"start\": 5472000, \"end\": 7920000, \"duration\": 2448000, \"volume\": 1.0}, {\"audio_url\": \"https://wanzioss.oss-cn-beijing.aliyuncs.com/tts_audio/audio_1782642116304.mp3\", \"start\": 7920000, \"end\": 13368000, \"duration\": 5448000, \"volume\": 1.0}, {\"audio_url\": \"https://wanzioss.oss-cn-beijing.aliyuncs.com/tts_audio/audio_1782642118137.mp3\", \"start\": 13368000, \"end\": 20832000, \"duration\": 7464000, \"volume\": 1.0}, {\"audio_url\": \"https://wanzioss.oss-cn-beijing.aliyuncs.com/tts_audio/audio_1782642119862.mp3\", \"start\": 20832000, \"end\": 27480000, \"duration\": 6648000, \"volume\": 1.0}, {\"audio_url\": \"https://wanzioss.oss-cn-beijing.aliyuncs.com/tts_audio/audio_1782642121435.mp3\", \"start\": 27480000, \"end\": 31512000, \"duration\": 4032000, \"volume\": 1.0}]"
+      },
+      "response": {
+        "code": 0,
+        "message": "成功",
+        "draft_url": "http://123.57.144.37:30000/openapi/capcut-mate/v1/get_draft?draft_id=202606281823204f6c7006",
+        "track_id": "e5b7bd3ff5ea4695a8a026c784b49eab",
+        "audio_ids": [
+          "54ae02cb721f492793bf9d023e604b98",
+          "2f4bcea96fcb4ef89b9f0f7ee467bc2a",
+          "d62a9e5165fb475da3c5252914fb3e0b",
+          "859e0efe08fa4f17b82b68c9befc06c0",
+          "dbcb413be9ea478e94c1bd4abe999968",
+          "8161f7f563ff41358e5ea1df02ab8b75"
+        ]
+      }
+    },
+    {
+      "step": "save_draft",
+      "url": "http://123.57.144.37:30000/openapi/capcut-mate/v1/save_draft",
+      "request": {
+        "draft_url": "http://123.57.144.37:30000/openapi/capcut-mate/v1/get_draft?draft_id=202606281823204f6c7006"
+      },
+      "response": {
+        "code": 0,
+        "message": "成功",
+        "draft_url": "http://123.57.144.37:30000/openapi/capcut-mate/v1/get_draft?draft_id=202606281823204f6c7006"
+      }
+    }
+  ],
+  "message": "剪映草稿已生成，请用 CapCut Mate 桌面端导入剪映。"
+}
