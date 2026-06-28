@@ -12,6 +12,7 @@ DEFAULT_SHORT_DURATION_SECONDS = 28
 DEFAULT_SHORT_SENTENCE_COUNT = 3
 ACCOUNT_PACK = get_account_pack()
 VOICE_CONFIG = ACCOUNT_PACK.get("voices", {})
+DEFAULT_ACCOUNT_ID = ACCOUNT_PACK.get("account_id", "xiaowanzi_english")
 CONTENT_MODE_PREFIXES = list(
     (ACCOUNT_PACK.get("modes", {}).get("mode_aliases") or {
         '场景式': 'scene_collection',
@@ -23,7 +24,20 @@ CONTENT_MODE_PREFIXES = list(
         '纠错': 'painpoint_contrast',
     }).keys()
 )
+ACCOUNT_CONTROL_KEYS = {"account", "account_id", "账号", "赛道"}
+MODE_CONTROL_KEYS = {"mode", "模式"}
+TOPIC_CONTROL_KEYS = {"topic", "主题"}
 VOICE_CONTROL_KEYS = {"音色", "voice", "语速", "speed"}
+ACCOUNT_ALIASES = {
+    "小丸子英语": "xiaowanzi_english",
+    "小丸子": "xiaowanzi_english",
+    "英语": "xiaowanzi_english",
+    "xiaowanzi": "xiaowanzi_english",
+    "xiaowanzi_english": "xiaowanzi_english",
+    "玄学": "metaphysics",
+    "玄学方向": "metaphysics",
+    "metaphysics": "metaphysics",
+}
 
 # LLM 配置
 LLM_CONFIG_PATH = os.path.join(
@@ -74,6 +88,7 @@ def _parse_user_input(message: str) -> Dict[str, Any]:
     3. 带场景的文本：如"旅行英语：机场值机"
     """
     result = {
+        'account_id': DEFAULT_ACCOUNT_ID,
         'raw_topic': '',
         'learning_note': '',
         'topic': '',
@@ -86,9 +101,26 @@ def _parse_user_input(message: str) -> Dict[str, Any]:
         return result
     
     message = message.strip()
+    message, account_controls = _extract_account_contract(message)
+    if account_controls.get("account_id"):
+        result["account_id"] = account_controls["account_id"]
     message, voice_profile_override = _extract_voice_profile_override(message)
     result['voice_profile_override'] = voice_profile_override
     if not message:
+        if account_controls.get("topic"):
+            message = account_controls["topic"]
+        else:
+            return result
+
+    if account_controls.get("topic"):
+        mode = account_controls.get("mode", "")
+        topic = account_controls["topic"]
+        raw_topic = f"{mode}：{topic}" if mode else topic
+        result['raw_topic'] = raw_topic
+        result['topic'] = raw_topic
+        result['learning_note'] = ''
+        result['scene'] = _detect_scene(topic, result["account_id"])
+        result['auto_generate_expressions'] = True
         return result
     
     # 尝试提取主题/场景
@@ -98,11 +130,12 @@ def _parse_user_input(message: str) -> Dict[str, Any]:
             topic_part = parts[0].strip()
             content_part = parts[1].strip()
 
-            if topic_part in CONTENT_MODE_PREFIXES:
+            content_mode_prefixes = _content_mode_prefixes(result["account_id"])
+            if topic_part in content_mode_prefixes:
                 result['raw_topic'] = f"{topic_part}：{content_part}"
                 result['topic'] = f"{topic_part}：{content_part}"
                 result['learning_note'] = ''
-                result['scene'] = _detect_scene(content_part)
+                result['scene'] = _detect_scene(content_part, result["account_id"])
                 result['auto_generate_expressions'] = True
                 return result
             
@@ -111,7 +144,7 @@ def _parse_user_input(message: str) -> Dict[str, Any]:
             if any(kw in topic_part for kw in scene_keywords):
                 result['topic'] = topic_part
                 result['learning_note'] = content_part
-                result['scene'] = _detect_scene(topic_part)
+                result['scene'] = _detect_scene(topic_part, result["account_id"])
                 result['raw_topic'] = topic_part
                 result['auto_generate_expressions'] = not _contains_english(content_part)
             else:
@@ -124,7 +157,7 @@ def _parse_user_input(message: str) -> Dict[str, Any]:
         result['raw_topic'] = message
         result['topic'] = message
         result['learning_note'] = ''
-        result['scene'] = _detect_scene(message)
+        result['scene'] = _detect_scene(message, result["account_id"])
         result['auto_generate_expressions'] = True
     
     return result
@@ -132,6 +165,47 @@ def _parse_user_input(message: str) -> Dict[str, Any]:
 
 def _contains_english(text: str) -> bool:
     return bool(text and any(("A" <= ch <= "Z") or ("a" <= ch <= "z") for ch in text))
+
+
+def _extract_account_contract(message: str) -> tuple[str, Dict[str, str]]:
+    """Extract explicit account/mode/topic contract controls."""
+    controls: Dict[str, str] = {}
+    kept_lines: List[str] = []
+
+    for raw_line in (message or "").replace("；", "\n").replace(";", "\n").splitlines():
+        clean_line = raw_line.strip()
+        if not clean_line:
+            continue
+
+        matched = False
+        for separator in ("：", ":", "="):
+            if separator not in clean_line:
+                continue
+            key, value = clean_line.split(separator, 1)
+            key = key.strip().lower()
+            value = value.strip()
+            if key in ACCOUNT_CONTROL_KEYS:
+                controls["account_id"] = _normalize_account_id(value)
+                matched = True
+            elif key in MODE_CONTROL_KEYS:
+                controls["mode"] = value
+                matched = True
+            elif key in TOPIC_CONTROL_KEYS:
+                controls["topic"] = value
+                matched = True
+            break
+
+        if not matched:
+            kept_lines.append(clean_line)
+
+    return "\n".join(kept_lines).strip(), controls
+
+
+def _normalize_account_id(value: str) -> str:
+    account = (value or "").strip()
+    if not account:
+        return ""
+    return ACCOUNT_ALIASES.get(account, ACCOUNT_ALIASES.get(account.lower(), account))
 
 
 def _extract_voice_profile_override(message: str) -> tuple[str, Dict[str, Any]]:
@@ -201,10 +275,18 @@ def _normalize_speed_value(value: str) -> float | None:
     return max(min_speed, min(speed, max_speed))
 
 
-def _detect_scene(text: str) -> str:
+def _content_mode_prefixes(account_id: str) -> List[str]:
+    pack = get_account_pack(account_id)
+    return list((pack.get("modes", {}).get("mode_aliases") or {}).keys()) or CONTENT_MODE_PREFIXES
+
+
+def _detect_scene(text: str, account_id: str | None = None) -> str:
     """Map Chinese topic hints to the coarse scene used by the workflow memory."""
     text = text or ''
-    scene_map = [
+    account_scene_map = []
+    if account_id:
+        account_scene_map = get_account_pack(account_id).get("modes", {}).get("scene_map") or []
+    scene_map = account_scene_map or [
         ('emergency', ['救场', '卡壳', '听不清', '不会说', '付款失败', '迷路', '丢东西']),
         ('hotel', ['酒店', '入住', '退房', '房间', '前台', '押金', '早餐']),
         ('office', ['办公室', '开会', '请假', '催进度', '汇报', '同事']),
@@ -228,6 +310,7 @@ async def _run_workflow(user_input: Dict[str, Any]) -> Dict[str, Any]:
         
         # 构建工作流输入
         workflow_input = {
+            'account_id': user_input.get('account_id', DEFAULT_ACCOUNT_ID),
             'raw_topic': user_input.get('raw_topic', ''),
             'learning_note': user_input.get('learning_note', ''),
             'topic': user_input.get('topic', ''),
@@ -307,6 +390,7 @@ def agent_node(state: Dict[str, Any]) -> Dict[str, Any]:
         
         # 构建工作流输入
         workflow_input = {
+            'account_id': user_input.get('account_id', DEFAULT_ACCOUNT_ID),
             'raw_topic': user_input.get('raw_topic', ''),
             'learning_note': user_input.get('learning_note', ''),
             'topic': user_input.get('topic', ''),

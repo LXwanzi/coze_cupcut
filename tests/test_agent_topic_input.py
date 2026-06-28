@@ -48,6 +48,28 @@ def test_parse_user_input_extracts_voice_profile_override():
     assert parsed["voice_profile_override"] == {"voice": "playful", "speed": 1.12}
 
 
+def test_parse_user_input_extracts_account_contract_multiline():
+    parsed = _parse_user_input(
+        "account: metaphysics\nmode: 痛点式\ntopic: 最近总觉得钱留不住"
+    )
+
+    assert parsed["account_id"] == "metaphysics"
+    assert parsed["raw_topic"] == "痛点式：最近总觉得钱留不住"
+    assert parsed["topic"] == "痛点式：最近总觉得钱留不住"
+    assert parsed["scene"] == "wallet"
+    assert parsed["auto_generate_expressions"] is True
+
+
+def test_parse_user_input_extracts_account_contract_inline():
+    parsed = _parse_user_input(
+        "账号=玄学；模式=痛点式；主题=最近总觉得钱留不住"
+    )
+
+    assert parsed["account_id"] == "metaphysics"
+    assert parsed["raw_topic"] == "痛点式：最近总觉得钱留不住"
+    assert parsed["scene"] == "wallet"
+
+
 def test_extract_voice_profile_accepts_tts_voice_code():
     message, override = _extract_voice_profile_override(
         "痛点式：酒店退房\nvoice: zh_female_yingyujiaoxue_uranus_bigtts\nspeed: 9"

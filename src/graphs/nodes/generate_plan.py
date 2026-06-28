@@ -14,12 +14,14 @@ import logging
 from typing import Dict, Any, List, Optional
 
 from content.account_loader import get_account_pack
+from graphs.nodes.metaphysics_node import build_metaphysics_plan, is_metaphysics_account
 from graphs.nodes.topic_memory import get_topic_memory
 from graphs.nodes.topic_rescue_node import (
     apply_visual_metadata,
     build_rescue_segments,
     build_scene_collection_segments,
     build_topic_brief,
+    configure_account_context,
     detect_scene as detect_topic_scene,
     extract_answer_sentences,
     normalize_dynamic_scene_collection_brief,
@@ -96,6 +98,14 @@ def generate_plan(state: Dict[str, Any]) -> Dict[str, Any]:
     - episode_info: 集数信息（回顾、预告等）
     """
     try:
+        account_pack = get_account_pack(state.get("account_id"))
+        configure_account_context(account_pack)
+        publish_config = account_pack.get("publish", {})
+        prompt_config = account_pack.get("prompts", {})
+
+        if is_metaphysics_account(account_pack):
+            return build_metaphysics_plan(state, account_pack)
+
         # 1. 提取用户输入
         learning_note = state.get('learning_note', '')
         topic = state.get('topic', '')
@@ -145,11 +155,19 @@ def generate_plan(state: Dict[str, Any]) -> Dict[str, Any]:
                 if duration_seconds == DEFAULT_TARGET_DURATION_SECONDS:
                     duration_seconds = SCENE_COLLECTION_DURATION_SECONDS
                 if topic_brief.get("needs_dynamic_generation"):
-                    generated_brief = _generate_dynamic_scene_collection_brief(
-                        raw_topic=topic_brief.get("raw_topic") or raw_topic or user_input,
-                        scene=scene,
-                        memory_context=memory_context,
-                    )
+                    try:
+                        generated_brief = _generate_dynamic_scene_collection_brief(
+                            raw_topic=topic_brief.get("raw_topic") or raw_topic or user_input,
+                            scene=scene,
+                            memory_context=memory_context,
+                            prompt_config=prompt_config,
+                        )
+                    except TypeError:
+                        generated_brief = _generate_dynamic_scene_collection_brief(
+                            raw_topic=topic_brief.get("raw_topic") or raw_topic or user_input,
+                            scene=scene,
+                            memory_context=memory_context,
+                        )
                     if generated_brief:
                         topic_brief = generated_brief
                         scene = topic_brief.get('scene', scene)
@@ -227,6 +245,7 @@ def generate_plan(state: Dict[str, Any]) -> Dict[str, Any]:
         
         # 5. 构建内容元数据
         content_meta = {
+            'account_id': account_pack.get("account_id", "xiaowanzi_english"),
             'selected_topic': _extract_topic(segments, user_input),
             'scene': scene,
             'sub_scene': topic_brief.get('sub_scene') or topic_meta.get('sub_scene'),
@@ -245,7 +264,7 @@ def generate_plan(state: Dict[str, Any]) -> Dict[str, Any]:
         }
         
         # 6. 构建发布信息
-        publish_pack = _build_publish_pack(content_meta, topic_brief, segments)
+        publish_pack = _build_publish_pack(content_meta, topic_brief, segments, publish_config=publish_config)
         
         # 7. 构建复习卡片
         expressions = []
@@ -293,6 +312,8 @@ def generate_plan(state: Dict[str, Any]) -> Dict[str, Any]:
             'episode_info': {},
             'topic_id': topic_id if 'topic_id' in locals() else ''
         }
+    finally:
+        configure_account_context(get_account_pack())
 
 
 def _generate_topic_id(user_input: str, scene: str) -> str:
@@ -410,7 +431,8 @@ def _format_bullet_lines(lines: Any) -> str:
 def _generate_dynamic_scene_collection_brief(
     raw_topic: str,
     scene: str,
-    memory_context: Dict[str, Any]
+    memory_context: Dict[str, Any],
+    prompt_config: Optional[Dict[str, Any]] = None,
 ) -> Optional[Dict[str, Any]]:
     """Use LLM to generate concrete same-scene expressions when no preset matches."""
     learned_sentences = memory_context.get('learned_sentences', []) if memory_context else []
@@ -419,6 +441,7 @@ def _generate_dynamic_scene_collection_brief(
         raw_topic=raw_topic,
         scene=scene,
         learned_list=learned_list,
+        prompt_config=prompt_config,
     )
     try:
         import requests
@@ -467,11 +490,13 @@ def _generate_dynamic_scene_collection_brief(
 def _build_dynamic_scene_collection_prompt(
     raw_topic: str,
     scene: str,
-    learned_list: str
+    learned_list: str,
+    prompt_config: Optional[Dict[str, Any]] = None,
 ) -> str:
-    dynamic_config = PROMPT_CONFIG.get("dynamic_scene_collection") or {}
-    system_role = PROMPT_CONFIG.get("system_role") or "你是短视频脚本专家。"
-    account_positioning = _format_prompt_lines(PROMPT_CONFIG.get("account_positioning", []))
+    prompt_config = prompt_config or PROMPT_CONFIG
+    dynamic_config = prompt_config.get("dynamic_scene_collection") or {}
+    system_role = prompt_config.get("system_role") or "你是短视频脚本专家。"
+    account_positioning = _format_prompt_lines(prompt_config.get("account_positioning", []))
     brief = dynamic_config.get("brief") or "请根据用户主题动态生成一个短视频脚本 brief。"
     goal = dynamic_config.get("goal") or "生成同一个具体场景里的真实表达。"
     rules = _format_numbered_lines(dynamic_config.get("rules", []))
@@ -524,22 +549,24 @@ def _format_for_topic_brief(topic_brief: Dict[str, Any]) -> str:
 def _build_publish_pack(
     content_meta: Dict[str, Any],
     topic_brief: Dict[str, Any],
-    segments: List[Dict[str, Any]]
+    segments: List[Dict[str, Any]],
+    publish_config: Optional[Dict[str, Any]] = None,
 ) -> Dict[str, Any]:
+    publish_config = publish_config or PUBLISH_CONFIG
     topic = topic_brief.get('topic') or content_meta.get('selected_topic') or '真实场景英语'
     mode = topic_brief.get('content_mode') or content_meta.get('content_mode')
 
     if mode == 'scene_collection':
-        title = topic_brief.get('title') or _format_publish_template("title_templates", mode, topic)
-        description = _format_publish_template("description_templates", mode, topic)
-        hashtags = _publish_hashtags(mode)
+        title = topic_brief.get('title') or _format_publish_template("title_templates", mode, topic, publish_config)
+        description = _format_publish_template("description_templates", mode, topic, publish_config)
+        hashtags = _publish_hashtags(mode, publish_config)
     else:
-        title = topic_brief.get('title') or _format_publish_template("title_templates", mode, topic)
-        description = _format_publish_template("description_templates", mode, topic)
-        hashtags = _publish_hashtags(mode)
+        title = topic_brief.get('title') or _format_publish_template("title_templates", mode, topic, publish_config)
+        description = _format_publish_template("description_templates", mode, topic, publish_config)
+        hashtags = _publish_hashtags(mode, publish_config)
 
-    title_max_length = int(PUBLISH_CONFIG.get("title_max_length", 30))
-    cover_text_max_length = int(PUBLISH_CONFIG.get("cover_text_max_length", 12))
+    title_max_length = int(publish_config.get("title_max_length", 30))
+    cover_text_max_length = int(publish_config.get("cover_text_max_length", 12))
     return {
         'title': title[:title_max_length],
         'cover_text': topic[:cover_text_max_length],
@@ -548,14 +575,21 @@ def _build_publish_pack(
     }
 
 
-def _format_publish_template(config_key: str, mode: str, topic: str) -> str:
-    templates = PUBLISH_CONFIG.get(config_key) or {}
+def _format_publish_template(
+    config_key: str,
+    mode: str,
+    topic: str,
+    publish_config: Optional[Dict[str, Any]] = None,
+) -> str:
+    publish_config = publish_config or PUBLISH_CONFIG
+    templates = publish_config.get(config_key) or {}
     template = templates.get(mode) or templates.get("default") or "{topic}"
     return template.format(topic=topic)
 
 
-def _publish_hashtags(mode: str) -> List[str]:
-    hashtags = PUBLISH_CONFIG.get("hashtags") or {}
+def _publish_hashtags(mode: str, publish_config: Optional[Dict[str, Any]] = None) -> List[str]:
+    publish_config = publish_config or PUBLISH_CONFIG
+    hashtags = publish_config.get("hashtags") or {}
     return hashtags.get(mode) or hashtags.get("default") or []
 
 

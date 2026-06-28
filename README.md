@@ -47,6 +47,35 @@ CONTENT_ACCOUNT_ID=metaphysics bash scripts/local_run.sh -m flow
 
 如果未指定，默认使用 `xiaowanzi_english`。
 
+推荐在用户输入中显式声明账号契约，避免多账号串台：
+
+```text
+account: xiaowanzi_english
+mode: 场景式
+topic: 飞机上找空乘
+```
+
+```text
+account: metaphysics
+mode: 痛点式
+topic: 最近总觉得钱留不住
+```
+
+也支持一行简写：
+
+```text
+账号=玄学；模式=痛点式；主题=最近总觉得钱留不住
+```
+
+处理规则：
+
+```text
+1. account 决定读取 accounts/<account_id>/ 下的账号插件。
+2. mode 只在当前账号的 modes.json 中解析。
+3. topic 只表达本账号下的内容主题，不再承担账号识别。
+4. 未传 account 时仍默认 xiaowanzi_english，但多账号生产建议显式传 account。
+```
+
 ## 编码规范
 
 ### 1. 赛道规则必须账号级配置化

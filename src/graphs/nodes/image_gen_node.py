@@ -33,13 +33,19 @@ POSITION_CONSTRAINTS = VISUAL_CONFIG.get("position_constraints", {})
 FORBIDDEN_STYLES = VISUAL_CONFIG.get("forbidden_styles", [])
 
 
-def _handle_fixed_image(prompt_marker: str, i: int, scene: Dict[str, Any], client: Any) -> tuple:
+def _handle_fixed_image(
+    prompt_marker: str,
+    i: int,
+    scene: Dict[str, Any],
+    client: Any,
+    fixed_images: Dict[str, str] | None = None,
+) -> tuple:
     """处理固定图片类型：直接使用预置固定 URL，不调用 API"""
     global FIXED_HOOK_IMAGE_GENERATED, FIXED_REVIEW_BACKGROUND_GENERATED
 
     try:
         if prompt_marker == "FIXED_HOOK_IMAGE":
-            fixed_url = _fixed_image_url(prompt_marker)
+            fixed_url = _fixed_image_url(prompt_marker, fixed_images)
             if not fixed_url:
                 return i, None, f"Scene {i} 缺少固定图片配置: {prompt_marker}"
             cache = FIXED_HOOK_IMAGE_GENERATED
@@ -71,7 +77,7 @@ def _handle_fixed_image(prompt_marker: str, i: int, scene: Dict[str, Any], clien
             return i, updated_scene, None
 
         elif prompt_marker == "FIXED_REVIEW_WITH_CHAR":
-            fixed_url = _fixed_image_url(prompt_marker)
+            fixed_url = _fixed_image_url(prompt_marker, fixed_images)
             if not fixed_url:
                 return i, None, f"Scene {i} 缺少固定图片配置: {prompt_marker}"
             cache = FIXED_REVIEW_BACKGROUND_GENERATED
@@ -104,7 +110,7 @@ def _handle_fixed_image(prompt_marker: str, i: int, scene: Dict[str, Any], clien
 
         elif prompt_marker == "FIXED_REVIEW_BACKGROUND":
             import requests as req
-            fixed_url = _fixed_image_url(prompt_marker)
+            fixed_url = _fixed_image_url(prompt_marker, fixed_images)
             if not fixed_url:
                 return i, None, f"Scene {i} 缺少固定图片配置: {prompt_marker}"
             cache = FIXED_REVIEW_BACKGROUND_GENERATED
@@ -142,7 +148,12 @@ def _handle_fixed_image(prompt_marker: str, i: int, scene: Dict[str, Any], clien
         return i, None, f"Scene {i} 固定图片生成异常: {str(e)}"
 
 
-def _apply_style(prompt: str, scene_type: str = "", use_reference: bool = True) -> str:
+def _apply_style(
+    prompt: str,
+    scene_type: str = "",
+    use_reference: bool = True,
+    visual_config: Dict[str, Any] | None = None,
+) -> str:
     """为 prompt 添加统一风格，并移除禁止的风格关键词
     
     Args:
@@ -151,46 +162,52 @@ def _apply_style(prompt: str, scene_type: str = "", use_reference: bool = True) 
         use_reference: 是否追加角色一致性描述
     """
     # 移除禁止的关键词
-    clean_prompt = _sanitize_visual_prompt(prompt)
-    for forbidden in FORBIDDEN_STYLES:
+    visual_config = visual_config or VISUAL_CONFIG
+    style_suffix = visual_config.get("style_suffix", STYLE_SUFFIX)
+    position_constraints = visual_config.get("position_constraints", POSITION_CONSTRAINTS)
+    forbidden_styles = visual_config.get("forbidden_styles", FORBIDDEN_STYLES)
+    clean_prompt = _sanitize_visual_prompt(prompt, visual_config)
+    for forbidden in forbidden_styles:
         clean_prompt = clean_prompt.replace(forbidden, "")
 
     # 根据场景类型添加位置约束
     if "复习" in scene_type:
         # 复习页：人物缩小放角落，字幕区域留白
-        position_constraint = POSITION_CONSTRAINTS.get(
+        position_constraint = position_constraints.get(
             "review",
             ", IMPORTANT: leave clean empty space for external subtitle overlay"
         )
     elif "标题页" in scene_type:
-        position_constraint = POSITION_CONSTRAINTS.get(
+        position_constraint = position_constraints.get(
             "title",
             ", IMPORTANT: top 25% of the frame is clean and empty for external subtitles"
         )
     else:
-        position_constraint = POSITION_CONSTRAINTS.get(
+        position_constraint = position_constraints.get(
             "default",
             ", IMPORTANT: top 25% of the frame is clean and empty for external subtitles"
         )
 
-    styled_prompt = clean_prompt + STYLE_SUFFIX + position_constraint
-    styled_prompt = _append_visual_guard(styled_prompt)
+    styled_prompt = clean_prompt + style_suffix + position_constraint
+    styled_prompt = _append_visual_guard(styled_prompt, visual_config)
     
     return styled_prompt
 
 
-def _sanitize_visual_prompt(prompt: str) -> str:
+def _sanitize_visual_prompt(prompt: str, visual_config: Dict[str, Any] | None = None) -> str:
     """Remove account-configured prompt terms that invite in-image text."""
+    visual_config = visual_config or VISUAL_CONFIG
     clean_prompt = prompt or ""
-    guard = VISUAL_CONFIG.get("image_prompt_guard", {})
+    guard = visual_config.get("image_prompt_guard", {})
     for forbidden in guard.get("forbidden_prompt_terms", []):
         clean_prompt = clean_prompt.replace(forbidden, "")
     return clean_prompt
 
 
-def _append_visual_guard(prompt: str) -> str:
+def _append_visual_guard(prompt: str, visual_config: Dict[str, Any] | None = None) -> str:
     """Append account-level no-text/no-bubble constraints to image prompts."""
-    guard = VISUAL_CONFIG.get("image_prompt_guard", {})
+    visual_config = visual_config or VISUAL_CONFIG
+    guard = visual_config.get("image_prompt_guard", {})
     if not guard.get("enabled", True):
         return prompt
     suffixes = guard.get("suffixes", [])
@@ -199,14 +216,14 @@ def _append_visual_guard(prompt: str) -> str:
     return f"{prompt}, " + " ".join(suffixes)
 
 
-def _fixed_image_url(prompt_marker: str) -> str:
-    return (FIXED_IMAGES or {}).get(prompt_marker, "")
+def _fixed_image_url(prompt_marker: str, fixed_images: Dict[str, str] | None = None) -> str:
+    return (fixed_images or FIXED_IMAGES or {}).get(prompt_marker, "")
 
 
-def _fallback_image_url() -> str:
+def _fallback_image_url(fixed_images: Dict[str, str] | None = None) -> str:
     return (
-        _fixed_image_url("FIXED_HOOK_IMAGE")
-        or _fixed_image_url("FIXED_REVIEW_WITH_CHAR")
+        _fixed_image_url("FIXED_HOOK_IMAGE", fixed_images)
+        or _fixed_image_url("FIXED_REVIEW_WITH_CHAR", fixed_images)
         or ""
     )
 
@@ -215,6 +232,10 @@ def generate_images(state: Dict[str, Any]) -> Dict[str, Any]:
     """为所有 scenes 生成 AI 图片"""
     ctx = new_context(method="generate_images")
     client = ImageGenerationClient(ctx=ctx)
+    account_pack = get_account_pack(state.get("account_id"))
+    visual_config = account_pack.get("visual", {})
+    character_reference_image_url = visual_config.get("reference_image_url", "")
+    fixed_images = visual_config.get("fixed_images", {})
 
     # 优先使用 video_plan，如果不存在则从 segments 构建
     video_plan = state.get("video_plan")
@@ -276,11 +297,11 @@ def generate_images(state: Dict[str, Any]) -> Dict[str, Any]:
         scene_type = scene.get("visual_role", "") or scene.get("scene", "")
 
         # 检查是否是固定图片类型
-        if original_prompt in FIXED_IMAGES:
+        if original_prompt in fixed_images:
             logger.info(f"Generating fixed image for scene {i}: {original_prompt}")
-            return _handle_fixed_image(original_prompt, i, scene, client)
+            return _handle_fixed_image(original_prompt, i, scene, client, fixed_images=fixed_images)
 
-        prompt = _apply_style(original_prompt, scene_type=scene_type)
+        prompt = _apply_style(original_prompt, scene_type=scene_type, visual_config=visual_config)
         logger.info(f"Generating image for scene {i} ({scene_type}): {prompt[:80]}...")
 
         try:
@@ -289,8 +310,8 @@ def generate_images(state: Dict[str, Any]) -> Dict[str, Any]:
                 "size": "2K",
                 "watermark": False,
             }
-            if CHARACTER_REFERENCE_IMAGE_URL:
-                generate_kwargs["image"] = CHARACTER_REFERENCE_IMAGE_URL
+            if character_reference_image_url:
+                generate_kwargs["image"] = character_reference_image_url
             response = client.generate(**generate_kwargs)
 
             image_url = _extract_image_url(response)
@@ -319,7 +340,7 @@ def generate_images(state: Dict[str, Any]) -> Dict[str, Any]:
             else:
                 # 未获取到图片 URL，使用备用图片
                 logger.warning(f"Scene {i} 未获取到图片 URL，使用备用图片")
-                fallback_url = _fallback_image_url()
+                fallback_url = _fallback_image_url(fixed_images)
                 fallback_scene = {
                     "start": scene.get("start", 0),
                     "end": scene.get("end", 0),
@@ -335,7 +356,7 @@ def generate_images(state: Dict[str, Any]) -> Dict[str, Any]:
         except Exception as e:
             # 图片生成失败，使用固定图片作为备用
             logger.warning(f"Scene {i} 生成失败: {str(e)}，使用备用图片")
-            fallback_url = _fallback_image_url()
+            fallback_url = _fallback_image_url(fixed_images)
             fallback_scene = {
                 "start": scene.get("start", 0),
                 "end": scene.get("end", 0),

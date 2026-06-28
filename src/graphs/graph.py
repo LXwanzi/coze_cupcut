@@ -17,6 +17,7 @@ logger = logging.getLogger(__name__)
 class VideoWorkflowState(dict):
     """工作流状态"""
     # 输入字段
+    account_id: str
     raw_topic: str
     learning_note: str
     topic: str
@@ -95,6 +96,7 @@ def generate_plan_node(state: VideoWorkflowState) -> Dict[str, Any]:
     
     return {
         "topic_id": result.get("topic_id"),
+        "account_id": state.get("account_id"),
         "content_meta": result.get("content_meta"),
         "publish_pack": result.get("publish_pack"),
         "review_card": result.get("review_card"),

@@ -14,7 +14,7 @@ def write_workflow_output(
     result: Dict[str, Any],
     account_pack: Optional[Dict[str, Any]] = None
 ) -> Dict[str, Any]:
-    account_pack = account_pack or get_account_pack()
+    account_pack = account_pack or get_account_pack(state.get("account_id"))
     output_config = account_pack.get("output") or {}
     if not output_config.get("enabled", True):
         return {}

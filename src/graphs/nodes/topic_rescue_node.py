@@ -66,6 +66,37 @@ TOPIC_PRESETS: List[Dict[str, Any]] = _configured_presets("painpoint_presets")
 SCENE_COLLECTION_PRESETS: List[Dict[str, Any]] = _configured_presets("scene_collection_presets")
 
 
+def configure_account_context(account_pack: Dict[str, Any]) -> None:
+    """Switch module-level account config for one workflow invocation."""
+    global ACCOUNT_PACK, MODE_ALIASES, PAINPOINT_TRIGGERS, SCENE_MAP
+    global VOICE_PROFILES, SCENE_COLLECTION_FLOW, VISUAL_CONFIG, PROMPT_CONFIG
+    global LEGACY_PROMPT_CONFIG, QUALITY_RULES, SCENE_QUALITY_RULES
+    global GENERIC_SCENE_EXPRESSIONS, TOPIC_PRESETS, SCENE_COLLECTION_PRESETS
+
+    ACCOUNT_PACK = account_pack or get_account_pack()
+    MODE_ALIASES = ACCOUNT_PACK.get("modes", {}).get("mode_aliases") or DEFAULT_MODE_ALIASES
+    PAINPOINT_TRIGGERS = ACCOUNT_PACK.get("modes", {}).get("painpoint_triggers") or DEFAULT_PAINPOINT_TRIGGERS
+    SCENE_MAP = ACCOUNT_PACK.get("modes", {}).get("scene_map") or [
+        ["emergency", ["救场", "卡壳", "听不清", "不会说", "付款失败", "迷路", "丢东西"]],
+        ["hotel", ["酒店", "入住", "退房", "房间", "前台", "押金", "早餐"]],
+        ["office", ["办公室", "开会", "请假", "催进度", "汇报", "同事", "进度"]],
+        ["business", ["商务", "客户", "合同", "谈判", "报价", "提案"]],
+        ["parent_child", ["亲子", "孩子", "绘本", "睡前"]],
+        ["daily", ["日常", "生活", "咖啡", "外卖", "超市", "理发"]],
+        ["travel", ["旅行", "机场", "入境", "航班", "行李", "登机", "护照", "值机"]],
+    ]
+    VOICE_PROFILES = ACCOUNT_PACK.get("modes", {}).get("voice_profiles") or {}
+    SCENE_COLLECTION_FLOW = ACCOUNT_PACK.get("modes", {}).get("scene_collection_flow") or {}
+    VISUAL_CONFIG = ACCOUNT_PACK.get("visual", {})
+    PROMPT_CONFIG = ACCOUNT_PACK.get("prompts", {})
+    LEGACY_PROMPT_CONFIG = PROMPT_CONFIG.get("legacy_retention_plan", {})
+    QUALITY_RULES = ACCOUNT_PACK.get("quality_rules", {})
+    SCENE_QUALITY_RULES = QUALITY_RULES.get("scene_collection", {})
+    GENERIC_SCENE_EXPRESSIONS = set(SCENE_QUALITY_RULES.get("generic_expressions", []))
+    TOPIC_PRESETS = _configured_presets("painpoint_presets")
+    SCENE_COLLECTION_PRESETS = _configured_presets("scene_collection_presets")
+
+
 def parse_topic_input(raw_text: str) -> Dict[str, Any]:
     """Parse a user-supplied short topic into routing metadata."""
     topic = (raw_text or "").strip()

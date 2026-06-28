@@ -67,6 +67,9 @@ def _seconds_to_us(seconds: float) -> int:
 def _resolve_voice_and_speed(content_meta: Dict[str, Any]) -> tuple[str, float]:
     """Resolve configured voice profile into concrete TTS speaker and speed."""
     content_meta = content_meta or {}
+    account_pack = get_account_pack(content_meta.get("account_id"))
+    voice_config = account_pack.get("voices", {})
+    tts_voices = voice_config.get("speaker_map") or TTS_VOICES
     voice_profile = content_meta.get("voice_profile") or {}
     voice_key = (
         voice_profile.get("voice") or
@@ -85,16 +88,17 @@ def _resolve_voice_and_speed(content_meta: Dict[str, Any]) -> tuple[str, float]:
     except (TypeError, ValueError):
         speed = TTS_SPEED
     speed = max(0.8, min(speed, 1.35))
-    return _resolve_speaker(voice_key), speed
+    return _resolve_speaker(voice_key, tts_voices), speed
 
 
-def _resolve_speaker(voice_key: str) -> str:
+def _resolve_speaker(voice_key: str, tts_voices: Dict[str, str] | None = None) -> str:
+    tts_voices = tts_voices or TTS_VOICES
     voice_key = (voice_key or "").strip()
-    if voice_key in TTS_VOICES:
-        return TTS_VOICES[voice_key]
+    if voice_key in tts_voices:
+        return tts_voices[voice_key]
     if _looks_like_tts_voice_code(voice_key):
         return voice_key
-    return TTS_VOICES.get("default", DEFAULT_VOICE)
+    return tts_voices.get("default", DEFAULT_VOICE)
 
 
 def _looks_like_tts_voice_code(value: str) -> bool:
