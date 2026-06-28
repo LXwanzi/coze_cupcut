@@ -1,0 +1,112 @@
+[
+  {
+    "index": 0,
+    "start": 0,
+    "end": 6648000,
+    "duration": 6648000,
+    "caption": "最近总觉得钱留不住，先别急着焦虑。\n适合先收藏慢慢看",
+    "keywords": [],
+    "caption_highlight": {},
+    "animation": {
+      "image": "slow_zoom_in",
+      "caption": "fade_in",
+      "keyword": "soft_glow"
+    },
+    "audio_url": "https://wanzioss.oss-cn-beijing.aliyuncs.com/tts_audio/audio_1782646797993.mp3",
+    "asset_url": "https://wanzioss.oss-cn-beijing.aliyuncs.com/video_images/scene_scene_0.png",
+    "scene": "痛点钩子"
+  },
+  {
+    "index": 1,
+    "start": 6648000,
+    "end": 9072000,
+    "duration": 2424000,
+    "caption": "你最近总觉得钱留不住",
+    "keywords": [],
+    "caption_highlight": {},
+    "animation": {
+      "image": "slow_zoom_in",
+      "caption": "fade_in",
+      "keyword": "soft_glow"
+    },
+    "audio_url": "https://wanzioss.oss-cn-beijing.aliyuncs.com/tts_audio/audio_1782646799602.mp3",
+    "asset_url": "https://wanzioss.oss-cn-beijing.aliyuncs.com/video_images/scene_scene_1.png",
+    "scene": "场景代入"
+  },
+  {
+    "index": 2,
+    "start": 9072000,
+    "end": 14688000,
+    "duration": 5616000,
+    "caption": "传统说法里，状态不稳时先看空间和随身物件的秩序感。",
+    "keywords": [],
+    "caption_highlight": {},
+    "animation": {
+      "image": "slow_zoom_in",
+      "caption": "fade_in",
+      "keyword": "soft_glow"
+    },
+    "audio_url": "https://wanzioss.oss-cn-beijing.aliyuncs.com/tts_audio/audio_1782646801181.mp3",
+    "asset_url": "https://wanzioss.oss-cn-beijing.aliyuncs.com/video_images/scene_scene_2.png",
+    "scene": "传统说法"
+  },
+  {
+    "index": 3,
+    "start": 14688000,
+    "end": 22560000,
+    "duration": 7872000,
+    "caption": "五帝钱\n五帝钱更适合做一个守财感提醒，寓意是守财感、平安感、传统寓意。",
+    "keywords": [
+      "五帝钱"
+    ],
+    "caption_highlight": {
+      "keywords": [
+        "五帝钱"
+      ],
+      "mode": "keyword_badge",
+      "color": "#B45309"
+    },
+    "animation": {
+      "image": "slow_zoom_in",
+      "caption": "fade_in",
+      "keyword": "soft_glow"
+    },
+    "audio_url": "https://wanzioss.oss-cn-beijing.aliyuncs.com/tts_audio/audio_1782646802992.mp3",
+    "asset_url": "https://wanzioss.oss-cn-beijing.aliyuncs.com/video_images/scene_scene_3.png",
+    "scene": "产品建议"
+  },
+  {
+    "index": 4,
+    "start": 22560000,
+    "end": 29208000,
+    "duration": 6648000,
+    "caption": "可以放在钱包、玄关或每天会看到的位置，重点是提醒自己少冲动消费。",
+    "keywords": [],
+    "caption_highlight": {},
+    "animation": {
+      "image": "slow_zoom_in",
+      "caption": "fade_in",
+      "keyword": "soft_glow"
+    },
+    "audio_url": "https://wanzioss.oss-cn-beijing.aliyuncs.com/tts_audio/audio_1782646804760.mp3",
+    "asset_url": "https://wanzioss.oss-cn-beijing.aliyuncs.com/video_images/scene_scene_4.png",
+    "scene": "摆放建议"
+  },
+  {
+    "index": 5,
+    "start": 29208000,
+    "end": 33456000,
+    "duration": 4248000,
+    "caption": "你最近是钱留不住，还是心里总觉得不踏实？",
+    "keywords": [],
+    "caption_highlight": {},
+    "animation": {
+      "image": "slow_zoom_in",
+      "caption": "fade_in",
+      "keyword": "soft_glow"
+    },
+    "audio_url": "https://wanzioss.oss-cn-beijing.aliyuncs.com/tts_audio/audio_1782646806312.mp3",
+    "asset_url": "https://wanzioss.oss-cn-beijing.aliyuncs.com/video_images/scene_scene_5.png",
+    "scene": "自然问句"
+  }
+]
