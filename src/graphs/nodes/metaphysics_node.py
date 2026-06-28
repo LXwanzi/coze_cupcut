@@ -162,28 +162,28 @@ def _build_segments(brief: Dict[str, Any]) -> List[Dict[str, Any]]:
             "scene": "痛点钩子",
             "caption": f"{brief['hook']}\n适合先收藏慢慢看",
             "tts": f"{brief['hook']}适合先收藏慢慢看。",
-            "image_prompt": _image_prompt(brief, "opening"),
+            "image_prompt": _image_prompt(brief, "opening", include_product=False),
             "duration": 3.2,
         },
         {
             "scene": "场景代入",
             "caption": brief["pain_point"],
             "tts": brief["pain_point"],
-            "image_prompt": _image_prompt(brief, "life scene"),
+            "image_prompt": _image_prompt(brief, "life scene", include_product=False),
             "duration": 4.0,
         },
         {
             "scene": "传统说法",
             "caption": brief["traditional_view"],
             "tts": brief["traditional_view"],
-            "image_prompt": _image_prompt(brief, "traditional view"),
+            "image_prompt": _image_prompt(brief, "traditional view", include_product=False),
             "duration": 4.2,
         },
         {
             "scene": "产品建议",
             "caption": f"{brief['product_angle']}\n{brief['product_reason']}",
             "tts": f"可以看看{brief['product_reason']}",
-            "image_prompt": _image_prompt(brief, "product close up"),
+            "image_prompt": _image_prompt(brief, "product close up", include_product=True),
             "keywords": [brief["product_angle"]],
             "duration": 4.8,
         },
@@ -191,24 +191,31 @@ def _build_segments(brief: Dict[str, Any]) -> List[Dict[str, Any]]:
             "scene": "摆放建议",
             "caption": brief["placement"],
             "tts": brief["placement"],
-            "image_prompt": _image_prompt(brief, "placement tips"),
+            "image_prompt": _image_prompt(brief, "placement tips", include_product=True),
             "duration": 4.2,
         },
         {
             "scene": "自然问句",
             "caption": brief["interaction"],
             "tts": brief["interaction"],
-            "image_prompt": _image_prompt(brief, "soft interaction"),
+            "image_prompt": _image_prompt(brief, "soft interaction", include_product=False),
             "duration": 3.2,
         },
     ]
 
 
-def _image_prompt(brief: Dict[str, Any], moment: str) -> str:
-    return (
-        f"{brief['topic']}, {brief['product_angle']}, metaphysics lifestyle short video, "
-        f"moment: {moment}, product-focused still life, no text, no speech bubbles"
+def _image_prompt(brief: Dict[str, Any], moment: str, include_product: bool = False) -> str:
+    base = (
+        f"{brief['topic']}, metaphysics lifestyle short video, moment: {moment}, "
+        "abstract black-gold guardian portrait, lotus halo, incense mist, quiet mystical atmosphere, "
+        "no text, no speech bubbles"
     )
+    if include_product:
+        return (
+            f"{base}, show only one matching product type: {brief['product_angle']}, "
+            "single product close-up in lower third, no other lucky objects"
+        )
+    return f"{base}, no product props, no lucky object pile"
 
 
 def _apply_visual_metadata(segment: Dict[str, Any], account_pack: Dict[str, Any]) -> Dict[str, Any]:

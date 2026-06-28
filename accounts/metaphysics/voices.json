@@ -1,12 +1,15 @@
 {
   "speaker_map": {
-    "default": "zh_female_santongyongns_saturn_bigtts",
+    "default": "zh_male_ruyayichen_saturn_bigtts",
+    "mystic_male": "zh_male_ruyayichen_saturn_bigtts",
     "gentle": "zh_female_santongyongns_saturn_bigtts",
     "calm": "zh_female_santongyongns_saturn_bigtts",
     "warm": "zh_female_mizai_saturn_bigtts"
   },
-  "allowed_voice_keys": ["default", "gentle", "calm", "warm"],
+  "allowed_voice_keys": ["default", "mystic_male", "gentle", "calm", "warm"],
   "aliases": {
+    "玄幻男声": "mystic_male",
+    "低沉": "mystic_male",
     "温柔": "gentle",
     "平静": "calm",
     "暖一点": "warm"

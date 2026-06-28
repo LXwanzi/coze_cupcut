@@ -31,9 +31,12 @@ def test_metaphysics_account_pack_loads_isolated_config():
     assert pack["modes"]["mode_aliases"]["场景式"] == "scene_product_seed"
     assert pack["prompts"]["system_role"] == "你是玄学生活方式短视频脚本策划。"
     assert pack["visual"]["style_name"] == "黑金禅意开运物语风"
-    assert "black-gold zen metaphysics storytelling style" in pack["visual"]["style_suffix"]
+    assert "black-gold zen metaphysics key visual style" in pack["visual"]["style_suffix"]
+    assert "pixiu" not in pack["visual"]["style_suffix"]
     assert pack["visual"]["local_reference_image"] == "assets/metaphysics/seed/black_gold_zen_seed.png"
+    assert pack["voices"]["speaker_map"]["mystic_male"] == "zh_male_ruyayichen_saturn_bigtts"
     assert pack["voices"]["speaker_map"]["gentle"] == "zh_female_santongyongns_saturn_bigtts"
+    assert pack["modes"]["voice_profiles"]["painpoint_conversion"]["voice"] == "mystic_male"
     assert pack["product_catalog"]["products"][0]["name"] == "小貔貅摆件"
     assert "保证发财" in pack["safety_rules"]["forbidden_claims"]
 

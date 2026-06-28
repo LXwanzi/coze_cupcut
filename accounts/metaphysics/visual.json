@@ -3,11 +3,11 @@
   "local_reference_image": "assets/metaphysics/seed/black_gold_zen_seed.png",
   "fixed_images": {},
   "style_name": "黑金禅意开运物语风",
-  "style_suffix": ", black-gold zen metaphysics storytelling style, deep ink-black background, warm golden line art, abstract buddhist guardian light silhouette without realistic facial details, lotus glow, circular halo, incense smoke, moonlight, broken scroll fragments, mirror shards, golden particles, premium low-saturation dark gold palette, foreground product-focused lucky objects such as pixiu, five emperor coins, gourd charm, yellow crystal, cinnabar bracelet and candle, mystical and protective but not scary, no text inside the image, no watermark, vertical 9:16 frame",
+  "style_suffix": ", black-gold zen metaphysics key visual style, deep ink-black background, warm golden line art, abstract guardian portrait silhouette without realistic facial details, lotus glow, circular halo, incense smoke, soft golden particles, premium low-saturation dark gold palette, mystical and protective but not scary, clean cinematic composition, no text inside the image, no watermark, vertical 9:16 frame",
   "position_constraints": {
-    "review": ", IMPORTANT: leave the upper 55% dark and clean for external subtitles, lucky objects placed in lower third with warm gold glow",
-    "title": ", IMPORTANT: abstract guardian light and lucky objects in lower half, top 30% clean dark negative space for external subtitles",
-    "default": ", IMPORTANT: cinematic vertical composition, key lucky object visible in lower third, top 30% clean dark negative space for external subtitles"
+    "review": ", IMPORTANT: leave the upper 55% dark and clean for external subtitles, guardian portrait in lower half, no product pile",
+    "title": ", IMPORTANT: abstract guardian portrait in lower half, top 35% clean dark negative space for external subtitles",
+    "default": ", IMPORTANT: cinematic vertical composition, top 35% clean dark negative space for external subtitles, do not show multiple lucky objects"
   },
   "forbidden_styles": [
     "horror",
@@ -19,7 +19,10 @@
     "complex talisman",
     "text in image",
     "caption in image",
-    "speech bubble"
+    "speech bubble",
+    "product pile",
+    "many lucky objects",
+    "assorted objects"
   ],
   "image_prompt_guard": {
     "enabled": true,
@@ -27,7 +30,9 @@
       "No text, no letters, no captions, no subtitles.",
       "No speech bubbles, no comic dialogue bubbles, no thought bubbles.",
       "No scary symbols, no horror atmosphere, no watermark.",
-      "The image must not contain any written words or pseudo-text."
+      "The image must not contain any written words or pseudo-text.",
+      "Do not show a pile of multiple lucky objects.",
+      "If a product is needed, show only one product type that matches the script."
     ],
     "forbidden_prompt_terms": [
       "speech bubble",

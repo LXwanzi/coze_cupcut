@@ -352,6 +352,8 @@ def test_generate_plan_uses_metaphysics_account_contract(tmp_path, monkeypatch):
     assert result["content_meta"]["format"] == "metaphysics_product_seed"
     assert result["content_meta"]["content_mode"] == "painpoint_conversion"
     assert result["content_meta"]["scene"] == "wallet"
+    assert result["content_meta"]["voice_profile"]["voice"] == "mystic_male"
+    assert result["content_meta"]["voice_profile"]["speed"] == 0.94
     assert result["content_meta"]["product"]["name"] in ["五帝钱", "小貔貅摆件", "黄水晶小摆件"]
     assert result["publish_pack"]["title"].startswith("【最近总觉得钱留不住】")
     assert [segment["scene"] for segment in result["segments"][:3]] == [
@@ -362,6 +364,9 @@ def test_generate_plan_uses_metaphysics_account_contract(tmp_path, monkeypatch):
     captions = "\n".join(segment["caption"] for segment in result["segments"])
     assert "help me" not in captions
     assert "小丸子" not in captions
+    assert "no product props" in result["segments"][0]["image_prompt"]
+    assert "show only one matching product type" in result["segments"][3]["image_prompt"]
+    assert result["content_meta"]["product"]["name"] in result["segments"][3]["image_prompt"]
 
 
 def test_tts_resolves_voice_profile_speed():
