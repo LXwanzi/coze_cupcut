@@ -59,7 +59,7 @@ def test_build_topic_brief_adds_scene_collection_expressions():
     assert len(brief["expressions"]) == 5
     assert brief["expressions"][0]["english"] == "Excuse me, could you help me?"
     assert brief["quality_review"]["is_reasonable"] is True
-    assert brief["voice_profile"]["voice"] == "playful"
+    assert brief["voice_profile"]["voice"] == "default"
 
 
 def test_painpoint_plane_attendant_uses_meaningful_contrast():

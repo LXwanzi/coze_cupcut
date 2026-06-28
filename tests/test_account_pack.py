@@ -24,4 +24,4 @@ def test_topic_rescue_uses_account_pack_values():
     assert any(item["id"] == "plane_attendant_help" for item in SCENE_COLLECTION_PRESETS)
     assert any(item["id"] == "airport_checkin_bag" for item in TOPIC_PRESETS)
     assert detect_scene("酒店退房查账单") == "hotel"
-    assert voice_profile_for_mode("scene_collection", "travel")["voice"] == "playful"
+    assert voice_profile_for_mode("scene_collection", "travel")["voice"] == "default"
