@@ -1,11 +1,13 @@
 {
   "reference_image_url": "",
+  "local_reference_image": "assets/metaphysics/seed/black_gold_zen_seed.png",
   "fixed_images": {},
-  "style_suffix": ", warm soft oriental lifestyle aesthetic, clean bright home space, low-saturation gold accents, wooden table, natural light, calm premium composition, product-focused still life, no text inside the image, no symbols, no scary atmosphere, vertical 9:16 frame",
+  "style_name": "黑金禅意开运物语风",
+  "style_suffix": ", black-gold zen metaphysics storytelling style, deep ink-black background, warm golden line art, abstract buddhist guardian light silhouette without realistic facial details, lotus glow, circular halo, incense smoke, moonlight, broken scroll fragments, mirror shards, golden particles, premium low-saturation dark gold palette, foreground product-focused lucky objects such as pixiu, five emperor coins, gourd charm, yellow crystal, cinnabar bracelet and candle, mystical and protective but not scary, no text inside the image, no watermark, vertical 9:16 frame",
   "position_constraints": {
-    "review": ", IMPORTANT: leave the upper 60% clean and empty for external subtitles, product placed in lower third",
-    "title": ", IMPORTANT: product or lifestyle scene in lower half, top 25% clean and empty for external subtitles",
-    "default": ", IMPORTANT: clean composition, key product visible, top 25% clean and empty for external subtitles"
+    "review": ", IMPORTANT: leave the upper 55% dark and clean for external subtitles, lucky objects placed in lower third with warm gold glow",
+    "title": ", IMPORTANT: abstract guardian light and lucky objects in lower half, top 30% clean dark negative space for external subtitles",
+    "default": ", IMPORTANT: cinematic vertical composition, key lucky object visible in lower third, top 30% clean dark negative space for external subtitles"
   },
   "forbidden_styles": [
     "horror",

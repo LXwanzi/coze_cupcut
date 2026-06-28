@@ -35,5 +35,24 @@
     "scene_collection": {"voice": "default", "speed": 1.16, "style": "bright_companion"},
     "painpoint_contrast": {"voice": "playful", "speed": 1.18, "style": "snappy_contrast"},
     "default": {"voice": "zh_female_yingyujiaoxue_uranus_bigtts", "speed": 1.08, "style": "clear_bilingual"}
+  },
+  "scene_collection_flow": {
+    "order": ["opening_overview", "sentence_pages", "interaction"],
+    "opening_overview": {
+      "enabled": true,
+      "scene": "开场总览页",
+      "duration": 3.8,
+      "image_prompt": "FIXED_REVIEW_WITH_CHAR"
+    },
+    "full_sentence_preview": {
+      "enabled": false,
+      "scene": "英文总览页",
+      "duration": 3.0,
+      "tts": "这 5 句先过一遍，后面带你逐句看。",
+      "image_prompt": "FIXED_REVIEW_WITH_CHAR"
+    },
+    "summary": {
+      "enabled": false
+    }
   }
 }

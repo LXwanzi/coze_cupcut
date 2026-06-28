@@ -48,6 +48,7 @@ SCENE_MAP = ACCOUNT_PACK.get("modes", {}).get("scene_map") or [
     ["travel", ["旅行", "机场", "入境", "航班", "行李", "登机", "护照", "值机"]],
 ]
 VOICE_PROFILES = ACCOUNT_PACK.get("modes", {}).get("voice_profiles") or {}
+SCENE_COLLECTION_FLOW = ACCOUNT_PACK.get("modes", {}).get("scene_collection_flow") or {}
 VISUAL_CONFIG = ACCOUNT_PACK.get("visual", {})
 PROMPT_CONFIG = ACCOUNT_PACK.get("prompts", {})
 LEGACY_PROMPT_CONFIG = PROMPT_CONFIG.get("legacy_retention_plan", {})
@@ -171,15 +172,14 @@ def build_scene_collection_segments(
 ) -> List[Dict[str, Any]]:
     """Build a compact 4-5 sentence same-scene collection script."""
     expressions = (brief.get("expressions") or [])[:5]
-    segments: List[Dict[str, Any]] = [
-        {
-            "scene": "钩子页",
-            "caption": brief.get("hook", f"{brief.get('topic', '这个场景')}，这几句先收藏。"),
-            "tts": build_scene_collection_hook_tts(brief),
-            "image_prompt": "FIXED_HOOK_IMAGE",
-            "duration": 2.0,
-        }
-    ]
+    segments: List[Dict[str, Any]] = []
+    if _opening_overview_enabled():
+        segments.append(build_opening_overview_segment(brief, expressions))
+    else:
+        segments.append(build_scene_collection_hook_segment(brief))
+
+    if not _opening_overview_enabled() and _full_sentence_preview_enabled():
+        segments.append(build_full_sentence_preview_segment(expressions))
 
     for index, expression in enumerate(expressions, start=1):
         segments.append({
@@ -191,18 +191,10 @@ def build_scene_collection_segments(
             "duration": SCENE_COLLECTION_SENTENCE_SECONDS,
         })
 
-    summary_caption = "\n".join(
-        f"{idx}. {item.get('english', '')}"
-        for idx, item in enumerate(expressions, start=1)
-    )
+    if _summary_enabled():
+        segments.append(build_scene_collection_summary_segment(brief, expressions))
+
     segments.extend([
-        {
-            "scene": "快速汇总页",
-            "caption": summary_caption,
-            "tts": build_scene_collection_summary_tts(brief),
-            "image_prompt": "FIXED_REVIEW_WITH_CHAR",
-            "duration": SCENE_COLLECTION_SUMMARY_SECONDS,
-        },
         {
             "scene": "互动页",
             "caption": brief.get("interaction", "你还卡过哪句？评论区说说。"),
@@ -460,16 +452,122 @@ def build_collection_sentence_tts(index: int, expression: Dict[str, Any]) -> str
     return sanitize_tts(f"第 {index} 句：{english}。{chinese}")
 
 
+def build_scene_collection_hook_segment(brief: Dict[str, Any]) -> Dict[str, Any]:
+    opening_text = build_scene_collection_opening_text(brief)
+    return {
+        "scene": "钩子页",
+        "caption": opening_text,
+        "tts": opening_text,
+        "image_prompt": "FIXED_HOOK_IMAGE",
+        "duration": 2.0,
+    }
+
+
+def build_opening_overview_segment(
+    brief: Dict[str, Any],
+    expressions: List[Dict[str, Any]]
+) -> Dict[str, Any]:
+    config = SCENE_COLLECTION_FLOW.get("opening_overview") or {}
+    english_list = "\n".join(
+        f"{index}. {item.get('english', '').strip()}"
+        for index, item in enumerate(expressions, start=1)
+        if item.get("english")
+    )
+    caption = f"{build_scene_collection_opening_caption(brief)}\n{english_list}".strip()
+    return {
+        "scene": config.get("scene", "开场总览页"),
+        "caption": caption,
+        "tts": build_scene_collection_opening_text(brief),
+        "image_prompt": config.get("image_prompt", "FIXED_REVIEW_WITH_CHAR"),
+        "duration": float(config.get("duration", 3.8)),
+    }
+
+
+def build_full_sentence_preview_segment(expressions: List[Dict[str, Any]]) -> Dict[str, Any]:
+    config = SCENE_COLLECTION_FLOW.get("full_sentence_preview") or {}
+    caption = "\n".join(
+        f"{index}. {item.get('english', '').strip()}"
+        for index, item in enumerate(expressions, start=1)
+        if item.get("english")
+    )
+    return {
+        "scene": config.get("scene", "英文总览页"),
+        "caption": caption,
+        "tts": config.get("tts", "这 5 句先过一遍，后面带你逐句看。"),
+        "image_prompt": config.get("image_prompt", "FIXED_REVIEW_WITH_CHAR"),
+        "duration": float(config.get("duration", 3.0)),
+    }
+
+
+def build_scene_collection_summary_segment(
+    brief: Dict[str, Any],
+    expressions: List[Dict[str, Any]]
+) -> Dict[str, Any]:
+    summary_caption = "\n".join(
+        f"{idx}. {item.get('english', '')}"
+        for idx, item in enumerate(expressions, start=1)
+    )
+    return {
+        "scene": "快速汇总页",
+        "caption": summary_caption,
+        "tts": build_scene_collection_summary_tts(brief),
+        "image_prompt": "FIXED_REVIEW_WITH_CHAR",
+        "duration": SCENE_COLLECTION_SUMMARY_SECONDS,
+    }
+
+
+def _full_sentence_preview_enabled() -> bool:
+    return bool((SCENE_COLLECTION_FLOW.get("full_sentence_preview") or {}).get("enabled", False))
+
+
+def _opening_overview_enabled() -> bool:
+    return bool((SCENE_COLLECTION_FLOW.get("opening_overview") or {}).get("enabled", False))
+
+
+def _summary_enabled() -> bool:
+    return bool((SCENE_COLLECTION_FLOW.get("summary") or {}).get("enabled", True))
+
+
 def _strip_sentence_end(text: str) -> str:
     return (text or "").strip().rstrip("。.!！？? ")
 
 
-def build_scene_collection_hook_tts(brief: Dict[str, Any]) -> str:
-    hook = brief.get("hook", f"{brief.get('topic', '这个场景')}，这几句先收藏。")
-    setup = brief.get("setup") or brief.get("real_scene", "")
-    if setup:
-        return sanitize_tts(f"{hook} {setup}")
+def build_scene_collection_opening_text(brief: Dict[str, Any]) -> str:
+    hook = brief.get("hook", f"{brief.get('topic', '这个场景')}，这几句先收藏。").strip()
+    value_text = build_scene_collection_value_text(brief)
+    if value_text:
+        return sanitize_tts(f"{hook} {value_text}")
     return sanitize_tts(hook)
+
+
+def build_scene_collection_opening_caption(brief: Dict[str, Any]) -> str:
+    hook = brief.get("hook", f"{brief.get('topic', '这个场景')}，这几句先收藏。").strip()
+    value_text = build_scene_collection_value_text(brief)
+    if value_text:
+        return f"{sanitize_tts(hook)}\n{value_text}"
+    return sanitize_tts(hook)
+
+
+def build_scene_collection_value_text(brief: Dict[str, Any]) -> str:
+    setup = (brief.get("setup") or "").strip()
+    if not setup:
+        return ""
+
+    value_text = setup
+    if "收藏" not in value_text:
+        match = re.match(r"^这\s*5\s*句(.*)$", value_text)
+        if match:
+            rest = match.group(1).strip("，,。 ")
+            rest = re.sub(r"^按顺序(学|说)(就够)?[，, ]*", "", rest)
+            value_text = f"收藏这 5 句，{rest}" if rest else "收藏这 5 句。"
+        else:
+            value_text = f"收藏这 5 句，{value_text}"
+
+    return sanitize_tts(value_text)
+
+
+def build_scene_collection_hook_tts(brief: Dict[str, Any]) -> str:
+    return build_scene_collection_opening_text(brief)
 
 
 def build_scene_collection_summary_tts(brief: Dict[str, Any]) -> str:
@@ -490,9 +588,16 @@ def validate_scene_collection_segments(
             continue
         item = dict(segment)
         item["tts"] = sanitize_tts(item.get("tts", ""))
-        if item.get("scene") == "快速汇总页":
-            item["caption"] = compact_caption(item.get("caption", ""), max_lines=5)
-            item["duration"] = min(float(item.get("duration", SCENE_COLLECTION_SUMMARY_SECONDS)), SCENE_COLLECTION_SUMMARY_SECONDS)
+        if item.get("scene") in ["快速汇总页", "英文总览页", "开场总览页"]:
+            max_lines = 7 if item.get("scene") == "开场总览页" else 5
+            item["caption"] = compact_caption(item.get("caption", ""), max_lines=max_lines)
+            if item.get("scene") == "开场总览页":
+                max_segment_duration = 4.0
+            elif item.get("scene") == "英文总览页":
+                max_segment_duration = 3.2
+            else:
+                max_segment_duration = SCENE_COLLECTION_SUMMARY_SECONDS
+            item["duration"] = min(float(item.get("duration", max_segment_duration)), max_segment_duration)
         elif item.get("scene") in ["钩子页", "互动页"]:
             item["caption"] = compact_caption(item.get("caption", ""), max_lines=2)
             item["duration"] = min(float(item.get("duration", SCENE_COLLECTION_INTERACTION_SECONDS)), 2.0)

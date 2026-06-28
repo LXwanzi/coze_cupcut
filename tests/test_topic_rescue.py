@@ -109,7 +109,12 @@ def test_build_scene_collection_segments_keeps_five_sentences_fast():
     sentence_segments = [segment for segment in segments if segment["scene"].startswith("第")]
     assert len(sentence_segments) == 5
     assert sentence_segments[0]["caption"].startswith("Excuse me, could you help me?")
-    assert segments[0]["scene"] == "钩子页"
+    assert segments[0]["scene"] == "开场总览页"
+    assert "飞机上想找空乘" in segments[0]["caption"]
+    assert "收藏这 5 句" in segments[0]["caption"]
+    assert "报故障都能用" in segments[0]["caption"]
+    assert segments[0]["tts"] == "飞机上想找空乘，别只会 hello。 收藏这 5 句，求助、放行李、要东西、报故障都能用"
+    assert "1. Excuse me, could you help me?" in segments[0]["caption"]
     assert segments[1]["scene"] == "第1句场景句"
     assert segments[-1]["scene"] == "互动页"
     assert sum(segment["duration"] for segment in segments) <= 34
@@ -264,7 +269,7 @@ def test_generate_plan_topic_only_uses_scene_collection_mode(tmp_path, monkeypat
     assert result["publish_pack"]["title"].startswith("【飞机上找空乘】")
     assert len(result["review_card"]["today_expressions"]) == 5
     assert [segment["scene"] for segment in result["segments"][:3]] == [
-        "钩子页",
+        "开场总览页",
         "第1句场景句",
         "第2句场景句",
     ]
