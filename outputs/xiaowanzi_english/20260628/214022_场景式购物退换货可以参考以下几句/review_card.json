@@ -1,0 +1,31 @@
+{
+  "today_expressions": [
+    {
+      "english": "I'd like to return this shirt.",
+      "chinese": "我想退这件衬衫",
+      "usage": ""
+    },
+    {
+      "english": "It's too small for me.",
+      "chinese": "它对我来说太小了",
+      "usage": ""
+    },
+    {
+      "english": "Do you have a larger size?",
+      "chinese": "你们有更大码的吗？",
+      "usage": ""
+    },
+    {
+      "english": "When will the refund come through?",
+      "chinese": "退款什么时候到账？",
+      "usage": ""
+    },
+    {
+      "english": "Can I get a new bag for this?",
+      "chinese": "能给我个新袋子装这个吗？",
+      "usage": ""
+    }
+  ],
+  "answer_levels": [],
+  "quick_review": "先收藏，下一集继续同一场景。"
+}

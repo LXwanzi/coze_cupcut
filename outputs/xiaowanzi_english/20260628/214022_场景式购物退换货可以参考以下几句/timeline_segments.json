@@ -1,0 +1,182 @@
+[
+  {
+    "index": 0,
+    "start": 0,
+    "end": 8448000,
+    "duration": 8448000,
+    "caption": "出国买错东西退换不用慌！\n收藏这 5 句，覆盖从说明诉求到确认退款的全流程表达\n1. I'd like to return this shirt.\n2. It's too small for me.\n3. Do you have a larger size?\n4. When will the refund come through?\n5. Can I get a new bag for this?",
+    "keywords": [
+      "I'd",
+      "like"
+    ],
+    "caption_highlight": {
+      "enabled": true,
+      "mode": "keyword_badge",
+      "highlight_color": "#2563EB",
+      "keywords": [
+        "I'd",
+        "like"
+      ]
+    },
+    "animation": {
+      "image": "slow_zoom_in",
+      "caption": "fade_in",
+      "keyword": "pop"
+    },
+    "audio_url": "https://wanzioss.oss-cn-beijing.aliyuncs.com/tts_audio/audio_1782653939729.mp3",
+    "asset_url": "https://wanzioss.oss-cn-beijing.aliyuncs.com/video_images/scene_review_bg_0.png",
+    "scene": "开场总览页"
+  },
+  {
+    "index": 1,
+    "start": 8448000,
+    "end": 13680000,
+    "duration": 5232000,
+    "caption": "I'd like to return this shirt.\n我想退这件衬衫",
+    "keywords": [
+      "return"
+    ],
+    "caption_highlight": {
+      "enabled": true,
+      "mode": "keyword_badge",
+      "highlight_color": "#2563EB",
+      "keywords": [
+        "return"
+      ]
+    },
+    "animation": {
+      "image": "slow_zoom_in",
+      "caption": "fade_in",
+      "keyword": "pop"
+    },
+    "audio_url": "https://wanzioss.oss-cn-beijing.aliyuncs.com/tts_audio/audio_1782653941467.mp3",
+    "asset_url": "https://wanzioss.oss-cn-beijing.aliyuncs.com/video_images/scene_scene_1.png",
+    "scene": "第1句场景句"
+  },
+  {
+    "index": 2,
+    "start": 13680000,
+    "end": 18504000,
+    "duration": 4824000,
+    "caption": "It's too small for me.\n它对我来说太小了",
+    "keywords": [
+      "small"
+    ],
+    "caption_highlight": {
+      "enabled": true,
+      "mode": "keyword_badge",
+      "highlight_color": "#2563EB",
+      "keywords": [
+        "small"
+      ]
+    },
+    "animation": {
+      "image": "slow_zoom_in",
+      "caption": "fade_in",
+      "keyword": "pop"
+    },
+    "audio_url": "https://wanzioss.oss-cn-beijing.aliyuncs.com/tts_audio/audio_1782653942870.mp3",
+    "asset_url": "https://wanzioss.oss-cn-beijing.aliyuncs.com/video_images/scene_scene_2.png",
+    "scene": "第2句场景句"
+  },
+  {
+    "index": 3,
+    "start": 18504000,
+    "end": 23328000,
+    "duration": 4824000,
+    "caption": "Do you have a larger size?\n你们有更大码的吗？",
+    "keywords": [
+      "larger size"
+    ],
+    "caption_highlight": {
+      "enabled": true,
+      "mode": "keyword_badge",
+      "highlight_color": "#2563EB",
+      "keywords": [
+        "larger size"
+      ]
+    },
+    "animation": {
+      "image": "slow_zoom_in",
+      "caption": "fade_in",
+      "keyword": "pop"
+    },
+    "audio_url": "https://wanzioss.oss-cn-beijing.aliyuncs.com/tts_audio/audio_1782653944308.mp3",
+    "asset_url": "https://wanzioss.oss-cn-beijing.aliyuncs.com/video_images/scene_scene_3.png",
+    "scene": "第3句场景句"
+  },
+  {
+    "index": 4,
+    "start": 23328000,
+    "end": 29376000,
+    "duration": 6048000,
+    "caption": "When will the refund come through?\n退款什么时候到账？",
+    "keywords": [
+      "refund"
+    ],
+    "caption_highlight": {
+      "enabled": true,
+      "mode": "keyword_badge",
+      "highlight_color": "#2563EB",
+      "keywords": [
+        "refund"
+      ]
+    },
+    "animation": {
+      "image": "slow_zoom_in",
+      "caption": "fade_in",
+      "keyword": "pop"
+    },
+    "audio_url": "https://wanzioss.oss-cn-beijing.aliyuncs.com/tts_audio/audio_1782653945891.mp3",
+    "asset_url": "https://wanzioss.oss-cn-beijing.aliyuncs.com/video_images/scene_scene_4.png",
+    "scene": "第4句场景句"
+  },
+  {
+    "index": 5,
+    "start": 29376000,
+    "end": 35016000,
+    "duration": 5640000,
+    "caption": "Can I get a new bag for this?\n能给我个新袋子装这个吗？",
+    "keywords": [
+      "bag"
+    ],
+    "caption_highlight": {
+      "enabled": true,
+      "mode": "keyword_badge",
+      "highlight_color": "#2563EB",
+      "keywords": [
+        "bag"
+      ]
+    },
+    "animation": {
+      "image": "slow_zoom_in",
+      "caption": "fade_in",
+      "keyword": "pop"
+    },
+    "audio_url": "https://wanzioss.oss-cn-beijing.aliyuncs.com/tts_audio/audio_1782653947508.mp3",
+    "asset_url": "https://wanzioss.oss-cn-beijing.aliyuncs.com/video_images/scene_scene_5.png",
+    "scene": "第5句场景句"
+  },
+  {
+    "index": 6,
+    "start": 35016000,
+    "end": 39048000,
+    "duration": 4032000,
+    "caption": "你出国旅游有没有遇到过要退换货的情况呀？",
+    "keywords": [],
+    "caption_highlight": {
+      "enabled": true,
+      "mode": "keyword_badge",
+      "highlight_color": "#2563EB",
+      "keywords": []
+    },
+    "animation": {
+      "image": "slow_zoom_in",
+      "caption": "fade_in",
+      "keyword": "pop"
+    },
+    "audio_url": "https://wanzioss.oss-cn-beijing.aliyuncs.com/tts_audio/audio_1782653948913.mp3",
+    "asset_url": "https://wanzioss.oss-cn-beijing.aliyuncs.com/video_images/scene_hook_img_6.png",
+    "scene": "互动页"
+  }
+]

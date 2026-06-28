@@ -92,13 +92,13 @@ def _resolve_voice_and_speed(content_meta: Dict[str, Any]) -> tuple[str, float]:
 
 
 def _resolve_speaker(voice_key: str, tts_voices: Dict[str, str] | None = None) -> str:
-    tts_voices = tts_voices or TTS_VOICES
+    resolved_voices = tts_voices if tts_voices is not None else TTS_VOICES
     voice_key = (voice_key or "").strip()
-    if voice_key in tts_voices:
-        return tts_voices[voice_key]
+    if voice_key in resolved_voices:
+        return resolved_voices[voice_key]
     if _looks_like_tts_voice_code(voice_key):
         return voice_key
-    return tts_voices.get("default", DEFAULT_VOICE)
+    return resolved_voices.get("default", DEFAULT_VOICE)
 
 
 def _looks_like_tts_voice_code(value: str) -> bool:

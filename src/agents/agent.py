@@ -431,8 +431,6 @@ def agent_node(state: Dict[str, Any]) -> Dict[str, Any]:
     
     if draft_url:
         response += f"剪映草稿链接：{draft_url}\n"
-    if result.get('output_dir'):
-        response += f"输出目录：{result.get('output_dir')}\n"
     
     # 添加视频内容摘要
     segments = result.get('segments', [])

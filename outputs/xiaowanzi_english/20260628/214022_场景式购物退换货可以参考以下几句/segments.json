@@ -1,0 +1,210 @@
+[
+  {
+    "scene": "开场总览页",
+    "caption": "出国买错东西退换不用慌！\n收藏这 5 句，覆盖从说明诉求到确认退款的全流程表达\n1. I'd like to return this shirt.\n2. It's too small for me.\n3. Do you have a larger size?\n4. When will the refund come through?\n5. Can I get a new bag for this?",
+    "tts": "出国买错东西退换不用慌！ 收藏这 5 句，覆盖从说明诉求到确认退款的全流程表达",
+    "image_prompt": "FIXED_REVIEW_WITH_CHAR",
+    "duration": 3.8,
+    "keywords": [
+      "I'd",
+      "like"
+    ],
+    "caption_highlight": {
+      "enabled": true,
+      "mode": "keyword_badge",
+      "highlight_color": "#2563EB",
+      "keywords": [
+        "I'd",
+        "like"
+      ]
+    },
+    "animation": {
+      "image": "slow_zoom_in",
+      "caption": "fade_in",
+      "keyword": "pop"
+    },
+    "audio_url": "https://wanzioss.oss-cn-beijing.aliyuncs.com/tts_audio/audio_1782653939729.mp3",
+    "audio_duration": 8448000,
+    "audio_duration_seconds": 8.448,
+    "start": 0,
+    "end": 8448000,
+    "asset_url": "https://wanzioss.oss-cn-beijing.aliyuncs.com/video_images/scene_review_bg_0.png",
+    "image_url": "https://wanzioss.oss-cn-beijing.aliyuncs.com/video_images/scene_review_bg_0.png"
+  },
+  {
+    "scene": "第1句场景句",
+    "caption": "I'd like to return this shirt.\n我想退这件衬衫",
+    "tts": "第 1 句：I'd like to return this shirt。我想退这件衬衫",
+    "image_prompt": "旅行购物退换货英语, 出国旅游时在当地服饰门店退换购买的衣服, moment: 说明退货诉求, Xiao Wanzi helping a young office worker speak English, minimal props, clear real-life setting",
+    "keywords": [
+      "return"
+    ],
+    "duration": 4.0,
+    "caption_highlight": {
+      "enabled": true,
+      "mode": "keyword_badge",
+      "highlight_color": "#2563EB",
+      "keywords": [
+        "return"
+      ]
+    },
+    "animation": {
+      "image": "slow_zoom_in",
+      "caption": "fade_in",
+      "keyword": "pop"
+    },
+    "audio_url": "https://wanzioss.oss-cn-beijing.aliyuncs.com/tts_audio/audio_1782653941467.mp3",
+    "audio_duration": 5232000,
+    "audio_duration_seconds": 5.232,
+    "start": 8448000,
+    "end": 13680000,
+    "asset_url": "https://wanzioss.oss-cn-beijing.aliyuncs.com/video_images/scene_scene_1.png",
+    "image_url": "https://wanzioss.oss-cn-beijing.aliyuncs.com/video_images/scene_scene_1.png"
+  },
+  {
+    "scene": "第2句场景句",
+    "caption": "It's too small for me.\n它对我来说太小了",
+    "tts": "第 2 句：It's too small for me。它对我来说太小了",
+    "image_prompt": "旅行购物退换货英语, 出国旅游时在当地服饰门店退换购买的衣服, moment: 说明退换原因, Xiao Wanzi helping a young office worker speak English, minimal props, clear real-life setting",
+    "keywords": [
+      "small"
+    ],
+    "duration": 4.0,
+    "caption_highlight": {
+      "enabled": true,
+      "mode": "keyword_badge",
+      "highlight_color": "#2563EB",
+      "keywords": [
+        "small"
+      ]
+    },
+    "animation": {
+      "image": "slow_zoom_in",
+      "caption": "fade_in",
+      "keyword": "pop"
+    },
+    "audio_url": "https://wanzioss.oss-cn-beijing.aliyuncs.com/tts_audio/audio_1782653942870.mp3",
+    "audio_duration": 4824000,
+    "audio_duration_seconds": 4.824,
+    "start": 13680000,
+    "end": 18504000,
+    "asset_url": "https://wanzioss.oss-cn-beijing.aliyuncs.com/video_images/scene_scene_2.png",
+    "image_url": "https://wanzioss.oss-cn-beijing.aliyuncs.com/video_images/scene_scene_2.png"
+  },
+  {
+    "scene": "第3句场景句",
+    "caption": "Do you have a larger size?\n你们有更大码的吗？",
+    "tts": "第 3 句：Do you have a larger size。你们有更大码的吗",
+    "image_prompt": "旅行购物退换货英语, 出国旅游时在当地服饰门店退换购买的衣服, moment: 询问换货选项, Xiao Wanzi helping a young office worker speak English, minimal props, clear real-life setting",
+    "keywords": [
+      "larger size"
+    ],
+    "duration": 4.0,
+    "caption_highlight": {
+      "enabled": true,
+      "mode": "keyword_badge",
+      "highlight_color": "#2563EB",
+      "keywords": [
+        "larger size"
+      ]
+    },
+    "animation": {
+      "image": "slow_zoom_in",
+      "caption": "fade_in",
+      "keyword": "pop"
+    },
+    "audio_url": "https://wanzioss.oss-cn-beijing.aliyuncs.com/tts_audio/audio_1782653944308.mp3",
+    "audio_duration": 4824000,
+    "audio_duration_seconds": 4.824,
+    "start": 18504000,
+    "end": 23328000,
+    "asset_url": "https://wanzioss.oss-cn-beijing.aliyuncs.com/video_images/scene_scene_3.png",
+    "image_url": "https://wanzioss.oss-cn-beijing.aliyuncs.com/video_images/scene_scene_3.png"
+  },
+  {
+    "scene": "第4句场景句",
+    "caption": "When will the refund come through?\n退款什么时候到账？",
+    "tts": "第 4 句：When will the refund come through。退款什么时候到账",
+    "image_prompt": "旅行购物退换货英语, 出国旅游时在当地服饰门店退换购买的衣服, moment: 确认退款到账, Xiao Wanzi helping a young office worker speak English, minimal props, clear real-life setting",
+    "keywords": [
+      "refund"
+    ],
+    "duration": 4.0,
+    "caption_highlight": {
+      "enabled": true,
+      "mode": "keyword_badge",
+      "highlight_color": "#2563EB",
+      "keywords": [
+        "refund"
+      ]
+    },
+    "animation": {
+      "image": "slow_zoom_in",
+      "caption": "fade_in",
+      "keyword": "pop"
+    },
+    "audio_url": "https://wanzioss.oss-cn-beijing.aliyuncs.com/tts_audio/audio_1782653945891.mp3",
+    "audio_duration": 6048000,
+    "audio_duration_seconds": 6.048,
+    "start": 23328000,
+    "end": 29376000,
+    "asset_url": "https://wanzioss.oss-cn-beijing.aliyuncs.com/video_images/scene_scene_4.png",
+    "image_url": "https://wanzioss.oss-cn-beijing.aliyuncs.com/video_images/scene_scene_4.png"
+  },
+  {
+    "scene": "第5句场景句",
+    "caption": "Can I get a new bag for this?\n能给我个新袋子装这个吗？",
+    "tts": "第 5 句：Can I get a new bag for this。能给我个新袋子装这个吗",
+    "image_prompt": "旅行购物退换货英语, 出国旅游时在当地服饰门店退换购买的衣服, moment: 索要包装袋子, Xiao Wanzi helping a young office worker speak English, minimal props, clear real-life setting",
+    "keywords": [
+      "bag"
+    ],
+    "duration": 4.0,
+    "caption_highlight": {
+      "enabled": true,
+      "mode": "keyword_badge",
+      "highlight_color": "#2563EB",
+      "keywords": [
+        "bag"
+      ]
+    },
+    "animation": {
+      "image": "slow_zoom_in",
+      "caption": "fade_in",
+      "keyword": "pop"
+    },
+    "audio_url": "https://wanzioss.oss-cn-beijing.aliyuncs.com/tts_audio/audio_1782653947508.mp3",
+    "audio_duration": 5640000,
+    "audio_duration_seconds": 5.64,
+    "start": 29376000,
+    "end": 35016000,
+    "asset_url": "https://wanzioss.oss-cn-beijing.aliyuncs.com/video_images/scene_scene_5.png",
+    "image_url": "https://wanzioss.oss-cn-beijing.aliyuncs.com/video_images/scene_scene_5.png"
+  },
+  {
+    "scene": "互动页",
+    "caption": "你出国旅游有没有遇到过要退换货的情况呀？",
+    "tts": "你出国旅游有没有遇到过要退换货的情况呀？",
+    "image_prompt": "FIXED_HOOK_IMAGE",
+    "duration": 1.8,
+    "keywords": [],
+    "caption_highlight": {
+      "enabled": true,
+      "mode": "keyword_badge",
+      "highlight_color": "#2563EB",
+      "keywords": []
+    },
+    "animation": {
+      "image": "slow_zoom_in",
+      "caption": "fade_in",
+      "keyword": "pop"
+    },
+    "audio_url": "https://wanzioss.oss-cn-beijing.aliyuncs.com/tts_audio/audio_1782653948913.mp3",
+    "audio_duration": 4032000,
+    "audio_duration_seconds": 4.032,
+    "start": 35016000,
+    "end": 39048000,
+    "asset_url": "https://wanzioss.oss-cn-beijing.aliyuncs.com/video_images/scene_hook_img_6.png",
+    "image_url": "https://wanzioss.oss-cn-beijing.aliyuncs.com/video_images/scene_hook_img_6.png"
+  }
+]

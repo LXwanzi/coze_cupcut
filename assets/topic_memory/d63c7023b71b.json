@@ -15,6 +15,23 @@
       "hook": "",
       "preview": "下集学机场值机更多救急实用表达哦",
       "created_at": "2026-06-26T23:45:39.691957"
+    },
+    {
+      "episode_num": 2,
+      "sentences": [
+        "I'd like to return this shirt.",
+        "It's too small for me.",
+        "Do you have a larger size?",
+        "When will the refund come through?",
+        "Can I get a new bag for this?"
+      ],
+      "scene": "",
+      "hook": "",
+      "preview": "下集教你机场免税店购物砍价实用表达",
+      "pain_point": "",
+      "wrong_expression": "",
+      "answer_levels": [],
+      "created_at": "2026-06-28T21:38:57.727010"
     }
   ],
   "all_sentences": [
@@ -22,13 +39,18 @@
     "How much is the extra fee?",
     "Can I take some items out?",
     "Can I pay for extra baggage?",
-    "Where should I drop this bag?"
+    "Where should I drop this bag?",
+    "I'd like to return this shirt.",
+    "It's too small for me.",
+    "Do you have a larger size?",
+    "When will the refund come through?",
+    "Can I get a new bag for this?"
   ],
   "scenes_used": [
     "行李超重必备实用英语"
   ],
   "last_hook": "",
-  "next_preview": "下集学机场值机更多救急实用表达哦",
+  "next_preview": "下集教你机场免税店购物砍价实用表达",
   "created_at": "2026-06-26T23:44:57.307195",
-  "updated_at": "2026-06-26T23:45:39.694866"
+  "updated_at": "2026-06-28T21:38:57.727034"
 }
