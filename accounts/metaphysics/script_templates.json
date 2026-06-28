@@ -1,33 +1,38 @@
 {
   "painpoint_conversion": {
-    "structure": ["痛点命中", "具体表现", "玄学解释", "现实解释", "产品桥接", "使用建议", "自然问句"],
+    "structure": ["强命题", "隐藏机制", "具体动作", "传统说法", "现实解释", "微调整", "避坑提醒", "自然问句"],
     "required_slots": [
-      "sharp_hook",
-      "symptoms",
+      "raw_pain",
+      "sharp_claim",
+      "hidden_mechanism",
+      "concrete_signs",
       "mystic_view",
       "real_life_view",
-      "product_bridge",
-      "usage_tip",
-      "soft_boundary",
+      "micro_adjustments",
+      "avoid_mistake",
       "interaction"
     ],
     "hook_rules": [
-      "开头必须命中一个具体生活表现。",
+      "不要直接回答用户痛点，先改写成更尖锐、更具体、更有反差的命题。",
+      "命题优先使用：你以为A，其实B；不是A，而是B；真正漏掉的不是A，是B。",
       "不能只说先别焦虑、慢慢看、适合收藏。",
       "前2秒必须出现反差、悬念或被说中的感觉。"
     ],
     "symptom_rules": [
-      "至少列出2-3个真实表现。",
+      "至少列出3个真实表现。",
       "表现要来自生活动作，比如刚到账就花掉、钱包乱、玄关乱、冲动付款、月底焦虑。"
     ],
-    "product_rules": [
-      "产品不能突然出现。",
-      "必须先解释这个物件为什么和痛点有关。",
-      "不能承诺发财、改命、必转运。"
+    "content_rules": [
+      "痛点式默认不口播产品，不在字幕里介绍产品。",
+      "必须讲清楚痛点背后的隐藏机制。",
+      "必须给出2个今天就能做的微调整。",
+      "必须给出1个带刺痛感的反向提醒。"
     ],
     "quality_gate": {
-      "min_symptoms": 2,
+      "min_symptoms": 3,
+      "min_adjustments": 2,
       "weak_hook_phrases": ["先别急着焦虑", "适合先收藏", "慢慢看"],
+      "required_claim_patterns": ["你以为", "不是", "真正"],
       "forbidden_claims": ["保证发财", "必定转运", "改命", "治病"]
     },
     "interaction_rule": "只保留自然问句，不使用评论区打、扣1、留言关键词。"

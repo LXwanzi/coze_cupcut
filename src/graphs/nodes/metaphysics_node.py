@@ -54,7 +54,7 @@ def build_metaphysics_plan(
         "review_card": {
             "today_expressions": [],
             "answer_levels": [],
-            "quick_review": brief["soft_boundary"],
+            "quick_review": brief["avoid_mistake"],
             "product": product,
         },
         "episode_info": {
@@ -131,36 +131,42 @@ def _voice_profile(mode: str, account_pack: Dict[str, Any]) -> Dict[str, Any]:
 
 
 def _build_brief(topic: str, mode: str, scene: str, product: Dict[str, Any]) -> Dict[str, Any]:
-    product_name = product.get("name", "开运小物")
-    meaning = product.get("meaning", "给自己一个稳定提醒")
     clean_topic = topic.replace("玄学方向", "").strip() or topic
-    pain_point = clean_topic if clean_topic.startswith(("最近", "总觉得", "老是")) else f"最近总觉得{clean_topic}"
-    symptoms = _symptoms_for_topic(clean_topic, scene)
-    sharp_hook = _sharp_hook_for_topic(clean_topic, symptoms)
+    concrete_signs = _symptoms_for_topic(clean_topic, scene)
+    sharp_claim = _sharp_hook_for_topic(clean_topic, concrete_signs)
     if any(keyword in clean_topic for keyword in MONEY_KEYWORDS):
+        hidden_mechanism = "钱不是一下子漏掉的，是在一次次不用想就付款里流走的。"
         mystic_view = "传统说法里，这种状态容易被叫作财气不聚。"
-        real_life_view = "现实一点说，是花钱前少了一个让自己停一下的提醒。"
-        product_bridge = f"{product_name}适合做一个守财感提醒，寓意是{meaning}。"
-        placement = "可以放在钱包、玄关或每天会看到的位置，重点是提醒自己少冲动消费。"
+        real_life_view = "现实一点说，是钱出去前，少了一个让你停下来的动作。"
+        micro_adjustments = [
+            "付款前先停十秒，问自己是不是真的需要。",
+            "每天清一次钱包和玄关，只留当天真正有用的东西。",
+        ]
+        avoid_mistake = "别一边喊守财，一边把每一次付款都变成顺手动作。"
+        interaction = "你最容易在哪一刻忍不住付款？"
     else:
+        hidden_mechanism = "状态不是突然乱掉的，是小杂事一直没被收回来。"
         mystic_view = "传统说法里，状态不稳时先看空间和随身物件的秩序感。"
-        real_life_view = "现实一点说，是生活里缺少一个让自己稳下来的提醒。"
-        product_bridge = f"{product_name}适合用来增加一点稳定的仪式感，寓意是{meaning}。"
-        placement = "放在你每天会经过或会看到的位置就好，保持干净、不杂乱。"
+        real_life_view = "现实一点说，是你每天看到的东西都在提醒你还没处理完。"
+        micro_adjustments = [
+            "先清掉最常看到的一处杂物。",
+            "给每天出门前的自己留一个干净位置。",
+        ]
+        avoid_mistake = "别一边想稳住状态，一边让最常看的地方一直乱着。"
+        interaction = "你最想先整理钱包、玄关，还是桌面？"
     return {
         "topic": clean_topic,
         "mode": mode,
         "scene": scene,
-        "sharp_hook": sharp_hook,
-        "symptoms": symptoms,
-        "pain_point": f"你{pain_point}",
+        "raw_pain": clean_topic,
+        "sharp_claim": sharp_claim,
+        "hidden_mechanism": hidden_mechanism,
+        "concrete_signs": concrete_signs,
         "mystic_view": mystic_view,
         "real_life_view": real_life_view,
-        "product_angle": product_name,
-        "product_bridge": product_bridge,
-        "usage_tip": placement,
-        "soft_boundary": "它不承诺结果，只是给自己一个慢下来的仪式感。",
-        "interaction": "你最近是钱留不住，还是心里总觉得不踏实？",
+        "micro_adjustments": micro_adjustments,
+        "avoid_mistake": avoid_mistake,
+        "interaction": interaction,
         "title": f"【{clean_topic[:10]}】想稳一点，可以先看这个",
     }
 
@@ -168,21 +174,28 @@ def _build_brief(topic: str, mode: str, scene: str, product: Dict[str, Any]) -> 
 def _build_segments(brief: Dict[str, Any]) -> List[Dict[str, Any]]:
     return [
         {
-            "scene": "痛点命中",
-            "caption": brief["sharp_hook"],
-            "tts": brief["sharp_hook"],
+            "scene": "强命题",
+            "caption": brief["sharp_claim"],
+            "tts": brief["sharp_claim"],
             "image_prompt": _image_prompt(brief, "opening", include_product=False),
             "duration": 2.6,
         },
         {
-            "scene": "具体表现",
-            "caption": "，".join(brief["symptoms"][:3]),
-            "tts": "如果你也有这些情况：" + "，".join(brief["symptoms"][:3]) + "。",
+            "scene": "隐藏机制",
+            "caption": brief["hidden_mechanism"],
+            "tts": brief["hidden_mechanism"],
             "image_prompt": _image_prompt(brief, "life scene", include_product=False),
-            "duration": 4.4,
+            "duration": 4.2,
         },
         {
-            "scene": "玄学解释",
+            "scene": "具体动作",
+            "caption": "，".join(brief["concrete_signs"][:3]),
+            "tts": "看看你有没有这三个动作：" + "，".join(brief["concrete_signs"][:3]) + "。",
+            "image_prompt": _image_prompt(brief, "concrete signs", include_product=False),
+            "duration": 4.6,
+        },
+        {
+            "scene": "传统说法",
             "caption": brief["mystic_view"],
             "tts": brief["mystic_view"],
             "image_prompt": _image_prompt(brief, "mystic view", include_product=False),
@@ -196,19 +209,18 @@ def _build_segments(brief: Dict[str, Any]) -> List[Dict[str, Any]]:
             "duration": 3.8,
         },
         {
-            "scene": "产品桥接",
-            "caption": f"{brief['product_angle']}\n{brief['product_bridge']}",
-            "tts": f"这时候可以看看{brief['product_bridge']}",
-            "image_prompt": _image_prompt(brief, "product close up", include_product=True),
-            "keywords": [brief["product_angle"]],
-            "duration": 4.8,
+            "scene": "微调整",
+            "caption": "\n".join(f"{index}. {item}" for index, item in enumerate(brief["micro_adjustments"], start=1)),
+            "tts": "先做两个小调整。" + "".join(brief["micro_adjustments"]),
+            "image_prompt": _image_prompt(brief, "micro adjustments", include_product=False),
+            "duration": 6.0,
         },
         {
-            "scene": "使用建议",
-            "caption": brief["usage_tip"],
-            "tts": brief["usage_tip"] + brief["soft_boundary"],
-            "image_prompt": _image_prompt(brief, "usage tips", include_product=True),
-            "duration": 5.0,
+            "scene": "避坑提醒",
+            "caption": brief["avoid_mistake"],
+            "tts": brief["avoid_mistake"],
+            "image_prompt": _image_prompt(brief, "avoid mistake", include_product=False),
+            "duration": 3.8,
         },
         {
             "scene": "自然问句",
@@ -221,17 +233,31 @@ def _build_segments(brief: Dict[str, Any]) -> List[Dict[str, Any]]:
 
 
 def _image_prompt(brief: Dict[str, Any], moment: str, include_product: bool = False) -> str:
+    life_detail = _life_detail_for_moment(brief, moment)
     base = (
         f"{brief['topic']}, metaphysics lifestyle short video, moment: {moment}, "
-        "abstract black-gold guardian portrait, lotus halo, incense mist, quiet mystical atmosphere, "
+        f"{life_detail}, abstract black-gold guardian portrait, lotus halo, incense mist, quiet mystical atmosphere, "
         "no text, no speech bubbles"
     )
     if include_product:
+        product_angle = brief.get("product_angle", "matching lucky object")
         return (
-            f"{base}, show only one matching product type: {brief['product_angle']}, "
+            f"{base}, show only one matching product type: {product_angle}, "
             "single product close-up in lower third, no other lucky objects"
         )
     return f"{base}, no product props, no lucky object pile"
+
+
+def _life_detail_for_moment(brief: Dict[str, Any], moment: str) -> str:
+    if moment == "concrete signs":
+        return "subtle lifestyle symbols such as mobile payment glow, messy receipts, wallet silhouette and entryway clutter"
+    if moment == "micro adjustments":
+        return "clean wallet, tidy entryway, calm organizing gesture, no branded product"
+    if moment == "avoid mistake":
+        return "contrast between messy receipts and a calm dark empty space"
+    if moment == "real life view":
+        return "a quiet pause before payment, hand near phone but not touching pay button"
+    return "minimal symbolic lifestyle scene"
 
 
 def _symptoms_for_topic(topic: str, scene: str) -> List[str]:
@@ -262,9 +288,9 @@ def _symptoms_for_topic(topic: str, scene: str) -> List[str]:
 
 def _sharp_hook_for_topic(topic: str, symptoms: List[str]) -> str:
     if any(keyword in topic for keyword in MONEY_KEYWORDS):
-        return "刚发工资就没了？先别急着怪自己赚得少。"
+        return "你以为是赚得少，其实是钱出去得太顺手。"
     symptom = symptoms[0] if symptoms else topic
-    return f"{symptom}？可能不是你不努力。"
+    return f"你以为是自己不够稳，其实是{symptom}太顺手。"
 
 
 def _review_brief(brief: Dict[str, Any], account_pack: Dict[str, Any]) -> Dict[str, Any]:
@@ -275,15 +301,19 @@ def _review_brief(brief: Dict[str, Any], account_pack: Dict[str, Any]) -> Dict[s
     forbidden_claims = gate.get("forbidden_claims") or []
     issues: List[str] = []
 
-    if len(brief.get("symptoms") or []) < min_symptoms:
+    if len(brief.get("concrete_signs") or []) < min_symptoms:
         issues.append("具体表现少于质量闸门要求。")
-    if any(phrase in brief.get("sharp_hook", "") for phrase in weak_phrases):
+    if any(phrase in brief.get("sharp_claim", "") for phrase in weak_phrases):
         issues.append("开头钩子偏泛，缺少具体命中感。")
+    required_patterns = gate.get("required_claim_patterns") or []
+    if required_patterns and not any(pattern in brief.get("sharp_claim", "") for pattern in required_patterns):
+        issues.append("强命题缺少反差判断。")
+    min_adjustments = int(gate.get("min_adjustments", 2))
+    if len(brief.get("micro_adjustments") or []) < min_adjustments:
+        issues.append("微调整少于质量闸门要求。")
     body = " ".join(str(value) for value in brief.values())
     if any(claim in body for claim in forbidden_claims):
         issues.append("包含玄学绝对化承诺。")
-    if brief.get("product_angle", "") not in brief.get("product_bridge", ""):
-        issues.append("产品桥接没有解释具体物件。")
 
     return {
         "is_reasonable": not issues,

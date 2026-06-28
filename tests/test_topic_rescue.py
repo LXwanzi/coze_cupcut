@@ -358,19 +358,21 @@ def test_generate_plan_uses_metaphysics_account_contract(tmp_path, monkeypatch):
     assert result["content_meta"]["product"]["name"] in ["五帝钱", "小貔貅摆件", "黄水晶小摆件"]
     assert result["publish_pack"]["title"].startswith("【最近总觉得钱留不住】")
     assert [segment["scene"] for segment in result["segments"][:3]] == [
-        "痛点命中",
-        "具体表现",
-        "玄学解释",
+        "强命题",
+        "隐藏机制",
+        "具体动作",
     ]
-    assert result["segments"][0]["caption"] == "刚发工资就没了？先别急着怪自己赚得少。"
-    assert "刚到账就花掉" in result["segments"][1]["caption"]
-    assert result["segments"][4]["scene"] == "产品桥接"
+    assert result["segments"][0]["caption"] == "你以为是赚得少，其实是钱出去得太顺手。"
+    assert "不用想就付款" in result["segments"][1]["caption"]
+    assert "刚到账就花掉" in result["segments"][2]["caption"]
+    assert result["segments"][5]["scene"] == "微调整"
+    assert result["segments"][6]["scene"] == "避坑提醒"
     captions = "\n".join(segment["caption"] for segment in result["segments"])
     assert "help me" not in captions
     assert "小丸子" not in captions
+    assert result["content_meta"]["product"]["name"] not in captions
     assert "no product props" in result["segments"][0]["image_prompt"]
-    assert "show only one matching product type" in result["segments"][4]["image_prompt"]
-    assert result["content_meta"]["product"]["name"] in result["segments"][4]["image_prompt"]
+    assert all("show only one matching product type" not in segment["image_prompt"] for segment in result["segments"])
 
 
 def test_tts_resolves_voice_profile_speed():
