@@ -55,4 +55,4 @@ def test_extract_voice_profile_accepts_tts_voice_code():
 
     assert message == "痛点式：酒店退房"
     assert override["voice"] == "zh_female_yingyujiaoxue_uranus_bigtts"
-    assert override["speed"] == 1.3
+    assert override["speed"] == 1.35

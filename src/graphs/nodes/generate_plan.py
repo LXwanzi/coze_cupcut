@@ -37,19 +37,13 @@ SUMMARY_SEGMENT_SECONDS = 2.5
 PREVIEW_SEGMENT_SECONDS = 2.0
 ACCOUNT_PACK = get_account_pack()
 PUBLISH_CONFIG = ACCOUNT_PACK.get("publish", {})
+PROMPT_CONFIG = ACCOUNT_PACK.get("prompts", {})
 
 # LLM 配置
 LLM_CONFIG_PATH = os.path.join(
     os.getenv("COZE_WORKSPACE_PATH", "/workspace/projects"),
     "config", "agent_llm_config.json"
 )
-
-# 图片配置
-CHARACTER_REFERENCE_IMAGE_URL = os.getenv(
-    "CHARACTER_REFERENCE_IMAGE_URL",
-    "https://coze-coding-project.tos.coze.site/bot File/assets/小丸子形象图.png"
-)
-
 
 def _load_llm_config() -> Dict[str, Any]:
     """加载 LLM 配置"""
@@ -389,6 +383,30 @@ def _merge_voice_profile(
     return merged
 
 
+def _format_prompt_lines(lines: Any) -> str:
+    if isinstance(lines, str):
+        return lines
+    if not isinstance(lines, list):
+        return ""
+    return "\n".join(f"- {line}" for line in lines if str(line).strip())
+
+
+def _format_numbered_lines(lines: Any) -> str:
+    if isinstance(lines, str):
+        return lines
+    if not isinstance(lines, list):
+        return ""
+    return "\n".join(f"{index}. {line}" for index, line in enumerate(lines, start=1) if str(line).strip())
+
+
+def _format_bullet_lines(lines: Any) -> str:
+    if isinstance(lines, str):
+        return lines
+    if not isinstance(lines, list):
+        return ""
+    return "\n".join(f"- {line}" for line in lines if str(line).strip())
+
+
 def _generate_dynamic_scene_collection_brief(
     raw_topic: str,
     scene: str,
@@ -397,59 +415,11 @@ def _generate_dynamic_scene_collection_brief(
     """Use LLM to generate concrete same-scene expressions when no preset matches."""
     learned_sentences = memory_context.get('learned_sentences', []) if memory_context else []
     learned_list = "\n".join(f"- {s}" for s in learned_sentences[-20:]) or "无"
-    prompt = f"""你是“小丸子英语”的短视频脚本专家。请根据用户主题动态生成一个【场景式】英语短视频脚本 brief。
-
-## 用户主题
-{raw_topic}
-
-## 场景大类
-{scene}
-
-## 已学过的句子，禁止重复
-{learned_list}
-
-## 目标
-生成 5 句同一个具体场景里的真实英语表达，适合 30-45 秒短视频，提升收藏价值。
-
-## 硬性规则
-1. 必须正好 5 句 expressions。
-2. 5 句必须强相关于用户主题，不能用万能句凑数。
-3. 每句都要能在该具体场景直接开口使用。
-4. 5 句之间要覆盖不同动作，不能重复表达同一件事。
-5. 英文自然、简短、口语化，适合初学者。
-6. 禁止使用这些泛句作为主体：
-   - Excuse me, could you help me?
-   - Could you help me?
-   - Could you help me with this?
-   - I'd like to ask about this.
-   - Could you confirm that for me?
-   - Could you say that again?
-   - Thanks, that helps a lot.
-7. 如果主题是“飞机餐忌口”，应该围绕素食、过敏、不吃某类食物、换餐等具体动作，而不是泛泛求助。
-8. 每句都要给 keywords，选 1-2 个字幕高亮关键词，必须来自英文句子本身。
-9. image_prompt 后续只用于生成背景图，不能要求图片里出现任何文字、气泡、对白框或字幕。
-
-## 输出 JSON，不要 Markdown
-{{
-  "topic": "短主题名",
-  "real_scene": "一句话真实场景",
-  "hook": "18字以内强钩子",
-  "setup": "一句话说明这5句覆盖什么",
-  "expressions": [
-    {{
-      "label": "动作标签",
-      "english": "English sentence",
-      "chinese": "中文意思",
-      "usage": "这句什么时候用",
-      "keywords": ["keyword"]
-    }}
-  ],
-  "summary_tts": "这5句先收藏...",
-  "next_preview": "下集预告",
-  "interaction": "评论区互动问题",
-  "title": "【主题】吸引眼球标题"
-}}
-"""
+    prompt = _build_dynamic_scene_collection_prompt(
+        raw_topic=raw_topic,
+        scene=scene,
+        learned_list=learned_list,
+    )
     try:
         import requests
         from coze_coding_utils.runtime_ctx.context import default_headers, new_context
@@ -492,6 +462,55 @@ def _generate_dynamic_scene_collection_brief(
     except Exception as e:
         logger.error(f"动态场景式内容生成失败: {e}")
         return None
+
+
+def _build_dynamic_scene_collection_prompt(
+    raw_topic: str,
+    scene: str,
+    learned_list: str
+) -> str:
+    dynamic_config = PROMPT_CONFIG.get("dynamic_scene_collection") or {}
+    system_role = PROMPT_CONFIG.get("system_role") or "你是短视频脚本专家。"
+    account_positioning = _format_prompt_lines(PROMPT_CONFIG.get("account_positioning", []))
+    brief = dynamic_config.get("brief") or "请根据用户主题动态生成一个短视频脚本 brief。"
+    goal = dynamic_config.get("goal") or "生成同一个具体场景里的真实表达。"
+    rules = _format_numbered_lines(dynamic_config.get("rules", []))
+    forbidden = _format_bullet_lines(dynamic_config.get("forbidden_expressions", [])) or "无"
+    topic_specific_rules = _format_numbered_lines(dynamic_config.get("topic_specific_rules", []))
+    output_schema = json.dumps(
+        dynamic_config.get("output_schema") or {},
+        ensure_ascii=False,
+        indent=2,
+    )
+    return f"""{system_role}{brief}
+
+## 用户主题
+{raw_topic}
+
+## 场景大类
+{scene}
+
+## 已学过的句子，禁止重复
+{learned_list}
+
+## 账号定位
+{account_positioning or "无"}
+
+## 目标
+{goal}
+
+## 硬性规则
+{rules or "1. 生成内容必须强相关于用户主题。"}
+
+## 禁止作为主体的表达
+{forbidden}
+
+## 主题特别规则
+{topic_specific_rules or "无"}
+
+## 输出 JSON，不要 Markdown
+{output_schema}
+"""
 
 
 def _format_for_topic_brief(topic_brief: Dict[str, Any]) -> str:
@@ -763,15 +782,22 @@ def _generate_video_plan(
     
     # 构建已学句子列表
     learned_list = "\n".join([f"- {s}" for s in learned_sentences[-10:]]) if learned_sentences else "无"
+    legacy_prompt_config = PROMPT_CONFIG.get("legacy_retention_plan") or {}
+    legacy_role = legacy_prompt_config.get(
+        "role",
+        "你是短视频策划助手。你的目标是生成高完播率的真实场景短视频。"
+    )
+    account_positioning = _format_prompt_lines(PROMPT_CONFIG.get("account_positioning", []))
+    image_prompt_hint = legacy_prompt_config.get(
+        "image_prompt_hint",
+        "场景描述，主体在中下区域，头顶留白 25%"
+    )
     
     # 构建提示词
-    prompt = f"""你是“小丸子英语”短视频策划助手。你的目标不是做完整课程，而是做高完播率的真实场景救场英语短视频。
+    prompt = f"""{legacy_role}
 
 ## 账号定位
-- 主角：小丸子，年轻女性打工人英语学习搭子
-- 气质：亲切、元气、有陪伴感，不说教，不过度搞笑
-- 内容方向：碎片时间学真实场景英语
-- 当前优化目标：提高完播率，视频必须短、快、真实、有下一集连续感
+{account_positioning or "无"}
 
 ## 用户输入
 {user_input}
@@ -828,7 +854,7 @@ def _generate_video_plan(
             "scene": "第1句跟读",
             "caption": "英语句子\\n中文意思",
             "tts": "第1句。英语句子。中文意思。跟我读：英语句子。",
-            "image_prompt": "场景描述，小丸子站立在中下区域，头顶留白 25%",
+            "image_prompt": "{image_prompt_hint}",
             "duration": 4.5
         }},
         ...
@@ -842,7 +868,7 @@ def _generate_video_plan(
         {{
             "scene": "预告页",
             "caption": "下集预告\\n轻互动文案",
-            "tts": "轻互动预告，比如：评论区打酒店，我继续更下一集。",
+            "tts": "轻互动预告，使用自然问题或下一集预告。",
             "image_prompt": "FIXED_HOOK_IMAGE",
             "duration": 2.0
         }}
@@ -862,13 +888,12 @@ def _generate_video_plan(
 1. 预告接下来要学的同一场景内容
 2. 制造期待感，并带轻互动
 3. 示例：
-   - "下集学房间投诉，评论区打酒店"
    - "下一集学账单多收费怎么说"
    - "这句你敢不敢跟读一遍？"
 
 ## image_prompt 规则
 - 钩子页、预告页：固定为 "FIXED_HOOK_IMAGE"
-- 标题页、跟读句：描述场景，小丸子在中下区域
+- 标题页、跟读句：{image_prompt_hint}
 - 快速汇总页：固定为 "FIXED_REVIEW_WITH_CHAR"
 
 ## 重要规则

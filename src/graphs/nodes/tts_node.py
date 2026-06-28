@@ -84,7 +84,7 @@ def _resolve_voice_and_speed(content_meta: Dict[str, Any]) -> tuple[str, float]:
         speed = float(voice_profile.get("speed", TTS_SPEED))
     except (TypeError, ValueError):
         speed = TTS_SPEED
-    speed = max(0.8, min(speed, 1.3))
+    speed = max(0.8, min(speed, 1.35))
     return _resolve_speaker(voice_key), speed
 
 

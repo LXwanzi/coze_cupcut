@@ -15,7 +15,10 @@ from content.account_loader import get_account_pack
 
 DEFAULT_TOPIC_DURATION_SECONDS = 30
 DEFAULT_TOPIC_SENTENCE_COUNT = 3
-SCENE_COLLECTION_DURATION_SECONDS = 38
+SCENE_COLLECTION_DURATION_SECONDS = 34
+SCENE_COLLECTION_SENTENCE_SECONDS = 4.0
+SCENE_COLLECTION_SUMMARY_SECONDS = 1.8
+SCENE_COLLECTION_INTERACTION_SECONDS = 1.8
 
 DEFAULT_PAINPOINT_TRIGGERS = [
     "别说", "不要说", "中式英语", "不会说", "说错", "怎么说", "不是",
@@ -46,6 +49,8 @@ SCENE_MAP = ACCOUNT_PACK.get("modes", {}).get("scene_map") or [
 ]
 VOICE_PROFILES = ACCOUNT_PACK.get("modes", {}).get("voice_profiles") or {}
 VISUAL_CONFIG = ACCOUNT_PACK.get("visual", {})
+PROMPT_CONFIG = ACCOUNT_PACK.get("prompts", {})
+LEGACY_PROMPT_CONFIG = PROMPT_CONFIG.get("legacy_retention_plan", {})
 QUALITY_RULES = ACCOUNT_PACK.get("quality_rules", {})
 SCENE_QUALITY_RULES = QUALITY_RULES.get("scene_collection", {})
 GENERIC_SCENE_EXPRESSIONS = set(SCENE_QUALITY_RULES.get("generic_expressions", []))
@@ -170,17 +175,10 @@ def build_scene_collection_segments(
         {
             "scene": "钩子页",
             "caption": brief.get("hook", f"{brief.get('topic', '这个场景')}，这几句先收藏。"),
-            "tts": brief.get("hook", f"{brief.get('topic', '这个场景')}，这几句先收藏。"),
+            "tts": build_scene_collection_hook_tts(brief),
             "image_prompt": "FIXED_HOOK_IMAGE",
             "duration": 2.0,
-        },
-        {
-            "scene": "场景代入",
-            "caption": brief.get("setup", brief.get("real_scene", "")),
-            "tts": brief.get("setup", brief.get("real_scene", "")),
-            "image_prompt": _scene_prompt(brief, "real scene setup"),
-            "duration": 3.0,
-        },
+        }
     ]
 
     for index, expression in enumerate(expressions, start=1):
@@ -190,7 +188,7 @@ def build_scene_collection_segments(
             "tts": build_collection_sentence_tts(index, expression),
             "image_prompt": _scene_prompt(brief, expression.get("label", f"sentence {index}")),
             "keywords": normalize_keywords(expression.get("keywords"), expression.get("english", "")),
-            "duration": 4.8,
+            "duration": SCENE_COLLECTION_SENTENCE_SECONDS,
         })
 
     summary_caption = "\n".join(
@@ -201,16 +199,16 @@ def build_scene_collection_segments(
         {
             "scene": "快速汇总页",
             "caption": summary_caption,
-            "tts": brief.get("summary_tts", "这 5 句先收藏，下一集继续学同一场景。"),
+            "tts": build_scene_collection_summary_tts(brief),
             "image_prompt": "FIXED_REVIEW_WITH_CHAR",
-            "duration": 3.0,
+            "duration": SCENE_COLLECTION_SUMMARY_SECONDS,
         },
         {
             "scene": "互动页",
             "caption": brief.get("interaction", "你还卡过哪句？评论区说说。"),
             "tts": brief.get("interaction", "你还卡过哪句？评论区说说。"),
             "image_prompt": "FIXED_HOOK_IMAGE",
-            "duration": 2.0,
+            "duration": SCENE_COLLECTION_INTERACTION_SECONDS,
         },
     ])
 
@@ -260,8 +258,8 @@ def build_rescue_segments(
     segments.extend([
         {
             "scene": "跟读打卡",
-            "caption": f"{follow_read.get('english', '')}\n跟小丸子读一遍".strip(),
-            "tts": f"跟小丸子读一遍：{follow_read.get('english', '')}",
+            "caption": f"{follow_read.get('english', '')}\n跟{_follow_read_name()}读一遍".strip(),
+            "tts": f"跟{_follow_read_name()}读一遍：{follow_read.get('english', '')}",
             "image_prompt": _scene_prompt(brief, "follow read"),
             "duration": 4.0,
         },
@@ -457,10 +455,26 @@ def voice_profile_for_mode(content_mode: str | None, scene: str | None = None) -
 
 
 def build_collection_sentence_tts(index: int, expression: Dict[str, Any]) -> str:
-    label = expression.get("label", f"第 {index} 句")
-    english = expression.get("english", "")
-    chinese = expression.get("chinese", "")
-    return sanitize_tts(f"第 {index} 句，{label}：{english}。{chinese}")
+    english = _strip_sentence_end(expression.get("english", ""))
+    chinese = _strip_sentence_end(expression.get("chinese", ""))
+    return sanitize_tts(f"第 {index} 句：{english}。{chinese}")
+
+
+def _strip_sentence_end(text: str) -> str:
+    return (text or "").strip().rstrip("。.!！？? ")
+
+
+def build_scene_collection_hook_tts(brief: Dict[str, Any]) -> str:
+    hook = brief.get("hook", f"{brief.get('topic', '这个场景')}，这几句先收藏。")
+    setup = brief.get("setup") or brief.get("real_scene", "")
+    if setup:
+        return sanitize_tts(f"{hook} {setup}")
+    return sanitize_tts(hook)
+
+
+def build_scene_collection_summary_tts(brief: Dict[str, Any]) -> str:
+    topic = brief.get("topic", "这个场景")
+    return sanitize_tts(brief.get("summary_tts_short") or f"这 5 句先收藏，{topic}时能直接用。")
 
 
 def validate_scene_collection_segments(
@@ -469,7 +483,7 @@ def validate_scene_collection_segments(
 ) -> List[Dict[str, Any]]:
     cleaned: List[Dict[str, Any]] = []
     running_duration = 0.0
-    max_duration = max(duration_seconds, 34)
+    max_duration = max(duration_seconds, 30)
 
     for segment in segments:
         if not segment:
@@ -478,13 +492,13 @@ def validate_scene_collection_segments(
         item["tts"] = sanitize_tts(item.get("tts", ""))
         if item.get("scene") == "快速汇总页":
             item["caption"] = compact_caption(item.get("caption", ""), max_lines=5)
-            item["duration"] = min(float(item.get("duration", 3.0)), 3.0)
+            item["duration"] = min(float(item.get("duration", SCENE_COLLECTION_SUMMARY_SECONDS)), SCENE_COLLECTION_SUMMARY_SECONDS)
         elif item.get("scene") in ["钩子页", "互动页"]:
             item["caption"] = compact_caption(item.get("caption", ""), max_lines=2)
-            item["duration"] = min(float(item.get("duration", 2.0)), 2.5)
+            item["duration"] = min(float(item.get("duration", SCENE_COLLECTION_INTERACTION_SECONDS)), 2.0)
         else:
             item["caption"] = compact_caption(item.get("caption", ""), max_lines=2)
-            item["duration"] = min(float(item.get("duration", 4.8)), 5.0)
+            item["duration"] = min(float(item.get("duration", SCENE_COLLECTION_SENTENCE_SECONDS)), SCENE_COLLECTION_SENTENCE_SECONDS)
         running_duration += item["duration"]
         if running_duration <= max_duration or item.get("scene") == "互动页":
             cleaned.append(apply_visual_metadata(item))
@@ -495,7 +509,7 @@ def validate_scene_collection_segments(
             "caption": "你还卡过哪句？评论区说说。",
             "tts": "你还卡过哪句？评论区说说。",
             "image_prompt": "FIXED_HOOK_IMAGE",
-            "duration": 2.0,
+            "duration": SCENE_COLLECTION_INTERACTION_SECONDS,
         }))
 
     return cleaned
@@ -715,11 +729,18 @@ def _answer_segment(
 
 
 def _scene_prompt(brief: Dict[str, Any], moment: str) -> str:
+    subject = LEGACY_PROMPT_CONFIG.get(
+        "scene_prompt_subject",
+        "account host in a clear real-life setting"
+    )
     return (
         f"{brief.get('topic', 'English scene')}, {brief.get('real_scene', '')}, "
-        f"moment: {moment}, Xiao Wanzi helping a young office worker speak English, "
-        "minimal props, clear real-life setting"
+        f"moment: {moment}, {subject}"
     )
+
+
+def _follow_read_name() -> str:
+    return LEGACY_PROMPT_CONFIG.get("follow_read_name", "我")
 
 
 def normalize_keywords(value: Any, fallback_text: str = "") -> List[str]:

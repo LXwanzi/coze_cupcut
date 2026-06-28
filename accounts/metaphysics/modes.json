@@ -1,0 +1,28 @@
+{
+  "mode_aliases": {
+    "痛点转化": "painpoint_conversion",
+    "痛点式": "painpoint_conversion",
+    "场景种草": "scene_product_seed",
+    "场景式": "scene_product_seed",
+    "清单带货": "product_list",
+    "清单式": "product_list",
+    "生肖互动": "zodiac_interaction",
+    "打卡仪式": "ritual_checkin"
+  },
+  "scene_map": [
+    ["entryway", ["玄关", "入户", "门口", "鞋柜"]],
+    ["desk", ["办公桌", "书桌", "事业", "工作", "文昌"]],
+    ["bedroom", ["卧室", "床头", "睡眠", "镜子"]],
+    ["wallet", ["钱包", "守财", "钱留不住"]],
+    ["car", ["车挂", "车内", "开车", "平安"]],
+    ["wearable", ["手串", "饰品", "朱砂", "水晶", "随身"]]
+  ],
+  "voice_profiles": {
+    "painpoint_conversion": {"voice": "gentle", "speed": 1.03, "style": "warm_seed"},
+    "scene_product_seed": {"voice": "gentle", "speed": 1.03, "style": "calm_lifestyle"},
+    "product_list": {"voice": "default", "speed": 1.06, "style": "clear_seed"},
+    "zodiac_interaction": {"voice": "gentle", "speed": 1.03, "style": "soft_question"},
+    "ritual_checkin": {"voice": "gentle", "speed": 1.02, "style": "ritual_calm"},
+    "default": {"voice": "gentle", "speed": 1.03, "style": "warm_metaphysics"}
+  }
+}

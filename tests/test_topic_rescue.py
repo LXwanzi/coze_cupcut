@@ -110,8 +110,10 @@ def test_build_scene_collection_segments_keeps_five_sentences_fast():
     assert len(sentence_segments) == 5
     assert sentence_segments[0]["caption"].startswith("Excuse me, could you help me?")
     assert segments[0]["scene"] == "钩子页"
+    assert segments[1]["scene"] == "第1句场景句"
     assert segments[-1]["scene"] == "互动页"
-    assert sum(segment["duration"] for segment in segments) <= 38
+    assert sum(segment["duration"] for segment in segments) <= 34
+    assert "先开口求助" not in sentence_segments[0]["tts"]
 
 
 def test_review_topic_brief_marks_scene_collection_reasonable():
@@ -263,8 +265,8 @@ def test_generate_plan_topic_only_uses_scene_collection_mode(tmp_path, monkeypat
     assert len(result["review_card"]["today_expressions"]) == 5
     assert [segment["scene"] for segment in result["segments"][:3]] == [
         "钩子页",
-        "场景代入",
         "第1句场景句",
+        "第2句场景句",
     ]
 
 

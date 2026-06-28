@@ -1,0 +1,50 @@
+{
+  "reference_image_url": "",
+  "fixed_images": {},
+  "style_suffix": ", warm soft oriental lifestyle aesthetic, clean bright home space, low-saturation gold accents, wooden table, natural light, calm premium composition, product-focused still life, no text inside the image, no symbols, no scary atmosphere, vertical 9:16 frame",
+  "position_constraints": {
+    "review": ", IMPORTANT: leave the upper 60% clean and empty for external subtitles, product placed in lower third",
+    "title": ", IMPORTANT: product or lifestyle scene in lower half, top 25% clean and empty for external subtitles",
+    "default": ", IMPORTANT: clean composition, key product visible, top 25% clean and empty for external subtitles"
+  },
+  "forbidden_styles": [
+    "horror",
+    "ghost",
+    "dark ritual",
+    "bloody",
+    "scary",
+    "cult",
+    "complex talisman",
+    "text in image",
+    "caption in image",
+    "speech bubble"
+  ],
+  "image_prompt_guard": {
+    "enabled": true,
+    "suffixes": [
+      "No text, no letters, no captions, no subtitles.",
+      "No speech bubbles, no comic dialogue bubbles, no thought bubbles.",
+      "No scary symbols, no horror atmosphere, no watermark.",
+      "The image must not contain any written words or pseudo-text."
+    ],
+    "forbidden_prompt_terms": [
+      "speech bubble",
+      "dialogue bubble",
+      "comic bubble",
+      "text in image",
+      "caption in image",
+      "word balloon"
+    ]
+  },
+  "animation_defaults": {
+    "image": "slow_zoom_in",
+    "caption": "fade_in",
+    "keyword": "soft_glow"
+  },
+  "caption_highlight": {
+    "enabled": true,
+    "mode": "keyword_badge",
+    "highlight_color": "#B45309",
+    "max_keywords": 2
+  }
+}

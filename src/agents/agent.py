@@ -1,7 +1,4 @@
-"""
-小丸子英语短视频生成助手 Agent
-把每日英语学习笔记转化为原创短视频内容
-"""
+"""Multi-account short-video generation Agent."""
 import os
 import json
 import logging

@@ -1,0 +1,13 @@
+{
+  "painpoint_conversion": {
+    "structure": ["痛点钩子", "场景代入", "传统说法", "产品建议", "自然问句"],
+    "interaction_rule": "只保留自然问句，不使用评论区打、扣1、留言关键词。"
+  },
+  "scene_product_seed": {
+    "structure": ["场景问题", "摆放逻辑", "推荐小物", "摆放建议", "自然问句"],
+    "interaction_rule": "只问用户状态或偏好。"
+  },
+  "product_list": {
+    "structure": ["收藏钩子", "3-5个产品清单", "适用场景", "购买建议", "自然问句"]
+  }
+}

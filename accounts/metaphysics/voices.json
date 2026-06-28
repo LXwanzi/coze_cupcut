@@ -1,0 +1,15 @@
+{
+  "speaker_map": {
+    "default": "zh_female_santongyongns_saturn_bigtts",
+    "gentle": "zh_female_santongyongns_saturn_bigtts",
+    "calm": "zh_female_santongyongns_saturn_bigtts",
+    "warm": "zh_female_mizai_saturn_bigtts"
+  },
+  "allowed_voice_keys": ["default", "gentle", "calm", "warm"],
+  "aliases": {
+    "温柔": "gentle",
+    "平静": "calm",
+    "暖一点": "warm"
+  },
+  "speed_range": [0.85, 1.2]
+}

@@ -1,0 +1,18 @@
+{
+  "title_templates": {
+    "painpoint_conversion": "【{topic}】最近不顺？先看这个",
+    "scene_product_seed": "【{topic}】想稳一点，可以这样放",
+    "product_list": "【{topic}】新手别乱买，先看这几个",
+    "zodiac_interaction": "【{topic}】不同状态，适合的不一样",
+    "ritual_checkin": "【{topic}】给自己一个小仪式",
+    "default": "【{topic}】玄学小物和生活仪式感"
+  },
+  "description_templates": {
+    "default": "给自己一个稳住的小仪式。分享开运小物、空间调整和玄学生活方式，不制造焦虑，只做温和参考。#玄学 #开运小物 #转运摆件"
+  },
+  "hashtags": {
+    "default": ["玄学", "开运小物", "转运摆件", "生活仪式感"]
+  },
+  "title_max_length": 30,
+  "cover_text_max_length": 12
+}

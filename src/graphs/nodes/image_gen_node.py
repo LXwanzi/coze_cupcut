@@ -1,16 +1,10 @@
-"""
-AI 图片生成节点
-输入: video_plan
-输出: scenes（每项包含 asset_url）
+"""Account-aware AI image generation node.
 
-图片风格：极简卡通圆头豆豆人「小丸子」，白色或浅色干净背景，
-线条简洁，表情亲切有活力，像利用碎片时间学英语的年轻打工人学习搭子。
-画面元素少，主体明确，底部预留字幕区域，色彩明亮，扁平化插画风格。
-竖屏比例 9:16，适合 1080x1920 视频。
+Input: video_plan / segments.
+Output: scenes, each with asset_url.
 
-复习页使用固定复习卡背景图，不生成AI图片。
-
-生成后自动上传到 OSS，CapCut Mate 可直接访问。
+Visual style, reference image, fixed images, forbidden terms, and subtitle safe
+areas are read from accounts/<account_id>/visual.json.
 """
 import logging
 import requests
@@ -25,55 +19,18 @@ logger = logging.getLogger(__name__)
 ACCOUNT_PACK = get_account_pack()
 VISUAL_CONFIG = ACCOUNT_PACK.get("visual", {})
 
-# 小丸子角色参考图 URL（上传到 OSS 后的永久 URL）
-CHARACTER_REFERENCE_IMAGE_URL = (
-    "https://coze-coding-project.tos.coze.site/"
-    "coze_storage_7654517760407470089/character/xiaowanzi_reference_025ac01d.png"
-    "?sign=1813840450-6d264531cf-0-98731a4230b5a6d4f921455f1f0f76e47a690a7e486f6a0e53b2c4637f455532"
-)
-
-# 固定图片 URL（warm beige背景 + 米白色渐变）
-FIXED_HOOK_IMAGE_URL = (
-    "https://coze-coding-project.tos.coze.site/"
-    "coze_storage_7654517760407470089/fixed/hook_v2_c362fa07.png"
-    "?sign=1784964895-037cf37b48-0-339cc160f1c31a11dedb04c065cf435541bf41677ce811b2332fdd1d4cf6fd12"
-)
-
-# 复习卡带人物背景 URL（底部小头像，顶部80%留白给字幕）
-FIXED_REVIEW_WITH_CHAR_URL = (
-    "https://coze-coding-project.tos.coze.site/"
-    "coze_storage_7654517760407470089/fixed/review_v2_6f1121be.png"
-    "?sign=1784964896-cd489dffc6-0-6cfcc2b6b884fc6aa2e4685b6e97081a2d8125a2e1967f3c16da1b9b8e22dd81"
-)
+CHARACTER_REFERENCE_IMAGE_URL = VISUAL_CONFIG.get("reference_image_url", "")
+FIXED_IMAGES = VISUAL_CONFIG.get("fixed_images", {})
+FIXED_HOOK_IMAGE_URL = FIXED_IMAGES.get("FIXED_HOOK_IMAGE", "")
+FIXED_REVIEW_WITH_CHAR_URL = FIXED_IMAGES.get("FIXED_REVIEW_WITH_CHAR", "")
 
 # 缓存已生成的固定图片（仅用于缓存从 URL 下载后的本地路径）
 FIXED_HOOK_IMAGE_GENERATED = None
 FIXED_REVIEW_BACKGROUND_GENERATED = None
 
-# 统一图片风格后缀（warm beige米白色渐变背景，顶部15%留白给字幕）
-STYLE_SUFFIX = (
-    ", warm beige gradient background, minimalist style, soft lighting. "
-    "The top 15% of the frame is completely empty and clean for text overlay. "
-    "Minimalist round-headed cartoon character Xiao Wanzi, young office worker "
-    "learning English in everyday spare moments, wearing wireless earbuds and carrying a laptop bag, "
-    "short black hair, light-colored top, crossbody bag, line art style, "
-    "character prominently displayed in center of frame, large and clear, "
-    "taking up about 40-50% of the image height, positioned vertically centered, "
-    "no text inside the image, bright colors, flat illustration, 9:16 vertical frame"
-)
-
-# 禁止的风格/颜色关键词
-FORBIDDEN_STYLES = [
-    # 禁止的质感
-    "photorealistic", "realistic photo", "cinematic", "film grain",
-    "hyperrealistic", "detailed texture", "3D render", "cyberpunk",
-    "dark style", "oil painting", "complex background", "anime",
-    "manga", "children book", "childish", "text in image",
-    # 禁止的蓝色系背景
-    "blue", "cyan", "sky blue", "gradient blue", "teal", "navy",
-    "azure", "ocean blue", "light blue", "dark blue", "royal blue",
-    "aqua", "turquoise", "steel blue", "cobalt", "indigo"
-]
+STYLE_SUFFIX = VISUAL_CONFIG.get("style_suffix", "")
+POSITION_CONSTRAINTS = VISUAL_CONFIG.get("position_constraints", {})
+FORBIDDEN_STYLES = VISUAL_CONFIG.get("forbidden_styles", [])
 
 
 def _handle_fixed_image(prompt_marker: str, i: int, scene: Dict[str, Any], client: Any) -> tuple:
@@ -82,7 +39,9 @@ def _handle_fixed_image(prompt_marker: str, i: int, scene: Dict[str, Any], clien
 
     try:
         if prompt_marker == "FIXED_HOOK_IMAGE":
-            fixed_url = FIXED_HOOK_IMAGE_URL
+            fixed_url = _fixed_image_url(prompt_marker)
+            if not fixed_url:
+                return i, None, f"Scene {i} 缺少固定图片配置: {prompt_marker}"
             cache = FIXED_HOOK_IMAGE_GENERATED
 
             if cache:
@@ -112,7 +71,9 @@ def _handle_fixed_image(prompt_marker: str, i: int, scene: Dict[str, Any], clien
             return i, updated_scene, None
 
         elif prompt_marker == "FIXED_REVIEW_WITH_CHAR":
-            fixed_url = FIXED_REVIEW_WITH_CHAR_URL
+            fixed_url = _fixed_image_url(prompt_marker)
+            if not fixed_url:
+                return i, None, f"Scene {i} 缺少固定图片配置: {prompt_marker}"
             cache = FIXED_REVIEW_BACKGROUND_GENERATED
 
             if cache:
@@ -142,13 +103,10 @@ def _handle_fixed_image(prompt_marker: str, i: int, scene: Dict[str, Any], clien
             return i, updated_scene, None
 
         elif prompt_marker == "FIXED_REVIEW_BACKGROUND":
-            # 纯色渐变复习背景（无人物）
             import requests as req
-            fixed_url = (
-                "https://coze-coding-project.tos.coze.site/"
-                "coze_storage_7654517760407470089/fixed/review_bg_a6d431c4.png"
-                "?sign=xxx"
-            )
+            fixed_url = _fixed_image_url(prompt_marker)
+            if not fixed_url:
+                return i, None, f"Scene {i} 缺少固定图片配置: {prompt_marker}"
             cache = FIXED_REVIEW_BACKGROUND_GENERATED
 
             if cache:
@@ -200,28 +158,21 @@ def _apply_style(prompt: str, scene_type: str = "", use_reference: bool = True) 
     # 根据场景类型添加位置约束
     if "复习" in scene_type:
         # 复习页：人物缩小放角落，字幕区域留白
-        position_constraint = (
-            ", IMPORTANT: Xiao Wanzi MUST be positioned in the BOTTOM-LEFT or BOTTOM-RIGHT corner, "
-            "character height takes up NO MORE than 30% of the frame height, "
-            "right side and upper area of the frame (60%+) MUST be completely empty for subtitle text overlay, "
-            "background is a clean review card style with large empty space on the right"
+        position_constraint = POSITION_CONSTRAINTS.get(
+            "review",
+            ", IMPORTANT: leave clean empty space for external subtitle overlay"
         )
     elif "标题页" in scene_type:
-        # 标题页：人物在中下，头顶留白
-        position_constraint = (
-            ", IMPORTANT: Xiao Wanzi positioned in the CENTER-LOWER area, "
-            "top 25% of the frame is intentionally left empty and clean for subtitle placement, "
-            "character head should NOT reach the middle of the frame"
+        position_constraint = POSITION_CONSTRAINTS.get(
+            "title",
+            ", IMPORTANT: top 25% of the frame is clean and empty for external subtitles"
         )
     else:
-        # 跟读句：人物固定在中下区域
-        position_constraint = (
-            ", IMPORTANT: Xiao Wanzi positioned in the CENTER-LOWER or LOWER-CENTER area of the frame, "
-            "top 25% of the frame is intentionally left empty and clean for subtitle placement, "
-            "character head should NOT reach the top third of the frame"
+        position_constraint = POSITION_CONSTRAINTS.get(
+            "default",
+            ", IMPORTANT: top 25% of the frame is clean and empty for external subtitles"
         )
 
-    # 构建完整 prompt（STYLE_SUFFIX 已包含角色一致性描述）
     styled_prompt = clean_prompt + STYLE_SUFFIX + position_constraint
     styled_prompt = _append_visual_guard(styled_prompt)
     
@@ -246,6 +197,18 @@ def _append_visual_guard(prompt: str) -> str:
     if not suffixes:
         return prompt
     return f"{prompt}, " + " ".join(suffixes)
+
+
+def _fixed_image_url(prompt_marker: str) -> str:
+    return (FIXED_IMAGES or {}).get(prompt_marker, "")
+
+
+def _fallback_image_url() -> str:
+    return (
+        _fixed_image_url("FIXED_HOOK_IMAGE")
+        or _fixed_image_url("FIXED_REVIEW_WITH_CHAR")
+        or ""
+    )
 
 
 def generate_images(state: Dict[str, Any]) -> Dict[str, Any]:
@@ -313,7 +276,7 @@ def generate_images(state: Dict[str, Any]) -> Dict[str, Any]:
         scene_type = scene.get("visual_role", "") or scene.get("scene", "")
 
         # 检查是否是固定图片类型
-        if original_prompt in ("FIXED_HOOK_IMAGE", "FIXED_REVIEW_WITH_CHAR"):
+        if original_prompt in FIXED_IMAGES:
             logger.info(f"Generating fixed image for scene {i}: {original_prompt}")
             return _handle_fixed_image(original_prompt, i, scene, client)
 
@@ -321,12 +284,14 @@ def generate_images(state: Dict[str, Any]) -> Dict[str, Any]:
         logger.info(f"Generating image for scene {i} ({scene_type}): {prompt[:80]}...")
 
         try:
-            response = client.generate(
-                prompt=prompt,
-                size="2K",
-                watermark=False,
-                image=CHARACTER_REFERENCE_IMAGE_URL
-            )
+            generate_kwargs = {
+                "prompt": prompt,
+                "size": "2K",
+                "watermark": False,
+            }
+            if CHARACTER_REFERENCE_IMAGE_URL:
+                generate_kwargs["image"] = CHARACTER_REFERENCE_IMAGE_URL
+            response = client.generate(**generate_kwargs)
 
             image_url = _extract_image_url(response)
 
@@ -354,7 +319,7 @@ def generate_images(state: Dict[str, Any]) -> Dict[str, Any]:
             else:
                 # 未获取到图片 URL，使用备用图片
                 logger.warning(f"Scene {i} 未获取到图片 URL，使用备用图片")
-                fallback_url = FIXED_HOOK_IMAGE_URL
+                fallback_url = _fallback_image_url()
                 fallback_scene = {
                     "start": scene.get("start", 0),
                     "end": scene.get("end", 0),
@@ -370,7 +335,7 @@ def generate_images(state: Dict[str, Any]) -> Dict[str, Any]:
         except Exception as e:
             # 图片生成失败，使用固定图片作为备用
             logger.warning(f"Scene {i} 生成失败: {str(e)}，使用备用图片")
-            fallback_url = FIXED_HOOK_IMAGE_URL  # 使用钩子图作为备用
+            fallback_url = _fallback_image_url()
             fallback_scene = {
                 "start": scene.get("start", 0),
                 "end": scene.get("end", 0),

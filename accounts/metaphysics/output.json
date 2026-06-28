@@ -1,0 +1,14 @@
+{
+  "enabled": true,
+  "root_dir": "outputs",
+  "path_template": "{account_id}/{date}/{time}_{topic_slug}",
+  "files": {
+    "result": "result.json",
+    "segments": "segments.json",
+    "publish": "publish.json",
+    "review": "review_card.json",
+    "timeline": "timeline_segments.json",
+    "draft_url": "draft_url.txt",
+    "summary": "summary.md"
+  }
+}
