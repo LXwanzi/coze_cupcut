@@ -5,6 +5,7 @@
 import os
 import json
 import logging
+import re
 from typing import Dict, Any, List
 
 from content.account_loader import get_account_pack
@@ -12,8 +13,10 @@ from content.account_loader import get_account_pack
 logger = logging.getLogger(__name__)
 DEFAULT_SHORT_DURATION_SECONDS = 28
 DEFAULT_SHORT_SENTENCE_COUNT = 3
+ACCOUNT_PACK = get_account_pack()
+VOICE_CONFIG = ACCOUNT_PACK.get("voices", {})
 CONTENT_MODE_PREFIXES = list(
-    (get_account_pack().get("modes", {}).get("mode_aliases") or {
+    (ACCOUNT_PACK.get("modes", {}).get("mode_aliases") or {
         '场景式': 'scene_collection',
         '场景': 'scene_collection',
         '合集': 'scene_collection',
@@ -23,6 +26,7 @@ CONTENT_MODE_PREFIXES = list(
         '纠错': 'painpoint_contrast',
     }).keys()
 )
+VOICE_CONTROL_KEYS = {"音色", "voice", "语速", "speed"}
 
 # LLM 配置
 LLM_CONFIG_PATH = os.path.join(
@@ -78,12 +82,17 @@ def _parse_user_input(message: str) -> Dict[str, Any]:
         'topic': '',
         'scene': 'travel',
         'auto_generate_expressions': True,
+        'voice_profile_override': {},
     }
     
     if not message or not message.strip():
         return result
     
     message = message.strip()
+    message, voice_profile_override = _extract_voice_profile_override(message)
+    result['voice_profile_override'] = voice_profile_override
+    if not message:
+        return result
     
     # 尝试提取主题/场景
     if '：' in message or ':' in message:
@@ -128,6 +137,73 @@ def _contains_english(text: str) -> bool:
     return bool(text and any(("A" <= ch <= "Z") or ("a" <= ch <= "z") for ch in text))
 
 
+def _extract_voice_profile_override(message: str) -> tuple[str, Dict[str, Any]]:
+    """Extract optional voice controls without passing them to topic generation."""
+    override: Dict[str, Any] = {}
+    kept_lines: List[str] = []
+
+    for line in (message or "").splitlines():
+        clean_line = line.strip()
+        if not clean_line:
+            continue
+
+        matched = False
+        for separator in ("：", ":"):
+            if separator not in clean_line:
+                continue
+            key, value = clean_line.split(separator, 1)
+            key = key.strip().lower()
+            value = value.strip()
+            if key not in VOICE_CONTROL_KEYS:
+                continue
+            matched = True
+            if key in {"音色", "voice"} and value:
+                voice = _normalize_voice_value(value)
+                if voice:
+                    override["voice"] = voice
+            elif key in {"语速", "speed"} and value:
+                speed = _normalize_speed_value(value)
+                if speed is not None:
+                    override["speed"] = speed
+            break
+
+        if not matched:
+            kept_lines.append(clean_line)
+
+    return "\n".join(kept_lines).strip(), override
+
+
+def _normalize_voice_value(value: str) -> str:
+    voice = (value or "").strip()
+    if not voice:
+        return ""
+
+    aliases = VOICE_CONFIG.get("aliases", {})
+    speaker_map = VOICE_CONFIG.get("speaker_map", {})
+    allowed = set(VOICE_CONFIG.get("allowed_voice_keys", []))
+    normalized = aliases.get(voice, voice)
+    if normalized in allowed or normalized in speaker_map or _looks_like_tts_voice_code(normalized):
+        return normalized
+    return ""
+
+
+def _looks_like_tts_voice_code(value: str) -> bool:
+    return bool(re.match(r"^(zh|saturn|multi|en)_[-_a-zA-Z0-9]+$", value or ""))
+
+
+def _normalize_speed_value(value: str) -> float | None:
+    try:
+        speed = float(value)
+    except (TypeError, ValueError):
+        return None
+    speed_range = VOICE_CONFIG.get("speed_range") or [0.8, 1.3]
+    try:
+        min_speed, max_speed = float(speed_range[0]), float(speed_range[1])
+    except (TypeError, ValueError, IndexError):
+        min_speed, max_speed = 0.8, 1.3
+    return max(min_speed, min(speed, max_speed))
+
+
 def _detect_scene(text: str) -> str:
     """Map Chinese topic hints to the coarse scene used by the workflow memory."""
     text = text or ''
@@ -162,6 +238,7 @@ async def _run_workflow(user_input: Dict[str, Any]) -> Dict[str, Any]:
             'auto_generate_expressions': user_input.get('auto_generate_expressions', True),
             'duration_seconds': DEFAULT_SHORT_DURATION_SECONDS,
             'sentence_count': DEFAULT_SHORT_SENTENCE_COUNT,
+            'voice_profile_override': user_input.get('voice_profile_override', {}),
             'canvas_width': 1080,
             'canvas_height': 1920
         }
@@ -240,6 +317,7 @@ def agent_node(state: Dict[str, Any]) -> Dict[str, Any]:
             'auto_generate_expressions': user_input.get('auto_generate_expressions', True),
             'duration_seconds': DEFAULT_SHORT_DURATION_SECONDS,
             'sentence_count': DEFAULT_SHORT_SENTENCE_COUNT,
+            'voice_profile_override': user_input.get('voice_profile_override', {}),
             'canvas_width': 1080,
             'canvas_height': 1920
         }
@@ -272,6 +350,8 @@ def agent_node(state: Dict[str, Any]) -> Dict[str, Any]:
     
     if draft_url:
         response += f"剪映草稿链接：{draft_url}\n"
+    if result.get('output_dir'):
+        response += f"输出目录：{result.get('output_dir')}\n"
     
     # 添加视频内容摘要
     segments = result.get('segments', [])

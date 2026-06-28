@@ -45,16 +45,10 @@ SCENE_MAP = ACCOUNT_PACK.get("modes", {}).get("scene_map") or [
     ["travel", ["旅行", "机场", "入境", "航班", "行李", "登机", "护照", "值机"]],
 ]
 VOICE_PROFILES = ACCOUNT_PACK.get("modes", {}).get("voice_profiles") or {}
-GENERIC_SCENE_EXPRESSIONS = {
-    "excuse me could you help me",
-    "could you help me",
-    "could you help me with this",
-    "id like to ask about this",
-    "could you confirm that for me",
-    "could you say that again",
-    "thanks that helps a lot",
-    "thank you that helps a lot",
-}
+VISUAL_CONFIG = ACCOUNT_PACK.get("visual", {})
+QUALITY_RULES = ACCOUNT_PACK.get("quality_rules", {})
+SCENE_QUALITY_RULES = QUALITY_RULES.get("scene_collection", {})
+GENERIC_SCENE_EXPRESSIONS = set(SCENE_QUALITY_RULES.get("generic_expressions", []))
 
 
 def _configured_presets(key: str) -> List[Dict[str, Any]]:
@@ -140,6 +134,7 @@ def normalize_dynamic_scene_collection_brief(
             "english": english,
             "chinese": chinese,
             "usage": (item.get("usage") or "").strip(),
+            "keywords": normalize_keywords(item.get("keywords"), english),
         })
 
     brief = {
@@ -194,6 +189,7 @@ def build_scene_collection_segments(
             "caption": f"{expression.get('english', '')}\n{expression.get('chinese', '')}".strip(),
             "tts": build_collection_sentence_tts(index, expression),
             "image_prompt": _scene_prompt(brief, expression.get("label", f"sentence {index}")),
+            "keywords": normalize_keywords(expression.get("keywords"), expression.get("english", "")),
             "duration": 4.8,
         })
 
@@ -302,16 +298,16 @@ def validate_rescue_segments(
         item["duration"] = min(float(item.get("duration", 4.0)), 5.0)
         running_duration += item["duration"]
         if running_duration <= max_duration or item.get("scene") == "预告页":
-            cleaned.append(item)
+            cleaned.append(apply_visual_metadata(item))
 
     if not any(seg.get("scene") == "预告页" for seg in cleaned):
-        cleaned.append({
+        cleaned.append(apply_visual_metadata({
             "scene": "预告页",
             "caption": "你还卡过哪句？评论区告诉我。",
             "tts": "你还卡过哪句？评论区告诉我。",
             "image_prompt": "FIXED_HOOK_IMAGE",
             "duration": 2.0,
-        })
+        }))
 
     return cleaned
 
@@ -399,27 +395,33 @@ def review_topic_brief(brief: Dict[str, Any], raw_topic: str) -> Dict[str, Any]:
 
     if mode == "scene_collection":
         expressions = brief.get("expressions") or []
+        min_expressions = int(SCENE_QUALITY_RULES.get("min_expressions", 4))
+        max_expressions = int(SCENE_QUALITY_RULES.get("max_expressions", 5))
         if brief.get("needs_dynamic_generation"):
             issues.append("场景式主题未命中预设，需要动态生成具体表达。")
             suggestions.append("调用动态场景生成器，禁止直接使用万能句兜底。")
-        if len(expressions) < 4:
-            issues.append("场景式内容少于 4 句，收藏价值偏弱。")
-            suggestions.append("补足到同一场景下 4-5 个连续动作。")
-        if len(expressions) > 5:
-            issues.append("场景式内容超过 5 句，容易拖慢完播。")
-            suggestions.append("只保留同一场景里最刚需的 5 句。")
+        if len(expressions) < min_expressions:
+            issues.append(f"场景式内容少于 {min_expressions} 句，收藏价值偏弱。")
+            suggestions.append(f"补足到同一场景下 {min_expressions}-{max_expressions} 个连续动作。")
+        if len(expressions) > max_expressions:
+            issues.append(f"场景式内容超过 {max_expressions} 句，容易拖慢完播。")
+            suggestions.append(f"只保留同一场景里最刚需的 {max_expressions} 句。")
         if _looks_cross_scene(brief):
             issues.append("句子疑似跨了多个场景。")
             suggestions.append("拆成多条视频，单条只讲一个具体场景。")
         generic_items = find_generic_scene_expressions(expressions)
-        if generic_items and (brief.get("source") == "dynamic_llm" or len(generic_items) >= 2):
+        thresholds = SCENE_QUALITY_RULES.get("generic_expression_threshold", {})
+        generic_threshold = int(
+            thresholds.get("dynamic_llm" if brief.get("source") == "dynamic_llm" else "preset", 2)
+        )
+        if generic_items and len(generic_items) >= generic_threshold:
             issues.append(f"场景式内容包含万能句：{', '.join(generic_items[:3])}")
             suggestions.append("改成和用户主题强相关的具体动作句，不能用万能求助/确认句凑数。")
         if expressions and brief.get("source") == "dynamic_llm" and not _has_topic_overlap(raw_topic, expressions):
             issues.append("句子和用户主题关键词关联偏弱。")
             suggestions.append("重新生成，确保每句都能直接用于用户描述的具体场景。")
         target_duration = SCENE_COLLECTION_DURATION_SECONDS
-        suggested_sentence_count = min(max(len(expressions), 4), 5) if expressions else 5
+        suggested_sentence_count = min(max(len(expressions), min_expressions), max_expressions) if expressions else max_expressions
     else:
         answer_levels = brief.get("answer_levels") or []
         if len(answer_levels) < 2:
@@ -485,16 +487,16 @@ def validate_scene_collection_segments(
             item["duration"] = min(float(item.get("duration", 4.8)), 5.0)
         running_duration += item["duration"]
         if running_duration <= max_duration or item.get("scene") == "互动页":
-            cleaned.append(item)
+            cleaned.append(apply_visual_metadata(item))
 
     if not any(seg.get("scene") == "互动页" for seg in cleaned):
-        cleaned.append({
+        cleaned.append(apply_visual_metadata({
             "scene": "互动页",
             "caption": "你还卡过哪句？评论区说说。",
             "tts": "你还卡过哪句？评论区说说。",
             "image_prompt": "FIXED_HOOK_IMAGE",
             "duration": 2.0,
-        })
+        }))
 
     return cleaned
 
@@ -546,9 +548,7 @@ def _topic_tokens(text: str) -> List[str]:
     text = (text or "").strip()
     tokens = []
     zh_keywords = [
-        "飞机餐", "忌口", "过敏", "素食", "花生", "海鲜", "猪肉", "鸡肉",
-        "行李", "托运", "值机", "空乘", "酒店", "账单", "退房", "早餐",
-        "入境", "办公室", "会议", "咖啡", "外卖",
+        *SCENE_QUALITY_RULES.get("topic_keywords", [])
     ]
     tokens.extend(keyword for keyword in zh_keywords if keyword in text)
     tokens.extend(re.findall(r"[A-Za-z]{3,}", text))
@@ -709,6 +709,7 @@ def _answer_segment(
         "caption": f"{answer.get('english', '')}\n{answer.get('chinese', '')}".strip(),
         "tts": f"{scene_name}：{answer.get('english', '')}。{answer.get('chinese', '')}",
         "image_prompt": _scene_prompt(brief, answer.get("level", scene_name)),
+        "keywords": normalize_keywords(answer.get("keywords"), answer.get("english", "")),
         "duration": duration,
     }
 
@@ -719,3 +720,54 @@ def _scene_prompt(brief: Dict[str, Any], moment: str) -> str:
         f"moment: {moment}, Xiao Wanzi helping a young office worker speak English, "
         "minimal props, clear real-life setting"
     )
+
+
+def normalize_keywords(value: Any, fallback_text: str = "") -> List[str]:
+    """Normalize caption highlight keywords from LLM/presets."""
+    max_keywords = int((VISUAL_CONFIG.get("caption_highlight") or {}).get("max_keywords", 2))
+    keywords: List[str] = []
+    if isinstance(value, list):
+        keywords = [str(item).strip() for item in value if str(item).strip()]
+    elif isinstance(value, str):
+        keywords = [item.strip() for item in re.split(r"[,，/、|]", value) if item.strip()]
+
+    if not keywords and fallback_text:
+        keywords = _fallback_keywords(fallback_text)
+    return keywords[:max_keywords]
+
+
+def _fallback_keywords(text: str) -> List[str]:
+    words = re.findall(r"[A-Za-z][A-Za-z'-]+", text or "")
+    stop_words = {
+        "a", "an", "the", "to", "for", "me", "my", "you", "your", "i",
+        "is", "are", "am", "this", "that", "it", "in", "on", "of", "do",
+        "does", "could", "would", "may", "have", "has", "with",
+    }
+    candidates = [word for word in words if word.lower() not in stop_words]
+    return candidates[:2]
+
+
+def apply_visual_metadata(segment: Dict[str, Any]) -> Dict[str, Any]:
+    """Attach account-driven caption/animation metadata without rendering assumptions."""
+    item = dict(segment)
+    caption_highlight = VISUAL_CONFIG.get("caption_highlight") or {}
+    animation_defaults = VISUAL_CONFIG.get("animation_defaults") or {}
+
+    if caption_highlight.get("enabled", False):
+        keywords = normalize_keywords(item.get("keywords"), item.get("caption", ""))
+        item["keywords"] = keywords
+        item["caption_highlight"] = {
+            "enabled": True,
+            "mode": caption_highlight.get("mode", "keyword_badge"),
+            "highlight_color": caption_highlight.get("highlight_color", "#2563EB"),
+            "keywords": keywords,
+        }
+
+    if animation_defaults:
+        item["animation"] = {
+            "image": item.get("image_animation") or animation_defaults.get("image"),
+            "caption": item.get("caption_animation") or animation_defaults.get("caption"),
+            "keyword": item.get("keyword_animation") or animation_defaults.get("keyword"),
+        }
+
+    return item

@@ -1,0 +1,31 @@
+{
+  "image_prompt_guard": {
+    "enabled": true,
+    "suffixes": [
+      "No text, no letters, no captions, no subtitles.",
+      "No speech bubbles, no comic dialogue bubbles, no thought bubbles.",
+      "No signs, no labels, no watermark, no random symbols.",
+      "The image must not contain any written words or pseudo-text.",
+      "All spoken content will be added later as external subtitles, not inside the image."
+    ],
+    "forbidden_prompt_terms": [
+      "speech bubble",
+      "dialogue bubble",
+      "comic bubble",
+      "text in image",
+      "caption in image",
+      "word balloon"
+    ]
+  },
+  "animation_defaults": {
+    "image": "slow_zoom_in",
+    "caption": "fade_in",
+    "keyword": "pop"
+  },
+  "caption_highlight": {
+    "enabled": true,
+    "mode": "keyword_badge",
+    "highlight_color": "#2563EB",
+    "max_keywords": 2
+  }
+}

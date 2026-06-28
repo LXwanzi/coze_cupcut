@@ -15,27 +15,10 @@ from typing import Dict, Any, List, Optional
 import requests
 from coze_coding_dev_sdk import TTSClient
 from coze_coding_utils.runtime_ctx.context import new_context
+from content.account_loader import get_account_pack
 from graphs.nodes.oss_uploader import upload_audio_to_oss
 
-# ========== TTS 音色配置 ==========
-# 可选音色：
-# - zh_female_xiaohe_uranus_bigtts (小禾 - 默认，通用女声)
-# - zh_female_vv_uranus_bigtts (Vivi - 中英双语)
-# - zh_female_xueayi_saturn_bigtts (雪球 - 儿童故事)
-# - zh_male_m191_uranus_bigtts (云舟 - 男声)
-# - zh_male_taocheng_uranus_bigtts (小天 - 男声)
-# - zh_male_dayi_saturn_bigtts (大奕 - 视频配音男声)
-# - zh_female_mizai_saturn_bigtts (米仔 - 视频配音女声)
-# - zh_female_meilinvyou_saturn_bigtts (美丽女友 - 商务女声)
-# - zh_female_santongyongns_saturn_bigtts (三通女 - 温柔女声)
-# - zh_male_ruyayichen_saturn_bigtts (儒雅男 - 优雅男声)
-# - saturn_zh_female_keainvsheng_tob (可爱女声)
-# - saturn_zh_female_tiaopigongzhu_tob (俏皮女声)
-# - saturn_zh_male_shuanglangshaonian_tob (爽朗少年)
-# - saturn_zh_male_tiancaitongzhuo_tob (天才同学)
-# - saturn_zh_female_cancan_tob (才女)
-
-TTS_VOICES = {
+DEFAULT_TTS_VOICES = {
     "default": "zh_female_yingyujiaoxue_uranus_bigtts",
     "xiaohao": "zh_female_xiaohe_uranus_bigtts",
     "vivi": "zh_female_vv_uranus_bigtts",
@@ -60,13 +43,14 @@ TTS_VOICES = {
     "genius": "saturn_zh_male_tiancaitongzhuo_tob",
     "smart": "saturn_zh_female_cancan_tob",
 }
+ACCOUNT_PACK = get_account_pack()
+VOICE_CONFIG = ACCOUNT_PACK.get("voices", {})
+TTS_VOICES = VOICE_CONFIG.get("speaker_map") or DEFAULT_TTS_VOICES
 
 DEFAULT_VOICE = "zh_female_yingyujiaoxue_uranus_bigtts"
 # 短视频默认要更利落。若底层 TTS SDK 不支持 speed 参数，也会靠更短文案控时长。
 TTS_SPEED = float(os.getenv("TTS_SPEED", "1.05"))
 TARGET_TOTAL_DURATION_SECONDS = float(os.getenv("TARGET_TOTAL_DURATION_SECONDS", "28"))
-# =================================
-
 logger = logging.getLogger(__name__)
 
 CAPCUT_MATE_BASE_URL = os.getenv(
@@ -101,7 +85,21 @@ def _resolve_voice_and_speed(content_meta: Dict[str, Any]) -> tuple[str, float]:
     except (TypeError, ValueError):
         speed = TTS_SPEED
     speed = max(0.8, min(speed, 1.3))
-    return TTS_VOICES.get(voice_key, DEFAULT_VOICE), speed
+    return _resolve_speaker(voice_key), speed
+
+
+def _resolve_speaker(voice_key: str) -> str:
+    voice_key = (voice_key or "").strip()
+    if voice_key in TTS_VOICES:
+        return TTS_VOICES[voice_key]
+    if _looks_like_tts_voice_code(voice_key):
+        return voice_key
+    return TTS_VOICES.get("default", DEFAULT_VOICE)
+
+
+def _looks_like_tts_voice_code(value: str) -> bool:
+    import re
+    return bool(re.match(r"^(zh|saturn|multi|en)_[-_a-zA-Z0-9]+$", value or ""))
 
 
 def _get_audio_duration_from_capcut(mp3_url: str) -> Optional[int]:

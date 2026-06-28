@@ -39,6 +39,11 @@ def load_account_pack(account_id: str | None = None) -> Dict[str, Any]:
         "account_id": account_id,
         "profile": _load_json(base / "account.json", {}),
         "modes": _load_json(base / "modes.json", {}),
+        "visual": _load_json(base / "visual.json", {}),
+        "quality_rules": _load_json(base / "quality_rules.json", {}),
+        "voices": _load_json(base / "voices.json", {}),
+        "publish": _load_json(base / "publish.json", {}),
+        "output": _load_json(base / "output.json", {}),
         "painpoint_presets": _load_json(base / "painpoint_presets.json", []),
         "scene_collection_presets": _load_json(base / "scene_collection_presets.json", []),
     }

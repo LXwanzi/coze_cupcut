@@ -1,0 +1,19 @@
+{
+  "title_templates": {
+    "scene_collection": "【{topic}】这5句真的能救场",
+    "painpoint_contrast": "【{topic}】不会开口？这句能救场",
+    "default": "【{topic}】真实场景英语"
+  },
+  "description_templates": {
+    "scene_collection": "每天进步一点点。{topic}真实场景 5 句英语，先收藏，关键时候能直接用。#英语学习 #实用英语 #旅游英语",
+    "painpoint_contrast": "每天进步一点点。别再硬翻译，{topic}这句先学会。#英语学习 #实用英语 #救场英语",
+    "default": "每天进步一点点。跟小丸子学真实场景英语。#英语学习 #实用英语"
+  },
+  "hashtags": {
+    "scene_collection": ["英语学习", "实用英语", "旅游英语"],
+    "painpoint_contrast": ["英语学习", "实用英语", "救场英语"],
+    "default": ["英语学习", "实用英语"]
+  },
+  "title_max_length": 30,
+  "cover_text_max_length": 12
+}

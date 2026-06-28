@@ -1,0 +1,45 @@
+{
+  "speaker_map": {
+    "default": "zh_female_yingyujiaoxue_uranus_bigtts",
+    "xiaohao": "zh_female_xiaohe_uranus_bigtts",
+    "vivi": "zh_female_vv_uranus_bigtts",
+    "children": "zh_female_xueayi_saturn_bigtts",
+    "parent_child": "zh_female_xueayi_saturn_bigtts",
+    "kids": "zh_female_xueayi_saturn_bigtts",
+    "male": "zh_male_m191_uranus_bigtts",
+    "yunzhou": "zh_male_m191_uranus_bigtts",
+    "xiaotian": "zh_male_taocheng_uranus_bigtts",
+    "business": "zh_female_meilinvyou_saturn_bigtts",
+    "bec": "zh_female_meilinvyou_saturn_bigtts",
+    "professional": "zh_female_meilinvyou_saturn_bigtts",
+    "video": "zh_male_dayi_saturn_bigtts",
+    "dubbing": "zh_female_mizai_saturn_bigtts",
+    "motivation": "zh_female_jitangnv_saturn_bigtts",
+    "gentle": "zh_female_santongyongns_saturn_bigtts",
+    "sweet": "zh_female_santongyongns_saturn_bigtts",
+    "elegant": "zh_male_ruyayichen_saturn_bigtts",
+    "cute": "saturn_zh_female_keainvsheng_tob",
+    "playful": "saturn_zh_female_tiaopigongzhu_tob",
+    "cheerful": "saturn_zh_male_shuanglangshaonian_tob",
+    "genius": "saturn_zh_male_tiancaitongzhuo_tob",
+    "smart": "saturn_zh_female_cancan_tob"
+  },
+  "allowed_voice_keys": [
+    "default",
+    "playful",
+    "business",
+    "cute",
+    "vivi",
+    "gentle",
+    "zh_female_yingyujiaoxue_uranus_bigtts"
+  ],
+  "aliases": {
+    "英语教师": "default",
+    "教师": "default",
+    "俏皮": "playful",
+    "商务": "business",
+    "可爱": "cute",
+    "温柔": "gentle"
+  },
+  "speed_range": [0.8, 1.3]
+}

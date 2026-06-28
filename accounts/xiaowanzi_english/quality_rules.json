@@ -1,0 +1,43 @@
+{
+  "scene_collection": {
+    "min_expressions": 4,
+    "max_expressions": 5,
+    "generic_expression_threshold": {
+      "preset": 2,
+      "dynamic_llm": 1
+    },
+    "generic_expressions": [
+      "excuse me could you help me",
+      "could you help me",
+      "could you help me with this",
+      "id like to ask about this",
+      "could you confirm that for me",
+      "could you say that again",
+      "thanks that helps a lot",
+      "thank you that helps a lot"
+    ],
+    "topic_keywords": [
+      "飞机餐",
+      "忌口",
+      "过敏",
+      "素食",
+      "花生",
+      "海鲜",
+      "猪肉",
+      "鸡肉",
+      "行李",
+      "托运",
+      "值机",
+      "空乘",
+      "酒店",
+      "账单",
+      "退房",
+      "早餐",
+      "入境",
+      "办公室",
+      "会议",
+      "咖啡",
+      "外卖"
+    ]
+  }
+}

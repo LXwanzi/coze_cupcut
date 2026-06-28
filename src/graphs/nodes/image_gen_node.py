@@ -18,9 +18,12 @@ from typing import Dict, Any
 from concurrent.futures import ThreadPoolExecutor, as_completed
 from coze_coding_dev_sdk import ImageGenerationClient
 from coze_coding_utils.runtime_ctx.context import new_context
+from content.account_loader import get_account_pack
 from graphs.nodes.oss_uploader import upload_image_to_oss
 
 logger = logging.getLogger(__name__)
+ACCOUNT_PACK = get_account_pack()
+VISUAL_CONFIG = ACCOUNT_PACK.get("visual", {})
 
 # 小丸子角色参考图 URL（上传到 OSS 后的永久 URL）
 CHARACTER_REFERENCE_IMAGE_URL = (
@@ -190,7 +193,7 @@ def _apply_style(prompt: str, scene_type: str = "", use_reference: bool = True) 
         use_reference: 是否追加角色一致性描述
     """
     # 移除禁止的关键词
-    clean_prompt = prompt
+    clean_prompt = _sanitize_visual_prompt(prompt)
     for forbidden in FORBIDDEN_STYLES:
         clean_prompt = clean_prompt.replace(forbidden, "")
 
@@ -220,8 +223,29 @@ def _apply_style(prompt: str, scene_type: str = "", use_reference: bool = True) 
 
     # 构建完整 prompt（STYLE_SUFFIX 已包含角色一致性描述）
     styled_prompt = clean_prompt + STYLE_SUFFIX + position_constraint
+    styled_prompt = _append_visual_guard(styled_prompt)
     
     return styled_prompt
+
+
+def _sanitize_visual_prompt(prompt: str) -> str:
+    """Remove account-configured prompt terms that invite in-image text."""
+    clean_prompt = prompt or ""
+    guard = VISUAL_CONFIG.get("image_prompt_guard", {})
+    for forbidden in guard.get("forbidden_prompt_terms", []):
+        clean_prompt = clean_prompt.replace(forbidden, "")
+    return clean_prompt
+
+
+def _append_visual_guard(prompt: str) -> str:
+    """Append account-level no-text/no-bubble constraints to image prompts."""
+    guard = VISUAL_CONFIG.get("image_prompt_guard", {})
+    if not guard.get("enabled", True):
+        return prompt
+    suffixes = guard.get("suffixes", [])
+    if not suffixes:
+        return prompt
+    return f"{prompt}, " + " ".join(suffixes)
 
 
 def generate_images(state: Dict[str, Any]) -> Dict[str, Any]:

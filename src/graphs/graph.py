@@ -23,6 +23,7 @@ class VideoWorkflowState(dict):
     scene: str
     auto_generate_expressions: bool
     content_mode: str
+    voice_profile_override: Dict[str, Any]
     duration_seconds: int
     sentence_count: int
     audience: str
@@ -53,6 +54,9 @@ class VideoWorkflowState(dict):
     success: bool
     draft_url: str
     steps_status: list
+    output_dir: str
+    output_files: Dict[str, Any]
+    timeline_segments: list
     error: str
 
 
@@ -203,6 +207,10 @@ def create_capcut_draft_node(state: VideoWorkflowState) -> Dict[str, Any]:
         "publish_pack": result.get("publish_pack"),
         "review_card": result.get("review_card"),
         "material_bank": result.get("material_bank", []),
+        "segments": result.get("segments", state.get("segments", [])),
+        "timeline_segments": result.get("timeline_segments", []),
+        "output_dir": result.get("output_dir"),
+        "output_files": result.get("output_files", {}),
         "steps_status": result.get("steps_status", []),
         "message": result.get("message"),
         "error": result.get("error")

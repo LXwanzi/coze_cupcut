@@ -13,8 +13,10 @@ import re
 import logging
 from typing import Dict, Any, List, Optional
 
+from content.account_loader import get_account_pack
 from graphs.nodes.topic_memory import get_topic_memory
 from graphs.nodes.topic_rescue_node import (
+    apply_visual_metadata,
     build_rescue_segments,
     build_scene_collection_segments,
     build_topic_brief,
@@ -33,6 +35,8 @@ DEFAULT_TARGET_DURATION_SECONDS = 28
 MAX_SENTENCE_SEGMENT_SECONDS = 5.0
 SUMMARY_SEGMENT_SECONDS = 2.5
 PREVIEW_SEGMENT_SECONDS = 2.0
+ACCOUNT_PACK = get_account_pack()
+PUBLISH_CONFIG = ACCOUNT_PACK.get("publish", {})
 
 # LLM 配置
 LLM_CONFIG_PATH = os.path.join(
@@ -104,6 +108,7 @@ def generate_plan(state: Dict[str, Any]) -> Dict[str, Any]:
         topic_id = state.get('topic_id', '')
         raw_topic = state.get('raw_topic', '') or topic or learning_note
         auto_generate_expressions = bool(state.get('auto_generate_expressions'))
+        voice_profile_override = state.get('voice_profile_override') or {}
         user_input = learning_note or topic
         
         if not user_input:
@@ -170,6 +175,7 @@ def generate_plan(state: Dict[str, Any]) -> Dict[str, Any]:
                 segments = build_scene_collection_segments(topic_brief, duration_seconds=duration_seconds)
             else:
                 segments = build_rescue_segments(topic_brief, duration_seconds=duration_seconds)
+            topic_brief = _apply_voice_profile_override(topic_brief, voice_profile_override)
             result = {
                 'segments': segments,
                 'episode_info': {
@@ -199,6 +205,7 @@ def generate_plan(state: Dict[str, Any]) -> Dict[str, Any]:
             }
         
         segments = result['segments']
+        segments = [apply_visual_metadata(segment) for segment in segments]
         episode_info = result.get('episode_info', {})
         effective_sentence_count = (
             len(extract_answer_sentences(topic_brief))
@@ -237,7 +244,7 @@ def generate_plan(state: Dict[str, Any]) -> Dict[str, Any]:
             'pain_point': topic_brief.get('pain_point', ''),
             'wrong_expression': topic_brief.get('wrong_expression', ''),
             'quality_review': topic_brief.get('quality_review', {}),
-            'voice_profile': topic_brief.get('voice_profile', {}),
+            'voice_profile': _merge_voice_profile(topic_brief.get('voice_profile', {}), voice_profile_override),
             'originality_check': '所有内容基于用户提供的原始素材生成',
             'safety_note': '未涉及教材原文复述',
             'topic_id': topic_id
@@ -360,6 +367,28 @@ def _build_quality_error(
     }
 
 
+def _apply_voice_profile_override(
+    topic_brief: Dict[str, Any],
+    override: Dict[str, Any]
+) -> Dict[str, Any]:
+    if not override:
+        return topic_brief
+    updated = dict(topic_brief or {})
+    updated["voice_profile"] = _merge_voice_profile(updated.get("voice_profile", {}), override)
+    return updated
+
+
+def _merge_voice_profile(
+    base: Dict[str, Any] | None,
+    override: Dict[str, Any] | None
+) -> Dict[str, Any]:
+    merged = dict(base or {})
+    for key, value in (override or {}).items():
+        if value not in ("", None):
+            merged[key] = value
+    return merged
+
+
 def _generate_dynamic_scene_collection_brief(
     raw_topic: str,
     scene: str,
@@ -397,6 +426,8 @@ def _generate_dynamic_scene_collection_brief(
    - Could you say that again?
    - Thanks, that helps a lot.
 7. 如果主题是“飞机餐忌口”，应该围绕素食、过敏、不吃某类食物、换餐等具体动作，而不是泛泛求助。
+8. 每句都要给 keywords，选 1-2 个字幕高亮关键词，必须来自英文句子本身。
+9. image_prompt 后续只用于生成背景图，不能要求图片里出现任何文字、气泡、对白框或字幕。
 
 ## 输出 JSON，不要 Markdown
 {{
@@ -409,7 +440,8 @@ def _generate_dynamic_scene_collection_brief(
       "label": "动作标签",
       "english": "English sentence",
       "chinese": "中文意思",
-      "usage": "这句什么时候用"
+      "usage": "这句什么时候用",
+      "keywords": ["keyword"]
     }}
   ],
   "summary_tts": "这5句先收藏...",
@@ -479,41 +511,33 @@ def _build_publish_pack(
     mode = topic_brief.get('content_mode') or content_meta.get('content_mode')
 
     if mode == 'scene_collection':
-        title = topic_brief.get('title') or f"【{topic}】这5句英语真的能救场"
-        description = (
-            f"每天进步一点点。{topic}真实场景 5 句英语，先收藏，"
-            "关键时候能直接用。#英语学习 #实用英语 #旅游英语"
-        )
-        hashtags = ['英语学习', '实用英语', '旅游英语']
+        title = topic_brief.get('title') or _format_publish_template("title_templates", mode, topic)
+        description = _format_publish_template("description_templates", mode, topic)
+        hashtags = _publish_hashtags(mode)
     else:
-        pain_point = topic_brief.get('pain_point') or content_meta.get('selected_topic') or topic
-        title = _build_painpoint_title(topic, pain_point)
-        description = (
-            f"每天进步一点点。别再硬翻译，{topic}这句先学会。"
-            "#英语学习 #实用英语 #救场英语"
-        )
-        hashtags = ['英语学习', '实用英语', '救场英语']
+        title = topic_brief.get('title') or _format_publish_template("title_templates", mode, topic)
+        description = _format_publish_template("description_templates", mode, topic)
+        hashtags = _publish_hashtags(mode)
 
+    title_max_length = int(PUBLISH_CONFIG.get("title_max_length", 30))
+    cover_text_max_length = int(PUBLISH_CONFIG.get("cover_text_max_length", 12))
     return {
-        'title': title[:30],
-        'cover_text': topic[:12],
+        'title': title[:title_max_length],
+        'cover_text': topic[:cover_text_max_length],
         'description': description,
         'hashtags': hashtags,
     }
 
 
-def _build_painpoint_title(topic: str, pain_point: str) -> str:
-    if "空乘" in pain_point or "空姐" in pain_point:
-        return f"【{topic}】别只会yes，这句才有用"
-    if "托运" in pain_point or "行李" in pain_point:
-        return f"【{topic}】不会说托运行李？这句能救场"
-    if "账单" in pain_point:
-        return f"【{topic}】账单多收费？这句一定要会"
-    if "太吵" in pain_point or "换房" in pain_point:
-        return f"【{topic}】房间太吵？这句帮你换房"
-    if "入境" in pain_point:
-        return f"【{topic}】被问来干嘛？别只会travel"
-    return f"【{topic}】不会开口？这句能救场"
+def _format_publish_template(config_key: str, mode: str, topic: str) -> str:
+    templates = PUBLISH_CONFIG.get(config_key) or {}
+    template = templates.get(mode) or templates.get("default") or "{topic}"
+    return template.format(topic=topic)
+
+
+def _publish_hashtags(mode: str) -> List[str]:
+    hashtags = PUBLISH_CONFIG.get("hashtags") or {}
+    return hashtags.get(mode) or hashtags.get("default") or []
 
 
 def _extract_sentences(segments: List[Dict]) -> List[str]:

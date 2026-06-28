@@ -1,6 +1,7 @@
 import pytest
 
 from graphs.nodes.topic_rescue_node import (
+    apply_visual_metadata,
     build_rescue_segments,
     build_scene_collection_segments,
     build_scene_tts,
@@ -155,6 +156,43 @@ def test_dynamic_scene_collection_brief_passes_for_specific_topic():
     assert not find_generic_scene_expressions(brief["expressions"])
 
 
+def test_dynamic_scene_collection_preserves_keywords():
+    brief = normalize_dynamic_scene_collection_brief(
+        "飞机餐忌口",
+        "travel",
+        {
+            "topic": "飞机餐忌口",
+            "expressions": [
+                {
+                    "label": "问素食",
+                    "english": "Do you have a vegetarian option?",
+                    "chinese": "有素食选择吗？",
+                    "keywords": ["vegetarian"],
+                },
+                {"label": "花生", "english": "I can't eat peanuts.", "chinese": "我不能吃花生。"},
+                {"label": "海鲜", "english": "I'm allergic to seafood.", "chinese": "我对海鲜过敏。"},
+                {"label": "猪肉", "english": "Does this have pork in it?", "chinese": "这里面有猪肉吗？"},
+                {"label": "鸡肉", "english": "Could I have the chicken instead?", "chinese": "我可以换成鸡肉吗？"},
+            ],
+        },
+    )
+
+    assert brief["expressions"][0]["keywords"] == ["vegetarian"]
+    assert brief["expressions"][1]["keywords"]
+
+
+def test_apply_visual_metadata_adds_highlight_and_animation():
+    segment = apply_visual_metadata({
+        "scene": "第1句场景句",
+        "caption": "I have one bag to check.\n我有一个包要托运。",
+        "tts": "第1句。",
+        "keywords": ["bag"],
+    })
+
+    assert segment["caption_highlight"]["keywords"] == ["bag"]
+    assert segment["animation"]["image"] == "slow_zoom_in"
+
+
 def test_scene_collection_quality_blocks_generic_expressions():
     brief = normalize_dynamic_scene_collection_brief(
         "飞机餐忌口",
@@ -272,6 +310,22 @@ def test_generate_plan_dynamic_scene_collection_uses_generated_expressions(tmp_p
     assert result["content_meta"]["quality_review"]["is_reasonable"] is True
     assert result["review_card"]["today_expressions"][0]["english"] == "Do you have a vegetarian option?"
     assert "Could you help me?" not in "\n".join(seg["caption"] for seg in result["segments"])
+
+
+def test_generate_plan_applies_voice_override(tmp_path, monkeypatch):
+    monkeypatch.setenv("COZE_WORKSPACE_PATH", str(tmp_path))
+
+    result = generate_plan({
+        "raw_topic": "场景式：机场值机",
+        "topic": "场景式：机场值机",
+        "auto_generate_expressions": True,
+        "duration_seconds": 28,
+        "sentence_count": 3,
+        "voice_profile_override": {"voice": "playful", "speed": 1.12},
+    })
+
+    assert result["content_meta"]["voice_profile"]["voice"] == "playful"
+    assert result["content_meta"]["voice_profile"]["speed"] == 1.12
 
 
 def test_tts_resolves_voice_profile_speed():

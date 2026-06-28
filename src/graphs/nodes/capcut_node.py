@@ -22,6 +22,8 @@ import os
 import requests
 from typing import Dict, Any, List, Optional
 
+from graphs.nodes.output_writer import write_workflow_output
+
 logger = logging.getLogger(__name__)
 
 # ========== BGM 配置 ==========
@@ -93,6 +95,9 @@ def _build_timeline_segments(state: Dict[str, Any]) -> List[Dict[str, Any]]:
             "end": end,
             "duration": end - start,
             "caption": audio_seg.get("caption") or source_seg.get("caption", ""),
+            "keywords": source_seg.get("keywords", []),
+            "caption_highlight": source_seg.get("caption_highlight", {}),
+            "animation": source_seg.get("animation", {}),
             "audio_url": audio_seg.get("audio_url") or audio_seg.get("url"),
             "asset_url": asset_url,
             "scene": audio_seg.get("scene") or source_seg.get("scene", ""),
@@ -133,12 +138,13 @@ def create_capcut_draft(state: Dict[str, Any]) -> Dict[str, Any]:
     scenes = state.get("scenes", [])  # 包含 asset_url 的 scenes
 
     if not video_plan:
-        return {
+        result = {
             "success": False,
             "draft_url": None,
             "error": "缺少 video_plan",
             "steps_status": []
         }
+        return _finalize_result(state, result)
 
     canvas = video_plan.get("canvas", {})
     width = canvas.get("width", 1080)
@@ -159,11 +165,11 @@ def create_capcut_draft(state: Dict[str, Any]) -> Dict[str, Any]:
         timeline_segments = _build_timeline_segments(state)
         timeline_error = _validate_timeline(timeline_segments)
         if timeline_error:
-            return _build_error_result(
+            return _finalize_result(state, _build_error_result(
                 draft_url, content_meta, publish_pack, review_card, material_bank,
                 timeline_error,
                 steps_status
-            )
+            ))
 
         total_audio_duration = max(seg["end"] for seg in timeline_segments)
 
@@ -186,21 +192,21 @@ def create_capcut_draft(state: Dict[str, Any]) -> Dict[str, Any]:
         })
 
         if not create_response or create_response.get("code") != 0:
-            return _build_error_result(
+            return _finalize_result(state, _build_error_result(
                 draft_url, content_meta, publish_pack, review_card, material_bank,
                 f"创建草稿失败: {create_response}",
                 steps_status
-            )
+            ))
 
         draft_url = create_response.get("draft_url")
         if not draft_url:
             draft_url = create_response.get("data", {}).get("draft_url")
         if not draft_url:
-            return _build_error_result(
+            return _finalize_result(state, _build_error_result(
                 draft_url, content_meta, publish_pack, review_card, material_bank,
                 "创建草稿返回的 draft_url 为空",
                 steps_status
-            )
+            ))
 
         logger.info(f"Draft created: {draft_url}")
 
@@ -236,11 +242,11 @@ def create_capcut_draft(state: Dict[str, Any]) -> Dict[str, Any]:
             })
 
             if not add_images_response or add_images_response.get("code") != 0:
-                return _build_error_result(
+                return _finalize_result(state, _build_error_result(
                     draft_url, content_meta, publish_pack, review_card, material_bank,
                     f"添加图片失败: {add_images_response}",
                     steps_status
-                )
+                ))
 
         # ========== Step 3: 添加字幕 ==========
         # 构建字幕列表 - 基于片段时间轴，使用深色文字+白色背景+底部位置
@@ -295,11 +301,11 @@ def create_capcut_draft(state: Dict[str, Any]) -> Dict[str, Any]:
             })
 
             if not add_captions_response or add_captions_response.get("code") != 0:
-                return _build_error_result(
+                return _finalize_result(state, _build_error_result(
                     draft_url, content_meta, publish_pack, review_card, material_bank,
                     f"添加字幕失败: {add_captions_response}",
                     steps_status
-                )
+                ))
 
         # ========== Step 4: 添加音频 ==========
         # 使用片段级音频同步
@@ -329,11 +335,11 @@ def create_capcut_draft(state: Dict[str, Any]) -> Dict[str, Any]:
             })
 
             if not add_audios_response or add_audios_response.get("code") != 0:
-                return _build_error_result(
+                return _finalize_result(state, _build_error_result(
                     draft_url, content_meta, publish_pack, review_card, material_bank,
                     f"添加音频失败: {add_audios_response}",
                     steps_status
-                )
+                ))
 
         # ========== Step 4.5: 添加 BGM（可选）==========
         # 检查是否有 BGM 配置
@@ -382,11 +388,11 @@ def create_capcut_draft(state: Dict[str, Any]) -> Dict[str, Any]:
         })
 
         if not save_response or save_response.get("code") != 0:
-            return _build_error_result(
+            return _finalize_result(state, _build_error_result(
                 draft_url, content_meta, publish_pack, review_card, material_bank,
                 f"保存草稿失败: {save_response}",
                 steps_status
-            )
+            ))
 
         # 替换 draft_url 域名为用户配置的地址
         final_draft_url = draft_url.replace(
@@ -398,13 +404,14 @@ def create_capcut_draft(state: Dict[str, Any]) -> Dict[str, Any]:
         logger.info(f"Final draft URL (replaced): {final_draft_url}")
 
         # ========== 返回成功结果 ==========
-        return {
+        success_result = {
             "success": True,
             "draft_url": final_draft_url,
             "content_meta": content_meta,
             "publish_pack": publish_pack,
             "review_card": review_card,
             "material_bank": material_bank,
+            "segments": state.get("segments", []),
             "duration": total_audio_duration,
             "duration_seconds": round(total_audio_duration / MICROSECONDS_PER_SECOND, 2),
             "scene_count": len(timeline_segments),
@@ -413,14 +420,16 @@ def create_capcut_draft(state: Dict[str, Any]) -> Dict[str, Any]:
             "steps_status": steps_status,
             "message": "剪映草稿已生成，请用 CapCut Mate 桌面端导入剪映。"
         }
+        return _finalize_result(state, success_result)
 
     except Exception as e:
         logger.error(f"CapCut API exception: {str(e)}")
-        return _build_error_result(
+        error_result = _build_error_result(
             draft_url, content_meta, publish_pack, review_card, material_bank,
             f"CapCut API 请求异常: {str(e)}",
             steps_status
         )
+        return _finalize_result(state, error_result)
 
 
 def _safe_post(endpoint: str, payload: Dict) -> Dict:
@@ -461,6 +470,14 @@ def _truncate_for_logging(payload: Dict) -> Dict:
         else:
             safe[key] = value
     return safe
+
+
+def _finalize_result(state: Dict[str, Any], result: Dict[str, Any]) -> Dict[str, Any]:
+    """Attach common output fields and persist the workflow result."""
+    result.setdefault("segments", state.get("segments", []))
+    result.setdefault("timeline_segments", [])
+    result.update(write_workflow_output(state, result))
+    return result
 
 
 def _build_error_result(

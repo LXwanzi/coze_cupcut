@@ -14,6 +14,10 @@ def test_xiaowanzi_account_pack_loads_content_config():
 
     assert pack["profile"]["account_id"] == "xiaowanzi_english"
     assert pack["modes"]["mode_aliases"]["场景式"] == "scene_collection"
+    assert pack["visual"]["image_prompt_guard"]["enabled"] is True
+    assert pack["voices"]["speaker_map"]["playful"] == "saturn_zh_female_tiaopigongzhu_tob"
+    assert pack["publish"]["title_templates"]["scene_collection"].startswith("【{topic}】")
+    assert pack["output"]["enabled"] is True
     assert any(item["id"] == "plane_attendant_help" for item in pack["scene_collection_presets"])
     assert any(item["id"] == "plane_attendant_help_painpoint" for item in pack["painpoint_presets"])
 

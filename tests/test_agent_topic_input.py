@@ -1,4 +1,4 @@
-from agents.agent import _parse_user_input
+from agents.agent import _extract_voice_profile_override, _parse_user_input
 
 
 def test_parse_user_input_treats_plain_text_as_topic():
@@ -39,3 +39,20 @@ def test_parse_user_input_keeps_painpoint_mode_prefix_as_topic():
     assert parsed["learning_note"] == ""
     assert parsed["scene"] == "travel"
     assert parsed["auto_generate_expressions"] is True
+
+
+def test_parse_user_input_extracts_voice_profile_override():
+    parsed = _parse_user_input("场景式：机场值机\n音色：俏皮\n语速：1.12")
+
+    assert parsed["topic"] == "场景式：机场值机"
+    assert parsed["voice_profile_override"] == {"voice": "playful", "speed": 1.12}
+
+
+def test_extract_voice_profile_accepts_tts_voice_code():
+    message, override = _extract_voice_profile_override(
+        "痛点式：酒店退房\nvoice: zh_female_yingyujiaoxue_uranus_bigtts\nspeed: 9"
+    )
+
+    assert message == "痛点式：酒店退房"
+    assert override["voice"] == "zh_female_yingyujiaoxue_uranus_bigtts"
+    assert override["speed"] == 1.3
