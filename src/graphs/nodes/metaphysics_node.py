@@ -5,6 +5,7 @@ from typing import Any, Dict, List
 
 
 MONEY_KEYWORDS = ["钱留不住", "漏财", "守财", "花钱", "存不住钱", "财"]
+DEFAULT_WEAK_HOOK_PHRASES = ["先别急着焦虑", "适合先收藏", "慢慢看"]
 
 
 def is_metaphysics_account(account_pack: Dict[str, Any]) -> bool:
@@ -26,6 +27,7 @@ def build_metaphysics_plan(
     product = _select_product(topic, scene, account_pack)
     voice_profile = _voice_profile(mode, account_pack)
     brief = _build_brief(topic, mode, scene, product)
+    quality_review = _review_brief(brief, account_pack)
     segments = _build_segments(brief)
     segments = [_apply_visual_metadata(seg, account_pack) for seg in segments]
     duration_seconds = sum(seg.get("duration", 4.0) for seg in segments)
@@ -41,6 +43,7 @@ def build_metaphysics_plan(
         "content_mode": mode,
         "voice_profile": voice_profile,
         "product": product,
+        "quality_review": quality_review,
         "topic_id": _topic_id(topic, scene),
         "safety_note": "玄学内容仅作传统寓意和生活仪式感参考，不承诺结果。",
     }
@@ -51,7 +54,7 @@ def build_metaphysics_plan(
         "review_card": {
             "today_expressions": [],
             "answer_levels": [],
-            "quick_review": brief["soft_claim"],
+            "quick_review": brief["soft_boundary"],
             "product": product,
         },
         "episode_info": {
@@ -132,25 +135,31 @@ def _build_brief(topic: str, mode: str, scene: str, product: Dict[str, Any]) -> 
     meaning = product.get("meaning", "给自己一个稳定提醒")
     clean_topic = topic.replace("玄学方向", "").strip() or topic
     pain_point = clean_topic if clean_topic.startswith(("最近", "总觉得", "老是")) else f"最近总觉得{clean_topic}"
-    hook = f"{clean_topic}，先别急着焦虑。"
+    symptoms = _symptoms_for_topic(clean_topic, scene)
+    sharp_hook = _sharp_hook_for_topic(clean_topic, symptoms)
     if any(keyword in clean_topic for keyword in MONEY_KEYWORDS):
-        product_reason = f"{product_name}更适合做一个守财感提醒，寓意是{meaning}。"
+        mystic_view = "传统说法里，这种状态容易被叫作财气不聚。"
+        real_life_view = "现实一点说，是花钱前少了一个让自己停一下的提醒。"
+        product_bridge = f"{product_name}适合做一个守财感提醒，寓意是{meaning}。"
         placement = "可以放在钱包、玄关或每天会看到的位置，重点是提醒自己少冲动消费。"
     else:
-        product_reason = f"{product_name}适合用来增加一点稳定的仪式感，寓意是{meaning}。"
+        mystic_view = "传统说法里，状态不稳时先看空间和随身物件的秩序感。"
+        real_life_view = "现实一点说，是生活里缺少一个让自己稳下来的提醒。"
+        product_bridge = f"{product_name}适合用来增加一点稳定的仪式感，寓意是{meaning}。"
         placement = "放在你每天会经过或会看到的位置就好，保持干净、不杂乱。"
     return {
         "topic": clean_topic,
         "mode": mode,
         "scene": scene,
-        "hook": hook,
+        "sharp_hook": sharp_hook,
+        "symptoms": symptoms,
         "pain_point": f"你{pain_point}",
-        "traditional_view": "传统说法里，状态不稳时先看空间和随身物件的秩序感。",
-        "real_life_view": "现实一点说，它更像给自己一个慢下来、少乱花的提醒。",
+        "mystic_view": mystic_view,
+        "real_life_view": real_life_view,
         "product_angle": product_name,
-        "product_reason": product_reason,
-        "placement": placement,
-        "soft_claim": "玄学小物只做寓意和提醒，不保证结果，关键还是自己的节奏。",
+        "product_bridge": product_bridge,
+        "usage_tip": placement,
+        "soft_boundary": "它不承诺结果，只是给自己一个慢下来的仪式感。",
         "interaction": "你最近是钱留不住，还是心里总觉得不踏实？",
         "title": f"【{clean_topic[:10]}】想稳一点，可以先看这个",
     }
@@ -159,40 +168,47 @@ def _build_brief(topic: str, mode: str, scene: str, product: Dict[str, Any]) -> 
 def _build_segments(brief: Dict[str, Any]) -> List[Dict[str, Any]]:
     return [
         {
-            "scene": "痛点钩子",
-            "caption": f"{brief['hook']}\n适合先收藏慢慢看",
-            "tts": f"{brief['hook']}适合先收藏慢慢看。",
+            "scene": "痛点命中",
+            "caption": brief["sharp_hook"],
+            "tts": brief["sharp_hook"],
             "image_prompt": _image_prompt(brief, "opening", include_product=False),
-            "duration": 3.2,
+            "duration": 2.6,
         },
         {
-            "scene": "场景代入",
-            "caption": brief["pain_point"],
-            "tts": brief["pain_point"],
+            "scene": "具体表现",
+            "caption": "，".join(brief["symptoms"][:3]),
+            "tts": "如果你也有这些情况：" + "，".join(brief["symptoms"][:3]) + "。",
             "image_prompt": _image_prompt(brief, "life scene", include_product=False),
-            "duration": 4.0,
+            "duration": 4.4,
         },
         {
-            "scene": "传统说法",
-            "caption": brief["traditional_view"],
-            "tts": brief["traditional_view"],
-            "image_prompt": _image_prompt(brief, "traditional view", include_product=False),
-            "duration": 4.2,
+            "scene": "玄学解释",
+            "caption": brief["mystic_view"],
+            "tts": brief["mystic_view"],
+            "image_prompt": _image_prompt(brief, "mystic view", include_product=False),
+            "duration": 3.8,
         },
         {
-            "scene": "产品建议",
-            "caption": f"{brief['product_angle']}\n{brief['product_reason']}",
-            "tts": f"可以看看{brief['product_reason']}",
+            "scene": "现实解释",
+            "caption": brief["real_life_view"],
+            "tts": brief["real_life_view"],
+            "image_prompt": _image_prompt(brief, "real life view", include_product=False),
+            "duration": 3.8,
+        },
+        {
+            "scene": "产品桥接",
+            "caption": f"{brief['product_angle']}\n{brief['product_bridge']}",
+            "tts": f"这时候可以看看{brief['product_bridge']}",
             "image_prompt": _image_prompt(brief, "product close up", include_product=True),
             "keywords": [brief["product_angle"]],
             "duration": 4.8,
         },
         {
-            "scene": "摆放建议",
-            "caption": brief["placement"],
-            "tts": brief["placement"],
-            "image_prompt": _image_prompt(brief, "placement tips", include_product=True),
-            "duration": 4.2,
+            "scene": "使用建议",
+            "caption": brief["usage_tip"],
+            "tts": brief["usage_tip"] + brief["soft_boundary"],
+            "image_prompt": _image_prompt(brief, "usage tips", include_product=True),
+            "duration": 5.0,
         },
         {
             "scene": "自然问句",
@@ -216,6 +232,64 @@ def _image_prompt(brief: Dict[str, Any], moment: str, include_product: bool = Fa
             "single product close-up in lower third, no other lucky objects"
         )
     return f"{base}, no product props, no lucky object pile"
+
+
+def _symptoms_for_topic(topic: str, scene: str) -> List[str]:
+    if any(keyword in topic for keyword in MONEY_KEYWORDS):
+        return [
+            "刚到账就花掉",
+            "付款太随手",
+            "买完又后悔",
+        ]
+    if scene == "bedroom":
+        return [
+            "睡前脑子停不下来",
+            "床头杂物越堆越多",
+            "醒来还是觉得累",
+        ]
+    if scene == "desk":
+        return [
+            "坐下就分心",
+            "桌面越乱越烦",
+            "事情总是拖到最后",
+        ]
+    return [
+        "东西越堆越乱",
+        "心里总是不踏实",
+        "想调整却不知道从哪开始",
+    ]
+
+
+def _sharp_hook_for_topic(topic: str, symptoms: List[str]) -> str:
+    if any(keyword in topic for keyword in MONEY_KEYWORDS):
+        return "刚发工资就没了？先别急着怪自己赚得少。"
+    symptom = symptoms[0] if symptoms else topic
+    return f"{symptom}？可能不是你不努力。"
+
+
+def _review_brief(brief: Dict[str, Any], account_pack: Dict[str, Any]) -> Dict[str, Any]:
+    template = (account_pack.get("script_templates") or {}).get(brief.get("mode"), {})
+    gate = template.get("quality_gate") or {}
+    min_symptoms = int(gate.get("min_symptoms", 2))
+    weak_phrases = gate.get("weak_hook_phrases") or DEFAULT_WEAK_HOOK_PHRASES
+    forbidden_claims = gate.get("forbidden_claims") or []
+    issues: List[str] = []
+
+    if len(brief.get("symptoms") or []) < min_symptoms:
+        issues.append("具体表现少于质量闸门要求。")
+    if any(phrase in brief.get("sharp_hook", "") for phrase in weak_phrases):
+        issues.append("开头钩子偏泛，缺少具体命中感。")
+    body = " ".join(str(value) for value in brief.values())
+    if any(claim in body for claim in forbidden_claims):
+        issues.append("包含玄学绝对化承诺。")
+    if brief.get("product_angle", "") not in brief.get("product_bridge", ""):
+        issues.append("产品桥接没有解释具体物件。")
+
+    return {
+        "is_reasonable": not issues,
+        "issues": issues,
+        "slots": template.get("required_slots", []),
+    }
 
 
 def _apply_visual_metadata(segment: Dict[str, Any], account_pack: Dict[str, Any]) -> Dict[str, Any]:

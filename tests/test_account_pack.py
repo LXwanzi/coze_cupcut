@@ -37,6 +37,8 @@ def test_metaphysics_account_pack_loads_isolated_config():
     assert pack["voices"]["speaker_map"]["mystic_male"] == "zh_male_ruyayichen_saturn_bigtts"
     assert pack["voices"]["speaker_map"]["gentle"] == "zh_female_santongyongns_saturn_bigtts"
     assert pack["modes"]["voice_profiles"]["painpoint_conversion"]["voice"] == "mystic_male"
+    assert "具体表现" in pack["script_templates"]["painpoint_conversion"]["structure"]
+    assert pack["script_templates"]["painpoint_conversion"]["quality_gate"]["min_symptoms"] == 2
     assert pack["product_catalog"]["products"][0]["name"] == "小貔貅摆件"
     assert "保证发财" in pack["safety_rules"]["forbidden_claims"]
 
