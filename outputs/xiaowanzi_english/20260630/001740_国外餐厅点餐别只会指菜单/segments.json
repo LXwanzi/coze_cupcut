@@ -1,0 +1,182 @@
+[
+  {
+    "scene": "钩子页",
+    "caption": "国外餐厅点餐，别只会指菜单",
+    "tts": "国外餐厅点餐，别只会指菜单",
+    "image_prompt": "FIXED_HOOK_IMAGE",
+    "duration": 2.0,
+    "keywords": [],
+    "caption_highlight": {
+      "enabled": true,
+      "mode": "keyword_badge",
+      "highlight_color": "#2563EB",
+      "keywords": []
+    },
+    "animation": {
+      "image": "slow_zoom_in",
+      "caption": "fade_in",
+      "keyword": "pop"
+    },
+    "audio_url": "https://wanzioss.oss-cn-beijing.aliyuncs.com/tts_audio/audio_1782749816406.mp3",
+    "audio_duration": 3240000,
+    "audio_duration_seconds": 3.24,
+    "start": 0,
+    "end": 3240000,
+    "asset_url": "https://wanzioss.oss-cn-beijing.aliyuncs.com/video_images/scene_hook_img_0.png",
+    "image_url": "https://wanzioss.oss-cn-beijing.aliyuncs.com/video_images/scene_hook_img_0.png"
+  },
+  {
+    "scene": "第1句跟读",
+    "caption": "Do you have a table for two?\n请问有两人位吗？",
+    "tts": "第1句。Do you have a table for two? 请问有两人位吗。跟我读：Do you have a table for two?",
+    "image_prompt": "国外餐厅门口接待场景，小丸子站立在中下区域，头顶留白 25%",
+    "duration": 4.5,
+    "keywords": [
+      "table",
+      "two"
+    ],
+    "caption_highlight": {
+      "enabled": true,
+      "mode": "keyword_badge",
+      "highlight_color": "#2563EB",
+      "keywords": [
+        "table",
+        "two"
+      ]
+    },
+    "animation": {
+      "image": "slow_zoom_in",
+      "caption": "fade_in",
+      "keyword": "pop"
+    },
+    "audio_url": "https://wanzioss.oss-cn-beijing.aliyuncs.com/tts_audio/audio_1782749818699.mp3",
+    "audio_duration": 8664000,
+    "audio_duration_seconds": 8.664,
+    "start": 3240000,
+    "end": 11904000,
+    "asset_url": "https://wanzioss.oss-cn-beijing.aliyuncs.com/video_images/scene_scene_1.png",
+    "image_url": "https://wanzioss.oss-cn-beijing.aliyuncs.com/video_images/scene_scene_1.png"
+  },
+  {
+    "scene": "第2句跟读",
+    "caption": "Can I have a glass of iced water please?\n请给我一杯冰水好吗？",
+    "tts": "第2句。Can I have a glass of iced water please? 请给我一杯冰水好吗。跟我读：Can I have a glass of iced water please?",
+    "image_prompt": "餐厅座位上招手叫服务员场景，小丸子站立在中下区域，头顶留白 25%",
+    "duration": 4.5,
+    "keywords": [
+      "Can",
+      "glass"
+    ],
+    "caption_highlight": {
+      "enabled": true,
+      "mode": "keyword_badge",
+      "highlight_color": "#2563EB",
+      "keywords": [
+        "Can",
+        "glass"
+      ]
+    },
+    "animation": {
+      "image": "slow_zoom_in",
+      "caption": "fade_in",
+      "keyword": "pop"
+    },
+    "audio_url": "https://wanzioss.oss-cn-beijing.aliyuncs.com/tts_audio/audio_1782749820992.mp3",
+    "audio_duration": 11088000,
+    "audio_duration_seconds": 11.088,
+    "start": 11904000,
+    "end": 22992000,
+    "asset_url": "https://wanzioss.oss-cn-beijing.aliyuncs.com/video_images/scene_scene_2.png",
+    "image_url": "https://wanzioss.oss-cn-beijing.aliyuncs.com/video_images/scene_scene_2.png"
+  },
+  {
+    "scene": "第3句跟读",
+    "caption": "I'd like the steak medium rare please.\n我想要三分熟的牛排。",
+    "tts": "第3句。I'd like the steak medium rare please. 我想要三分熟的牛排。跟我读：I'd like the steak medium rare please.",
+    "image_prompt": "指着菜单和服务员点餐场景，小丸子站立在中下区域，头顶留白 25%",
+    "duration": 4.5,
+    "keywords": [
+      "I'd",
+      "like"
+    ],
+    "caption_highlight": {
+      "enabled": true,
+      "mode": "keyword_badge",
+      "highlight_color": "#2563EB",
+      "keywords": [
+        "I'd",
+        "like"
+      ]
+    },
+    "animation": {
+      "image": "slow_zoom_in",
+      "caption": "fade_in",
+      "keyword": "pop"
+    },
+    "audio_url": "https://wanzioss.oss-cn-beijing.aliyuncs.com/tts_audio/audio_1782749823283.mp3",
+    "audio_duration": 10656000,
+    "audio_duration_seconds": 10.656,
+    "start": 22992000,
+    "end": 33648000,
+    "asset_url": "https://wanzioss.oss-cn-beijing.aliyuncs.com/video_images/scene_scene_3.png",
+    "image_url": "https://wanzioss.oss-cn-beijing.aliyuncs.com/video_images/scene_scene_3.png"
+  },
+  {
+    "scene": "快速汇总页",
+    "caption": "1. Do you have a table for two?\n2. Can I have a glass of iced water please?\n3. I'd like the steak medium rare please.",
+    "tts": "这几句先收藏，下一集继续学同一场景。",
+    "image_prompt": "FIXED_REVIEW_WITH_CHAR",
+    "duration": 2.5,
+    "keywords": [
+      "table",
+      "two"
+    ],
+    "caption_highlight": {
+      "enabled": true,
+      "mode": "keyword_badge",
+      "highlight_color": "#2563EB",
+      "keywords": [
+        "table",
+        "two"
+      ]
+    },
+    "animation": {
+      "image": "slow_zoom_in",
+      "caption": "fade_in",
+      "keyword": "pop"
+    },
+    "audio_url": "https://wanzioss.oss-cn-beijing.aliyuncs.com/tts_audio/audio_1782749824556.mp3",
+    "audio_duration": 3864000,
+    "audio_duration_seconds": 3.864,
+    "start": 33648000,
+    "end": 37512000,
+    "asset_url": "https://wanzioss.oss-cn-beijing.aliyuncs.com/video_images/scene_review_bg_4.png",
+    "image_url": "https://wanzioss.oss-cn-beijing.aliyuncs.com/video_images/scene_review_bg_4.png"
+  },
+  {
+    "scene": "预告页",
+    "caption": "下集学退菜怎么说？\n你遇到过吗？",
+    "tts": "下集学退菜怎么说，你有过这种经历吗？",
+    "image_prompt": "FIXED_HOOK_IMAGE",
+    "duration": 2.0,
+    "keywords": [],
+    "caption_highlight": {
+      "enabled": true,
+      "mode": "keyword_badge",
+      "highlight_color": "#2563EB",
+      "keywords": []
+    },
+    "animation": {
+      "image": "slow_zoom_in",
+      "caption": "fade_in",
+      "keyword": "pop"
+    },
+    "audio_url": "https://wanzioss.oss-cn-beijing.aliyuncs.com/tts_audio/audio_1782749826012.mp3",
+    "audio_duration": 3648000,
+    "audio_duration_seconds": 3.648,
+    "start": 37512000,
+    "end": 41160000,
+    "asset_url": "https://wanzioss.oss-cn-beijing.aliyuncs.com/video_images/scene_hook_img_5.png",
+    "image_url": "https://wanzioss.oss-cn-beijing.aliyuncs.com/video_images/scene_hook_img_5.png"
+  }
+]

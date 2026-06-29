@@ -1,0 +1,182 @@
+[
+  {
+    "index": 0,
+    "start": 0,
+    "end": 9072000,
+    "duration": 9072000,
+    "caption": "国外玩突然不舒服怎么说？\n收藏这 5 句，覆盖说症状、要药品、问路、求助送医等不同需求\n1. I feel sick to my stomach.\n2. Do you have stomach medicine?\n3. Can I have some hot water?\n4. Where is the nearest pharmacy?\n5. Please call an ambulance.",
+    "keywords": [
+      "feel",
+      "sick"
+    ],
+    "caption_highlight": {
+      "enabled": true,
+      "mode": "keyword_badge",
+      "highlight_color": "#2563EB",
+      "keywords": [
+        "feel",
+        "sick"
+      ]
+    },
+    "animation": {
+      "image": "slow_zoom_in",
+      "caption": "fade_in",
+      "keyword": "pop"
+    },
+    "audio_url": "https://wanzioss.oss-cn-beijing.aliyuncs.com/tts_audio/audio_1782730376940.mp3",
+    "asset_url": "https://wanzioss.oss-cn-beijing.aliyuncs.com/video_images/scene_review_bg_0.png",
+    "scene": "开场总览页"
+  },
+  {
+    "index": 1,
+    "start": 9072000,
+    "end": 13512000,
+    "duration": 4440000,
+    "caption": "I feel sick to my stomach.\n我胃不舒服",
+    "keywords": [
+      "sick"
+    ],
+    "caption_highlight": {
+      "enabled": true,
+      "mode": "keyword_badge",
+      "highlight_color": "#2563EB",
+      "keywords": [
+        "sick"
+      ]
+    },
+    "animation": {
+      "image": "slow_zoom_in",
+      "caption": "fade_in",
+      "keyword": "pop"
+    },
+    "audio_url": "https://wanzioss.oss-cn-beijing.aliyuncs.com/tts_audio/audio_1782730378659.mp3",
+    "asset_url": "https://wanzioss.oss-cn-beijing.aliyuncs.com/video_images/scene_scene_1.png",
+    "scene": "第1句场景句"
+  },
+  {
+    "index": 2,
+    "start": 13512000,
+    "end": 17952000,
+    "duration": 4440000,
+    "caption": "Do you have stomach medicine?\n你有胃药吗？",
+    "keywords": [
+      "medicine"
+    ],
+    "caption_highlight": {
+      "enabled": true,
+      "mode": "keyword_badge",
+      "highlight_color": "#2563EB",
+      "keywords": [
+        "medicine"
+      ]
+    },
+    "animation": {
+      "image": "slow_zoom_in",
+      "caption": "fade_in",
+      "keyword": "pop"
+    },
+    "audio_url": "https://wanzioss.oss-cn-beijing.aliyuncs.com/tts_audio/audio_1782730379958.mp3",
+    "asset_url": "https://wanzioss.oss-cn-beijing.aliyuncs.com/video_images/scene_scene_2.png",
+    "scene": "第2句场景句"
+  },
+  {
+    "index": 3,
+    "start": 17952000,
+    "end": 22776000,
+    "duration": 4824000,
+    "caption": "Can I have some hot water?\n能给我一点热水吗？",
+    "keywords": [
+      "hot water"
+    ],
+    "caption_highlight": {
+      "enabled": true,
+      "mode": "keyword_badge",
+      "highlight_color": "#2563EB",
+      "keywords": [
+        "hot water"
+      ]
+    },
+    "animation": {
+      "image": "slow_zoom_in",
+      "caption": "fade_in",
+      "keyword": "pop"
+    },
+    "audio_url": "https://wanzioss.oss-cn-beijing.aliyuncs.com/tts_audio/audio_1782730381600.mp3",
+    "asset_url": "https://wanzioss.oss-cn-beijing.aliyuncs.com/video_images/scene_scene_3.png",
+    "scene": "第3句场景句"
+  },
+  {
+    "index": 4,
+    "start": 22776000,
+    "end": 28440000,
+    "duration": 5664000,
+    "caption": "Where is the nearest pharmacy?\n最近的药店在哪里？",
+    "keywords": [
+      "pharmacy"
+    ],
+    "caption_highlight": {
+      "enabled": true,
+      "mode": "keyword_badge",
+      "highlight_color": "#2563EB",
+      "keywords": [
+        "pharmacy"
+      ]
+    },
+    "animation": {
+      "image": "slow_zoom_in",
+      "caption": "fade_in",
+      "keyword": "pop"
+    },
+    "audio_url": "https://wanzioss.oss-cn-beijing.aliyuncs.com/tts_audio/audio_1782730383504.mp3",
+    "asset_url": "https://wanzioss.oss-cn-beijing.aliyuncs.com/video_images/scene_scene_4.png",
+    "scene": "第4句场景句"
+  },
+  {
+    "index": 5,
+    "start": 28440000,
+    "end": 33912000,
+    "duration": 5472000,
+    "caption": "Please call an ambulance.\n请帮我叫救护车",
+    "keywords": [
+      "ambulance"
+    ],
+    "caption_highlight": {
+      "enabled": true,
+      "mode": "keyword_badge",
+      "highlight_color": "#2563EB",
+      "keywords": [
+        "ambulance"
+      ]
+    },
+    "animation": {
+      "image": "slow_zoom_in",
+      "caption": "fade_in",
+      "keyword": "pop"
+    },
+    "audio_url": "https://wanzioss.oss-cn-beijing.aliyuncs.com/tts_audio/audio_1782730385076.mp3",
+    "asset_url": "https://wanzioss.oss-cn-beijing.aliyuncs.com/video_images/scene_scene_5.png",
+    "scene": "第5句场景句"
+  },
+  {
+    "index": 6,
+    "start": 33912000,
+    "end": 37536000,
+    "duration": 3624000,
+    "caption": "你们出去玩有没有过突然不舒服的经历呀？",
+    "keywords": [],
+    "caption_highlight": {
+      "enabled": true,
+      "mode": "keyword_badge",
+      "highlight_color": "#2563EB",
+      "keywords": []
+    },
+    "animation": {
+      "image": "slow_zoom_in",
+      "caption": "fade_in",
+      "keyword": "pop"
+    },
+    "audio_url": "https://wanzioss.oss-cn-beijing.aliyuncs.com/tts_audio/audio_1782730386529.mp3",
+    "asset_url": "https://wanzioss.oss-cn-beijing.aliyuncs.com/video_images/scene_hook_img_6.png",
+    "scene": "互动页"
+  }
+]

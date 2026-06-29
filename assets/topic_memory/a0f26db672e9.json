@@ -1,0 +1,35 @@
+{
+  "topic_id": "a0f26db672e9",
+  "season_name": "{\"query\": \"account: ",
+  "episodes": [
+    {
+      "episode_num": 1,
+      "sentences": [
+        "Do you have a table for two?",
+        "Can I have a glass of iced water please?",
+        "I'd like the steak medium rare please."
+      ],
+      "scene": "国外餐厅点餐，别只会指菜单",
+      "hook": "国外餐厅点餐，别只会指菜单",
+      "preview": "下集学点隐藏餐品怎么说",
+      "pain_point": "",
+      "wrong_expression": "",
+      "answer_levels": [],
+      "created_at": "2026-06-30T00:16:54.500310"
+    }
+  ],
+  "all_sentences": [
+    "Do you have a table for two?",
+    "Can I have a glass of iced water please?",
+    "I'd like the steak medium rare please."
+  ],
+  "scenes_used": [
+    "国外餐厅点餐，别只会指菜单"
+  ],
+  "pain_points_used": [],
+  "wrong_expressions_used": [],
+  "last_hook": "",
+  "next_preview": "下集学点隐藏餐品怎么说",
+  "created_at": "2026-06-30T00:16:36.880021",
+  "updated_at": "2026-06-30T00:16:54.503481"
+}

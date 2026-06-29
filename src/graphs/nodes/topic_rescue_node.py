@@ -8,7 +8,7 @@ TTS/image/CapCut nodes unchanged.
 
 import hashlib
 import re
-from typing import Any, Dict, List
+from typing import Any, Dict, List, Optional, cast
 
 from content.account_loader import get_account_pack
 
@@ -66,15 +66,15 @@ TOPIC_PRESETS: List[Dict[str, Any]] = _configured_presets("painpoint_presets")
 SCENE_COLLECTION_PRESETS: List[Dict[str, Any]] = _configured_presets("scene_collection_presets")
 
 
-def configure_account_context(new_account_pack: Dict[str, Any]) -> None:
+def configure_account_context(account_config: Optional[Dict[str, Any]] = None) -> None:  # type: ignore[no-redef]
     """Switch module-level account config for one workflow invocation."""
     global ACCOUNT_PACK, MODE_ALIASES, PAINPOINT_TRIGGERS, SCENE_MAP
     global VOICE_PROFILES, SCENE_COLLECTION_FLOW, VISUAL_CONFIG, PROMPT_CONFIG
     global LEGACY_PROMPT_CONFIG, QUALITY_RULES, SCENE_QUALITY_RULES
     global GENERIC_SCENE_EXPRESSIONS, TOPIC_PRESETS, SCENE_COLLECTION_PRESETS
 
-    resolved_pack = new_account_pack if new_account_pack is not None else get_account_pack()
-    ACCOUNT_PACK = resolved_pack
+    final_config = account_config if account_config is not None else get_account_pack()  # type: ignore[no-redef]
+    ACCOUNT_PACK = final_config
     MODE_ALIASES = ACCOUNT_PACK.get("modes", {}).get("mode_aliases") or DEFAULT_MODE_ALIASES
     PAINPOINT_TRIGGERS = ACCOUNT_PACK.get("modes", {}).get("painpoint_triggers") or DEFAULT_PAINPOINT_TRIGGERS
     SCENE_MAP = ACCOUNT_PACK.get("modes", {}).get("scene_map") or [

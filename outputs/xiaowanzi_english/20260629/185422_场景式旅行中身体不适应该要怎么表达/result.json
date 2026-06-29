@@ -1,0 +1,685 @@
+{
+  "success": true,
+  "draft_url": "http://123.57.144.37:30000/openapi/capcut-mate/v1/get_draft?draft_id=20260629185420d045db20",
+  "content_meta": {
+    "account_id": "xiaowanzi_english",
+    "selected_topic": "场景式：旅行中身体不适应该要怎么表达",
+    "scene": "travel",
+    "sub_scene": "旅行身体不适英语表达",
+    "duration_seconds": 25.6,
+    "target_duration_seconds": 34,
+    "sentence_count": 5,
+    "format": "scene_collection",
+    "content_mode": "scene_collection",
+    "pain_point": "",
+    "wrong_expression": "",
+    "quality_review": {
+      "is_reasonable": true,
+      "content_mode": "scene_collection",
+      "topic": "旅行身体不适英语表达",
+      "suggested_sentence_count": 5,
+      "target_duration_seconds": 34,
+      "issues": [],
+      "suggestions": []
+    },
+    "voice_profile": {
+      "voice": "default",
+      "speed": 1.16,
+      "style": "bright_companion"
+    },
+    "originality_check": "所有内容基于用户提供的原始素材生成",
+    "safety_note": "未涉及教材原文复述",
+    "topic_id": "d02ba1fa9dc0"
+  },
+  "publish_pack": {
+    "title": "【旅行英语】出国玩突然不舒服？5句话直接救急！",
+    "cover_text": "旅行身体不适英语表达",
+    "description": "每天进步一点点。旅行身体不适英语表达真实场景 5 句英语，先收藏，关键时候能直接用。#英语学习 #实用英语 #旅游英语",
+    "hashtags": [
+      "英语学习",
+      "实用英语",
+      "旅游英语"
+    ]
+  },
+  "review_card": {
+    "today_expressions": [
+      {
+        "english": "I feel sick to my stomach.",
+        "chinese": "我胃不舒服",
+        "usage": ""
+      },
+      {
+        "english": "Do you have stomach medicine?",
+        "chinese": "你有胃药吗？",
+        "usage": ""
+      },
+      {
+        "english": "Can I have some hot water?",
+        "chinese": "能给我一点热水吗？",
+        "usage": ""
+      },
+      {
+        "english": "Where is the nearest pharmacy?",
+        "chinese": "最近的药店在哪里？",
+        "usage": ""
+      },
+      {
+        "english": "Please call an ambulance.",
+        "chinese": "请帮我叫救护车",
+        "usage": ""
+      }
+    ],
+    "answer_levels": [],
+    "quick_review": "先收藏，下一集继续同一场景。"
+  },
+  "material_bank": [],
+  "segments": [
+    {
+      "scene": "开场总览页",
+      "caption": "国外玩突然不舒服怎么说？\n收藏这 5 句，覆盖说症状、要药品、问路、求助送医等不同需求\n1. I feel sick to my stomach.\n2. Do you have stomach medicine?\n3. Can I have some hot water?\n4. Where is the nearest pharmacy?\n5. Please call an ambulance.",
+      "tts": "国外玩突然不舒服怎么说？ 收藏这 5 句，覆盖说症状、要药品、问路、求助送医等不同需求",
+      "image_prompt": "FIXED_REVIEW_WITH_CHAR",
+      "duration": 3.8,
+      "keywords": [
+        "feel",
+        "sick"
+      ],
+      "caption_highlight": {
+        "enabled": true,
+        "mode": "keyword_badge",
+        "highlight_color": "#2563EB",
+        "keywords": [
+          "feel",
+          "sick"
+        ]
+      },
+      "animation": {
+        "image": "slow_zoom_in",
+        "caption": "fade_in",
+        "keyword": "pop"
+      },
+      "audio_url": "https://wanzioss.oss-cn-beijing.aliyuncs.com/tts_audio/audio_1782730376940.mp3",
+      "audio_duration": 9072000,
+      "audio_duration_seconds": 9.072,
+      "start": 0,
+      "end": 9072000,
+      "asset_url": "https://wanzioss.oss-cn-beijing.aliyuncs.com/video_images/scene_review_bg_0.png",
+      "image_url": "https://wanzioss.oss-cn-beijing.aliyuncs.com/video_images/scene_review_bg_0.png"
+    },
+    {
+      "scene": "第1句场景句",
+      "caption": "I feel sick to my stomach.\n我胃不舒服",
+      "tts": "第 1 句：I feel sick to my stomach。我胃不舒服",
+      "image_prompt": "旅行身体不适英语表达, 出国旅行时突发胃痛，在酒店找前台求助的真实场景, moment: 告知自身症状, Xiao Wanzi helping a young office worker speak English, minimal props, clear real-life setting",
+      "keywords": [
+        "sick"
+      ],
+      "duration": 4.0,
+      "caption_highlight": {
+        "enabled": true,
+        "mode": "keyword_badge",
+        "highlight_color": "#2563EB",
+        "keywords": [
+          "sick"
+        ]
+      },
+      "animation": {
+        "image": "slow_zoom_in",
+        "caption": "fade_in",
+        "keyword": "pop"
+      },
+      "audio_url": "https://wanzioss.oss-cn-beijing.aliyuncs.com/tts_audio/audio_1782730378659.mp3",
+      "audio_duration": 4440000,
+      "audio_duration_seconds": 4.44,
+      "start": 9072000,
+      "end": 13512000,
+      "asset_url": "https://wanzioss.oss-cn-beijing.aliyuncs.com/video_images/scene_scene_1.png",
+      "image_url": "https://wanzioss.oss-cn-beijing.aliyuncs.com/video_images/scene_scene_1.png"
+    },
+    {
+      "scene": "第2句场景句",
+      "caption": "Do you have stomach medicine?\n你有胃药吗？",
+      "tts": "第 2 句：Do you have stomach medicine。你有胃药吗",
+      "image_prompt": "旅行身体不适英语表达, 出国旅行时突发胃痛，在酒店找前台求助的真实场景, moment: 索要常用胃药, Xiao Wanzi helping a young office worker speak English, minimal props, clear real-life setting",
+      "keywords": [
+        "medicine"
+      ],
+      "duration": 4.0,
+      "caption_highlight": {
+        "enabled": true,
+        "mode": "keyword_badge",
+        "highlight_color": "#2563EB",
+        "keywords": [
+          "medicine"
+        ]
+      },
+      "animation": {
+        "image": "slow_zoom_in",
+        "caption": "fade_in",
+        "keyword": "pop"
+      },
+      "audio_url": "https://wanzioss.oss-cn-beijing.aliyuncs.com/tts_audio/audio_1782730379958.mp3",
+      "audio_duration": 4440000,
+      "audio_duration_seconds": 4.44,
+      "start": 13512000,
+      "end": 17952000,
+      "asset_url": "https://wanzioss.oss-cn-beijing.aliyuncs.com/video_images/scene_scene_2.png",
+      "image_url": "https://wanzioss.oss-cn-beijing.aliyuncs.com/video_images/scene_scene_2.png"
+    },
+    {
+      "scene": "第3句场景句",
+      "caption": "Can I have some hot water?\n能给我一点热水吗？",
+      "tts": "第 3 句：Can I have some hot water。能给我一点热水吗",
+      "image_prompt": "旅行身体不适英语表达, 出国旅行时突发胃痛，在酒店找前台求助的真实场景, moment: 索要热水缓解, Xiao Wanzi helping a young office worker speak English, minimal props, clear real-life setting",
+      "keywords": [
+        "hot water"
+      ],
+      "duration": 4.0,
+      "caption_highlight": {
+        "enabled": true,
+        "mode": "keyword_badge",
+        "highlight_color": "#2563EB",
+        "keywords": [
+          "hot water"
+        ]
+      },
+      "animation": {
+        "image": "slow_zoom_in",
+        "caption": "fade_in",
+        "keyword": "pop"
+      },
+      "audio_url": "https://wanzioss.oss-cn-beijing.aliyuncs.com/tts_audio/audio_1782730381600.mp3",
+      "audio_duration": 4824000,
+      "audio_duration_seconds": 4.824,
+      "start": 17952000,
+      "end": 22776000,
+      "asset_url": "https://wanzioss.oss-cn-beijing.aliyuncs.com/video_images/scene_scene_3.png",
+      "image_url": "https://wanzioss.oss-cn-beijing.aliyuncs.com/video_images/scene_scene_3.png"
+    },
+    {
+      "scene": "第4句场景句",
+      "caption": "Where is the nearest pharmacy?\n最近的药店在哪里？",
+      "tts": "第 4 句：Where is the nearest pharmacy。最近的药店在哪里",
+      "image_prompt": "旅行身体不适英语表达, 出国旅行时突发胃痛，在酒店找前台求助的真实场景, moment: 询问药店位置, Xiao Wanzi helping a young office worker speak English, minimal props, clear real-life setting",
+      "keywords": [
+        "pharmacy"
+      ],
+      "duration": 4.0,
+      "caption_highlight": {
+        "enabled": true,
+        "mode": "keyword_badge",
+        "highlight_color": "#2563EB",
+        "keywords": [
+          "pharmacy"
+        ]
+      },
+      "animation": {
+        "image": "slow_zoom_in",
+        "caption": "fade_in",
+        "keyword": "pop"
+      },
+      "audio_url": "https://wanzioss.oss-cn-beijing.aliyuncs.com/tts_audio/audio_1782730383504.mp3",
+      "audio_duration": 5664000,
+      "audio_duration_seconds": 5.664,
+      "start": 22776000,
+      "end": 28440000,
+      "asset_url": "https://wanzioss.oss-cn-beijing.aliyuncs.com/video_images/scene_scene_4.png",
+      "image_url": "https://wanzioss.oss-cn-beijing.aliyuncs.com/video_images/scene_scene_4.png"
+    },
+    {
+      "scene": "第5句场景句",
+      "caption": "Please call an ambulance.\n请帮我叫救护车",
+      "tts": "第 5 句：Please call an ambulance。请帮我叫救护车",
+      "image_prompt": "旅行身体不适英语表达, 出国旅行时突发胃痛，在酒店找前台求助的真实场景, moment: 请求呼叫急救, Xiao Wanzi helping a young office worker speak English, minimal props, clear real-life setting",
+      "keywords": [
+        "ambulance"
+      ],
+      "duration": 4.0,
+      "caption_highlight": {
+        "enabled": true,
+        "mode": "keyword_badge",
+        "highlight_color": "#2563EB",
+        "keywords": [
+          "ambulance"
+        ]
+      },
+      "animation": {
+        "image": "slow_zoom_in",
+        "caption": "fade_in",
+        "keyword": "pop"
+      },
+      "audio_url": "https://wanzioss.oss-cn-beijing.aliyuncs.com/tts_audio/audio_1782730385076.mp3",
+      "audio_duration": 5472000,
+      "audio_duration_seconds": 5.472,
+      "start": 28440000,
+      "end": 33912000,
+      "asset_url": "https://wanzioss.oss-cn-beijing.aliyuncs.com/video_images/scene_scene_5.png",
+      "image_url": "https://wanzioss.oss-cn-beijing.aliyuncs.com/video_images/scene_scene_5.png"
+    },
+    {
+      "scene": "互动页",
+      "caption": "你们出去玩有没有过突然不舒服的经历呀？",
+      "tts": "你们出去玩有没有过突然不舒服的经历呀？",
+      "image_prompt": "FIXED_HOOK_IMAGE",
+      "duration": 1.8,
+      "keywords": [],
+      "caption_highlight": {
+        "enabled": true,
+        "mode": "keyword_badge",
+        "highlight_color": "#2563EB",
+        "keywords": []
+      },
+      "animation": {
+        "image": "slow_zoom_in",
+        "caption": "fade_in",
+        "keyword": "pop"
+      },
+      "audio_url": "https://wanzioss.oss-cn-beijing.aliyuncs.com/tts_audio/audio_1782730386529.mp3",
+      "audio_duration": 3624000,
+      "audio_duration_seconds": 3.624,
+      "start": 33912000,
+      "end": 37536000,
+      "asset_url": "https://wanzioss.oss-cn-beijing.aliyuncs.com/video_images/scene_hook_img_6.png",
+      "image_url": "https://wanzioss.oss-cn-beijing.aliyuncs.com/video_images/scene_hook_img_6.png"
+    }
+  ],
+  "duration": 37536000,
+  "duration_seconds": 37.54,
+  "scene_count": 7,
+  "caption_count": 7,
+  "timeline_segments": [
+    {
+      "index": 0,
+      "start": 0,
+      "end": 9072000,
+      "duration": 9072000,
+      "caption": "国外玩突然不舒服怎么说？\n收藏这 5 句，覆盖说症状、要药品、问路、求助送医等不同需求\n1. I feel sick to my stomach.\n2. Do you have stomach medicine?\n3. Can I have some hot water?\n4. Where is the nearest pharmacy?\n5. Please call an ambulance.",
+      "keywords": [
+        "feel",
+        "sick"
+      ],
+      "caption_highlight": {
+        "enabled": true,
+        "mode": "keyword_badge",
+        "highlight_color": "#2563EB",
+        "keywords": [
+          "feel",
+          "sick"
+        ]
+      },
+      "animation": {
+        "image": "slow_zoom_in",
+        "caption": "fade_in",
+        "keyword": "pop"
+      },
+      "audio_url": "https://wanzioss.oss-cn-beijing.aliyuncs.com/tts_audio/audio_1782730376940.mp3",
+      "asset_url": "https://wanzioss.oss-cn-beijing.aliyuncs.com/video_images/scene_review_bg_0.png",
+      "scene": "开场总览页"
+    },
+    {
+      "index": 1,
+      "start": 9072000,
+      "end": 13512000,
+      "duration": 4440000,
+      "caption": "I feel sick to my stomach.\n我胃不舒服",
+      "keywords": [
+        "sick"
+      ],
+      "caption_highlight": {
+        "enabled": true,
+        "mode": "keyword_badge",
+        "highlight_color": "#2563EB",
+        "keywords": [
+          "sick"
+        ]
+      },
+      "animation": {
+        "image": "slow_zoom_in",
+        "caption": "fade_in",
+        "keyword": "pop"
+      },
+      "audio_url": "https://wanzioss.oss-cn-beijing.aliyuncs.com/tts_audio/audio_1782730378659.mp3",
+      "asset_url": "https://wanzioss.oss-cn-beijing.aliyuncs.com/video_images/scene_scene_1.png",
+      "scene": "第1句场景句"
+    },
+    {
+      "index": 2,
+      "start": 13512000,
+      "end": 17952000,
+      "duration": 4440000,
+      "caption": "Do you have stomach medicine?\n你有胃药吗？",
+      "keywords": [
+        "medicine"
+      ],
+      "caption_highlight": {
+        "enabled": true,
+        "mode": "keyword_badge",
+        "highlight_color": "#2563EB",
+        "keywords": [
+          "medicine"
+        ]
+      },
+      "animation": {
+        "image": "slow_zoom_in",
+        "caption": "fade_in",
+        "keyword": "pop"
+      },
+      "audio_url": "https://wanzioss.oss-cn-beijing.aliyuncs.com/tts_audio/audio_1782730379958.mp3",
+      "asset_url": "https://wanzioss.oss-cn-beijing.aliyuncs.com/video_images/scene_scene_2.png",
+      "scene": "第2句场景句"
+    },
+    {
+      "index": 3,
+      "start": 17952000,
+      "end": 22776000,
+      "duration": 4824000,
+      "caption": "Can I have some hot water?\n能给我一点热水吗？",
+      "keywords": [
+        "hot water"
+      ],
+      "caption_highlight": {
+        "enabled": true,
+        "mode": "keyword_badge",
+        "highlight_color": "#2563EB",
+        "keywords": [
+          "hot water"
+        ]
+      },
+      "animation": {
+        "image": "slow_zoom_in",
+        "caption": "fade_in",
+        "keyword": "pop"
+      },
+      "audio_url": "https://wanzioss.oss-cn-beijing.aliyuncs.com/tts_audio/audio_1782730381600.mp3",
+      "asset_url": "https://wanzioss.oss-cn-beijing.aliyuncs.com/video_images/scene_scene_3.png",
+      "scene": "第3句场景句"
+    },
+    {
+      "index": 4,
+      "start": 22776000,
+      "end": 28440000,
+      "duration": 5664000,
+      "caption": "Where is the nearest pharmacy?\n最近的药店在哪里？",
+      "keywords": [
+        "pharmacy"
+      ],
+      "caption_highlight": {
+        "enabled": true,
+        "mode": "keyword_badge",
+        "highlight_color": "#2563EB",
+        "keywords": [
+          "pharmacy"
+        ]
+      },
+      "animation": {
+        "image": "slow_zoom_in",
+        "caption": "fade_in",
+        "keyword": "pop"
+      },
+      "audio_url": "https://wanzioss.oss-cn-beijing.aliyuncs.com/tts_audio/audio_1782730383504.mp3",
+      "asset_url": "https://wanzioss.oss-cn-beijing.aliyuncs.com/video_images/scene_scene_4.png",
+      "scene": "第4句场景句"
+    },
+    {
+      "index": 5,
+      "start": 28440000,
+      "end": 33912000,
+      "duration": 5472000,
+      "caption": "Please call an ambulance.\n请帮我叫救护车",
+      "keywords": [
+        "ambulance"
+      ],
+      "caption_highlight": {
+        "enabled": true,
+        "mode": "keyword_badge",
+        "highlight_color": "#2563EB",
+        "keywords": [
+          "ambulance"
+        ]
+      },
+      "animation": {
+        "image": "slow_zoom_in",
+        "caption": "fade_in",
+        "keyword": "pop"
+      },
+      "audio_url": "https://wanzioss.oss-cn-beijing.aliyuncs.com/tts_audio/audio_1782730385076.mp3",
+      "asset_url": "https://wanzioss.oss-cn-beijing.aliyuncs.com/video_images/scene_scene_5.png",
+      "scene": "第5句场景句"
+    },
+    {
+      "index": 6,
+      "start": 33912000,
+      "end": 37536000,
+      "duration": 3624000,
+      "caption": "你们出去玩有没有过突然不舒服的经历呀？",
+      "keywords": [],
+      "caption_highlight": {
+        "enabled": true,
+        "mode": "keyword_badge",
+        "highlight_color": "#2563EB",
+        "keywords": []
+      },
+      "animation": {
+        "image": "slow_zoom_in",
+        "caption": "fade_in",
+        "keyword": "pop"
+      },
+      "audio_url": "https://wanzioss.oss-cn-beijing.aliyuncs.com/tts_audio/audio_1782730386529.mp3",
+      "asset_url": "https://wanzioss.oss-cn-beijing.aliyuncs.com/video_images/scene_hook_img_6.png",
+      "scene": "互动页"
+    }
+  ],
+  "steps_status": [
+    {
+      "step": "create_draft",
+      "url": "http://123.57.144.37:30000/openapi/capcut-mate/v1/create_draft",
+      "request": {
+        "width": 1080,
+        "height": 1920
+      },
+      "response": {
+        "code": 0,
+        "message": "成功",
+        "draft_url": "http://123.57.144.37:30000/openapi/capcut-mate/v1/get_draft?draft_id=20260629185420d045db20",
+        "tip_url": "https://docs.jcaigc.cn/"
+      }
+    },
+    {
+      "step": "add_images",
+      "url": "http://123.57.144.37:30000/openapi/capcut-mate/v1/add_images",
+      "request": {
+        "draft_url": "http://123.57.144.37:30000/openapi/capcut-mate/v1/get_draft?draft_id=20260629185420d045db20",
+        "image_infos": "[{\"image_url\": \"https://wanzioss.oss-cn-beijing.aliyuncs.com/video_images/scene_review_bg_0.png\", \"width\": 1080, \"height\": 1920, \"start\": 0, \"end\": 9072000}, {\"image_url\": \"https://wanzioss.oss-cn-beijing.aliyuncs.com/video_images/scene_scene_1.png\", \"width\": 1080, \"height\": 1920, \"start\": 9072000, \"end\": 13512000}, {\"image_url\": \"https://wanzioss.oss-cn-beijing.aliyuncs.com/video_images/scene_scene_2.png\", \"width\": 1080, \"height\": 1920, \"start\": 13512000, \"end\": 17952000}, {\"image_url\": \"https://wanzioss.oss-cn-beijing.aliyuncs.com/video_images/scene_scene_3.png\", \"width\": 1080, \"height\": 1920, \"start\": 17952000, \"end\": 22776000}, {\"image_url\": \"https://wanzioss.oss-cn-beijing.aliyuncs.com/video_images/scene_scene_4.png\", \"width\": 1080, \"height\": 1920, \"start\": 22776000, \"end\": 28440000}, {\"image_url\": \"https://wanzioss.oss-cn-beijing.aliyuncs.com/video_images/scene_scene_5.png\", \"width\": 1080, \"height\": 1920, \"start\": 28440000, \"end\": 33912000}, {\"image_url\": \"https://wanzioss.oss-cn-beijing.aliyuncs.com/video_images/scene_hook_img_6.png\", \"width\": 1080, \"height\": 1920, \"start\": 33912000, \"end\": 37536000}]",
+        "scale_x": 1.0,
+        "scale_y": 1.0,
+        "transform_x": 0,
+        "transform_y": 0
+      },
+      "response": {
+        "code": 0,
+        "message": "成功",
+        "draft_url": "http://123.57.144.37:30000/openapi/capcut-mate/v1/get_draft?draft_id=20260629185420d045db20",
+        "track_id": "8137217d8ddb4293aaca1e6ef4528a6b",
+        "image_ids": [
+          "cddc9dc84c5e4aa6b9302895170604f4",
+          "008b56acd85249c285622c6786713572",
+          "d5ccc45c58d242baa5a03130731de368",
+          "b348a9f723fe4b9ca1263e7e9a1c45b4",
+          "0bf3f20c31234630a922ad75ea2354ef",
+          "21b6a983cda04869b7066b6a60d68bdf",
+          "b32d5b6b7e6248b6849ffceae2cf911c"
+        ],
+        "segment_ids": [
+          "3757daa57ea84734aa98b2bd14c71591",
+          "7b406e45ba93432f9d253d076db0b84e",
+          "f1129b33bbd247dab9c6ff87c261a7c4",
+          "502e0adb464f409c8cc0467fa96d3c20",
+          "d972e4fe817c4a169674ee00b5c31803",
+          "8a817272cd694ac187a3cb74aaeebacf",
+          "b8d1d5b28df640dbbc34d0d831cb1cad"
+        ],
+        "segment_infos": [
+          {
+            "id": "3757daa57ea84734aa98b2bd14c71591",
+            "start": 0,
+            "end": 9072000
+          },
+          {
+            "id": "7b406e45ba93432f9d253d076db0b84e",
+            "start": 9072000,
+            "end": 13512000
+          },
+          {
+            "id": "f1129b33bbd247dab9c6ff87c261a7c4",
+            "start": 13512000,
+            "end": 17952000
+          },
+          {
+            "id": "502e0adb464f409c8cc0467fa96d3c20",
+            "start": 17952000,
+            "end": 22776000
+          },
+          {
+            "id": "d972e4fe817c4a169674ee00b5c31803",
+            "start": 22776000,
+            "end": 28440000
+          },
+          {
+            "id": "8a817272cd694ac187a3cb74aaeebacf",
+            "start": 28440000,
+            "end": 33912000
+          },
+          {
+            "id": "b8d1d5b28df640dbbc34d0d831cb1cad",
+            "start": 33912000,
+            "end": 37536000
+          }
+        ]
+      }
+    },
+    {
+      "step": "add_captions",
+      "url": "http://123.57.144.37:30000/openapi/capcut-mate/v1/add_captions",
+      "request": {
+        "draft_url": "http://123.57.144.37:30000/openapi/capcut-mate/v1/get_draft?draft_id=20260629185420d045db20",
+        "captions": "[{\"start\": 0, \"end\": 9072000, \"text\": \"国外玩突然不舒服怎么说？\\n收藏这 5 句，覆盖说症状、要药品、问路、求助送医等不同需求\\n1. I feel sick to my stomach.\\n2. Do you have stomach medicine?\\n3. Can I have some hot water?\\n4. Where is the nearest pharmacy?\\n5. Please call an ambulance.\", \"font_size\": 10}, {\"start\": 9072000, \"end\": 13512000, \"text\": \"I feel sick to my stomach.\\n我胃不舒服\", \"font_size\": 10}, {\"start\": 13512000, \"end\": 17952000, \"text\": \"Do you have stomach medicine?\\n你有胃药吗？\", \"font_size\": 10}, {\"start\": 17952000, \"end\": 22776000, \"text\": \"Can I have some hot water?\\n能给我一点热水吗？\", \"font_size\": 10}, {\"start\": 22776000, \"end\": 28440000, \"text\": \"Where is the nearest pharmacy?\\n最近的药店在哪里？\", \"font_size\": 10}, {\"start\": 28440000, \"end\": 33912000, \"text\": \"Please call an ambulance.\\n请帮我叫救护车\", \"font_size\": 10}, {\"start\": 33912000, \"end\": 37536000, \"text\": \"你们出去玩有没有过突然不舒服的经历呀？\", \"font_size\": 10}]",
+        "text_color": "#111111",
+        "border_color": "#FFFFFF",
+        "border_width": 2,
+        "alignment": 1,
+        "font_size": 10,
+        "alpha": 1.0,
+        "bold": true,
+        "italic": true,
+        "line_spacing": 2,
+        "has_shadow": true,
+        "shadow_info": {
+          "shadow_color": "#000000",
+          "shadow_alpha": 0.3,
+          "shadow_diffuse": 4,
+          "shadow_distance": 2,
+          "shadow_angle": -45
+        },
+        "transform_x": 0,
+        "transform_y": 630
+      },
+      "response": {
+        "code": 0,
+        "message": "成功",
+        "draft_url": "http://123.57.144.37:30000/openapi/capcut-mate/v1/get_draft?draft_id=20260629185420d045db20",
+        "track_id": "e268a5d1252342ef950d06aff22c8749",
+        "text_ids": [
+          "b0eab175c8004cbe961bea78d7e360db",
+          "a71a38c7464f42089d231da1dc1702e9",
+          "b0e4631cd88c46939a3ddf2f67889f63",
+          "e5e39dba4ba24c5d882041885ad53164",
+          "2973532f6c79473b8867c75cff2b0112",
+          "aabec0161677477e94180103f9162381",
+          "bd1e2ebbf7684abc890666b2de3fad71"
+        ],
+        "segment_ids": [
+          "f006e55e5f054156903ec96757e76946",
+          "8021e4e8b74749e9937cbadbc5a97a72",
+          "56c94623e72d4152ae15b86ac466f194",
+          "00c436468adc4d6f992d497c31eba368",
+          "f0a614b3461f48f292ad05ec22d85205",
+          "6ba1fee947974b49b88acb82dc8f233c",
+          "883dc34e583c4501a1f396362bf8a14b"
+        ],
+        "segment_infos": [
+          {
+            "id": "f006e55e5f054156903ec96757e76946",
+            "start": 0,
+            "end": 9072000
+          },
+          {
+            "id": "8021e4e8b74749e9937cbadbc5a97a72",
+            "start": 9072000,
+            "end": 13512000
+          },
+          {
+            "id": "56c94623e72d4152ae15b86ac466f194",
+            "start": 13512000,
+            "end": 17952000
+          },
+          {
+            "id": "00c436468adc4d6f992d497c31eba368",
+            "start": 17952000,
+            "end": 22776000
+          },
+          {
+            "id": "f0a614b3461f48f292ad05ec22d85205",
+            "start": 22776000,
+            "end": 28440000
+          },
+          {
+            "id": "6ba1fee947974b49b88acb82dc8f233c",
+            "start": 28440000,
+            "end": 33912000
+          },
+          {
+            "id": "883dc34e583c4501a1f396362bf8a14b",
+            "start": 33912000,
+            "end": 37536000
+          }
+        ]
+      }
+    },
+    {
+      "step": "add_audios",
+      "url": "http://123.57.144.37:30000/openapi/capcut-mate/v1/add_audios",
+      "request": {
+        "draft_url": "http://123.57.144.37:30000/openapi/capcut-mate/v1/get_draft?draft_id=20260629185420d045db20",
+        "audio_infos": "[{\"audio_url\": \"https://wanzioss.oss-cn-beijing.aliyuncs.com/tts_audio/audio_1782730376940.mp3\", \"start\": 0, \"end\": 9072000, \"duration\": 9072000, \"volume\": 1.0}, {\"audio_url\": \"https://wanzioss.oss-cn-beijing.aliyuncs.com/tts_audio/audio_1782730378659.mp3\", \"start\": 9072000, \"end\": 13512000, \"duration\": 4440000, \"volume\": 1.0}, {\"audio_url\": \"https://wanzioss.oss-cn-beijing.aliyuncs.com/tts_audio/audio_1782730379958.mp3\", \"start\": 13512000, \"end\": 17952000, \"duration\": 4440000, \"volume\": 1.0}, {\"audio_url\": \"https://wanzioss.oss-cn-beijing.aliyuncs.com/tts_audio/audio_1782730381600.mp3\", \"start\": 17952000, \"end\": 22776000, \"duration\": 4824000, \"volume\": 1.0}, {\"audio_url\": \"https://wanzioss.oss-cn-beijing.aliyuncs.com/tts_audio/audio_1782730383504.mp3\", \"start\": 22776000, \"end\": 28440000, \"duration\": 5664000, \"volume\": 1.0}, {\"audio_url\": \"https://wanzioss.oss-cn-beijing.aliyuncs.com/tts_audio/audio_1782730385076.mp3\", \"start\": 28440000, \"end\": 33912000, \"duration\": 5472000, \"volume\": 1.0}, {\"audio_url\": \"https://wanzioss.oss-cn-beijing.aliyuncs.com/tts_audio/audio_1782730386529.mp3\", \"start\": 33912000, \"end\": 37536000, \"duration\": 3624000, \"volume\": 1.0}]"
+      },
+      "response": {
+        "code": 0,
+        "message": "成功",
+        "draft_url": "http://123.57.144.37:30000/openapi/capcut-mate/v1/get_draft?draft_id=20260629185420d045db20",
+        "track_id": "699912c110c643f092248b75d4d8d6a6",
+        "audio_ids": [
+          "4e433daede214e0d9a002c8a89f0fa25",
+          "fa317cd45353416ea67fb6876af6e5d4",
+          "5f50057f803c4de2abdf63b9dc41c1ef",
+          "5b7feb43d9be4b0a9d094bff2ba29d52",
+          "0b5c2024cef24312b7705eac9a6b5a14",
+          "8d73801977b041fea504cbc5b0a1fafe",
+          "b8e6d44690c049538d57dbdb3c35a432"
+        ]
+      }
+    },
+    {
+      "step": "save_draft",
+      "url": "http://123.57.144.37:30000/openapi/capcut-mate/v1/save_draft",
+      "request": {
+        "draft_url": "http://123.57.144.37:30000/openapi/capcut-mate/v1/get_draft?draft_id=20260629185420d045db20"
+      },
+      "response": {
+        "code": 0,
+        "message": "成功",
+        "draft_url": "http://123.57.144.37:30000/openapi/capcut-mate/v1/get_draft?draft_id=20260629185420d045db20"
+      }
+    }
+  ],
+  "message": "剪映草稿已生成，请用 CapCut Mate 桌面端导入剪映。"
+}

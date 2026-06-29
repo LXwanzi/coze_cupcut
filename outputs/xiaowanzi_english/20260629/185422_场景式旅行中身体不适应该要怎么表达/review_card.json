@@ -1,0 +1,31 @@
+{
+  "today_expressions": [
+    {
+      "english": "I feel sick to my stomach.",
+      "chinese": "我胃不舒服",
+      "usage": ""
+    },
+    {
+      "english": "Do you have stomach medicine?",
+      "chinese": "你有胃药吗？",
+      "usage": ""
+    },
+    {
+      "english": "Can I have some hot water?",
+      "chinese": "能给我一点热水吗？",
+      "usage": ""
+    },
+    {
+      "english": "Where is the nearest pharmacy?",
+      "chinese": "最近的药店在哪里？",
+      "usage": ""
+    },
+    {
+      "english": "Please call an ambulance.",
+      "chinese": "请帮我叫救护车",
+      "usage": ""
+    }
+  ],
+  "answer_levels": [],
+  "quick_review": "先收藏，下一集继续同一场景。"
+}

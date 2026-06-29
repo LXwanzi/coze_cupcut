@@ -1,0 +1,596 @@
+{
+  "success": true,
+  "draft_url": "http://123.57.144.37:30000/openapi/capcut-mate/v1/get_draft?draft_id=202606300017395dac5cac",
+  "content_meta": {
+    "account_id": "xiaowanzi_english",
+    "selected_topic": "国外餐厅点餐，别只会指菜单",
+    "scene": "travel",
+    "sub_scene": "query_account_xiaowanzi_englishn",
+    "duration_seconds": 20.0,
+    "target_duration_seconds": 28,
+    "sentence_count": 3,
+    "format": "retention_short",
+    "content_mode": "painpoint_contrast",
+    "pain_point": "",
+    "wrong_expression": "",
+    "quality_review": {},
+    "voice_profile": {},
+    "originality_check": "所有内容基于用户提供的原始素材生成",
+    "safety_note": "未涉及教材原文复述",
+    "topic_id": "a0f26db672e9"
+  },
+  "publish_pack": {
+    "title": "【国外餐厅点餐，别只会指菜单】不会开口？这句能救场",
+    "cover_text": "国外餐厅点餐，别只会指菜",
+    "description": "每天进步一点点。别再硬翻译，国外餐厅点餐，别只会指菜单这句先学会。#英语学习 #实用英语 #救场英语",
+    "hashtags": [
+      "英语学习",
+      "实用英语",
+      "救场英语"
+    ]
+  },
+  "review_card": {
+    "today_expressions": [
+      {
+        "english": "Do you have a table for two?",
+        "chinese": "请问有两人位吗？",
+        "usage": ""
+      },
+      {
+        "english": "Can I have a glass of iced water please?",
+        "chinese": "请给我一杯冰水好吗？",
+        "usage": ""
+      },
+      {
+        "english": "I'd like the steak medium rare please.",
+        "chinese": "我想要三分熟的牛排。",
+        "usage": ""
+      }
+    ],
+    "answer_levels": [],
+    "quick_review": "先收藏，下一集继续同一场景。"
+  },
+  "material_bank": [],
+  "segments": [
+    {
+      "scene": "钩子页",
+      "caption": "国外餐厅点餐，别只会指菜单",
+      "tts": "国外餐厅点餐，别只会指菜单",
+      "image_prompt": "FIXED_HOOK_IMAGE",
+      "duration": 2.0,
+      "keywords": [],
+      "caption_highlight": {
+        "enabled": true,
+        "mode": "keyword_badge",
+        "highlight_color": "#2563EB",
+        "keywords": []
+      },
+      "animation": {
+        "image": "slow_zoom_in",
+        "caption": "fade_in",
+        "keyword": "pop"
+      },
+      "audio_url": "https://wanzioss.oss-cn-beijing.aliyuncs.com/tts_audio/audio_1782749816406.mp3",
+      "audio_duration": 3240000,
+      "audio_duration_seconds": 3.24,
+      "start": 0,
+      "end": 3240000,
+      "asset_url": "https://wanzioss.oss-cn-beijing.aliyuncs.com/video_images/scene_hook_img_0.png",
+      "image_url": "https://wanzioss.oss-cn-beijing.aliyuncs.com/video_images/scene_hook_img_0.png"
+    },
+    {
+      "scene": "第1句跟读",
+      "caption": "Do you have a table for two?\n请问有两人位吗？",
+      "tts": "第1句。Do you have a table for two? 请问有两人位吗。跟我读：Do you have a table for two?",
+      "image_prompt": "国外餐厅门口接待场景，小丸子站立在中下区域，头顶留白 25%",
+      "duration": 4.5,
+      "keywords": [
+        "table",
+        "two"
+      ],
+      "caption_highlight": {
+        "enabled": true,
+        "mode": "keyword_badge",
+        "highlight_color": "#2563EB",
+        "keywords": [
+          "table",
+          "two"
+        ]
+      },
+      "animation": {
+        "image": "slow_zoom_in",
+        "caption": "fade_in",
+        "keyword": "pop"
+      },
+      "audio_url": "https://wanzioss.oss-cn-beijing.aliyuncs.com/tts_audio/audio_1782749818699.mp3",
+      "audio_duration": 8664000,
+      "audio_duration_seconds": 8.664,
+      "start": 3240000,
+      "end": 11904000,
+      "asset_url": "https://wanzioss.oss-cn-beijing.aliyuncs.com/video_images/scene_scene_1.png",
+      "image_url": "https://wanzioss.oss-cn-beijing.aliyuncs.com/video_images/scene_scene_1.png"
+    },
+    {
+      "scene": "第2句跟读",
+      "caption": "Can I have a glass of iced water please?\n请给我一杯冰水好吗？",
+      "tts": "第2句。Can I have a glass of iced water please? 请给我一杯冰水好吗。跟我读：Can I have a glass of iced water please?",
+      "image_prompt": "餐厅座位上招手叫服务员场景，小丸子站立在中下区域，头顶留白 25%",
+      "duration": 4.5,
+      "keywords": [
+        "Can",
+        "glass"
+      ],
+      "caption_highlight": {
+        "enabled": true,
+        "mode": "keyword_badge",
+        "highlight_color": "#2563EB",
+        "keywords": [
+          "Can",
+          "glass"
+        ]
+      },
+      "animation": {
+        "image": "slow_zoom_in",
+        "caption": "fade_in",
+        "keyword": "pop"
+      },
+      "audio_url": "https://wanzioss.oss-cn-beijing.aliyuncs.com/tts_audio/audio_1782749820992.mp3",
+      "audio_duration": 11088000,
+      "audio_duration_seconds": 11.088,
+      "start": 11904000,
+      "end": 22992000,
+      "asset_url": "https://wanzioss.oss-cn-beijing.aliyuncs.com/video_images/scene_scene_2.png",
+      "image_url": "https://wanzioss.oss-cn-beijing.aliyuncs.com/video_images/scene_scene_2.png"
+    },
+    {
+      "scene": "第3句跟读",
+      "caption": "I'd like the steak medium rare please.\n我想要三分熟的牛排。",
+      "tts": "第3句。I'd like the steak medium rare please. 我想要三分熟的牛排。跟我读：I'd like the steak medium rare please.",
+      "image_prompt": "指着菜单和服务员点餐场景，小丸子站立在中下区域，头顶留白 25%",
+      "duration": 4.5,
+      "keywords": [
+        "I'd",
+        "like"
+      ],
+      "caption_highlight": {
+        "enabled": true,
+        "mode": "keyword_badge",
+        "highlight_color": "#2563EB",
+        "keywords": [
+          "I'd",
+          "like"
+        ]
+      },
+      "animation": {
+        "image": "slow_zoom_in",
+        "caption": "fade_in",
+        "keyword": "pop"
+      },
+      "audio_url": "https://wanzioss.oss-cn-beijing.aliyuncs.com/tts_audio/audio_1782749823283.mp3",
+      "audio_duration": 10656000,
+      "audio_duration_seconds": 10.656,
+      "start": 22992000,
+      "end": 33648000,
+      "asset_url": "https://wanzioss.oss-cn-beijing.aliyuncs.com/video_images/scene_scene_3.png",
+      "image_url": "https://wanzioss.oss-cn-beijing.aliyuncs.com/video_images/scene_scene_3.png"
+    },
+    {
+      "scene": "快速汇总页",
+      "caption": "1. Do you have a table for two?\n2. Can I have a glass of iced water please?\n3. I'd like the steak medium rare please.",
+      "tts": "这几句先收藏，下一集继续学同一场景。",
+      "image_prompt": "FIXED_REVIEW_WITH_CHAR",
+      "duration": 2.5,
+      "keywords": [
+        "table",
+        "two"
+      ],
+      "caption_highlight": {
+        "enabled": true,
+        "mode": "keyword_badge",
+        "highlight_color": "#2563EB",
+        "keywords": [
+          "table",
+          "two"
+        ]
+      },
+      "animation": {
+        "image": "slow_zoom_in",
+        "caption": "fade_in",
+        "keyword": "pop"
+      },
+      "audio_url": "https://wanzioss.oss-cn-beijing.aliyuncs.com/tts_audio/audio_1782749824556.mp3",
+      "audio_duration": 3864000,
+      "audio_duration_seconds": 3.864,
+      "start": 33648000,
+      "end": 37512000,
+      "asset_url": "https://wanzioss.oss-cn-beijing.aliyuncs.com/video_images/scene_review_bg_4.png",
+      "image_url": "https://wanzioss.oss-cn-beijing.aliyuncs.com/video_images/scene_review_bg_4.png"
+    },
+    {
+      "scene": "预告页",
+      "caption": "下集学退菜怎么说？\n你遇到过吗？",
+      "tts": "下集学退菜怎么说，你有过这种经历吗？",
+      "image_prompt": "FIXED_HOOK_IMAGE",
+      "duration": 2.0,
+      "keywords": [],
+      "caption_highlight": {
+        "enabled": true,
+        "mode": "keyword_badge",
+        "highlight_color": "#2563EB",
+        "keywords": []
+      },
+      "animation": {
+        "image": "slow_zoom_in",
+        "caption": "fade_in",
+        "keyword": "pop"
+      },
+      "audio_url": "https://wanzioss.oss-cn-beijing.aliyuncs.com/tts_audio/audio_1782749826012.mp3",
+      "audio_duration": 3648000,
+      "audio_duration_seconds": 3.648,
+      "start": 37512000,
+      "end": 41160000,
+      "asset_url": "https://wanzioss.oss-cn-beijing.aliyuncs.com/video_images/scene_hook_img_5.png",
+      "image_url": "https://wanzioss.oss-cn-beijing.aliyuncs.com/video_images/scene_hook_img_5.png"
+    }
+  ],
+  "duration": 41160000,
+  "duration_seconds": 41.16,
+  "scene_count": 6,
+  "caption_count": 6,
+  "timeline_segments": [
+    {
+      "index": 0,
+      "start": 0,
+      "end": 3240000,
+      "duration": 3240000,
+      "caption": "国外餐厅点餐，别只会指菜单",
+      "keywords": [],
+      "caption_highlight": {
+        "enabled": true,
+        "mode": "keyword_badge",
+        "highlight_color": "#2563EB",
+        "keywords": []
+      },
+      "animation": {
+        "image": "slow_zoom_in",
+        "caption": "fade_in",
+        "keyword": "pop"
+      },
+      "audio_url": "https://wanzioss.oss-cn-beijing.aliyuncs.com/tts_audio/audio_1782749816406.mp3",
+      "asset_url": "https://wanzioss.oss-cn-beijing.aliyuncs.com/video_images/scene_hook_img_0.png",
+      "scene": "钩子页"
+    },
+    {
+      "index": 1,
+      "start": 3240000,
+      "end": 11904000,
+      "duration": 8664000,
+      "caption": "Do you have a table for two?\n请问有两人位吗？",
+      "keywords": [
+        "table",
+        "two"
+      ],
+      "caption_highlight": {
+        "enabled": true,
+        "mode": "keyword_badge",
+        "highlight_color": "#2563EB",
+        "keywords": [
+          "table",
+          "two"
+        ]
+      },
+      "animation": {
+        "image": "slow_zoom_in",
+        "caption": "fade_in",
+        "keyword": "pop"
+      },
+      "audio_url": "https://wanzioss.oss-cn-beijing.aliyuncs.com/tts_audio/audio_1782749818699.mp3",
+      "asset_url": "https://wanzioss.oss-cn-beijing.aliyuncs.com/video_images/scene_scene_1.png",
+      "scene": "第1句跟读"
+    },
+    {
+      "index": 2,
+      "start": 11904000,
+      "end": 22992000,
+      "duration": 11088000,
+      "caption": "Can I have a glass of iced water please?\n请给我一杯冰水好吗？",
+      "keywords": [
+        "Can",
+        "glass"
+      ],
+      "caption_highlight": {
+        "enabled": true,
+        "mode": "keyword_badge",
+        "highlight_color": "#2563EB",
+        "keywords": [
+          "Can",
+          "glass"
+        ]
+      },
+      "animation": {
+        "image": "slow_zoom_in",
+        "caption": "fade_in",
+        "keyword": "pop"
+      },
+      "audio_url": "https://wanzioss.oss-cn-beijing.aliyuncs.com/tts_audio/audio_1782749820992.mp3",
+      "asset_url": "https://wanzioss.oss-cn-beijing.aliyuncs.com/video_images/scene_scene_2.png",
+      "scene": "第2句跟读"
+    },
+    {
+      "index": 3,
+      "start": 22992000,
+      "end": 33648000,
+      "duration": 10656000,
+      "caption": "I'd like the steak medium rare please.\n我想要三分熟的牛排。",
+      "keywords": [
+        "I'd",
+        "like"
+      ],
+      "caption_highlight": {
+        "enabled": true,
+        "mode": "keyword_badge",
+        "highlight_color": "#2563EB",
+        "keywords": [
+          "I'd",
+          "like"
+        ]
+      },
+      "animation": {
+        "image": "slow_zoom_in",
+        "caption": "fade_in",
+        "keyword": "pop"
+      },
+      "audio_url": "https://wanzioss.oss-cn-beijing.aliyuncs.com/tts_audio/audio_1782749823283.mp3",
+      "asset_url": "https://wanzioss.oss-cn-beijing.aliyuncs.com/video_images/scene_scene_3.png",
+      "scene": "第3句跟读"
+    },
+    {
+      "index": 4,
+      "start": 33648000,
+      "end": 37512000,
+      "duration": 3864000,
+      "caption": "1. Do you have a table for two?\n2. Can I have a glass of iced water please?\n3. I'd like the steak medium rare please.",
+      "keywords": [
+        "table",
+        "two"
+      ],
+      "caption_highlight": {
+        "enabled": true,
+        "mode": "keyword_badge",
+        "highlight_color": "#2563EB",
+        "keywords": [
+          "table",
+          "two"
+        ]
+      },
+      "animation": {
+        "image": "slow_zoom_in",
+        "caption": "fade_in",
+        "keyword": "pop"
+      },
+      "audio_url": "https://wanzioss.oss-cn-beijing.aliyuncs.com/tts_audio/audio_1782749824556.mp3",
+      "asset_url": "https://wanzioss.oss-cn-beijing.aliyuncs.com/video_images/scene_review_bg_4.png",
+      "scene": "快速汇总页"
+    },
+    {
+      "index": 5,
+      "start": 37512000,
+      "end": 41160000,
+      "duration": 3648000,
+      "caption": "下集学退菜怎么说？\n你遇到过吗？",
+      "keywords": [],
+      "caption_highlight": {
+        "enabled": true,
+        "mode": "keyword_badge",
+        "highlight_color": "#2563EB",
+        "keywords": []
+      },
+      "animation": {
+        "image": "slow_zoom_in",
+        "caption": "fade_in",
+        "keyword": "pop"
+      },
+      "audio_url": "https://wanzioss.oss-cn-beijing.aliyuncs.com/tts_audio/audio_1782749826012.mp3",
+      "asset_url": "https://wanzioss.oss-cn-beijing.aliyuncs.com/video_images/scene_hook_img_5.png",
+      "scene": "预告页"
+    }
+  ],
+  "steps_status": [
+    {
+      "step": "create_draft",
+      "url": "http://123.57.144.37:30000/openapi/capcut-mate/v1/create_draft",
+      "request": {
+        "width": 1080,
+        "height": 1920
+      },
+      "response": {
+        "code": 0,
+        "message": "成功",
+        "draft_url": "http://123.57.144.37:30000/openapi/capcut-mate/v1/get_draft?draft_id=202606300017395dac5cac",
+        "tip_url": "https://docs.jcaigc.cn/"
+      }
+    },
+    {
+      "step": "add_images",
+      "url": "http://123.57.144.37:30000/openapi/capcut-mate/v1/add_images",
+      "request": {
+        "draft_url": "http://123.57.144.37:30000/openapi/capcut-mate/v1/get_draft?draft_id=202606300017395dac5cac",
+        "image_infos": "[{\"image_url\": \"https://wanzioss.oss-cn-beijing.aliyuncs.com/video_images/scene_hook_img_0.png\", \"width\": 1080, \"height\": 1920, \"start\": 0, \"end\": 3240000}, {\"image_url\": \"https://wanzioss.oss-cn-beijing.aliyuncs.com/video_images/scene_scene_1.png\", \"width\": 1080, \"height\": 1920, \"start\": 3240000, \"end\": 11904000}, {\"image_url\": \"https://wanzioss.oss-cn-beijing.aliyuncs.com/video_images/scene_scene_2.png\", \"width\": 1080, \"height\": 1920, \"start\": 11904000, \"end\": 22992000}, {\"image_url\": \"https://wanzioss.oss-cn-beijing.aliyuncs.com/video_images/scene_scene_3.png\", \"width\": 1080, \"height\": 1920, \"start\": 22992000, \"end\": 33648000}, {\"image_url\": \"https://wanzioss.oss-cn-beijing.aliyuncs.com/video_images/scene_review_bg_4.png\", \"width\": 1080, \"height\": 1920, \"start\": 33648000, \"end\": 37512000}, {\"image_url\": \"https://wanzioss.oss-cn-beijing.aliyuncs.com/video_images/scene_hook_img_5.png\", \"width\": 1080, \"height\": 1920, \"start\": 37512000, \"end\": 41160000}]",
+        "scale_x": 1.0,
+        "scale_y": 1.0,
+        "transform_x": 0,
+        "transform_y": 0
+      },
+      "response": {
+        "code": 0,
+        "message": "成功",
+        "draft_url": "http://123.57.144.37:30000/openapi/capcut-mate/v1/get_draft?draft_id=202606300017395dac5cac",
+        "track_id": "4b7b805420664d2db6b29a570e046cbc",
+        "image_ids": [
+          "f2b56afbf0d94b84b578cfc0edb5d471",
+          "72680cd039104171840f7302b549dace",
+          "b8666f07b74e4174b4c1f4a3419631a5",
+          "bc1a73ae414a40c38d4a8349206adb70",
+          "36852a9d93ed4c7e810eb3b1aa2c87f1",
+          "5797cee3b2054589a27370b1bdcc7247"
+        ],
+        "segment_ids": [
+          "c88ddcce286d4f87a1fd47774a1f9d76",
+          "9ce4238000414734b97ed8c39f4bd6db",
+          "bd7493378a6c44ecaec9e3ab734fbeda",
+          "1a73a833586a401683c50a1967da03fb",
+          "4d1078d467b64b19bd7bf382090f5e9d",
+          "d14118e7cc7f478ab0bcf61c3799973d"
+        ],
+        "segment_infos": [
+          {
+            "id": "c88ddcce286d4f87a1fd47774a1f9d76",
+            "start": 0,
+            "end": 3240000
+          },
+          {
+            "id": "9ce4238000414734b97ed8c39f4bd6db",
+            "start": 3240000,
+            "end": 11904000
+          },
+          {
+            "id": "bd7493378a6c44ecaec9e3ab734fbeda",
+            "start": 11904000,
+            "end": 22992000
+          },
+          {
+            "id": "1a73a833586a401683c50a1967da03fb",
+            "start": 22992000,
+            "end": 33648000
+          },
+          {
+            "id": "4d1078d467b64b19bd7bf382090f5e9d",
+            "start": 33648000,
+            "end": 37512000
+          },
+          {
+            "id": "d14118e7cc7f478ab0bcf61c3799973d",
+            "start": 37512000,
+            "end": 41160000
+          }
+        ]
+      }
+    },
+    {
+      "step": "add_captions",
+      "url": "http://123.57.144.37:30000/openapi/capcut-mate/v1/add_captions",
+      "request": {
+        "draft_url": "http://123.57.144.37:30000/openapi/capcut-mate/v1/get_draft?draft_id=202606300017395dac5cac",
+        "captions": "[{\"start\": 0, \"end\": 3240000, \"text\": \"国外餐厅点餐，别只会指菜单\", \"font_size\": 10}, {\"start\": 3240000, \"end\": 11904000, \"text\": \"Do you have a table for two?\\n请问有两人位吗？\", \"font_size\": 10}, {\"start\": 11904000, \"end\": 22992000, \"text\": \"Can I have a glass of iced water please?\\n请给我一杯冰水好吗？\", \"font_size\": 10}, {\"start\": 22992000, \"end\": 33648000, \"text\": \"I'd like the steak medium rare please.\\n我想要三分熟的牛排。\", \"font_size\": 10}, {\"start\": 33648000, \"end\": 37512000, \"text\": \"1. Do you have a table for two?\\n2. Can I have a glass of iced water please?\\n3. I'd like the steak medium rare please.\", \"font_size\": 10}, {\"start\": 37512000, \"end\": 41160000, \"text\": \"下集学退菜怎么说？\\n你遇到过吗？\", \"font_size\": 10}]",
+        "text_color": "#111111",
+        "border_color": "#FFFFFF",
+        "border_width": 2,
+        "alignment": 1,
+        "font_size": 10,
+        "alpha": 1.0,
+        "bold": true,
+        "italic": true,
+        "line_spacing": 2,
+        "has_shadow": true,
+        "shadow_info": {
+          "shadow_color": "#000000",
+          "shadow_alpha": 0.3,
+          "shadow_diffuse": 4,
+          "shadow_distance": 2,
+          "shadow_angle": -45
+        },
+        "transform_x": 0,
+        "transform_y": 630
+      },
+      "response": {
+        "code": 0,
+        "message": "成功",
+        "draft_url": "http://123.57.144.37:30000/openapi/capcut-mate/v1/get_draft?draft_id=202606300017395dac5cac",
+        "track_id": "13cd488445e94d4493cf135f1a40a541",
+        "text_ids": [
+          "2de31076fcb2454eb9a682867ed6f7a9",
+          "cdc47720d1994e078795747a6b3a677e",
+          "ac106edcf4544b0db9d3b88bc9ffe0ab",
+          "c3ee3c6237cb4a9fb960a5779b3fcda0",
+          "dae4ea395913448595a1166c547de700",
+          "c191c8756a3d4b259d1c3b0bb6a41b04"
+        ],
+        "segment_ids": [
+          "bd9dc1d63cfc4d879cd836ccb46bf927",
+          "ca6257ec710b4b048d9c6776cc5912f9",
+          "db73a18b94b84bf0aae34b902f87199a",
+          "609c934d982e4d96a17372a4354fed54",
+          "5144a5668a23443f8375bfe7b092b7dc",
+          "0f31dc48c5e54c698b622f27be76f355"
+        ],
+        "segment_infos": [
+          {
+            "id": "bd9dc1d63cfc4d879cd836ccb46bf927",
+            "start": 0,
+            "end": 3240000
+          },
+          {
+            "id": "ca6257ec710b4b048d9c6776cc5912f9",
+            "start": 3240000,
+            "end": 11904000
+          },
+          {
+            "id": "db73a18b94b84bf0aae34b902f87199a",
+            "start": 11904000,
+            "end": 22992000
+          },
+          {
+            "id": "609c934d982e4d96a17372a4354fed54",
+            "start": 22992000,
+            "end": 33648000
+          },
+          {
+            "id": "5144a5668a23443f8375bfe7b092b7dc",
+            "start": 33648000,
+            "end": 37512000
+          },
+          {
+            "id": "0f31dc48c5e54c698b622f27be76f355",
+            "start": 37512000,
+            "end": 41160000
+          }
+        ]
+      }
+    },
+    {
+      "step": "add_audios",
+      "url": "http://123.57.144.37:30000/openapi/capcut-mate/v1/add_audios",
+      "request": {
+        "draft_url": "http://123.57.144.37:30000/openapi/capcut-mate/v1/get_draft?draft_id=202606300017395dac5cac",
+        "audio_infos": "[{\"audio_url\": \"https://wanzioss.oss-cn-beijing.aliyuncs.com/tts_audio/audio_1782749816406.mp3\", \"start\": 0, \"end\": 3240000, \"duration\": 3240000, \"volume\": 1.0}, {\"audio_url\": \"https://wanzioss.oss-cn-beijing.aliyuncs.com/tts_audio/audio_1782749818699.mp3\", \"start\": 3240000, \"end\": 11904000, \"duration\": 8664000, \"volume\": 1.0}, {\"audio_url\": \"https://wanzioss.oss-cn-beijing.aliyuncs.com/tts_audio/audio_1782749820992.mp3\", \"start\": 11904000, \"end\": 22992000, \"duration\": 11088000, \"volume\": 1.0}, {\"audio_url\": \"https://wanzioss.oss-cn-beijing.aliyuncs.com/tts_audio/audio_1782749823283.mp3\", \"start\": 22992000, \"end\": 33648000, \"duration\": 10656000, \"volume\": 1.0}, {\"audio_url\": \"https://wanzioss.oss-cn-beijing.aliyuncs.com/tts_audio/audio_1782749824556.mp3\", \"start\": 33648000, \"end\": 37512000, \"duration\": 3864000, \"volume\": 1.0}, {\"audio_url\": \"https://wanzioss.oss-cn-beijing.aliyuncs.com/tts_audio/audio_1782749826012.mp3\", \"start\": 37512000, \"end\": 41160000, \"duration\": 3648000, \"volume\": 1.0}]"
+      },
+      "response": {
+        "code": 0,
+        "message": "成功",
+        "draft_url": "http://123.57.144.37:30000/openapi/capcut-mate/v1/get_draft?draft_id=202606300017395dac5cac",
+        "track_id": "fece97b07f6444d89e60f791575346b7",
+        "audio_ids": [
+          "57aeffaaab88495594f6fa18049db25f",
+          "268f0eeac39d4409b4e88cfb12e4a018",
+          "66ff4b964a3049f1a14e2f0dd8f4a31d",
+          "0e388edda5d04a5999a1cc6e47be2448",
+          "c155baf5b15a4ec2b5d66de699f1fce3",
+          "005d28ebf9af4122936e398ed2533d4d"
+        ]
+      }
+    },
+    {
+      "step": "save_draft",
+      "url": "http://123.57.144.37:30000/openapi/capcut-mate/v1/save_draft",
+      "request": {
+        "draft_url": "http://123.57.144.37:30000/openapi/capcut-mate/v1/get_draft?draft_id=202606300017395dac5cac"
+      },
+      "response": {
+        "code": 0,
+        "message": "成功",
+        "draft_url": "http://123.57.144.37:30000/openapi/capcut-mate/v1/get_draft?draft_id=202606300017395dac5cac"
+      }
+    }
+  ],
+  "message": "剪映草稿已生成，请用 CapCut Mate 桌面端导入剪映。"
+}

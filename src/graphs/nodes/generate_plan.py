@@ -213,7 +213,8 @@ def generate_plan(state: Dict[str, Any]) -> Dict[str, Any]:
                 'publish_pack': {},
                 'review_card': {},
                 'episode_info': {},
-                'topic_id': topic_id
+                'topic_id': topic_id,
+                'video_plan': {}
             }
         
         segments = result['segments']
@@ -310,7 +311,8 @@ def generate_plan(state: Dict[str, Any]) -> Dict[str, Any]:
             'publish_pack': {},
             'review_card': {},
             'episode_info': {},
-            'topic_id': topic_id if 'topic_id' in locals() else ''
+            'topic_id': topic_id if 'topic_id' in locals() else '',
+            'video_plan': {}
         }
     finally:
         configure_account_context(get_account_pack())
@@ -379,6 +381,7 @@ def _build_quality_error(
         'review_card': {},
         'episode_info': {},
         'topic_id': topic_id,
+        'video_plan': {},
     }
 
 

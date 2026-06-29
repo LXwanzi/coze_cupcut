@@ -1,0 +1,21 @@
+{
+  "today_expressions": [
+    {
+      "english": "Do you have a table for two?",
+      "chinese": "请问有两人位吗？",
+      "usage": ""
+    },
+    {
+      "english": "Can I have a glass of iced water please?",
+      "chinese": "请给我一杯冰水好吗？",
+      "usage": ""
+    },
+    {
+      "english": "I'd like the steak medium rare please.",
+      "chinese": "我想要三分熟的牛排。",
+      "usage": ""
+    }
+  ],
+  "answer_levels": [],
+  "quick_review": "先收藏，下一集继续同一场景。"
+}

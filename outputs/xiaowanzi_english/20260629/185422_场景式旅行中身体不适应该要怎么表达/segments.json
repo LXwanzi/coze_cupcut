@@ -1,0 +1,210 @@
+[
+  {
+    "scene": "开场总览页",
+    "caption": "国外玩突然不舒服怎么说？\n收藏这 5 句，覆盖说症状、要药品、问路、求助送医等不同需求\n1. I feel sick to my stomach.\n2. Do you have stomach medicine?\n3. Can I have some hot water?\n4. Where is the nearest pharmacy?\n5. Please call an ambulance.",
+    "tts": "国外玩突然不舒服怎么说？ 收藏这 5 句，覆盖说症状、要药品、问路、求助送医等不同需求",
+    "image_prompt": "FIXED_REVIEW_WITH_CHAR",
+    "duration": 3.8,
+    "keywords": [
+      "feel",
+      "sick"
+    ],
+    "caption_highlight": {
+      "enabled": true,
+      "mode": "keyword_badge",
+      "highlight_color": "#2563EB",
+      "keywords": [
+        "feel",
+        "sick"
+      ]
+    },
+    "animation": {
+      "image": "slow_zoom_in",
+      "caption": "fade_in",
+      "keyword": "pop"
+    },
+    "audio_url": "https://wanzioss.oss-cn-beijing.aliyuncs.com/tts_audio/audio_1782730376940.mp3",
+    "audio_duration": 9072000,
+    "audio_duration_seconds": 9.072,
+    "start": 0,
+    "end": 9072000,
+    "asset_url": "https://wanzioss.oss-cn-beijing.aliyuncs.com/video_images/scene_review_bg_0.png",
+    "image_url": "https://wanzioss.oss-cn-beijing.aliyuncs.com/video_images/scene_review_bg_0.png"
+  },
+  {
+    "scene": "第1句场景句",
+    "caption": "I feel sick to my stomach.\n我胃不舒服",
+    "tts": "第 1 句：I feel sick to my stomach。我胃不舒服",
+    "image_prompt": "旅行身体不适英语表达, 出国旅行时突发胃痛，在酒店找前台求助的真实场景, moment: 告知自身症状, Xiao Wanzi helping a young office worker speak English, minimal props, clear real-life setting",
+    "keywords": [
+      "sick"
+    ],
+    "duration": 4.0,
+    "caption_highlight": {
+      "enabled": true,
+      "mode": "keyword_badge",
+      "highlight_color": "#2563EB",
+      "keywords": [
+        "sick"
+      ]
+    },
+    "animation": {
+      "image": "slow_zoom_in",
+      "caption": "fade_in",
+      "keyword": "pop"
+    },
+    "audio_url": "https://wanzioss.oss-cn-beijing.aliyuncs.com/tts_audio/audio_1782730378659.mp3",
+    "audio_duration": 4440000,
+    "audio_duration_seconds": 4.44,
+    "start": 9072000,
+    "end": 13512000,
+    "asset_url": "https://wanzioss.oss-cn-beijing.aliyuncs.com/video_images/scene_scene_1.png",
+    "image_url": "https://wanzioss.oss-cn-beijing.aliyuncs.com/video_images/scene_scene_1.png"
+  },
+  {
+    "scene": "第2句场景句",
+    "caption": "Do you have stomach medicine?\n你有胃药吗？",
+    "tts": "第 2 句：Do you have stomach medicine。你有胃药吗",
+    "image_prompt": "旅行身体不适英语表达, 出国旅行时突发胃痛，在酒店找前台求助的真实场景, moment: 索要常用胃药, Xiao Wanzi helping a young office worker speak English, minimal props, clear real-life setting",
+    "keywords": [
+      "medicine"
+    ],
+    "duration": 4.0,
+    "caption_highlight": {
+      "enabled": true,
+      "mode": "keyword_badge",
+      "highlight_color": "#2563EB",
+      "keywords": [
+        "medicine"
+      ]
+    },
+    "animation": {
+      "image": "slow_zoom_in",
+      "caption": "fade_in",
+      "keyword": "pop"
+    },
+    "audio_url": "https://wanzioss.oss-cn-beijing.aliyuncs.com/tts_audio/audio_1782730379958.mp3",
+    "audio_duration": 4440000,
+    "audio_duration_seconds": 4.44,
+    "start": 13512000,
+    "end": 17952000,
+    "asset_url": "https://wanzioss.oss-cn-beijing.aliyuncs.com/video_images/scene_scene_2.png",
+    "image_url": "https://wanzioss.oss-cn-beijing.aliyuncs.com/video_images/scene_scene_2.png"
+  },
+  {
+    "scene": "第3句场景句",
+    "caption": "Can I have some hot water?\n能给我一点热水吗？",
+    "tts": "第 3 句：Can I have some hot water。能给我一点热水吗",
+    "image_prompt": "旅行身体不适英语表达, 出国旅行时突发胃痛，在酒店找前台求助的真实场景, moment: 索要热水缓解, Xiao Wanzi helping a young office worker speak English, minimal props, clear real-life setting",
+    "keywords": [
+      "hot water"
+    ],
+    "duration": 4.0,
+    "caption_highlight": {
+      "enabled": true,
+      "mode": "keyword_badge",
+      "highlight_color": "#2563EB",
+      "keywords": [
+        "hot water"
+      ]
+    },
+    "animation": {
+      "image": "slow_zoom_in",
+      "caption": "fade_in",
+      "keyword": "pop"
+    },
+    "audio_url": "https://wanzioss.oss-cn-beijing.aliyuncs.com/tts_audio/audio_1782730381600.mp3",
+    "audio_duration": 4824000,
+    "audio_duration_seconds": 4.824,
+    "start": 17952000,
+    "end": 22776000,
+    "asset_url": "https://wanzioss.oss-cn-beijing.aliyuncs.com/video_images/scene_scene_3.png",
+    "image_url": "https://wanzioss.oss-cn-beijing.aliyuncs.com/video_images/scene_scene_3.png"
+  },
+  {
+    "scene": "第4句场景句",
+    "caption": "Where is the nearest pharmacy?\n最近的药店在哪里？",
+    "tts": "第 4 句：Where is the nearest pharmacy。最近的药店在哪里",
+    "image_prompt": "旅行身体不适英语表达, 出国旅行时突发胃痛，在酒店找前台求助的真实场景, moment: 询问药店位置, Xiao Wanzi helping a young office worker speak English, minimal props, clear real-life setting",
+    "keywords": [
+      "pharmacy"
+    ],
+    "duration": 4.0,
+    "caption_highlight": {
+      "enabled": true,
+      "mode": "keyword_badge",
+      "highlight_color": "#2563EB",
+      "keywords": [
+        "pharmacy"
+      ]
+    },
+    "animation": {
+      "image": "slow_zoom_in",
+      "caption": "fade_in",
+      "keyword": "pop"
+    },
+    "audio_url": "https://wanzioss.oss-cn-beijing.aliyuncs.com/tts_audio/audio_1782730383504.mp3",
+    "audio_duration": 5664000,
+    "audio_duration_seconds": 5.664,
+    "start": 22776000,
+    "end": 28440000,
+    "asset_url": "https://wanzioss.oss-cn-beijing.aliyuncs.com/video_images/scene_scene_4.png",
+    "image_url": "https://wanzioss.oss-cn-beijing.aliyuncs.com/video_images/scene_scene_4.png"
+  },
+  {
+    "scene": "第5句场景句",
+    "caption": "Please call an ambulance.\n请帮我叫救护车",
+    "tts": "第 5 句：Please call an ambulance。请帮我叫救护车",
+    "image_prompt": "旅行身体不适英语表达, 出国旅行时突发胃痛，在酒店找前台求助的真实场景, moment: 请求呼叫急救, Xiao Wanzi helping a young office worker speak English, minimal props, clear real-life setting",
+    "keywords": [
+      "ambulance"
+    ],
+    "duration": 4.0,
+    "caption_highlight": {
+      "enabled": true,
+      "mode": "keyword_badge",
+      "highlight_color": "#2563EB",
+      "keywords": [
+        "ambulance"
+      ]
+    },
+    "animation": {
+      "image": "slow_zoom_in",
+      "caption": "fade_in",
+      "keyword": "pop"
+    },
+    "audio_url": "https://wanzioss.oss-cn-beijing.aliyuncs.com/tts_audio/audio_1782730385076.mp3",
+    "audio_duration": 5472000,
+    "audio_duration_seconds": 5.472,
+    "start": 28440000,
+    "end": 33912000,
+    "asset_url": "https://wanzioss.oss-cn-beijing.aliyuncs.com/video_images/scene_scene_5.png",
+    "image_url": "https://wanzioss.oss-cn-beijing.aliyuncs.com/video_images/scene_scene_5.png"
+  },
+  {
+    "scene": "互动页",
+    "caption": "你们出去玩有没有过突然不舒服的经历呀？",
+    "tts": "你们出去玩有没有过突然不舒服的经历呀？",
+    "image_prompt": "FIXED_HOOK_IMAGE",
+    "duration": 1.8,
+    "keywords": [],
+    "caption_highlight": {
+      "enabled": true,
+      "mode": "keyword_badge",
+      "highlight_color": "#2563EB",
+      "keywords": []
+    },
+    "animation": {
+      "image": "slow_zoom_in",
+      "caption": "fade_in",
+      "keyword": "pop"
+    },
+    "audio_url": "https://wanzioss.oss-cn-beijing.aliyuncs.com/tts_audio/audio_1782730386529.mp3",
+    "audio_duration": 3624000,
+    "audio_duration_seconds": 3.624,
+    "start": 33912000,
+    "end": 37536000,
+    "asset_url": "https://wanzioss.oss-cn-beijing.aliyuncs.com/video_images/scene_hook_img_6.png",
+    "image_url": "https://wanzioss.oss-cn-beijing.aliyuncs.com/video_images/scene_hook_img_6.png"
+  }
+]

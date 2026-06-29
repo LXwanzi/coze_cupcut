@@ -1,0 +1,158 @@
+[
+  {
+    "index": 0,
+    "start": 0,
+    "end": 3240000,
+    "duration": 3240000,
+    "caption": "国外餐厅点餐，别只会指菜单",
+    "keywords": [],
+    "caption_highlight": {
+      "enabled": true,
+      "mode": "keyword_badge",
+      "highlight_color": "#2563EB",
+      "keywords": []
+    },
+    "animation": {
+      "image": "slow_zoom_in",
+      "caption": "fade_in",
+      "keyword": "pop"
+    },
+    "audio_url": "https://wanzioss.oss-cn-beijing.aliyuncs.com/tts_audio/audio_1782749816406.mp3",
+    "asset_url": "https://wanzioss.oss-cn-beijing.aliyuncs.com/video_images/scene_hook_img_0.png",
+    "scene": "钩子页"
+  },
+  {
+    "index": 1,
+    "start": 3240000,
+    "end": 11904000,
+    "duration": 8664000,
+    "caption": "Do you have a table for two?\n请问有两人位吗？",
+    "keywords": [
+      "table",
+      "two"
+    ],
+    "caption_highlight": {
+      "enabled": true,
+      "mode": "keyword_badge",
+      "highlight_color": "#2563EB",
+      "keywords": [
+        "table",
+        "two"
+      ]
+    },
+    "animation": {
+      "image": "slow_zoom_in",
+      "caption": "fade_in",
+      "keyword": "pop"
+    },
+    "audio_url": "https://wanzioss.oss-cn-beijing.aliyuncs.com/tts_audio/audio_1782749818699.mp3",
+    "asset_url": "https://wanzioss.oss-cn-beijing.aliyuncs.com/video_images/scene_scene_1.png",
+    "scene": "第1句跟读"
+  },
+  {
+    "index": 2,
+    "start": 11904000,
+    "end": 22992000,
+    "duration": 11088000,
+    "caption": "Can I have a glass of iced water please?\n请给我一杯冰水好吗？",
+    "keywords": [
+      "Can",
+      "glass"
+    ],
+    "caption_highlight": {
+      "enabled": true,
+      "mode": "keyword_badge",
+      "highlight_color": "#2563EB",
+      "keywords": [
+        "Can",
+        "glass"
+      ]
+    },
+    "animation": {
+      "image": "slow_zoom_in",
+      "caption": "fade_in",
+      "keyword": "pop"
+    },
+    "audio_url": "https://wanzioss.oss-cn-beijing.aliyuncs.com/tts_audio/audio_1782749820992.mp3",
+    "asset_url": "https://wanzioss.oss-cn-beijing.aliyuncs.com/video_images/scene_scene_2.png",
+    "scene": "第2句跟读"
+  },
+  {
+    "index": 3,
+    "start": 22992000,
+    "end": 33648000,
+    "duration": 10656000,
+    "caption": "I'd like the steak medium rare please.\n我想要三分熟的牛排。",
+    "keywords": [
+      "I'd",
+      "like"
+    ],
+    "caption_highlight": {
+      "enabled": true,
+      "mode": "keyword_badge",
+      "highlight_color": "#2563EB",
+      "keywords": [
+        "I'd",
+        "like"
+      ]
+    },
+    "animation": {
+      "image": "slow_zoom_in",
+      "caption": "fade_in",
+      "keyword": "pop"
+    },
+    "audio_url": "https://wanzioss.oss-cn-beijing.aliyuncs.com/tts_audio/audio_1782749823283.mp3",
+    "asset_url": "https://wanzioss.oss-cn-beijing.aliyuncs.com/video_images/scene_scene_3.png",
+    "scene": "第3句跟读"
+  },
+  {
+    "index": 4,
+    "start": 33648000,
+    "end": 37512000,
+    "duration": 3864000,
+    "caption": "1. Do you have a table for two?\n2. Can I have a glass of iced water please?\n3. I'd like the steak medium rare please.",
+    "keywords": [
+      "table",
+      "two"
+    ],
+    "caption_highlight": {
+      "enabled": true,
+      "mode": "keyword_badge",
+      "highlight_color": "#2563EB",
+      "keywords": [
+        "table",
+        "two"
+      ]
+    },
+    "animation": {
+      "image": "slow_zoom_in",
+      "caption": "fade_in",
+      "keyword": "pop"
+    },
+    "audio_url": "https://wanzioss.oss-cn-beijing.aliyuncs.com/tts_audio/audio_1782749824556.mp3",
+    "asset_url": "https://wanzioss.oss-cn-beijing.aliyuncs.com/video_images/scene_review_bg_4.png",
+    "scene": "快速汇总页"
+  },
+  {
+    "index": 5,
+    "start": 37512000,
+    "end": 41160000,
+    "duration": 3648000,
+    "caption": "下集学退菜怎么说？\n你遇到过吗？",
+    "keywords": [],
+    "caption_highlight": {
+      "enabled": true,
+      "mode": "keyword_badge",
+      "highlight_color": "#2563EB",
+      "keywords": []
+    },
+    "animation": {
+      "image": "slow_zoom_in",
+      "caption": "fade_in",
+      "keyword": "pop"
+    },
+    "audio_url": "https://wanzioss.oss-cn-beijing.aliyuncs.com/tts_audio/audio_1782749826012.mp3",
+    "asset_url": "https://wanzioss.oss-cn-beijing.aliyuncs.com/video_images/scene_hook_img_5.png",
+    "scene": "预告页"
+  }
+]
