@@ -1,0 +1,156 @@
+[
+  {
+    "index": 0,
+    "start": 0,
+    "end": 2424000,
+    "duration": 2424000,
+    "caption": "出国点餐不会问口味？",
+    "keywords": [],
+    "caption_highlight": {
+      "enabled": true,
+      "mode": "keyword_badge",
+      "highlight_color": "#2563EB",
+      "keywords": []
+    },
+    "animation": {
+      "image": "slow_zoom_in",
+      "caption": "fade_in",
+      "keyword": "pop"
+    },
+    "audio_url": "https://wanzioss.oss-cn-beijing.aliyuncs.com/tts_audio/audio_1782834897170.mp3",
+    "asset_url": "https://wanzioss.oss-cn-beijing.aliyuncs.com/video_images/scene_hook_img_0.png",
+    "scene": "钩子页"
+  },
+  {
+    "index": 1,
+    "start": 2424000,
+    "end": 10320000,
+    "duration": 7896000,
+    "caption": "What is this dish like?\n这道菜是什么口味？",
+    "keywords": [
+      "What",
+      "dish"
+    ],
+    "caption_highlight": {
+      "enabled": true,
+      "mode": "keyword_badge",
+      "highlight_color": "#2563EB",
+      "keywords": [
+        "What",
+        "dish"
+      ]
+    },
+    "animation": {
+      "image": "slow_zoom_in",
+      "caption": "fade_in",
+      "keyword": "pop"
+    },
+    "audio_url": "https://wanzioss.oss-cn-beijing.aliyuncs.com/tts_audio/audio_1782834899320.mp3",
+    "asset_url": "https://wanzioss.oss-cn-beijing.aliyuncs.com/video_images/scene_scene_1.png",
+    "scene": "第1句跟读"
+  },
+  {
+    "index": 2,
+    "start": 10320000,
+    "end": 16752000,
+    "duration": 6432000,
+    "caption": "Is it spicy?\n辣吗？",
+    "keywords": [
+      "spicy"
+    ],
+    "caption_highlight": {
+      "enabled": true,
+      "mode": "keyword_badge",
+      "highlight_color": "#2563EB",
+      "keywords": [
+        "spicy"
+      ]
+    },
+    "animation": {
+      "image": "slow_zoom_in",
+      "caption": "fade_in",
+      "keyword": "pop"
+    },
+    "audio_url": "https://wanzioss.oss-cn-beijing.aliyuncs.com/tts_audio/audio_1782834900882.mp3",
+    "asset_url": "https://wanzioss.oss-cn-beijing.aliyuncs.com/video_images/scene_scene_2.png",
+    "scene": "第2句跟读"
+  },
+  {
+    "index": 3,
+    "start": 16752000,
+    "end": 24624000,
+    "duration": 7872000,
+    "caption": "Could you make it less salty?\n可以少盐一点吗？",
+    "keywords": [
+      "make",
+      "less"
+    ],
+    "caption_highlight": {
+      "enabled": true,
+      "mode": "keyword_badge",
+      "highlight_color": "#2563EB",
+      "keywords": [
+        "make",
+        "less"
+      ]
+    },
+    "animation": {
+      "image": "slow_zoom_in",
+      "caption": "fade_in",
+      "keyword": "pop"
+    },
+    "audio_url": "https://wanzioss.oss-cn-beijing.aliyuncs.com/tts_audio/audio_1782834902675.mp3",
+    "asset_url": "https://wanzioss.oss-cn-beijing.aliyuncs.com/video_images/scene_scene_3.png",
+    "scene": "第3句跟读"
+  },
+  {
+    "index": 4,
+    "start": 24624000,
+    "end": 28656000,
+    "duration": 4032000,
+    "caption": "1. What is this dish like?\n2. Is it spicy?\n3. Could you make it less salty?",
+    "keywords": [
+      "What",
+      "dish"
+    ],
+    "caption_highlight": {
+      "enabled": true,
+      "mode": "keyword_badge",
+      "highlight_color": "#2563EB",
+      "keywords": [
+        "What",
+        "dish"
+      ]
+    },
+    "animation": {
+      "image": "slow_zoom_in",
+      "caption": "fade_in",
+      "keyword": "pop"
+    },
+    "audio_url": "https://wanzioss.oss-cn-beijing.aliyuncs.com/tts_audio/audio_1782834904142.mp3",
+    "asset_url": "https://wanzioss.oss-cn-beijing.aliyuncs.com/video_images/scene_review_bg_4.png",
+    "scene": "快速汇总页"
+  },
+  {
+    "index": 5,
+    "start": 28656000,
+    "end": 32304000,
+    "duration": 3648000,
+    "caption": "下集学问食物过敏原\n你有忌口吗？",
+    "keywords": [],
+    "caption_highlight": {
+      "enabled": true,
+      "mode": "keyword_badge",
+      "highlight_color": "#2563EB",
+      "keywords": []
+    },
+    "animation": {
+      "image": "slow_zoom_in",
+      "caption": "fade_in",
+      "keyword": "pop"
+    },
+    "audio_url": "https://wanzioss.oss-cn-beijing.aliyuncs.com/tts_audio/audio_1782834905541.mp3",
+    "asset_url": "https://wanzioss.oss-cn-beijing.aliyuncs.com/video_images/scene_hook_img_5.png",
+    "scene": "预告页"
+  }
+]

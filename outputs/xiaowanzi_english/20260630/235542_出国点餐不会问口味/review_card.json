@@ -1,0 +1,21 @@
+{
+  "today_expressions": [
+    {
+      "english": "What is this dish like?",
+      "chinese": "这道菜是什么口味？",
+      "usage": ""
+    },
+    {
+      "english": "Is it spicy?",
+      "chinese": "辣吗？",
+      "usage": ""
+    },
+    {
+      "english": "Could you make it less salty?",
+      "chinese": "可以少盐一点吗？",
+      "usage": ""
+    }
+  ],
+  "answer_levels": [],
+  "quick_review": "先收藏，下一集继续同一场景。"
+}

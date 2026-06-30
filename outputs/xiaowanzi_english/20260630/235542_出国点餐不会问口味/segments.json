@@ -1,0 +1,180 @@
+[
+  {
+    "scene": "钩子页",
+    "caption": "出国点餐不会问口味？",
+    "tts": "出国点餐不会问口味？",
+    "image_prompt": "FIXED_HOOK_IMAGE",
+    "duration": 2.0,
+    "keywords": [],
+    "caption_highlight": {
+      "enabled": true,
+      "mode": "keyword_badge",
+      "highlight_color": "#2563EB",
+      "keywords": []
+    },
+    "animation": {
+      "image": "slow_zoom_in",
+      "caption": "fade_in",
+      "keyword": "pop"
+    },
+    "audio_url": "https://wanzioss.oss-cn-beijing.aliyuncs.com/tts_audio/audio_1782834897170.mp3",
+    "audio_duration": 2424000,
+    "audio_duration_seconds": 2.424,
+    "start": 0,
+    "end": 2424000,
+    "asset_url": "https://wanzioss.oss-cn-beijing.aliyuncs.com/video_images/scene_hook_img_0.png",
+    "image_url": "https://wanzioss.oss-cn-beijing.aliyuncs.com/video_images/scene_hook_img_0.png"
+  },
+  {
+    "scene": "第1句跟读",
+    "caption": "What is this dish like?\n这道菜是什么口味？",
+    "tts": "第1句。What is this dish like? 这道菜是什么口味。跟我读：What is this dish like。",
+    "image_prompt": "国外餐厅点餐场景，小丸子站立在中下区域，头顶留白 25%",
+    "duration": 4.5,
+    "keywords": [
+      "What",
+      "dish"
+    ],
+    "caption_highlight": {
+      "enabled": true,
+      "mode": "keyword_badge",
+      "highlight_color": "#2563EB",
+      "keywords": [
+        "What",
+        "dish"
+      ]
+    },
+    "animation": {
+      "image": "slow_zoom_in",
+      "caption": "fade_in",
+      "keyword": "pop"
+    },
+    "audio_url": "https://wanzioss.oss-cn-beijing.aliyuncs.com/tts_audio/audio_1782834899320.mp3",
+    "audio_duration": 7896000,
+    "audio_duration_seconds": 7.896,
+    "start": 2424000,
+    "end": 10320000,
+    "asset_url": "https://wanzioss.oss-cn-beijing.aliyuncs.com/video_images/scene_scene_1.png",
+    "image_url": "https://wanzioss.oss-cn-beijing.aliyuncs.com/video_images/scene_scene_1.png"
+  },
+  {
+    "scene": "第2句跟读",
+    "caption": "Is it spicy?\n辣吗？",
+    "tts": "第2句。Is it spicy? 辣吗。跟我读：Is it spicy。",
+    "image_prompt": "国外餐厅点餐场景，小丸子站立在中下区域，头顶留白 25%",
+    "duration": 4.5,
+    "keywords": [
+      "spicy"
+    ],
+    "caption_highlight": {
+      "enabled": true,
+      "mode": "keyword_badge",
+      "highlight_color": "#2563EB",
+      "keywords": [
+        "spicy"
+      ]
+    },
+    "animation": {
+      "image": "slow_zoom_in",
+      "caption": "fade_in",
+      "keyword": "pop"
+    },
+    "audio_url": "https://wanzioss.oss-cn-beijing.aliyuncs.com/tts_audio/audio_1782834900882.mp3",
+    "audio_duration": 6432000,
+    "audio_duration_seconds": 6.432,
+    "start": 10320000,
+    "end": 16752000,
+    "asset_url": "https://wanzioss.oss-cn-beijing.aliyuncs.com/video_images/scene_scene_2.png",
+    "image_url": "https://wanzioss.oss-cn-beijing.aliyuncs.com/video_images/scene_scene_2.png"
+  },
+  {
+    "scene": "第3句跟读",
+    "caption": "Could you make it less salty?\n可以少盐一点吗？",
+    "tts": "第3句。Could you make it less salty? 可以少盐一点吗。跟我读：Could you make it less salty。",
+    "image_prompt": "国外餐厅点餐场景，小丸子站立在中下区域，头顶留白 25%",
+    "duration": 4.5,
+    "keywords": [
+      "make",
+      "less"
+    ],
+    "caption_highlight": {
+      "enabled": true,
+      "mode": "keyword_badge",
+      "highlight_color": "#2563EB",
+      "keywords": [
+        "make",
+        "less"
+      ]
+    },
+    "animation": {
+      "image": "slow_zoom_in",
+      "caption": "fade_in",
+      "keyword": "pop"
+    },
+    "audio_url": "https://wanzioss.oss-cn-beijing.aliyuncs.com/tts_audio/audio_1782834902675.mp3",
+    "audio_duration": 7872000,
+    "audio_duration_seconds": 7.872,
+    "start": 16752000,
+    "end": 24624000,
+    "asset_url": "https://wanzioss.oss-cn-beijing.aliyuncs.com/video_images/scene_scene_3.png",
+    "image_url": "https://wanzioss.oss-cn-beijing.aliyuncs.com/video_images/scene_scene_3.png"
+  },
+  {
+    "scene": "快速汇总页",
+    "caption": "1. What is this dish like?\n2. Is it spicy?\n3. Could you make it less salty?",
+    "tts": "这几句先收藏，下一集继续学同一场景。",
+    "image_prompt": "FIXED_REVIEW_WITH_CHAR",
+    "duration": 2.5,
+    "keywords": [
+      "What",
+      "dish"
+    ],
+    "caption_highlight": {
+      "enabled": true,
+      "mode": "keyword_badge",
+      "highlight_color": "#2563EB",
+      "keywords": [
+        "What",
+        "dish"
+      ]
+    },
+    "animation": {
+      "image": "slow_zoom_in",
+      "caption": "fade_in",
+      "keyword": "pop"
+    },
+    "audio_url": "https://wanzioss.oss-cn-beijing.aliyuncs.com/tts_audio/audio_1782834904142.mp3",
+    "audio_duration": 4032000,
+    "audio_duration_seconds": 4.032,
+    "start": 24624000,
+    "end": 28656000,
+    "asset_url": "https://wanzioss.oss-cn-beijing.aliyuncs.com/video_images/scene_review_bg_4.png",
+    "image_url": "https://wanzioss.oss-cn-beijing.aliyuncs.com/video_images/scene_review_bg_4.png"
+  },
+  {
+    "scene": "预告页",
+    "caption": "下集学问食物过敏原\n你有忌口吗？",
+    "tts": "下集学问食物过敏原，记得来看哦。",
+    "image_prompt": "FIXED_HOOK_IMAGE",
+    "duration": 2.0,
+    "keywords": [],
+    "caption_highlight": {
+      "enabled": true,
+      "mode": "keyword_badge",
+      "highlight_color": "#2563EB",
+      "keywords": []
+    },
+    "animation": {
+      "image": "slow_zoom_in",
+      "caption": "fade_in",
+      "keyword": "pop"
+    },
+    "audio_url": "https://wanzioss.oss-cn-beijing.aliyuncs.com/tts_audio/audio_1782834905541.mp3",
+    "audio_duration": 3648000,
+    "audio_duration_seconds": 3.648,
+    "start": 28656000,
+    "end": 32304000,
+    "asset_url": "https://wanzioss.oss-cn-beijing.aliyuncs.com/video_images/scene_hook_img_5.png",
+    "image_url": "https://wanzioss.oss-cn-beijing.aliyuncs.com/video_images/scene_hook_img_5.png"
+  }
+]

@@ -53,6 +53,21 @@
         }
       ],
       "created_at": "2026-06-30T23:34:14.828182"
+    },
+    {
+      "episode_num": 3,
+      "sentences": [
+        "What is this dish like?",
+        "Is it spicy?",
+        "Could you make it less salty?"
+      ],
+      "scene": "出国点餐不会问口味？",
+      "hook": "出国点餐不会问口味？",
+      "preview": "下集学点餐询问食物过敏原相关表达",
+      "pain_point": "",
+      "wrong_expression": "",
+      "answer_levels": [],
+      "created_at": "2026-06-30T23:54:56.147391"
     }
   ],
   "all_sentences": [
@@ -61,11 +76,15 @@
     "I'd like the steak medium rare please.",
     "Could you help me with this?",
     "Could you check this for me?",
-    "Could you help me figure out what I should do next?"
+    "Could you help me figure out what I should do next?",
+    "What is this dish like?",
+    "Is it spicy?",
+    "Could you make it less salty?"
   ],
   "scenes_used": [
     "国外餐厅点餐，别只会指菜单",
-    "餐厅点餐时，别只会说 help me"
+    "餐厅点餐时，别只会说 help me",
+    "出国点餐不会问口味？"
   ],
   "pain_points_used": [
     "餐厅点餐时，别只会说 help me"
@@ -74,7 +93,7 @@
     "Help me."
   ],
   "last_hook": "",
-  "next_preview": "下集继续讲餐厅点餐里的卡壳表达。",
+  "next_preview": "下集学点餐询问食物过敏原相关表达",
   "created_at": "2026-06-30T00:16:36.880021",
-  "updated_at": "2026-06-30T23:34:14.828194"
+  "updated_at": "2026-06-30T23:54:56.147412"
 }

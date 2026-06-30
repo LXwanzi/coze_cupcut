@@ -1,0 +1,698 @@
+{
+  "success": true,
+  "draft_url": "http://123.57.144.37:30000/openapi/capcut-mate/v1/get_draft?draft_id=20260630235540dfba49bb",
+  "content_meta": {
+    "account_id": "xiaowanzi_english",
+    "selected_topic": "出国点餐不会问口味？",
+    "scene": "travel",
+    "sub_scene": "餐厅点餐避免踩雷",
+    "duration_seconds": 20.0,
+    "target_duration_seconds": 28,
+    "sentence_count": 3,
+    "format": "retention_short",
+    "content_mode": "scene_collection",
+    "pain_point": "",
+    "wrong_expression": "",
+    "quality_review": {},
+    "voice_profile": {},
+    "originality_check": "所有内容基于用户提供的原始素材生成",
+    "safety_note": "未涉及教材原文复述",
+    "topic_id": "a0f26db672e9"
+  },
+  "publish_pack": {
+    "title": "【出国点餐不会问口味？】这5句真的能救场",
+    "cover_text": "出国点餐不会问口味？",
+    "description": "每天进步一点点。出国点餐不会问口味？真实场景 5 句英语，先收藏，关键时候能直接用。#英语学习 #实用英语 #旅游英语",
+    "hashtags": [
+      "英语学习",
+      "实用英语",
+      "旅游英语"
+    ]
+  },
+  "review_card": {
+    "today_expressions": [
+      {
+        "english": "What is this dish like?",
+        "chinese": "这道菜是什么口味？",
+        "usage": ""
+      },
+      {
+        "english": "Is it spicy?",
+        "chinese": "辣吗？",
+        "usage": ""
+      },
+      {
+        "english": "Could you make it less salty?",
+        "chinese": "可以少盐一点吗？",
+        "usage": ""
+      }
+    ],
+    "answer_levels": [],
+    "quick_review": "先收藏，下一集继续同一场景。"
+  },
+  "material_bank": [],
+  "segments": [
+    {
+      "scene": "钩子页",
+      "caption": "出国点餐不会问口味？",
+      "tts": "出国点餐不会问口味？",
+      "image_prompt": "FIXED_HOOK_IMAGE",
+      "duration": 2.0,
+      "keywords": [],
+      "caption_highlight": {
+        "enabled": true,
+        "mode": "keyword_badge",
+        "highlight_color": "#2563EB",
+        "keywords": []
+      },
+      "animation": {
+        "image": "slow_zoom_in",
+        "caption": "fade_in",
+        "keyword": "pop"
+      },
+      "audio_url": "https://wanzioss.oss-cn-beijing.aliyuncs.com/tts_audio/audio_1782834897170.mp3",
+      "audio_duration": 2424000,
+      "audio_duration_seconds": 2.424,
+      "start": 0,
+      "end": 2424000,
+      "asset_url": "https://wanzioss.oss-cn-beijing.aliyuncs.com/video_images/scene_hook_img_0.png",
+      "image_url": "https://wanzioss.oss-cn-beijing.aliyuncs.com/video_images/scene_hook_img_0.png"
+    },
+    {
+      "scene": "第1句跟读",
+      "caption": "What is this dish like?\n这道菜是什么口味？",
+      "tts": "第1句。What is this dish like? 这道菜是什么口味。跟我读：What is this dish like。",
+      "image_prompt": "国外餐厅点餐场景，小丸子站立在中下区域，头顶留白 25%",
+      "duration": 4.5,
+      "keywords": [
+        "What",
+        "dish"
+      ],
+      "caption_highlight": {
+        "enabled": true,
+        "mode": "keyword_badge",
+        "highlight_color": "#2563EB",
+        "keywords": [
+          "What",
+          "dish"
+        ]
+      },
+      "animation": {
+        "image": "slow_zoom_in",
+        "caption": "fade_in",
+        "keyword": "pop"
+      },
+      "audio_url": "https://wanzioss.oss-cn-beijing.aliyuncs.com/tts_audio/audio_1782834899320.mp3",
+      "audio_duration": 7896000,
+      "audio_duration_seconds": 7.896,
+      "start": 2424000,
+      "end": 10320000,
+      "asset_url": "https://wanzioss.oss-cn-beijing.aliyuncs.com/video_images/scene_scene_1.png",
+      "image_url": "https://wanzioss.oss-cn-beijing.aliyuncs.com/video_images/scene_scene_1.png"
+    },
+    {
+      "scene": "第2句跟读",
+      "caption": "Is it spicy?\n辣吗？",
+      "tts": "第2句。Is it spicy? 辣吗。跟我读：Is it spicy。",
+      "image_prompt": "国外餐厅点餐场景，小丸子站立在中下区域，头顶留白 25%",
+      "duration": 4.5,
+      "keywords": [
+        "spicy"
+      ],
+      "caption_highlight": {
+        "enabled": true,
+        "mode": "keyword_badge",
+        "highlight_color": "#2563EB",
+        "keywords": [
+          "spicy"
+        ]
+      },
+      "animation": {
+        "image": "slow_zoom_in",
+        "caption": "fade_in",
+        "keyword": "pop"
+      },
+      "audio_url": "https://wanzioss.oss-cn-beijing.aliyuncs.com/tts_audio/audio_1782834900882.mp3",
+      "audio_duration": 6432000,
+      "audio_duration_seconds": 6.432,
+      "start": 10320000,
+      "end": 16752000,
+      "asset_url": "https://wanzioss.oss-cn-beijing.aliyuncs.com/video_images/scene_scene_2.png",
+      "image_url": "https://wanzioss.oss-cn-beijing.aliyuncs.com/video_images/scene_scene_2.png"
+    },
+    {
+      "scene": "第3句跟读",
+      "caption": "Could you make it less salty?\n可以少盐一点吗？",
+      "tts": "第3句。Could you make it less salty? 可以少盐一点吗。跟我读：Could you make it less salty。",
+      "image_prompt": "国外餐厅点餐场景，小丸子站立在中下区域，头顶留白 25%",
+      "duration": 4.5,
+      "keywords": [
+        "make",
+        "less"
+      ],
+      "caption_highlight": {
+        "enabled": true,
+        "mode": "keyword_badge",
+        "highlight_color": "#2563EB",
+        "keywords": [
+          "make",
+          "less"
+        ]
+      },
+      "animation": {
+        "image": "slow_zoom_in",
+        "caption": "fade_in",
+        "keyword": "pop"
+      },
+      "audio_url": "https://wanzioss.oss-cn-beijing.aliyuncs.com/tts_audio/audio_1782834902675.mp3",
+      "audio_duration": 7872000,
+      "audio_duration_seconds": 7.872,
+      "start": 16752000,
+      "end": 24624000,
+      "asset_url": "https://wanzioss.oss-cn-beijing.aliyuncs.com/video_images/scene_scene_3.png",
+      "image_url": "https://wanzioss.oss-cn-beijing.aliyuncs.com/video_images/scene_scene_3.png"
+    },
+    {
+      "scene": "快速汇总页",
+      "caption": "1. What is this dish like?\n2. Is it spicy?\n3. Could you make it less salty?",
+      "tts": "这几句先收藏，下一集继续学同一场景。",
+      "image_prompt": "FIXED_REVIEW_WITH_CHAR",
+      "duration": 2.5,
+      "keywords": [
+        "What",
+        "dish"
+      ],
+      "caption_highlight": {
+        "enabled": true,
+        "mode": "keyword_badge",
+        "highlight_color": "#2563EB",
+        "keywords": [
+          "What",
+          "dish"
+        ]
+      },
+      "animation": {
+        "image": "slow_zoom_in",
+        "caption": "fade_in",
+        "keyword": "pop"
+      },
+      "audio_url": "https://wanzioss.oss-cn-beijing.aliyuncs.com/tts_audio/audio_1782834904142.mp3",
+      "audio_duration": 4032000,
+      "audio_duration_seconds": 4.032,
+      "start": 24624000,
+      "end": 28656000,
+      "asset_url": "https://wanzioss.oss-cn-beijing.aliyuncs.com/video_images/scene_review_bg_4.png",
+      "image_url": "https://wanzioss.oss-cn-beijing.aliyuncs.com/video_images/scene_review_bg_4.png"
+    },
+    {
+      "scene": "预告页",
+      "caption": "下集学问食物过敏原\n你有忌口吗？",
+      "tts": "下集学问食物过敏原，记得来看哦。",
+      "image_prompt": "FIXED_HOOK_IMAGE",
+      "duration": 2.0,
+      "keywords": [],
+      "caption_highlight": {
+        "enabled": true,
+        "mode": "keyword_badge",
+        "highlight_color": "#2563EB",
+        "keywords": []
+      },
+      "animation": {
+        "image": "slow_zoom_in",
+        "caption": "fade_in",
+        "keyword": "pop"
+      },
+      "audio_url": "https://wanzioss.oss-cn-beijing.aliyuncs.com/tts_audio/audio_1782834905541.mp3",
+      "audio_duration": 3648000,
+      "audio_duration_seconds": 3.648,
+      "start": 28656000,
+      "end": 32304000,
+      "asset_url": "https://wanzioss.oss-cn-beijing.aliyuncs.com/video_images/scene_hook_img_5.png",
+      "image_url": "https://wanzioss.oss-cn-beijing.aliyuncs.com/video_images/scene_hook_img_5.png"
+    }
+  ],
+  "duration": 32304000,
+  "duration_seconds": 32.3,
+  "scene_count": 6,
+  "caption_count": 6,
+  "timeline_segments": [
+    {
+      "index": 0,
+      "start": 0,
+      "end": 2424000,
+      "duration": 2424000,
+      "caption": "出国点餐不会问口味？",
+      "keywords": [],
+      "caption_highlight": {
+        "enabled": true,
+        "mode": "keyword_badge",
+        "highlight_color": "#2563EB",
+        "keywords": []
+      },
+      "animation": {
+        "image": "slow_zoom_in",
+        "caption": "fade_in",
+        "keyword": "pop"
+      },
+      "audio_url": "https://wanzioss.oss-cn-beijing.aliyuncs.com/tts_audio/audio_1782834897170.mp3",
+      "asset_url": "https://wanzioss.oss-cn-beijing.aliyuncs.com/video_images/scene_hook_img_0.png",
+      "scene": "钩子页"
+    },
+    {
+      "index": 1,
+      "start": 2424000,
+      "end": 10320000,
+      "duration": 7896000,
+      "caption": "What is this dish like?\n这道菜是什么口味？",
+      "keywords": [
+        "What",
+        "dish"
+      ],
+      "caption_highlight": {
+        "enabled": true,
+        "mode": "keyword_badge",
+        "highlight_color": "#2563EB",
+        "keywords": [
+          "What",
+          "dish"
+        ]
+      },
+      "animation": {
+        "image": "slow_zoom_in",
+        "caption": "fade_in",
+        "keyword": "pop"
+      },
+      "audio_url": "https://wanzioss.oss-cn-beijing.aliyuncs.com/tts_audio/audio_1782834899320.mp3",
+      "asset_url": "https://wanzioss.oss-cn-beijing.aliyuncs.com/video_images/scene_scene_1.png",
+      "scene": "第1句跟读"
+    },
+    {
+      "index": 2,
+      "start": 10320000,
+      "end": 16752000,
+      "duration": 6432000,
+      "caption": "Is it spicy?\n辣吗？",
+      "keywords": [
+        "spicy"
+      ],
+      "caption_highlight": {
+        "enabled": true,
+        "mode": "keyword_badge",
+        "highlight_color": "#2563EB",
+        "keywords": [
+          "spicy"
+        ]
+      },
+      "animation": {
+        "image": "slow_zoom_in",
+        "caption": "fade_in",
+        "keyword": "pop"
+      },
+      "audio_url": "https://wanzioss.oss-cn-beijing.aliyuncs.com/tts_audio/audio_1782834900882.mp3",
+      "asset_url": "https://wanzioss.oss-cn-beijing.aliyuncs.com/video_images/scene_scene_2.png",
+      "scene": "第2句跟读"
+    },
+    {
+      "index": 3,
+      "start": 16752000,
+      "end": 24624000,
+      "duration": 7872000,
+      "caption": "Could you make it less salty?\n可以少盐一点吗？",
+      "keywords": [
+        "make",
+        "less"
+      ],
+      "caption_highlight": {
+        "enabled": true,
+        "mode": "keyword_badge",
+        "highlight_color": "#2563EB",
+        "keywords": [
+          "make",
+          "less"
+        ]
+      },
+      "animation": {
+        "image": "slow_zoom_in",
+        "caption": "fade_in",
+        "keyword": "pop"
+      },
+      "audio_url": "https://wanzioss.oss-cn-beijing.aliyuncs.com/tts_audio/audio_1782834902675.mp3",
+      "asset_url": "https://wanzioss.oss-cn-beijing.aliyuncs.com/video_images/scene_scene_3.png",
+      "scene": "第3句跟读"
+    },
+    {
+      "index": 4,
+      "start": 24624000,
+      "end": 28656000,
+      "duration": 4032000,
+      "caption": "1. What is this dish like?\n2. Is it spicy?\n3. Could you make it less salty?",
+      "keywords": [
+        "What",
+        "dish"
+      ],
+      "caption_highlight": {
+        "enabled": true,
+        "mode": "keyword_badge",
+        "highlight_color": "#2563EB",
+        "keywords": [
+          "What",
+          "dish"
+        ]
+      },
+      "animation": {
+        "image": "slow_zoom_in",
+        "caption": "fade_in",
+        "keyword": "pop"
+      },
+      "audio_url": "https://wanzioss.oss-cn-beijing.aliyuncs.com/tts_audio/audio_1782834904142.mp3",
+      "asset_url": "https://wanzioss.oss-cn-beijing.aliyuncs.com/video_images/scene_review_bg_4.png",
+      "scene": "快速汇总页"
+    },
+    {
+      "index": 5,
+      "start": 28656000,
+      "end": 32304000,
+      "duration": 3648000,
+      "caption": "下集学问食物过敏原\n你有忌口吗？",
+      "keywords": [],
+      "caption_highlight": {
+        "enabled": true,
+        "mode": "keyword_badge",
+        "highlight_color": "#2563EB",
+        "keywords": []
+      },
+      "animation": {
+        "image": "slow_zoom_in",
+        "caption": "fade_in",
+        "keyword": "pop"
+      },
+      "audio_url": "https://wanzioss.oss-cn-beijing.aliyuncs.com/tts_audio/audio_1782834905541.mp3",
+      "asset_url": "https://wanzioss.oss-cn-beijing.aliyuncs.com/video_images/scene_hook_img_5.png",
+      "scene": "预告页"
+    }
+  ],
+  "steps_status": [
+    {
+      "step": "create_draft",
+      "url": "http://123.57.144.37:30000/openapi/capcut-mate/v1/create_draft",
+      "request": {
+        "width": 1080,
+        "height": 1920
+      },
+      "response": {
+        "code": 0,
+        "message": "成功",
+        "draft_url": "http://123.57.144.37:30000/openapi/capcut-mate/v1/get_draft?draft_id=20260630235540dfba49bb",
+        "tip_url": "https://docs.jcaigc.cn/"
+      }
+    },
+    {
+      "step": "imgs_infos",
+      "url": "http://123.57.144.37:30000/openapi/capcut-mate/v1/imgs_infos",
+      "request": {
+        "timelines": [
+          {
+            "start": 0,
+            "end": 2424000
+          },
+          {
+            "start": 2424000,
+            "end": 10320000
+          },
+          {
+            "start": 10320000,
+            "end": 16752000
+          },
+          {
+            "start": 16752000,
+            "end": 24624000
+          },
+          {
+            "start": 24624000,
+            "end": 28656000
+          },
+          {
+            "start": 28656000,
+            "end": 32304000
+          }
+        ],
+        "width": 1080,
+        "height": 1920,
+        "in_animation": "向上滑动",
+        "in_animation_duration": 500000
+      },
+      "response": {
+        "code": 0,
+        "message": "成功"
+      }
+    },
+    {
+      "step": "add_images",
+      "url": "http://123.57.144.37:30000/openapi/capcut-mate/v1/add_images",
+      "request": {
+        "draft_url": "http://123.57.144.37:30000/openapi/capcut-mate/v1/get_draft?draft_id=20260630235540dfba49bb",
+        "scale_x": 1.0,
+        "scale_y": 1.0,
+        "transform_x": 0,
+        "transform_y": 0
+      },
+      "response": {
+        "code": 0,
+        "message": "成功",
+        "draft_url": "http://123.57.144.37:30000/openapi/capcut-mate/v1/get_draft?draft_id=20260630235540dfba49bb",
+        "track_id": "d3da5ffbff2c4d6aa877f074913f27ed",
+        "image_ids": [
+          "1149f6f3bfa949e28398bdd70d9b8e7e",
+          "07cf3326dc3f416e9223b894caca51a0",
+          "0e89eba0f94f4aa0849bd1cc2aae53d9",
+          "c79af937252848ffbfa042fc10cf93f5",
+          "ddf59314f40642c1afa7929ba1f487ae",
+          "f5132b3ad5a948a299c793e7e834c89d"
+        ],
+        "segment_ids": [
+          "b59e592c090f468db4f1a66716aa255e",
+          "876b674d05244167a306a19b09046ddd",
+          "4df6dac866b7445c9c41b0a3c312fe18",
+          "77d857dbdbdc4349a9104b0df9811953",
+          "551a5cb53a4e45c680b37bfd16226c7e",
+          "b891b64e312c407bba8ee99bdb831381"
+        ],
+        "segment_infos": [
+          {
+            "id": "b59e592c090f468db4f1a66716aa255e",
+            "start": 0,
+            "end": 2424000
+          },
+          {
+            "id": "876b674d05244167a306a19b09046ddd",
+            "start": 2424000,
+            "end": 10320000
+          },
+          {
+            "id": "4df6dac866b7445c9c41b0a3c312fe18",
+            "start": 10320000,
+            "end": 16752000
+          },
+          {
+            "id": "77d857dbdbdc4349a9104b0df9811953",
+            "start": 16752000,
+            "end": 24624000
+          },
+          {
+            "id": "551a5cb53a4e45c680b37bfd16226c7e",
+            "start": 24624000,
+            "end": 28656000
+          },
+          {
+            "id": "b891b64e312c407bba8ee99bdb831381",
+            "start": 28656000,
+            "end": 32304000
+          }
+        ]
+      }
+    },
+    {
+      "step": "keyframes_infos",
+      "url": "http://123.57.144.37:30000/openapi/capcut-mate/v1/keyframes_infos",
+      "request": {
+        "ctype": "UNIFORM_SCALE",
+        "offsets": "0|100",
+        "values": "1.0|1.08",
+        "width": 1080,
+        "height": 1920
+      },
+      "response": {
+        "code": 0,
+        "message": "成功"
+      }
+    },
+    {
+      "step": "add_keyframes",
+      "url": "http://123.57.144.37:30000/openapi/capcut-mate/v1/add_keyframes",
+      "request": {
+        "draft_url": "http://123.57.144.37:30000/openapi/capcut-mate/v1/get_draft?draft_id=20260630235540dfba49bb",
+        "keyframes_length": 966
+      },
+      "response": {
+        "code": 0,
+        "message": "成功",
+        "draft_url": "http://123.57.144.37:30000/openapi/capcut-mate/v1/get_draft?draft_id=20260630235540dfba49bb",
+        "keyframes_added": 0,
+        "affected_segments": []
+      }
+    },
+    {
+      "step": "caption_infos",
+      "url": "http://123.57.144.37:30000/openapi/capcut-mate/v1/caption_infos",
+      "request": {
+        "timelines": [
+          {
+            "start": 0,
+            "end": 2424000
+          },
+          {
+            "start": 2424000,
+            "end": 10320000
+          },
+          {
+            "start": 10320000,
+            "end": 16752000
+          },
+          {
+            "start": 16752000,
+            "end": 24624000
+          },
+          {
+            "start": 24624000,
+            "end": 28656000
+          },
+          {
+            "start": 28656000,
+            "end": 32304000
+          }
+        ],
+        "in_animation": "向上滑动",
+        "in_animation_duration": 500000
+      },
+      "response": {
+        "code": 0,
+        "message": "成功"
+      }
+    },
+    {
+      "step": "add_captions",
+      "url": "http://123.57.144.37:30000/openapi/capcut-mate/v1/add_captions",
+      "request": {
+        "draft_url": "http://123.57.144.37:30000/openapi/capcut-mate/v1/get_draft?draft_id=20260630235540dfba49bb",
+        "text_color": "#111111",
+        "border_color": "#FFFFFF",
+        "border_width": 2,
+        "alignment": 1,
+        "font_size": 10,
+        "alpha": 1.0,
+        "bold": true,
+        "italic": true,
+        "line_spacing": 2,
+        "has_shadow": true,
+        "shadow_info": {
+          "shadow_color": "#000000",
+          "shadow_alpha": 0.3,
+          "shadow_diffuse": 4,
+          "shadow_distance": 2,
+          "shadow_angle": -45
+        },
+        "transform_x": 0,
+        "transform_y": 630
+      },
+      "response": {
+        "code": 0,
+        "message": "成功",
+        "draft_url": "http://123.57.144.37:30000/openapi/capcut-mate/v1/get_draft?draft_id=20260630235540dfba49bb",
+        "track_id": "b3279496bf87412380a594fda3c5320f",
+        "text_ids": [
+          "09a9fd0de89649cca2296a0b02359435",
+          "18589ac16adc4d7e81ebb9d85c3c4a08",
+          "ab9078b9ebcc4b0c82b2b5bd03661a02",
+          "c28f6bb6ff0442bba9dbc19878e05b72",
+          "5c14d1ea9b6d4bac8efd54f0747269f4",
+          "353316aa9e5b49e3ac6c4bf33792dd40"
+        ],
+        "segment_ids": [
+          "c0f688787eee4791b981a77415d2b505",
+          "7125653456d44eafb4d69f557b1c568b",
+          "2b4d5d4dc8f5455eac8d34e96458cdbe",
+          "00dd6ba1a8a24056b4fb3621296f8241",
+          "be43661d2f4443149cc50dc429a9b4f0",
+          "e4b38136718f4a5a9d1f75f077589f19"
+        ],
+        "segment_infos": [
+          {
+            "id": "c0f688787eee4791b981a77415d2b505",
+            "start": 0,
+            "end": 2424000
+          },
+          {
+            "id": "7125653456d44eafb4d69f557b1c568b",
+            "start": 2424000,
+            "end": 10320000
+          },
+          {
+            "id": "2b4d5d4dc8f5455eac8d34e96458cdbe",
+            "start": 10320000,
+            "end": 16752000
+          },
+          {
+            "id": "00dd6ba1a8a24056b4fb3621296f8241",
+            "start": 16752000,
+            "end": 24624000
+          },
+          {
+            "id": "be43661d2f4443149cc50dc429a9b4f0",
+            "start": 24624000,
+            "end": 28656000
+          },
+          {
+            "id": "e4b38136718f4a5a9d1f75f077589f19",
+            "start": 28656000,
+            "end": 32304000
+          }
+        ]
+      }
+    },
+    {
+      "step": "add_audios",
+      "url": "http://123.57.144.37:30000/openapi/capcut-mate/v1/add_audios",
+      "request": {
+        "draft_url": "http://123.57.144.37:30000/openapi/capcut-mate/v1/get_draft?draft_id=20260630235540dfba49bb",
+        "audio_infos": "[{\"audio_url\": \"https://wanzioss.oss-cn-beijing.aliyuncs.com/tts_audio/audio_1782834897170.mp3\", \"start\": 0, \"end\": 2424000, \"duration\": 2424000, \"volume\": 1.0}, {\"audio_url\": \"https://wanzioss.oss-cn-beijing.aliyuncs.com/tts_audio/audio_1782834899320.mp3\", \"start\": 2424000, \"end\": 10320000, \"duration\": 7896000, \"volume\": 1.0}, {\"audio_url\": \"https://wanzioss.oss-cn-beijing.aliyuncs.com/tts_audio/audio_1782834900882.mp3\", \"start\": 10320000, \"end\": 16752000, \"duration\": 6432000, \"volume\": 1.0}, {\"audio_url\": \"https://wanzioss.oss-cn-beijing.aliyuncs.com/tts_audio/audio_1782834902675.mp3\", \"start\": 16752000, \"end\": 24624000, \"duration\": 7872000, \"volume\": 1.0}, {\"audio_url\": \"https://wanzioss.oss-cn-beijing.aliyuncs.com/tts_audio/audio_1782834904142.mp3\", \"start\": 24624000, \"end\": 28656000, \"duration\": 4032000, \"volume\": 1.0}, {\"audio_url\": \"https://wanzioss.oss-cn-beijing.aliyuncs.com/tts_audio/audio_1782834905541.mp3\", \"start\": 28656000, \"end\": 32304000, \"duration\": 3648000, \"volume\": 1.0}]"
+      },
+      "response": {
+        "code": 0,
+        "message": "成功",
+        "draft_url": "http://123.57.144.37:30000/openapi/capcut-mate/v1/get_draft?draft_id=20260630235540dfba49bb",
+        "track_id": "88c6d88687cc46249e75ac4a15f70fb4",
+        "audio_ids": [
+          "040f89cc75eb4641b32162f6d32362c9",
+          "93ace238979f4ff398a25e7ecf4915c6",
+          "16feb4013e5b4b52ac8429519c5990ae",
+          "43f9d9723b904a26bba6984d22480ec1",
+          "3b4b9a975bd44f34a36ada502b3eb413",
+          "1ecf0c3c971e4283867dc824cfe2e6be"
+        ]
+      }
+    },
+    {
+      "step": "save_draft",
+      "url": "http://123.57.144.37:30000/openapi/capcut-mate/v1/save_draft",
+      "request": {
+        "draft_url": "http://123.57.144.37:30000/openapi/capcut-mate/v1/get_draft?draft_id=20260630235540dfba49bb"
+      },
+      "response": {
+        "code": 0,
+        "message": "成功",
+        "draft_url": "http://123.57.144.37:30000/openapi/capcut-mate/v1/get_draft?draft_id=20260630235540dfba49bb"
+      }
+    }
+  ],
+  "message": "剪映草稿已生成，请用 CapCut Mate 桌面端导入剪映。"
+}

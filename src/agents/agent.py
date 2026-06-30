@@ -118,9 +118,10 @@ def _parse_user_input(message: str) -> Dict[str, Any]:
         raw_topic = f"{mode}：{topic}" if mode else topic
         result['raw_topic'] = raw_topic
         result['topic'] = raw_topic
-        result['learning_note'] = ''
+        # 保留剩余文本作为学习笔记（用户可能附带了英语句子）
+        result['learning_note'] = message if message else ''
         result['scene'] = _detect_scene(topic, result["account_id"])
-        result['auto_generate_expressions'] = True
+        result['auto_generate_expressions'] = not bool(message)
         return result
     
     # 尝试提取主题/场景

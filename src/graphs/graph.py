@@ -75,13 +75,41 @@ def create_workflow() -> CompiledStateGraph:
     # 设置入口点
     workflow.set_entry_point("generate_plan")
     
-    # 添加边
-    workflow.add_edge("generate_plan", "tts_synthesize")
-    workflow.add_edge("tts_synthesize", "generate_images")
-    workflow.add_edge("generate_images", "create_capcut_draft")
+    # 添加条件边：出错时直接结束
+    workflow.add_conditional_edges(
+        "generate_plan",
+        _check_error,
+        {
+            "continue": "tts_synthesize",
+            "error": END
+        }
+    )
+    workflow.add_conditional_edges(
+        "tts_synthesize",
+        _check_error,
+        {
+            "continue": "generate_images",
+            "error": END
+        }
+    )
+    workflow.add_conditional_edges(
+        "generate_images",
+        _check_error,
+        {
+            "continue": "create_capcut_draft",
+            "error": END
+        }
+    )
     workflow.add_edge("create_capcut_draft", END)
     
     return workflow.compile()
+
+
+def _check_error(state: VideoWorkflowState) -> str:
+    """检查状态中是否有错误，决定继续还是结束"""
+    if state.get("error"):
+        return "error"
+    return "continue"
 
 
 def generate_plan_node(state: VideoWorkflowState) -> Dict[str, Any]:
@@ -91,7 +119,8 @@ def generate_plan_node(state: VideoWorkflowState) -> Dict[str, Any]:
     if result.get("error"):
         return {
             "error": result["error"],
-            "success": False
+            "success": False,
+            "video_plan": result.get("video_plan", {})
         }
     
     return {
@@ -116,7 +145,8 @@ def tts_synthesize_node(state: VideoWorkflowState) -> Dict[str, Any]:
     if result.get("error"):
         return {
             "error": result["error"],
-            "success": False
+            "success": False,
+            "video_plan": state.get("video_plan", {})
         }
     
     # 将音频信息合并到 segments 中
@@ -154,7 +184,8 @@ def generate_images_node(state: VideoWorkflowState) -> Dict[str, Any]:
     if result.get("error"):
         return {
             "error": result["error"],
-            "success": False
+            "success": False,
+            "video_plan": state.get("video_plan", {})
         }
     
     # 获取生成的 scenes
