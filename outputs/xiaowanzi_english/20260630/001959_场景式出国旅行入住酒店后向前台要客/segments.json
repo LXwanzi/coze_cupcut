@@ -1,0 +1,210 @@
+[
+  {
+    "scene": "开场总览页",
+    "caption": "出国住酒店要用品的5句实用英语\n收藏这 5 句，覆盖索要不同客房用品的全高频场景\n1. Can I have a pair of slippers?\n2. Can I get a toothbrush set?\n3. May I have two more bath towels?\n4. Can I get some extra bottled water?\n5. Do you have a travel adapter I can borrow?",
+    "tts": "出国住酒店要用品的5句实用英语 收藏这 5 句，覆盖索要不同客房用品的全高频场景",
+    "image_prompt": "FIXED_REVIEW_WITH_CHAR",
+    "duration": 3.8,
+    "keywords": [
+      "Can",
+      "pair"
+    ],
+    "caption_highlight": {
+      "enabled": true,
+      "mode": "keyword_badge",
+      "highlight_color": "#2563EB",
+      "keywords": [
+        "Can",
+        "pair"
+      ]
+    },
+    "animation": {
+      "image": "slow_zoom_in",
+      "caption": "fade_in",
+      "keyword": "pop"
+    },
+    "audio_url": "https://wanzioss.oss-cn-beijing.aliyuncs.com/tts_audio/audio_1782749916352.mp3",
+    "audio_duration": 8280000,
+    "audio_duration_seconds": 8.28,
+    "start": 0,
+    "end": 8280000,
+    "asset_url": "https://wanzioss.oss-cn-beijing.aliyuncs.com/video_images/scene_review_bg_0.png",
+    "image_url": "https://wanzioss.oss-cn-beijing.aliyuncs.com/video_images/scene_review_bg_0.png"
+  },
+  {
+    "scene": "第1句场景句",
+    "caption": "Can I have a pair of slippers?\n能给我一双拖鞋吗？",
+    "tts": "第 1 句：Can I have a pair of slippers。能给我一双拖鞋吗",
+    "image_prompt": "入住酒店索要客房用品, 刚入住境外酒店发现房间缺常用用品，到前台申领的场景, moment: 要拖鞋, Xiao Wanzi helping a young office worker speak English, minimal props, clear real-life setting",
+    "keywords": [
+      "slippers"
+    ],
+    "duration": 4.0,
+    "caption_highlight": {
+      "enabled": true,
+      "mode": "keyword_badge",
+      "highlight_color": "#2563EB",
+      "keywords": [
+        "slippers"
+      ]
+    },
+    "animation": {
+      "image": "slow_zoom_in",
+      "caption": "fade_in",
+      "keyword": "pop"
+    },
+    "audio_url": "https://wanzioss.oss-cn-beijing.aliyuncs.com/tts_audio/audio_1782749918015.mp3",
+    "audio_duration": 5472000,
+    "audio_duration_seconds": 5.472,
+    "start": 8280000,
+    "end": 13752000,
+    "asset_url": "https://wanzioss.oss-cn-beijing.aliyuncs.com/video_images/scene_scene_1.png",
+    "image_url": "https://wanzioss.oss-cn-beijing.aliyuncs.com/video_images/scene_scene_1.png"
+  },
+  {
+    "scene": "第2句场景句",
+    "caption": "Can I get a toothbrush set?\n能给我一套牙具吗？",
+    "tts": "第 2 句：Can I get a toothbrush set。能给我一套牙具吗",
+    "image_prompt": "入住酒店索要客房用品, 刚入住境外酒店发现房间缺常用用品，到前台申领的场景, moment: 要牙具, Xiao Wanzi helping a young office worker speak English, minimal props, clear real-life setting",
+    "keywords": [
+      "toothbrush set"
+    ],
+    "duration": 4.0,
+    "caption_highlight": {
+      "enabled": true,
+      "mode": "keyword_badge",
+      "highlight_color": "#2563EB",
+      "keywords": [
+        "toothbrush set"
+      ]
+    },
+    "animation": {
+      "image": "slow_zoom_in",
+      "caption": "fade_in",
+      "keyword": "pop"
+    },
+    "audio_url": "https://wanzioss.oss-cn-beijing.aliyuncs.com/tts_audio/audio_1782749919692.mp3",
+    "audio_duration": 4656000,
+    "audio_duration_seconds": 4.656,
+    "start": 13752000,
+    "end": 18408000,
+    "asset_url": "https://wanzioss.oss-cn-beijing.aliyuncs.com/video_images/scene_scene_2.png",
+    "image_url": "https://wanzioss.oss-cn-beijing.aliyuncs.com/video_images/scene_scene_2.png"
+  },
+  {
+    "scene": "第3句场景句",
+    "caption": "May I have two more bath towels?\n能再给我两条浴巾吗？",
+    "tts": "第 3 句：May I have two more bath towels。能再给我两条浴巾吗",
+    "image_prompt": "入住酒店索要客房用品, 刚入住境外酒店发现房间缺常用用品，到前台申领的场景, moment: 要额外浴巾, Xiao Wanzi helping a young office worker speak English, minimal props, clear real-life setting",
+    "keywords": [
+      "bath towels"
+    ],
+    "duration": 4.0,
+    "caption_highlight": {
+      "enabled": true,
+      "mode": "keyword_badge",
+      "highlight_color": "#2563EB",
+      "keywords": [
+        "bath towels"
+      ]
+    },
+    "animation": {
+      "image": "slow_zoom_in",
+      "caption": "fade_in",
+      "keyword": "pop"
+    },
+    "audio_url": "https://wanzioss.oss-cn-beijing.aliyuncs.com/tts_audio/audio_1782749921483.mp3",
+    "audio_duration": 6264000,
+    "audio_duration_seconds": 6.264,
+    "start": 18408000,
+    "end": 24672000,
+    "asset_url": "https://wanzioss.oss-cn-beijing.aliyuncs.com/video_images/scene_scene_3.png",
+    "image_url": "https://wanzioss.oss-cn-beijing.aliyuncs.com/video_images/scene_scene_3.png"
+  },
+  {
+    "scene": "第4句场景句",
+    "caption": "Can I get some extra bottled water?\n能多给我几瓶矿泉水吗？",
+    "tts": "第 4 句：Can I get some extra bottled water。能多给我几瓶矿泉水吗",
+    "image_prompt": "入住酒店索要客房用品, 刚入住境外酒店发现房间缺常用用品，到前台申领的场景, moment: 要矿泉水, Xiao Wanzi helping a young office worker speak English, minimal props, clear real-life setting",
+    "keywords": [
+      "bottled water"
+    ],
+    "duration": 4.0,
+    "caption_highlight": {
+      "enabled": true,
+      "mode": "keyword_badge",
+      "highlight_color": "#2563EB",
+      "keywords": [
+        "bottled water"
+      ]
+    },
+    "animation": {
+      "image": "slow_zoom_in",
+      "caption": "fade_in",
+      "keyword": "pop"
+    },
+    "audio_url": "https://wanzioss.oss-cn-beijing.aliyuncs.com/tts_audio/audio_1782749923258.mp3",
+    "audio_duration": 6264000,
+    "audio_duration_seconds": 6.264,
+    "start": 24672000,
+    "end": 30936000,
+    "asset_url": "https://wanzioss.oss-cn-beijing.aliyuncs.com/video_images/scene_scene_4.png",
+    "image_url": "https://wanzioss.oss-cn-beijing.aliyuncs.com/video_images/scene_scene_4.png"
+  },
+  {
+    "scene": "第5句场景句",
+    "caption": "Do you have a travel adapter I can borrow?\n你们有可以借的旅行转换插头吗？",
+    "tts": "第 5 句：Do you have a travel adapter I can borrow。你们有可以借的旅行转换插头吗",
+    "image_prompt": "入住酒店索要客房用品, 刚入住境外酒店发现房间缺常用用品，到前台申领的场景, moment: 借转换插头, Xiao Wanzi helping a young office worker speak English, minimal props, clear real-life setting",
+    "keywords": [
+      "travel adapter"
+    ],
+    "duration": 4.0,
+    "caption_highlight": {
+      "enabled": true,
+      "mode": "keyword_badge",
+      "highlight_color": "#2563EB",
+      "keywords": [
+        "travel adapter"
+      ]
+    },
+    "animation": {
+      "image": "slow_zoom_in",
+      "caption": "fade_in",
+      "keyword": "pop"
+    },
+    "audio_url": "https://wanzioss.oss-cn-beijing.aliyuncs.com/tts_audio/audio_1782749925130.mp3",
+    "audio_duration": 7464000,
+    "audio_duration_seconds": 7.464,
+    "start": 30936000,
+    "end": 38400000,
+    "asset_url": "https://wanzioss.oss-cn-beijing.aliyuncs.com/video_images/scene_scene_5.png",
+    "image_url": "https://wanzioss.oss-cn-beijing.aliyuncs.com/video_images/scene_scene_5.png"
+  },
+  {
+    "scene": "互动页",
+    "caption": "你住酒店最常向前台要什么用品呀？",
+    "tts": "你住酒店最常向前台要什么用品呀？",
+    "image_prompt": "FIXED_HOOK_IMAGE",
+    "duration": 1.8,
+    "keywords": [],
+    "caption_highlight": {
+      "enabled": true,
+      "mode": "keyword_badge",
+      "highlight_color": "#2563EB",
+      "keywords": []
+    },
+    "animation": {
+      "image": "slow_zoom_in",
+      "caption": "fade_in",
+      "keyword": "pop"
+    },
+    "audio_url": "https://wanzioss.oss-cn-beijing.aliyuncs.com/tts_audio/audio_1782749926773.mp3",
+    "audio_duration": 3048000,
+    "audio_duration_seconds": 3.048,
+    "start": 38400000,
+    "end": 41448000,
+    "asset_url": "https://wanzioss.oss-cn-beijing.aliyuncs.com/video_images/scene_hook_img_6.png",
+    "image_url": "https://wanzioss.oss-cn-beijing.aliyuncs.com/video_images/scene_hook_img_6.png"
+  }
+]

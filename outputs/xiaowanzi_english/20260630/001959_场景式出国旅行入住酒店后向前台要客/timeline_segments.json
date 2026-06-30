@@ -1,0 +1,182 @@
+[
+  {
+    "index": 0,
+    "start": 0,
+    "end": 8280000,
+    "duration": 8280000,
+    "caption": "出国住酒店要用品的5句实用英语\n收藏这 5 句，覆盖索要不同客房用品的全高频场景\n1. Can I have a pair of slippers?\n2. Can I get a toothbrush set?\n3. May I have two more bath towels?\n4. Can I get some extra bottled water?\n5. Do you have a travel adapter I can borrow?",
+    "keywords": [
+      "Can",
+      "pair"
+    ],
+    "caption_highlight": {
+      "enabled": true,
+      "mode": "keyword_badge",
+      "highlight_color": "#2563EB",
+      "keywords": [
+        "Can",
+        "pair"
+      ]
+    },
+    "animation": {
+      "image": "slow_zoom_in",
+      "caption": "fade_in",
+      "keyword": "pop"
+    },
+    "audio_url": "https://wanzioss.oss-cn-beijing.aliyuncs.com/tts_audio/audio_1782749916352.mp3",
+    "asset_url": "https://wanzioss.oss-cn-beijing.aliyuncs.com/video_images/scene_review_bg_0.png",
+    "scene": "开场总览页"
+  },
+  {
+    "index": 1,
+    "start": 8280000,
+    "end": 13752000,
+    "duration": 5472000,
+    "caption": "Can I have a pair of slippers?\n能给我一双拖鞋吗？",
+    "keywords": [
+      "slippers"
+    ],
+    "caption_highlight": {
+      "enabled": true,
+      "mode": "keyword_badge",
+      "highlight_color": "#2563EB",
+      "keywords": [
+        "slippers"
+      ]
+    },
+    "animation": {
+      "image": "slow_zoom_in",
+      "caption": "fade_in",
+      "keyword": "pop"
+    },
+    "audio_url": "https://wanzioss.oss-cn-beijing.aliyuncs.com/tts_audio/audio_1782749918015.mp3",
+    "asset_url": "https://wanzioss.oss-cn-beijing.aliyuncs.com/video_images/scene_scene_1.png",
+    "scene": "第1句场景句"
+  },
+  {
+    "index": 2,
+    "start": 13752000,
+    "end": 18408000,
+    "duration": 4656000,
+    "caption": "Can I get a toothbrush set?\n能给我一套牙具吗？",
+    "keywords": [
+      "toothbrush set"
+    ],
+    "caption_highlight": {
+      "enabled": true,
+      "mode": "keyword_badge",
+      "highlight_color": "#2563EB",
+      "keywords": [
+        "toothbrush set"
+      ]
+    },
+    "animation": {
+      "image": "slow_zoom_in",
+      "caption": "fade_in",
+      "keyword": "pop"
+    },
+    "audio_url": "https://wanzioss.oss-cn-beijing.aliyuncs.com/tts_audio/audio_1782749919692.mp3",
+    "asset_url": "https://wanzioss.oss-cn-beijing.aliyuncs.com/video_images/scene_scene_2.png",
+    "scene": "第2句场景句"
+  },
+  {
+    "index": 3,
+    "start": 18408000,
+    "end": 24672000,
+    "duration": 6264000,
+    "caption": "May I have two more bath towels?\n能再给我两条浴巾吗？",
+    "keywords": [
+      "bath towels"
+    ],
+    "caption_highlight": {
+      "enabled": true,
+      "mode": "keyword_badge",
+      "highlight_color": "#2563EB",
+      "keywords": [
+        "bath towels"
+      ]
+    },
+    "animation": {
+      "image": "slow_zoom_in",
+      "caption": "fade_in",
+      "keyword": "pop"
+    },
+    "audio_url": "https://wanzioss.oss-cn-beijing.aliyuncs.com/tts_audio/audio_1782749921483.mp3",
+    "asset_url": "https://wanzioss.oss-cn-beijing.aliyuncs.com/video_images/scene_scene_3.png",
+    "scene": "第3句场景句"
+  },
+  {
+    "index": 4,
+    "start": 24672000,
+    "end": 30936000,
+    "duration": 6264000,
+    "caption": "Can I get some extra bottled water?\n能多给我几瓶矿泉水吗？",
+    "keywords": [
+      "bottled water"
+    ],
+    "caption_highlight": {
+      "enabled": true,
+      "mode": "keyword_badge",
+      "highlight_color": "#2563EB",
+      "keywords": [
+        "bottled water"
+      ]
+    },
+    "animation": {
+      "image": "slow_zoom_in",
+      "caption": "fade_in",
+      "keyword": "pop"
+    },
+    "audio_url": "https://wanzioss.oss-cn-beijing.aliyuncs.com/tts_audio/audio_1782749923258.mp3",
+    "asset_url": "https://wanzioss.oss-cn-beijing.aliyuncs.com/video_images/scene_scene_4.png",
+    "scene": "第4句场景句"
+  },
+  {
+    "index": 5,
+    "start": 30936000,
+    "end": 38400000,
+    "duration": 7464000,
+    "caption": "Do you have a travel adapter I can borrow?\n你们有可以借的旅行转换插头吗？",
+    "keywords": [
+      "travel adapter"
+    ],
+    "caption_highlight": {
+      "enabled": true,
+      "mode": "keyword_badge",
+      "highlight_color": "#2563EB",
+      "keywords": [
+        "travel adapter"
+      ]
+    },
+    "animation": {
+      "image": "slow_zoom_in",
+      "caption": "fade_in",
+      "keyword": "pop"
+    },
+    "audio_url": "https://wanzioss.oss-cn-beijing.aliyuncs.com/tts_audio/audio_1782749925130.mp3",
+    "asset_url": "https://wanzioss.oss-cn-beijing.aliyuncs.com/video_images/scene_scene_5.png",
+    "scene": "第5句场景句"
+  },
+  {
+    "index": 6,
+    "start": 38400000,
+    "end": 41448000,
+    "duration": 3048000,
+    "caption": "你住酒店最常向前台要什么用品呀？",
+    "keywords": [],
+    "caption_highlight": {
+      "enabled": true,
+      "mode": "keyword_badge",
+      "highlight_color": "#2563EB",
+      "keywords": []
+    },
+    "animation": {
+      "image": "slow_zoom_in",
+      "caption": "fade_in",
+      "keyword": "pop"
+    },
+    "audio_url": "https://wanzioss.oss-cn-beijing.aliyuncs.com/tts_audio/audio_1782749926773.mp3",
+    "asset_url": "https://wanzioss.oss-cn-beijing.aliyuncs.com/video_images/scene_hook_img_6.png",
+    "scene": "互动页"
+  }
+]

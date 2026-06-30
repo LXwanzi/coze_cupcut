@@ -1,0 +1,37 @@
+{
+  "topic_id": "c111371c4d1c",
+  "season_name": "场景式：出国旅行入住酒店后向前台要客房用",
+  "episodes": [
+    {
+      "episode_num": 1,
+      "sentences": [
+        "Can I have a pair of slippers?",
+        "Can I get a toothbrush set?",
+        "May I have two more bath towels?",
+        "Can I get some extra bottled water?",
+        "Do you have a travel adapter I can borrow?"
+      ],
+      "scene": "",
+      "hook": "",
+      "preview": "下集教你酒店报设施故障的实用表达",
+      "pain_point": "",
+      "wrong_expression": "",
+      "answer_levels": [],
+      "created_at": "2026-06-30T00:18:34.728805"
+    }
+  ],
+  "all_sentences": [
+    "Can I have a pair of slippers?",
+    "Can I get a toothbrush set?",
+    "May I have two more bath towels?",
+    "Can I get some extra bottled water?",
+    "Do you have a travel adapter I can borrow?"
+  ],
+  "scenes_used": [],
+  "pain_points_used": [],
+  "wrong_expressions_used": [],
+  "last_hook": "",
+  "next_preview": "下集教你酒店报设施故障的实用表达",
+  "created_at": "2026-06-30T00:18:06.867710",
+  "updated_at": "2026-06-30T00:18:34.729938"
+}

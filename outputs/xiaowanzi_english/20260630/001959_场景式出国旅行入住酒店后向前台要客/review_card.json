@@ -1,0 +1,31 @@
+{
+  "today_expressions": [
+    {
+      "english": "Can I have a pair of slippers?",
+      "chinese": "能给我一双拖鞋吗？",
+      "usage": ""
+    },
+    {
+      "english": "Can I get a toothbrush set?",
+      "chinese": "能给我一套牙具吗？",
+      "usage": ""
+    },
+    {
+      "english": "May I have two more bath towels?",
+      "chinese": "能再给我两条浴巾吗？",
+      "usage": ""
+    },
+    {
+      "english": "Can I get some extra bottled water?",
+      "chinese": "能多给我几瓶矿泉水吗？",
+      "usage": ""
+    },
+    {
+      "english": "Do you have a travel adapter I can borrow?",
+      "chinese": "你们有可以借的旅行转换插头吗？",
+      "usage": ""
+    }
+  ],
+  "answer_levels": [],
+  "quick_review": "先收藏，下一集继续同一场景。"
+}
