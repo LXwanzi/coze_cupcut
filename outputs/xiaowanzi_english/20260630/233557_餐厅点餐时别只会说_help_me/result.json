@@ -1,0 +1,756 @@
+{
+  "success": true,
+  "draft_url": "http://123.57.144.37:30000/openapi/capcut-mate/v1/get_draft?draft_id=2026063023355492f5e956",
+  "content_meta": {
+    "account_id": "xiaowanzi_english",
+    "selected_topic": "餐厅点餐时，别只会说 help me",
+    "scene": "travel",
+    "sub_scene": "餐厅点餐",
+    "duration_seconds": 29.0,
+    "target_duration_seconds": 28,
+    "sentence_count": 3,
+    "format": "topic_rescue_hybrid",
+    "content_mode": "painpoint_contrast",
+    "pain_point": "餐厅点餐时，别只会说 help me",
+    "wrong_expression": "Help me.",
+    "quality_review": {
+      "is_reasonable": true,
+      "content_mode": "painpoint_contrast",
+      "topic": "餐厅点餐",
+      "suggested_sentence_count": 3,
+      "target_duration_seconds": 30,
+      "issues": [],
+      "suggestions": []
+    },
+    "voice_profile": {
+      "voice": "playful",
+      "speed": 1.18,
+      "style": "snappy_contrast"
+    },
+    "originality_check": "所有内容基于用户提供的原始素材生成",
+    "safety_note": "未涉及教材原文复述",
+    "topic_id": "24f2400a27ae"
+  },
+  "publish_pack": {
+    "title": "【餐厅点餐】不会开口？这句能救场",
+    "cover_text": "餐厅点餐",
+    "description": "每天进步一点点。别再硬翻译，餐厅点餐这句先学会。#英语学习 #实用英语 #救场英语",
+    "hashtags": [
+      "英语学习",
+      "实用英语",
+      "救场英语"
+    ]
+  },
+  "review_card": {
+    "today_expressions": [],
+    "answer_levels": [
+      {
+        "level": "survival",
+        "label": "最短能救场",
+        "english": "Could you help me with this?",
+        "chinese": "可以帮我处理一下这个吗？",
+        "usage": "先把求助意图说完整。"
+      },
+      {
+        "level": "standard",
+        "label": "完整一点",
+        "english": "Could you check this for me?",
+        "chinese": "可以帮我检查一下这个吗？",
+        "usage": "需要对方查看或确认时用。"
+      },
+      {
+        "level": "polite",
+        "label": "更具体一点",
+        "english": "Could you help me figure out what I should do next?",
+        "chinese": "可以帮我看看下一步该怎么处理吗？",
+        "usage": "不知道流程时，比单说 help me 更能推进事情。"
+      }
+    ],
+    "quick_review": "先收藏，下一集继续同一场景。"
+  },
+  "material_bank": [],
+  "segments": [
+    {
+      "scene": "钩子页",
+      "caption": "餐厅点餐时，别只会说 help me",
+      "tts": "餐厅点餐时，别只会说 help me",
+      "image_prompt": "FIXED_HOOK_IMAGE",
+      "duration": 2.0,
+      "keywords": [
+        "help"
+      ],
+      "caption_highlight": {
+        "enabled": true,
+        "mode": "keyword_badge",
+        "highlight_color": "#2563EB",
+        "keywords": [
+          "help"
+        ]
+      },
+      "animation": {
+        "image": "slow_zoom_in",
+        "caption": "fade_in",
+        "keyword": "pop"
+      },
+      "audio_url": "https://wanzioss.oss-cn-beijing.aliyuncs.com/tts_audio/audio_1782833657903.mp3",
+      "audio_duration": 3936000,
+      "audio_duration_seconds": 3.936,
+      "start": 0,
+      "end": 3936000,
+      "asset_url": "https://wanzioss.oss-cn-beijing.aliyuncs.com/video_images/scene_hook_img_0.png",
+      "image_url": "https://wanzioss.oss-cn-beijing.aliyuncs.com/video_images/scene_hook_img_0.png"
+    },
+    {
+      "scene": "沉浸场景",
+      "caption": "How can I help you?\n有什么可以帮你？",
+      "tts": "现在你在餐厅点餐这个真实场景里，你需要对方处理一个具体需求。对方问：How can I help you?",
+      "image_prompt": "餐厅点餐, 餐厅点餐这个真实场景里，你需要对方处理一个具体需求, moment: conversation, Xiao Wanzi helping a young office worker speak English, minimal props, clear real-life setting",
+      "duration": 4.0,
+      "keywords": [
+        "How",
+        "can"
+      ],
+      "caption_highlight": {
+        "enabled": true,
+        "mode": "keyword_badge",
+        "highlight_color": "#2563EB",
+        "keywords": [
+          "How",
+          "can"
+        ]
+      },
+      "animation": {
+        "image": "slow_zoom_in",
+        "caption": "fade_in",
+        "keyword": "pop"
+      },
+      "audio_url": "https://wanzioss.oss-cn-beijing.aliyuncs.com/tts_audio/audio_1782833662836.mp3",
+      "audio_duration": 8664000,
+      "audio_duration_seconds": 8.664,
+      "start": 3936000,
+      "end": 12600000,
+      "asset_url": "https://wanzioss.oss-cn-beijing.aliyuncs.com/video_images/scene_scene_1.png",
+      "image_url": "https://wanzioss.oss-cn-beijing.aliyuncs.com/video_images/scene_scene_1.png"
+    },
+    {
+      "scene": "错误表达",
+      "caption": "Help me.\n这句太空，对方不知道你到底要查、改、拿还是确认什么。",
+      "tts": "别说 Help me.。这句太空，对方不知道你到底要查、改、拿还是确认什么。",
+      "image_prompt": "餐厅点餐, 餐厅点餐这个真实场景里，你需要对方处理一个具体需求, moment: mistake, Xiao Wanzi helping a young office worker speak English, minimal props, clear real-life setting",
+      "duration": 4.0,
+      "keywords": [
+        "Help"
+      ],
+      "caption_highlight": {
+        "enabled": true,
+        "mode": "keyword_badge",
+        "highlight_color": "#2563EB",
+        "keywords": [
+          "Help"
+        ]
+      },
+      "animation": {
+        "image": "slow_zoom_in",
+        "caption": "fade_in",
+        "keyword": "pop"
+      },
+      "audio_url": "https://wanzioss.oss-cn-beijing.aliyuncs.com/tts_audio/audio_1782833667515.mp3",
+      "audio_duration": 9360000,
+      "audio_duration_seconds": 9.36,
+      "start": 12600000,
+      "end": 21960000,
+      "asset_url": "https://wanzioss.oss-cn-beijing.aliyuncs.com/video_images/scene_scene_2.png",
+      "image_url": "https://wanzioss.oss-cn-beijing.aliyuncs.com/video_images/scene_scene_2.png"
+    },
+    {
+      "scene": "最短能救场",
+      "caption": "Could you help me with this?\n可以帮我处理一下这个吗？",
+      "tts": "最短能救场：Could you help me with this?。可以帮我处理一下这个吗？",
+      "image_prompt": "餐厅点餐, 餐厅点餐这个真实场景里，你需要对方处理一个具体需求, moment: survival, Xiao Wanzi helping a young office worker speak English, minimal props, clear real-life setting",
+      "keywords": [
+        "help"
+      ],
+      "duration": 4.0,
+      "caption_highlight": {
+        "enabled": true,
+        "mode": "keyword_badge",
+        "highlight_color": "#2563EB",
+        "keywords": [
+          "help"
+        ]
+      },
+      "animation": {
+        "image": "slow_zoom_in",
+        "caption": "fade_in",
+        "keyword": "pop"
+      },
+      "audio_url": "https://wanzioss.oss-cn-beijing.aliyuncs.com/tts_audio/audio_1782833671224.mp3",
+      "audio_duration": 6744000,
+      "audio_duration_seconds": 6.744,
+      "start": 21960000,
+      "end": 28704000,
+      "asset_url": "https://wanzioss.oss-cn-beijing.aliyuncs.com/video_images/scene_scene_3.png",
+      "image_url": "https://wanzioss.oss-cn-beijing.aliyuncs.com/video_images/scene_scene_3.png"
+    },
+    {
+      "scene": "完整一点",
+      "caption": "Could you check this for me?\n可以帮我检查一下这个吗？",
+      "tts": "完整一点：Could you check this for me?。可以帮我检查一下这个吗？",
+      "image_prompt": "餐厅点餐, 餐厅点餐这个真实场景里，你需要对方处理一个具体需求, moment: standard, Xiao Wanzi helping a young office worker speak English, minimal props, clear real-life setting",
+      "keywords": [
+        "check"
+      ],
+      "duration": 4.5,
+      "caption_highlight": {
+        "enabled": true,
+        "mode": "keyword_badge",
+        "highlight_color": "#2563EB",
+        "keywords": [
+          "check"
+        ]
+      },
+      "animation": {
+        "image": "slow_zoom_in",
+        "caption": "fade_in",
+        "keyword": "pop"
+      },
+      "audio_url": "https://wanzioss.oss-cn-beijing.aliyuncs.com/tts_audio/audio_1782833674599.mp3",
+      "audio_duration": 5760000,
+      "audio_duration_seconds": 5.76,
+      "start": 28704000,
+      "end": 34464000,
+      "asset_url": "https://wanzioss.oss-cn-beijing.aliyuncs.com/video_images/scene_scene_4.png",
+      "image_url": "https://wanzioss.oss-cn-beijing.aliyuncs.com/video_images/scene_scene_4.png"
+    },
+    {
+      "scene": "更具体一点",
+      "caption": "Could you help me figure out what I should do next?\n可以帮我看看下一步该怎么处理吗？",
+      "tts": "更具体一点：Could you help me figure out what I should do next?。可以帮我看看下一步该怎么处理吗？",
+      "image_prompt": "餐厅点餐, 餐厅点餐这个真实场景里，你需要对方处理一个具体需求, moment: polite, Xiao Wanzi helping a young office worker speak English, minimal props, clear real-life setting",
+      "keywords": [
+        "help",
+        "figure"
+      ],
+      "duration": 4.5,
+      "caption_highlight": {
+        "enabled": true,
+        "mode": "keyword_badge",
+        "highlight_color": "#2563EB",
+        "keywords": [
+          "help",
+          "figure"
+        ]
+      },
+      "animation": {
+        "image": "slow_zoom_in",
+        "caption": "fade_in",
+        "keyword": "pop"
+      },
+      "audio_url": "https://wanzioss.oss-cn-beijing.aliyuncs.com/tts_audio/audio_1782833679410.mp3",
+      "audio_duration": 9288000,
+      "audio_duration_seconds": 9.288,
+      "start": 34464000,
+      "end": 43752000,
+      "asset_url": "https://wanzioss.oss-cn-beijing.aliyuncs.com/video_images/scene_scene_5.png",
+      "image_url": "https://wanzioss.oss-cn-beijing.aliyuncs.com/video_images/scene_scene_5.png"
+    },
+    {
+      "scene": "跟读打卡",
+      "caption": "Could you check this for me?\n跟小丸子读一遍",
+      "tts": "跟小丸子读一遍：Could you check this for me?",
+      "image_prompt": "餐厅点餐, 餐厅点餐这个真实场景里，你需要对方处理一个具体需求, moment: follow read, Xiao Wanzi helping a young office worker speak English, minimal props, clear real-life setting",
+      "duration": 4.0,
+      "keywords": [
+        "check"
+      ],
+      "caption_highlight": {
+        "enabled": true,
+        "mode": "keyword_badge",
+        "highlight_color": "#2563EB",
+        "keywords": [
+          "check"
+        ]
+      },
+      "animation": {
+        "image": "slow_zoom_in",
+        "caption": "fade_in",
+        "keyword": "pop"
+      },
+      "audio_url": "https://wanzioss.oss-cn-beijing.aliyuncs.com/tts_audio/audio_1782833682431.mp3",
+      "audio_duration": 4080000,
+      "audio_duration_seconds": 4.08,
+      "start": 43752000,
+      "end": 47832000,
+      "asset_url": "https://wanzioss.oss-cn-beijing.aliyuncs.com/video_images/scene_scene_6.png",
+      "image_url": "https://wanzioss.oss-cn-beijing.aliyuncs.com/video_images/scene_scene_6.png"
+    },
+    {
+      "scene": "预告页",
+      "caption": "你在餐厅点餐还卡过哪句？评论区告诉我。",
+      "tts": "你在餐厅点餐还卡过哪句？评论区告诉我。",
+      "image_prompt": "FIXED_HOOK_IMAGE",
+      "duration": 2.0,
+      "keywords": [],
+      "caption_highlight": {
+        "enabled": true,
+        "mode": "keyword_badge",
+        "highlight_color": "#2563EB",
+        "keywords": []
+      },
+      "animation": {
+        "image": "slow_zoom_in",
+        "caption": "fade_in",
+        "keyword": "pop"
+      },
+      "audio_url": "https://wanzioss.oss-cn-beijing.aliyuncs.com/tts_audio/audio_1782833685015.mp3",
+      "audio_duration": 4272000,
+      "audio_duration_seconds": 4.272,
+      "start": 47832000,
+      "end": 52104000,
+      "asset_url": "https://wanzioss.oss-cn-beijing.aliyuncs.com/video_images/scene_hook_img_7.png",
+      "image_url": "https://wanzioss.oss-cn-beijing.aliyuncs.com/video_images/scene_hook_img_7.png"
+    }
+  ],
+  "duration": 52104000,
+  "duration_seconds": 52.1,
+  "scene_count": 8,
+  "caption_count": 8,
+  "timeline_segments": [
+    {
+      "index": 0,
+      "start": 0,
+      "end": 3936000,
+      "duration": 3936000,
+      "caption": "餐厅点餐时，别只会说 help me",
+      "keywords": [
+        "help"
+      ],
+      "caption_highlight": {
+        "enabled": true,
+        "mode": "keyword_badge",
+        "highlight_color": "#2563EB",
+        "keywords": [
+          "help"
+        ]
+      },
+      "animation": {
+        "image": "slow_zoom_in",
+        "caption": "fade_in",
+        "keyword": "pop"
+      },
+      "audio_url": "https://wanzioss.oss-cn-beijing.aliyuncs.com/tts_audio/audio_1782833657903.mp3",
+      "asset_url": "https://wanzioss.oss-cn-beijing.aliyuncs.com/video_images/scene_hook_img_0.png",
+      "scene": "钩子页"
+    },
+    {
+      "index": 1,
+      "start": 3936000,
+      "end": 12600000,
+      "duration": 8664000,
+      "caption": "How can I help you?\n有什么可以帮你？",
+      "keywords": [
+        "How",
+        "can"
+      ],
+      "caption_highlight": {
+        "enabled": true,
+        "mode": "keyword_badge",
+        "highlight_color": "#2563EB",
+        "keywords": [
+          "How",
+          "can"
+        ]
+      },
+      "animation": {
+        "image": "slow_zoom_in",
+        "caption": "fade_in",
+        "keyword": "pop"
+      },
+      "audio_url": "https://wanzioss.oss-cn-beijing.aliyuncs.com/tts_audio/audio_1782833662836.mp3",
+      "asset_url": "https://wanzioss.oss-cn-beijing.aliyuncs.com/video_images/scene_scene_1.png",
+      "scene": "沉浸场景"
+    },
+    {
+      "index": 2,
+      "start": 12600000,
+      "end": 21960000,
+      "duration": 9360000,
+      "caption": "Help me.\n这句太空，对方不知道你到底要查、改、拿还是确认什么。",
+      "keywords": [
+        "Help"
+      ],
+      "caption_highlight": {
+        "enabled": true,
+        "mode": "keyword_badge",
+        "highlight_color": "#2563EB",
+        "keywords": [
+          "Help"
+        ]
+      },
+      "animation": {
+        "image": "slow_zoom_in",
+        "caption": "fade_in",
+        "keyword": "pop"
+      },
+      "audio_url": "https://wanzioss.oss-cn-beijing.aliyuncs.com/tts_audio/audio_1782833667515.mp3",
+      "asset_url": "https://wanzioss.oss-cn-beijing.aliyuncs.com/video_images/scene_scene_2.png",
+      "scene": "错误表达"
+    },
+    {
+      "index": 3,
+      "start": 21960000,
+      "end": 28704000,
+      "duration": 6744000,
+      "caption": "Could you help me with this?\n可以帮我处理一下这个吗？",
+      "keywords": [
+        "help"
+      ],
+      "caption_highlight": {
+        "enabled": true,
+        "mode": "keyword_badge",
+        "highlight_color": "#2563EB",
+        "keywords": [
+          "help"
+        ]
+      },
+      "animation": {
+        "image": "slow_zoom_in",
+        "caption": "fade_in",
+        "keyword": "pop"
+      },
+      "audio_url": "https://wanzioss.oss-cn-beijing.aliyuncs.com/tts_audio/audio_1782833671224.mp3",
+      "asset_url": "https://wanzioss.oss-cn-beijing.aliyuncs.com/video_images/scene_scene_3.png",
+      "scene": "最短能救场"
+    },
+    {
+      "index": 4,
+      "start": 28704000,
+      "end": 34464000,
+      "duration": 5760000,
+      "caption": "Could you check this for me?\n可以帮我检查一下这个吗？",
+      "keywords": [
+        "check"
+      ],
+      "caption_highlight": {
+        "enabled": true,
+        "mode": "keyword_badge",
+        "highlight_color": "#2563EB",
+        "keywords": [
+          "check"
+        ]
+      },
+      "animation": {
+        "image": "slow_zoom_in",
+        "caption": "fade_in",
+        "keyword": "pop"
+      },
+      "audio_url": "https://wanzioss.oss-cn-beijing.aliyuncs.com/tts_audio/audio_1782833674599.mp3",
+      "asset_url": "https://wanzioss.oss-cn-beijing.aliyuncs.com/video_images/scene_scene_4.png",
+      "scene": "完整一点"
+    },
+    {
+      "index": 5,
+      "start": 34464000,
+      "end": 43752000,
+      "duration": 9288000,
+      "caption": "Could you help me figure out what I should do next?\n可以帮我看看下一步该怎么处理吗？",
+      "keywords": [
+        "help",
+        "figure"
+      ],
+      "caption_highlight": {
+        "enabled": true,
+        "mode": "keyword_badge",
+        "highlight_color": "#2563EB",
+        "keywords": [
+          "help",
+          "figure"
+        ]
+      },
+      "animation": {
+        "image": "slow_zoom_in",
+        "caption": "fade_in",
+        "keyword": "pop"
+      },
+      "audio_url": "https://wanzioss.oss-cn-beijing.aliyuncs.com/tts_audio/audio_1782833679410.mp3",
+      "asset_url": "https://wanzioss.oss-cn-beijing.aliyuncs.com/video_images/scene_scene_5.png",
+      "scene": "更具体一点"
+    },
+    {
+      "index": 6,
+      "start": 43752000,
+      "end": 47832000,
+      "duration": 4080000,
+      "caption": "Could you check this for me?\n跟小丸子读一遍",
+      "keywords": [
+        "check"
+      ],
+      "caption_highlight": {
+        "enabled": true,
+        "mode": "keyword_badge",
+        "highlight_color": "#2563EB",
+        "keywords": [
+          "check"
+        ]
+      },
+      "animation": {
+        "image": "slow_zoom_in",
+        "caption": "fade_in",
+        "keyword": "pop"
+      },
+      "audio_url": "https://wanzioss.oss-cn-beijing.aliyuncs.com/tts_audio/audio_1782833682431.mp3",
+      "asset_url": "https://wanzioss.oss-cn-beijing.aliyuncs.com/video_images/scene_scene_6.png",
+      "scene": "跟读打卡"
+    },
+    {
+      "index": 7,
+      "start": 47832000,
+      "end": 52104000,
+      "duration": 4272000,
+      "caption": "你在餐厅点餐还卡过哪句？评论区告诉我。",
+      "keywords": [],
+      "caption_highlight": {
+        "enabled": true,
+        "mode": "keyword_badge",
+        "highlight_color": "#2563EB",
+        "keywords": []
+      },
+      "animation": {
+        "image": "slow_zoom_in",
+        "caption": "fade_in",
+        "keyword": "pop"
+      },
+      "audio_url": "https://wanzioss.oss-cn-beijing.aliyuncs.com/tts_audio/audio_1782833685015.mp3",
+      "asset_url": "https://wanzioss.oss-cn-beijing.aliyuncs.com/video_images/scene_hook_img_7.png",
+      "scene": "预告页"
+    }
+  ],
+  "steps_status": [
+    {
+      "step": "create_draft",
+      "url": "http://123.57.144.37:30000/openapi/capcut-mate/v1/create_draft",
+      "request": {
+        "width": 1080,
+        "height": 1920
+      },
+      "response": {
+        "code": 0,
+        "message": "成功",
+        "draft_url": "http://123.57.144.37:30000/openapi/capcut-mate/v1/get_draft?draft_id=2026063023355492f5e956",
+        "tip_url": "https://docs.jcaigc.cn/"
+      }
+    },
+    {
+      "step": "add_images",
+      "url": "http://123.57.144.37:30000/openapi/capcut-mate/v1/add_images",
+      "request": {
+        "draft_url": "http://123.57.144.37:30000/openapi/capcut-mate/v1/get_draft?draft_id=2026063023355492f5e956",
+        "image_infos": "[{\"image_url\": \"https://wanzioss.oss-cn-beijing.aliyuncs.com/video_images/scene_hook_img_0.png\", \"width\": 1080, \"height\": 1920, \"start\": 0, \"end\": 3936000}, {\"image_url\": \"https://wanzioss.oss-cn-beijing.aliyuncs.com/video_images/scene_scene_1.png\", \"width\": 1080, \"height\": 1920, \"start\": 3936000, \"end\": 12600000}, {\"image_url\": \"https://wanzioss.oss-cn-beijing.aliyuncs.com/video_images/scene_scene_2.png\", \"width\": 1080, \"height\": 1920, \"start\": 12600000, \"end\": 21960000}, {\"image_url\": \"https://wanzioss.oss-cn-beijing.aliyuncs.com/video_images/scene_scene_3.png\", \"width\": 1080, \"height\": 1920, \"start\": 21960000, \"end\": 28704000}, {\"image_url\": \"https://wanzioss.oss-cn-beijing.aliyuncs.com/video_images/scene_scene_4.png\", \"width\": 1080, \"height\": 1920, \"start\": 28704000, \"end\": 34464000}, {\"image_url\": \"https://wanzioss.oss-cn-beijing.aliyuncs.com/video_images/scene_scene_5.png\", \"width\": 1080, \"height\": 1920, \"start\": 34464000, \"end\": 43752000}, {\"image_url\": \"https://wanzioss.oss-cn-beijing.aliyuncs.com/video_images/scene_scene_6.png\", \"width\": 1080, \"height\": 1920, \"start\": 43752000, \"end\": 47832000}, {\"image_url\": \"https://wanzioss.oss-cn-beijing.aliyuncs.com/video_images/scene_hook_img_7.png\", \"width\": 1080, \"height\": 1920, \"start\": 47832000, \"end\": 52104000}]",
+        "scale_x": 1.0,
+        "scale_y": 1.0,
+        "transform_x": 0,
+        "transform_y": 0
+      },
+      "response": {
+        "code": 0,
+        "message": "成功",
+        "draft_url": "http://123.57.144.37:30000/openapi/capcut-mate/v1/get_draft?draft_id=2026063023355492f5e956",
+        "track_id": "bf7492448b1940fd987e1a190535d6ef",
+        "image_ids": [
+          "4e54190247834b99903ea6353074e2c7",
+          "39378c80a4904b8788fdfface1a5812d",
+          "68923024f25e4df798fcb13b29b45ab9",
+          "d966fa40f4f84b259fbb2297ea12ea04",
+          "ac045d416baf43128f5ef67b719667b0",
+          "5a807eb4d2234547861e8a762f009acc",
+          "26bef19aa6564c9a83ffe70bbcf30c21",
+          "f5a5bec2d54d4d5984d6cde96416c7e7"
+        ],
+        "segment_ids": [
+          "88e0a479c4984066ae0f47dfcd8d8c03",
+          "df4149d9e232432eacba45ead0c17373",
+          "1ccc6a105a0e4edb923b21740fd683ce",
+          "ca6ed0a07f0c429c86ad13a15c2865ad",
+          "11db894463f9456b9923da33ccdb6f0d",
+          "63bb20bbf45f4678ad2c75018ee314fe",
+          "f25a860cc98e48a89185c4c0bb2e449f",
+          "2fe48e1bafe64e998d0bae60ffa02e7c"
+        ],
+        "segment_infos": [
+          {
+            "id": "88e0a479c4984066ae0f47dfcd8d8c03",
+            "start": 0,
+            "end": 3936000
+          },
+          {
+            "id": "df4149d9e232432eacba45ead0c17373",
+            "start": 3936000,
+            "end": 12600000
+          },
+          {
+            "id": "1ccc6a105a0e4edb923b21740fd683ce",
+            "start": 12600000,
+            "end": 21960000
+          },
+          {
+            "id": "ca6ed0a07f0c429c86ad13a15c2865ad",
+            "start": 21960000,
+            "end": 28704000
+          },
+          {
+            "id": "11db894463f9456b9923da33ccdb6f0d",
+            "start": 28704000,
+            "end": 34464000
+          },
+          {
+            "id": "63bb20bbf45f4678ad2c75018ee314fe",
+            "start": 34464000,
+            "end": 43752000
+          },
+          {
+            "id": "f25a860cc98e48a89185c4c0bb2e449f",
+            "start": 43752000,
+            "end": 47832000
+          },
+          {
+            "id": "2fe48e1bafe64e998d0bae60ffa02e7c",
+            "start": 47832000,
+            "end": 52104000
+          }
+        ]
+      }
+    },
+    {
+      "step": "add_captions",
+      "url": "http://123.57.144.37:30000/openapi/capcut-mate/v1/add_captions",
+      "request": {
+        "draft_url": "http://123.57.144.37:30000/openapi/capcut-mate/v1/get_draft?draft_id=2026063023355492f5e956",
+        "captions": "[{\"start\": 0, \"end\": 3936000, \"text\": \"餐厅点餐时，别只会说 help me\", \"font_size\": 10}, {\"start\": 3936000, \"end\": 12600000, \"text\": \"How can I help you?\\n有什么可以帮你？\", \"font_size\": 10}, {\"start\": 12600000, \"end\": 21960000, \"text\": \"Help me.\\n这句太空，对方不知道你到底要查、改、拿还是确认什么。\", \"font_size\": 10}, {\"start\": 21960000, \"end\": 28704000, \"text\": \"Could you help me with this?\\n可以帮我处理一下这个吗？\", \"font_size\": 10}, {\"start\": 28704000, \"end\": 34464000, \"text\": \"Could you check this for me?\\n可以帮我检查一下这个吗？\", \"font_size\": 10}, {\"start\": 34464000, \"end\": 43752000, \"text\": \"Could you help me figure out what I should do next?\\n可以帮我看看下一步该怎么处理吗？\", \"font_size\": 10}, {\"start\": 43752000, \"end\": 47832000, \"text\": \"Could you check this for me?\\n跟小丸子读一遍\", \"font_size\": 10}, {\"start\": 47832000, \"end\": 52104000, \"text\": \"你在餐厅点餐还卡过哪句？评论区告诉我。\", \"font_size\": 10}]",
+        "text_color": "#111111",
+        "border_color": "#FFFFFF",
+        "border_width": 2,
+        "alignment": 1,
+        "font_size": 10,
+        "alpha": 1.0,
+        "bold": true,
+        "italic": true,
+        "line_spacing": 2,
+        "has_shadow": true,
+        "shadow_info": {
+          "shadow_color": "#000000",
+          "shadow_alpha": 0.3,
+          "shadow_diffuse": 4,
+          "shadow_distance": 2,
+          "shadow_angle": -45
+        },
+        "transform_x": 0,
+        "transform_y": 630
+      },
+      "response": {
+        "code": 0,
+        "message": "成功",
+        "draft_url": "http://123.57.144.37:30000/openapi/capcut-mate/v1/get_draft?draft_id=2026063023355492f5e956",
+        "track_id": "a87da287b2854bb5a668ff7a36713432",
+        "text_ids": [
+          "06f0ff6ee4cf47e3ab96845005279799",
+          "b4800c3b282e4893bf4fa1cca270f30c",
+          "69d8729f167e408ca0694929ab5af463",
+          "267953a1439a4eb5acaf543bba6c6d96",
+          "ce2071257f7c40d193041b367cac4f80",
+          "2ee8fd8a3c0d4fe4a5c6b6598e9df109",
+          "c9575335062c418795e3daf8255776f1",
+          "f7f21454a8024e3d980cef062f2a1b8b"
+        ],
+        "segment_ids": [
+          "a2a86f995f4040b39b100e5747cff973",
+          "4931d86fc62a4f3b988b1b0fca991490",
+          "80b5a86b59a547ccbf30b62a246548ee",
+          "28c132944c964c818c16032418c4efc9",
+          "0af3da2c2b0e4acf9b1868a8f319f705",
+          "642aa360b0964e5298ab7d2b563c1cac",
+          "95eacc0d46184d90ba5b15327020d5d8",
+          "16217f4fc4b3470f9cc45b60cd58baea"
+        ],
+        "segment_infos": [
+          {
+            "id": "a2a86f995f4040b39b100e5747cff973",
+            "start": 0,
+            "end": 3936000
+          },
+          {
+            "id": "4931d86fc62a4f3b988b1b0fca991490",
+            "start": 3936000,
+            "end": 12600000
+          },
+          {
+            "id": "80b5a86b59a547ccbf30b62a246548ee",
+            "start": 12600000,
+            "end": 21960000
+          },
+          {
+            "id": "28c132944c964c818c16032418c4efc9",
+            "start": 21960000,
+            "end": 28704000
+          },
+          {
+            "id": "0af3da2c2b0e4acf9b1868a8f319f705",
+            "start": 28704000,
+            "end": 34464000
+          },
+          {
+            "id": "642aa360b0964e5298ab7d2b563c1cac",
+            "start": 34464000,
+            "end": 43752000
+          },
+          {
+            "id": "95eacc0d46184d90ba5b15327020d5d8",
+            "start": 43752000,
+            "end": 47832000
+          },
+          {
+            "id": "16217f4fc4b3470f9cc45b60cd58baea",
+            "start": 47832000,
+            "end": 52104000
+          }
+        ]
+      }
+    },
+    {
+      "step": "add_audios",
+      "url": "http://123.57.144.37:30000/openapi/capcut-mate/v1/add_audios",
+      "request": {
+        "draft_url": "http://123.57.144.37:30000/openapi/capcut-mate/v1/get_draft?draft_id=2026063023355492f5e956",
+        "audio_infos": "[{\"audio_url\": \"https://wanzioss.oss-cn-beijing.aliyuncs.com/tts_audio/audio_1782833657903.mp3\", \"start\": 0, \"end\": 3936000, \"duration\": 3936000, \"volume\": 1.0}, {\"audio_url\": \"https://wanzioss.oss-cn-beijing.aliyuncs.com/tts_audio/audio_1782833662836.mp3\", \"start\": 3936000, \"end\": 12600000, \"duration\": 8664000, \"volume\": 1.0}, {\"audio_url\": \"https://wanzioss.oss-cn-beijing.aliyuncs.com/tts_audio/audio_1782833667515.mp3\", \"start\": 12600000, \"end\": 21960000, \"duration\": 9360000, \"volume\": 1.0}, {\"audio_url\": \"https://wanzioss.oss-cn-beijing.aliyuncs.com/tts_audio/audio_1782833671224.mp3\", \"start\": 21960000, \"end\": 28704000, \"duration\": 6744000, \"volume\": 1.0}, {\"audio_url\": \"https://wanzioss.oss-cn-beijing.aliyuncs.com/tts_audio/audio_1782833674599.mp3\", \"start\": 28704000, \"end\": 34464000, \"duration\": 5760000, \"volume\": 1.0}, {\"audio_url\": \"https://wanzioss.oss-cn-beijing.aliyuncs.com/tts_audio/audio_1782833679410.mp3\", \"start\": 34464000, \"end\": 43752000, \"duration\": 9288000, \"volume\": 1.0}, {\"audio_url\": \"https://wanzioss.oss-cn-beijing.aliyuncs.com/tts_audio/audio_1782833682431.mp3\", \"start\": 43752000, \"end\": 47832000, \"duration\": 4080000, \"volume\": 1.0}, {\"audio_url\": \"https://wanzioss.oss-cn-beijing.aliyuncs.com/tts_audio/audio_1782833685015.mp3\", \"start\": 47832000, \"end\": 52104000, \"duration\": 4272000, \"volume\": 1.0}]"
+      },
+      "response": {
+        "code": 0,
+        "message": "成功",
+        "draft_url": "http://123.57.144.37:30000/openapi/capcut-mate/v1/get_draft?draft_id=2026063023355492f5e956",
+        "track_id": "1a36703f115741f0bc3afff4d773deeb",
+        "audio_ids": [
+          "4f8d1dc882374a18b73b73364732cd6d",
+          "6e9c71628fe6404c857e282adc825ba9",
+          "d9dbcaf8e90243b6ae2d4122b60f20cd",
+          "ef4d404c43a342d3b99a50c28dee2c30",
+          "904880f38bac49e9a8a0c41311e1669e",
+          "976dfd9a6b3840c3a426e31f4bb751c1",
+          "5d714576a8724d8ba6c57a205f1d1532",
+          "2f1a216289164a7fa7baf1d1b8ea3b49"
+        ]
+      }
+    },
+    {
+      "step": "save_draft",
+      "url": "http://123.57.144.37:30000/openapi/capcut-mate/v1/save_draft",
+      "request": {
+        "draft_url": "http://123.57.144.37:30000/openapi/capcut-mate/v1/get_draft?draft_id=2026063023355492f5e956"
+      },
+      "response": {
+        "code": 0,
+        "message": "成功",
+        "draft_url": "http://123.57.144.37:30000/openapi/capcut-mate/v1/get_draft?draft_id=2026063023355492f5e956"
+      }
+    }
+  ],
+  "message": "剪映草稿已生成，请用 CapCut Mate 桌面端导入剪映。"
+}

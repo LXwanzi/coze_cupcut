@@ -16,20 +16,65 @@
       "wrong_expression": "",
       "answer_levels": [],
       "created_at": "2026-06-30T00:16:54.500310"
+    },
+    {
+      "episode_num": 2,
+      "sentences": [
+        "Could you help me with this?",
+        "Could you check this for me?",
+        "Could you help me figure out what I should do next?"
+      ],
+      "scene": "餐厅点餐时，别只会说 help me",
+      "hook": "餐厅点餐时，别只会说 help me",
+      "preview": "下集继续讲餐厅点餐里的卡壳表达。",
+      "pain_point": "餐厅点餐时，别只会说 help me",
+      "wrong_expression": "Help me.",
+      "answer_levels": [
+        {
+          "level": "survival",
+          "label": "最短能救场",
+          "english": "Could you help me with this?",
+          "chinese": "可以帮我处理一下这个吗？",
+          "usage": "先把求助意图说完整。"
+        },
+        {
+          "level": "standard",
+          "label": "完整一点",
+          "english": "Could you check this for me?",
+          "chinese": "可以帮我检查一下这个吗？",
+          "usage": "需要对方查看或确认时用。"
+        },
+        {
+          "level": "polite",
+          "label": "更具体一点",
+          "english": "Could you help me figure out what I should do next?",
+          "chinese": "可以帮我看看下一步该怎么处理吗？",
+          "usage": "不知道流程时，比单说 help me 更能推进事情。"
+        }
+      ],
+      "created_at": "2026-06-30T23:34:14.828182"
     }
   ],
   "all_sentences": [
     "Do you have a table for two?",
     "Can I have a glass of iced water please?",
-    "I'd like the steak medium rare please."
+    "I'd like the steak medium rare please.",
+    "Could you help me with this?",
+    "Could you check this for me?",
+    "Could you help me figure out what I should do next?"
   ],
   "scenes_used": [
-    "国外餐厅点餐，别只会指菜单"
+    "国外餐厅点餐，别只会指菜单",
+    "餐厅点餐时，别只会说 help me"
   ],
-  "pain_points_used": [],
-  "wrong_expressions_used": [],
+  "pain_points_used": [
+    "餐厅点餐时，别只会说 help me"
+  ],
+  "wrong_expressions_used": [
+    "Help me."
+  ],
   "last_hook": "",
-  "next_preview": "下集学点隐藏餐品怎么说",
+  "next_preview": "下集继续讲餐厅点餐里的卡壳表达。",
   "created_at": "2026-06-30T00:16:36.880021",
-  "updated_at": "2026-06-30T00:16:54.503481"
+  "updated_at": "2026-06-30T23:34:14.828194"
 }

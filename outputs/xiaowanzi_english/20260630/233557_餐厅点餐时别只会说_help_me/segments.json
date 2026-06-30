@@ -1,0 +1,242 @@
+[
+  {
+    "scene": "钩子页",
+    "caption": "餐厅点餐时，别只会说 help me",
+    "tts": "餐厅点餐时，别只会说 help me",
+    "image_prompt": "FIXED_HOOK_IMAGE",
+    "duration": 2.0,
+    "keywords": [
+      "help"
+    ],
+    "caption_highlight": {
+      "enabled": true,
+      "mode": "keyword_badge",
+      "highlight_color": "#2563EB",
+      "keywords": [
+        "help"
+      ]
+    },
+    "animation": {
+      "image": "slow_zoom_in",
+      "caption": "fade_in",
+      "keyword": "pop"
+    },
+    "audio_url": "https://wanzioss.oss-cn-beijing.aliyuncs.com/tts_audio/audio_1782833657903.mp3",
+    "audio_duration": 3936000,
+    "audio_duration_seconds": 3.936,
+    "start": 0,
+    "end": 3936000,
+    "asset_url": "https://wanzioss.oss-cn-beijing.aliyuncs.com/video_images/scene_hook_img_0.png",
+    "image_url": "https://wanzioss.oss-cn-beijing.aliyuncs.com/video_images/scene_hook_img_0.png"
+  },
+  {
+    "scene": "沉浸场景",
+    "caption": "How can I help you?\n有什么可以帮你？",
+    "tts": "现在你在餐厅点餐这个真实场景里，你需要对方处理一个具体需求。对方问：How can I help you?",
+    "image_prompt": "餐厅点餐, 餐厅点餐这个真实场景里，你需要对方处理一个具体需求, moment: conversation, Xiao Wanzi helping a young office worker speak English, minimal props, clear real-life setting",
+    "duration": 4.0,
+    "keywords": [
+      "How",
+      "can"
+    ],
+    "caption_highlight": {
+      "enabled": true,
+      "mode": "keyword_badge",
+      "highlight_color": "#2563EB",
+      "keywords": [
+        "How",
+        "can"
+      ]
+    },
+    "animation": {
+      "image": "slow_zoom_in",
+      "caption": "fade_in",
+      "keyword": "pop"
+    },
+    "audio_url": "https://wanzioss.oss-cn-beijing.aliyuncs.com/tts_audio/audio_1782833662836.mp3",
+    "audio_duration": 8664000,
+    "audio_duration_seconds": 8.664,
+    "start": 3936000,
+    "end": 12600000,
+    "asset_url": "https://wanzioss.oss-cn-beijing.aliyuncs.com/video_images/scene_scene_1.png",
+    "image_url": "https://wanzioss.oss-cn-beijing.aliyuncs.com/video_images/scene_scene_1.png"
+  },
+  {
+    "scene": "错误表达",
+    "caption": "Help me.\n这句太空，对方不知道你到底要查、改、拿还是确认什么。",
+    "tts": "别说 Help me.。这句太空，对方不知道你到底要查、改、拿还是确认什么。",
+    "image_prompt": "餐厅点餐, 餐厅点餐这个真实场景里，你需要对方处理一个具体需求, moment: mistake, Xiao Wanzi helping a young office worker speak English, minimal props, clear real-life setting",
+    "duration": 4.0,
+    "keywords": [
+      "Help"
+    ],
+    "caption_highlight": {
+      "enabled": true,
+      "mode": "keyword_badge",
+      "highlight_color": "#2563EB",
+      "keywords": [
+        "Help"
+      ]
+    },
+    "animation": {
+      "image": "slow_zoom_in",
+      "caption": "fade_in",
+      "keyword": "pop"
+    },
+    "audio_url": "https://wanzioss.oss-cn-beijing.aliyuncs.com/tts_audio/audio_1782833667515.mp3",
+    "audio_duration": 9360000,
+    "audio_duration_seconds": 9.36,
+    "start": 12600000,
+    "end": 21960000,
+    "asset_url": "https://wanzioss.oss-cn-beijing.aliyuncs.com/video_images/scene_scene_2.png",
+    "image_url": "https://wanzioss.oss-cn-beijing.aliyuncs.com/video_images/scene_scene_2.png"
+  },
+  {
+    "scene": "最短能救场",
+    "caption": "Could you help me with this?\n可以帮我处理一下这个吗？",
+    "tts": "最短能救场：Could you help me with this?。可以帮我处理一下这个吗？",
+    "image_prompt": "餐厅点餐, 餐厅点餐这个真实场景里，你需要对方处理一个具体需求, moment: survival, Xiao Wanzi helping a young office worker speak English, minimal props, clear real-life setting",
+    "keywords": [
+      "help"
+    ],
+    "duration": 4.0,
+    "caption_highlight": {
+      "enabled": true,
+      "mode": "keyword_badge",
+      "highlight_color": "#2563EB",
+      "keywords": [
+        "help"
+      ]
+    },
+    "animation": {
+      "image": "slow_zoom_in",
+      "caption": "fade_in",
+      "keyword": "pop"
+    },
+    "audio_url": "https://wanzioss.oss-cn-beijing.aliyuncs.com/tts_audio/audio_1782833671224.mp3",
+    "audio_duration": 6744000,
+    "audio_duration_seconds": 6.744,
+    "start": 21960000,
+    "end": 28704000,
+    "asset_url": "https://wanzioss.oss-cn-beijing.aliyuncs.com/video_images/scene_scene_3.png",
+    "image_url": "https://wanzioss.oss-cn-beijing.aliyuncs.com/video_images/scene_scene_3.png"
+  },
+  {
+    "scene": "完整一点",
+    "caption": "Could you check this for me?\n可以帮我检查一下这个吗？",
+    "tts": "完整一点：Could you check this for me?。可以帮我检查一下这个吗？",
+    "image_prompt": "餐厅点餐, 餐厅点餐这个真实场景里，你需要对方处理一个具体需求, moment: standard, Xiao Wanzi helping a young office worker speak English, minimal props, clear real-life setting",
+    "keywords": [
+      "check"
+    ],
+    "duration": 4.5,
+    "caption_highlight": {
+      "enabled": true,
+      "mode": "keyword_badge",
+      "highlight_color": "#2563EB",
+      "keywords": [
+        "check"
+      ]
+    },
+    "animation": {
+      "image": "slow_zoom_in",
+      "caption": "fade_in",
+      "keyword": "pop"
+    },
+    "audio_url": "https://wanzioss.oss-cn-beijing.aliyuncs.com/tts_audio/audio_1782833674599.mp3",
+    "audio_duration": 5760000,
+    "audio_duration_seconds": 5.76,
+    "start": 28704000,
+    "end": 34464000,
+    "asset_url": "https://wanzioss.oss-cn-beijing.aliyuncs.com/video_images/scene_scene_4.png",
+    "image_url": "https://wanzioss.oss-cn-beijing.aliyuncs.com/video_images/scene_scene_4.png"
+  },
+  {
+    "scene": "更具体一点",
+    "caption": "Could you help me figure out what I should do next?\n可以帮我看看下一步该怎么处理吗？",
+    "tts": "更具体一点：Could you help me figure out what I should do next?。可以帮我看看下一步该怎么处理吗？",
+    "image_prompt": "餐厅点餐, 餐厅点餐这个真实场景里，你需要对方处理一个具体需求, moment: polite, Xiao Wanzi helping a young office worker speak English, minimal props, clear real-life setting",
+    "keywords": [
+      "help",
+      "figure"
+    ],
+    "duration": 4.5,
+    "caption_highlight": {
+      "enabled": true,
+      "mode": "keyword_badge",
+      "highlight_color": "#2563EB",
+      "keywords": [
+        "help",
+        "figure"
+      ]
+    },
+    "animation": {
+      "image": "slow_zoom_in",
+      "caption": "fade_in",
+      "keyword": "pop"
+    },
+    "audio_url": "https://wanzioss.oss-cn-beijing.aliyuncs.com/tts_audio/audio_1782833679410.mp3",
+    "audio_duration": 9288000,
+    "audio_duration_seconds": 9.288,
+    "start": 34464000,
+    "end": 43752000,
+    "asset_url": "https://wanzioss.oss-cn-beijing.aliyuncs.com/video_images/scene_scene_5.png",
+    "image_url": "https://wanzioss.oss-cn-beijing.aliyuncs.com/video_images/scene_scene_5.png"
+  },
+  {
+    "scene": "跟读打卡",
+    "caption": "Could you check this for me?\n跟小丸子读一遍",
+    "tts": "跟小丸子读一遍：Could you check this for me?",
+    "image_prompt": "餐厅点餐, 餐厅点餐这个真实场景里，你需要对方处理一个具体需求, moment: follow read, Xiao Wanzi helping a young office worker speak English, minimal props, clear real-life setting",
+    "duration": 4.0,
+    "keywords": [
+      "check"
+    ],
+    "caption_highlight": {
+      "enabled": true,
+      "mode": "keyword_badge",
+      "highlight_color": "#2563EB",
+      "keywords": [
+        "check"
+      ]
+    },
+    "animation": {
+      "image": "slow_zoom_in",
+      "caption": "fade_in",
+      "keyword": "pop"
+    },
+    "audio_url": "https://wanzioss.oss-cn-beijing.aliyuncs.com/tts_audio/audio_1782833682431.mp3",
+    "audio_duration": 4080000,
+    "audio_duration_seconds": 4.08,
+    "start": 43752000,
+    "end": 47832000,
+    "asset_url": "https://wanzioss.oss-cn-beijing.aliyuncs.com/video_images/scene_scene_6.png",
+    "image_url": "https://wanzioss.oss-cn-beijing.aliyuncs.com/video_images/scene_scene_6.png"
+  },
+  {
+    "scene": "预告页",
+    "caption": "你在餐厅点餐还卡过哪句？评论区告诉我。",
+    "tts": "你在餐厅点餐还卡过哪句？评论区告诉我。",
+    "image_prompt": "FIXED_HOOK_IMAGE",
+    "duration": 2.0,
+    "keywords": [],
+    "caption_highlight": {
+      "enabled": true,
+      "mode": "keyword_badge",
+      "highlight_color": "#2563EB",
+      "keywords": []
+    },
+    "animation": {
+      "image": "slow_zoom_in",
+      "caption": "fade_in",
+      "keyword": "pop"
+    },
+    "audio_url": "https://wanzioss.oss-cn-beijing.aliyuncs.com/tts_audio/audio_1782833685015.mp3",
+    "audio_duration": 4272000,
+    "audio_duration_seconds": 4.272,
+    "start": 47832000,
+    "end": 52104000,
+    "asset_url": "https://wanzioss.oss-cn-beijing.aliyuncs.com/video_images/scene_hook_img_7.png",
+    "image_url": "https://wanzioss.oss-cn-beijing.aliyuncs.com/video_images/scene_hook_img_7.png"
+  }
+]
