@@ -152,6 +152,43 @@
         }
       ],
       "created_at": "2026-06-27T13:19:15.864246"
+    },
+    {
+      "episode_num": 7,
+      "sentences": [
+        "Could you help me with this?",
+        "Could you check this for me?",
+        "Could you help me figure out what I should do next?"
+      ],
+      "scene": "帮我生成一个关于机场出行的英语学习视频时，别只会说 help me",
+      "hook": "帮我生成一个关于机场出行的英语学习视频时，别只会说 help me",
+      "preview": "下集继续讲帮我生成一个关于机场出行的英语学习视频里的卡壳表达。",
+      "pain_point": "帮我生成一个关于机场出行的英语学习视频时，别只会说 help me",
+      "wrong_expression": "Help me.",
+      "answer_levels": [
+        {
+          "level": "survival",
+          "label": "最短能救场",
+          "english": "Could you help me with this?",
+          "chinese": "可以帮我处理一下这个吗？",
+          "usage": "先把求助意图说完整。"
+        },
+        {
+          "level": "standard",
+          "label": "完整一点",
+          "english": "Could you check this for me?",
+          "chinese": "可以帮我检查一下这个吗？",
+          "usage": "需要对方查看或确认时用。"
+        },
+        {
+          "level": "polite",
+          "label": "更具体一点",
+          "english": "Could you help me figure out what I should do next?",
+          "chinese": "可以帮我看看下一步该怎么处理吗？",
+          "usage": "不知道流程时，比单说 help me 更能推进事情。"
+        }
+      ],
+      "created_at": "2026-06-30T23:46:24.167945"
     }
   ],
   "all_sentences": [
@@ -168,24 +205,29 @@
     "I'd like to check this bag.",
     "Yes, please.",
     "Could you help me with this?",
-    "Could you please take a look at this?"
+    "Could you please take a look at this?",
+    "Could you check this for me?",
+    "Could you help me figure out what I should do next?"
   ],
   "scenes_used": [
     "旅行英语之安检登机",
     "登机口临时改了？别慌说这几句",
     "机场托运行李，别说 send my bag",
-    "登机口临时变化时，别只会说 yes"
+    "登机口临时变化时，别只会说 yes",
+    "帮我生成一个关于机场出行的英语学习视频时，别只会说 help me"
   ],
   "last_hook": "",
-  "next_preview": "下集继续讲登机口临时变化里的卡壳表达。",
+  "next_preview": "下集继续讲帮我生成一个关于机场出行的英语学习视频里的卡壳表达。",
   "created_at": "2026-06-26T11:30:13.367774",
-  "updated_at": "2026-06-27T13:19:15.864257",
+  "updated_at": "2026-06-30T23:46:24.167958",
   "pain_points_used": [
     "机场托运行李，别说 send my bag",
-    "登机口临时变化时，别只会说 yes"
+    "登机口临时变化时，别只会说 yes",
+    "帮我生成一个关于机场出行的英语学习视频时，别只会说 help me"
   ],
   "wrong_expressions_used": [
     "I want to send my bag.",
-    "Yes."
+    "Yes.",
+    "Help me."
   ]
 }

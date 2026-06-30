@@ -1,0 +1,878 @@
+{
+  "success": true,
+  "draft_url": "http://123.57.144.37:30000/openapi/capcut-mate/v1/get_draft?draft_id=20260630234805a8aecdcf",
+  "content_meta": {
+    "account_id": "xiaowanzi_english",
+    "selected_topic": "帮我生成一个关于机场出行的英语学习视",
+    "scene": "travel",
+    "sub_scene": "帮我生成一个关于机场出行的英语学习视频",
+    "duration_seconds": 29.0,
+    "target_duration_seconds": 28,
+    "sentence_count": 3,
+    "format": "topic_rescue_hybrid",
+    "content_mode": "painpoint_contrast",
+    "pain_point": "帮我生成一个关于机场出行的英语学习视频时，别只会说 help me",
+    "wrong_expression": "Help me.",
+    "quality_review": {
+      "is_reasonable": true,
+      "content_mode": "painpoint_contrast",
+      "topic": "帮我生成一个关于机场出行的英语学习视频",
+      "suggested_sentence_count": 3,
+      "target_duration_seconds": 30,
+      "issues": [],
+      "suggestions": []
+    },
+    "voice_profile": {
+      "voice": "playful",
+      "speed": 1.18,
+      "style": "snappy_contrast"
+    },
+    "originality_check": "所有内容基于用户提供的原始素材生成",
+    "safety_note": "未涉及教材原文复述",
+    "topic_id": "f558885a7b15"
+  },
+  "publish_pack": {
+    "title": "【帮我生成一个关于机场出行的英语学习视频】不会开口？这句能救",
+    "cover_text": "帮我生成一个关于机场出行",
+    "description": "每天进步一点点。别再硬翻译，帮我生成一个关于机场出行的英语学习视频这句先学会。#英语学习 #实用英语 #救场英语",
+    "hashtags": [
+      "英语学习",
+      "实用英语",
+      "救场英语"
+    ]
+  },
+  "review_card": {
+    "today_expressions": [],
+    "answer_levels": [
+      {
+        "level": "survival",
+        "label": "最短能救场",
+        "english": "Could you help me with this?",
+        "chinese": "可以帮我处理一下这个吗？",
+        "usage": "先把求助意图说完整。"
+      },
+      {
+        "level": "standard",
+        "label": "完整一点",
+        "english": "Could you check this for me?",
+        "chinese": "可以帮我检查一下这个吗？",
+        "usage": "需要对方查看或确认时用。"
+      },
+      {
+        "level": "polite",
+        "label": "更具体一点",
+        "english": "Could you help me figure out what I should do next?",
+        "chinese": "可以帮我看看下一步该怎么处理吗？",
+        "usage": "不知道流程时，比单说 help me 更能推进事情。"
+      }
+    ],
+    "quick_review": "先收藏，下一集继续同一场景。"
+  },
+  "material_bank": [],
+  "segments": [
+    {
+      "scene": "钩子页",
+      "caption": "帮我生成一个关于机场出行的英语学习视频时，别只会说 help me",
+      "tts": "帮我生成一个关于机场出行的英语学习视频时，别只会说 help me",
+      "image_prompt": "FIXED_HOOK_IMAGE",
+      "duration": 2.0,
+      "keywords": [
+        "help"
+      ],
+      "caption_highlight": {
+        "enabled": true,
+        "mode": "keyword_badge",
+        "highlight_color": "#2563EB",
+        "keywords": [
+          "help"
+        ]
+      },
+      "animation": {
+        "image": "slow_zoom_in",
+        "caption": "fade_in",
+        "keyword": "pop"
+      },
+      "audio_url": "https://wanzioss.oss-cn-beijing.aliyuncs.com/tts_audio/audio_1782834386975.mp3",
+      "audio_duration": 6072000,
+      "audio_duration_seconds": 6.072,
+      "start": 0,
+      "end": 6072000,
+      "asset_url": "https://wanzioss.oss-cn-beijing.aliyuncs.com/video_images/scene_hook_img_0.png",
+      "image_url": "https://wanzioss.oss-cn-beijing.aliyuncs.com/video_images/scene_hook_img_0.png"
+    },
+    {
+      "scene": "沉浸场景",
+      "caption": "How can I help you?\n有什么可以帮你？",
+      "tts": "现在你在帮我生成一个关于机场出行的英语学习视频这个真实场景里，你需要对方处理一个具体需求。对方问：How can I help you?",
+      "image_prompt": "帮我生成一个关于机场出行的英语学习视频, 帮我生成一个关于机场出行的英语学习视频这个真实场景里，你需要对方处理一个具体需求, moment: conversation, Xiao Wanzi helping a young office worker speak English, minimal props, clear real-life setting",
+      "duration": 4.0,
+      "keywords": [
+        "How",
+        "can"
+      ],
+      "caption_highlight": {
+        "enabled": true,
+        "mode": "keyword_badge",
+        "highlight_color": "#2563EB",
+        "keywords": [
+          "How",
+          "can"
+        ]
+      },
+      "animation": {
+        "image": "slow_zoom_in",
+        "caption": "fade_in",
+        "keyword": "pop"
+      },
+      "audio_url": "https://wanzioss.oss-cn-beijing.aliyuncs.com/tts_audio/audio_1782834392620.mp3",
+      "audio_duration": 11424000,
+      "audio_duration_seconds": 11.424,
+      "start": 6072000,
+      "end": 17496000,
+      "asset_url": "https://wanzioss.oss-cn-beijing.aliyuncs.com/video_images/scene_scene_1.png",
+      "image_url": "https://wanzioss.oss-cn-beijing.aliyuncs.com/video_images/scene_scene_1.png"
+    },
+    {
+      "scene": "错误表达",
+      "caption": "Help me.\n这句太空，对方不知道你到底要查、改、拿还是确认什么。",
+      "tts": "别说 Help me.。这句太空，对方不知道你到底要查、改、拿还是确认什么。",
+      "image_prompt": "帮我生成一个关于机场出行的英语学习视频, 帮我生成一个关于机场出行的英语学习视频这个真实场景里，你需要对方处理一个具体需求, moment: mistake, Xiao Wanzi helping a young office worker speak English, minimal props, clear real-life setting",
+      "duration": 4.0,
+      "keywords": [
+        "Help"
+      ],
+      "caption_highlight": {
+        "enabled": true,
+        "mode": "keyword_badge",
+        "highlight_color": "#2563EB",
+        "keywords": [
+          "Help"
+        ]
+      },
+      "animation": {
+        "image": "slow_zoom_in",
+        "caption": "fade_in",
+        "keyword": "pop"
+      },
+      "audio_url": "https://wanzioss.oss-cn-beijing.aliyuncs.com/tts_audio/audio_1782834396485.mp3",
+      "audio_duration": 7368000,
+      "audio_duration_seconds": 7.368,
+      "start": 17496000,
+      "end": 24864000,
+      "asset_url": "https://wanzioss.oss-cn-beijing.aliyuncs.com/video_images/scene_scene_2.png",
+      "image_url": "https://wanzioss.oss-cn-beijing.aliyuncs.com/video_images/scene_scene_2.png"
+    },
+    {
+      "scene": "最短能救场",
+      "caption": "Could you help me with this?\n可以帮我处理一下这个吗？",
+      "tts": "最短能救场：Could you help me with this?。可以帮我处理一下这个吗？",
+      "image_prompt": "帮我生成一个关于机场出行的英语学习视频, 帮我生成一个关于机场出行的英语学习视频这个真实场景里，你需要对方处理一个具体需求, moment: survival, Xiao Wanzi helping a young office worker speak English, minimal props, clear real-life setting",
+      "keywords": [
+        "help"
+      ],
+      "duration": 4.0,
+      "caption_highlight": {
+        "enabled": true,
+        "mode": "keyword_badge",
+        "highlight_color": "#2563EB",
+        "keywords": [
+          "help"
+        ]
+      },
+      "animation": {
+        "image": "slow_zoom_in",
+        "caption": "fade_in",
+        "keyword": "pop"
+      },
+      "audio_url": "https://wanzioss.oss-cn-beijing.aliyuncs.com/tts_audio/audio_1782834399794.mp3",
+      "audio_duration": 6912000,
+      "audio_duration_seconds": 6.912,
+      "start": 24864000,
+      "end": 31776000,
+      "asset_url": "https://wanzioss.oss-cn-beijing.aliyuncs.com/video_images/scene_scene_3.png",
+      "image_url": "https://wanzioss.oss-cn-beijing.aliyuncs.com/video_images/scene_scene_3.png"
+    },
+    {
+      "scene": "完整一点",
+      "caption": "Could you check this for me?\n可以帮我检查一下这个吗？",
+      "tts": "完整一点：Could you check this for me?。可以帮我检查一下这个吗？",
+      "image_prompt": "帮我生成一个关于机场出行的英语学习视频, 帮我生成一个关于机场出行的英语学习视频这个真实场景里，你需要对方处理一个具体需求, moment: standard, Xiao Wanzi helping a young office worker speak English, minimal props, clear real-life setting",
+      "keywords": [
+        "check"
+      ],
+      "duration": 4.5,
+      "caption_highlight": {
+        "enabled": true,
+        "mode": "keyword_badge",
+        "highlight_color": "#2563EB",
+        "keywords": [
+          "check"
+        ]
+      },
+      "animation": {
+        "image": "slow_zoom_in",
+        "caption": "fade_in",
+        "keyword": "pop"
+      },
+      "audio_url": "https://wanzioss.oss-cn-beijing.aliyuncs.com/tts_audio/audio_1782834403090.mp3",
+      "audio_duration": 6072000,
+      "audio_duration_seconds": 6.072,
+      "start": 31776000,
+      "end": 37848000,
+      "asset_url": "https://wanzioss.oss-cn-beijing.aliyuncs.com/video_images/scene_scene_4.png",
+      "image_url": "https://wanzioss.oss-cn-beijing.aliyuncs.com/video_images/scene_scene_4.png"
+    },
+    {
+      "scene": "更具体一点",
+      "caption": "Could you help me figure out what I should do next?\n可以帮我看看下一步该怎么处理吗？",
+      "tts": "更具体一点：Could you help me figure out what I should do next?。可以帮我看看下一步该怎么处理吗？",
+      "image_prompt": "帮我生成一个关于机场出行的英语学习视频, 帮我生成一个关于机场出行的英语学习视频这个真实场景里，你需要对方处理一个具体需求, moment: polite, Xiao Wanzi helping a young office worker speak English, minimal props, clear real-life setting",
+      "keywords": [
+        "help",
+        "figure"
+      ],
+      "duration": 4.5,
+      "caption_highlight": {
+        "enabled": true,
+        "mode": "keyword_badge",
+        "highlight_color": "#2563EB",
+        "keywords": [
+          "help",
+          "figure"
+        ]
+      },
+      "animation": {
+        "image": "slow_zoom_in",
+        "caption": "fade_in",
+        "keyword": "pop"
+      },
+      "audio_url": "https://wanzioss.oss-cn-beijing.aliyuncs.com/tts_audio/audio_1782834407337.mp3",
+      "audio_duration": 9624000,
+      "audio_duration_seconds": 9.624,
+      "start": 37848000,
+      "end": 47472000,
+      "asset_url": "https://wanzioss.oss-cn-beijing.aliyuncs.com/video_images/scene_scene_5.png",
+      "image_url": "https://wanzioss.oss-cn-beijing.aliyuncs.com/video_images/scene_scene_5.png"
+    },
+    {
+      "scene": "跟读打卡",
+      "caption": "Could you check this for me?\n跟小丸子读一遍",
+      "tts": "跟小丸子读一遍：Could you check this for me?",
+      "image_prompt": "帮我生成一个关于机场出行的英语学习视频, 帮我生成一个关于机场出行的英语学习视频这个真实场景里，你需要对方处理一个具体需求, moment: follow read, Xiao Wanzi helping a young office worker speak English, minimal props, clear real-life setting",
+      "duration": 4.0,
+      "keywords": [
+        "check"
+      ],
+      "caption_highlight": {
+        "enabled": true,
+        "mode": "keyword_badge",
+        "highlight_color": "#2563EB",
+        "keywords": [
+          "check"
+        ]
+      },
+      "animation": {
+        "image": "slow_zoom_in",
+        "caption": "fade_in",
+        "keyword": "pop"
+      },
+      "audio_url": "https://wanzioss.oss-cn-beijing.aliyuncs.com/tts_audio/audio_1782834410033.mp3",
+      "audio_duration": 4368000,
+      "audio_duration_seconds": 4.368,
+      "start": 47472000,
+      "end": 51840000,
+      "asset_url": "https://wanzioss.oss-cn-beijing.aliyuncs.com/video_images/scene_scene_6.png",
+      "image_url": "https://wanzioss.oss-cn-beijing.aliyuncs.com/video_images/scene_scene_6.png"
+    },
+    {
+      "scene": "预告页",
+      "caption": "你在帮我生成一个关于机场出行的英语学习视频还卡过哪句？评论区告诉我。",
+      "tts": "你在帮我生成一个关于机场出行的英语学习视频还卡过哪句？评论区告诉我。",
+      "image_prompt": "FIXED_HOOK_IMAGE",
+      "duration": 2.0,
+      "keywords": [],
+      "caption_highlight": {
+        "enabled": true,
+        "mode": "keyword_badge",
+        "highlight_color": "#2563EB",
+        "keywords": []
+      },
+      "animation": {
+        "image": "slow_zoom_in",
+        "caption": "fade_in",
+        "keyword": "pop"
+      },
+      "audio_url": "https://wanzioss.oss-cn-beijing.aliyuncs.com/tts_audio/audio_1782834413731.mp3",
+      "audio_duration": 6936000,
+      "audio_duration_seconds": 6.936,
+      "start": 51840000,
+      "end": 58776000,
+      "asset_url": "https://wanzioss.oss-cn-beijing.aliyuncs.com/video_images/scene_hook_img_7.png",
+      "image_url": "https://wanzioss.oss-cn-beijing.aliyuncs.com/video_images/scene_hook_img_7.png"
+    }
+  ],
+  "duration": 58776000,
+  "duration_seconds": 58.78,
+  "scene_count": 8,
+  "caption_count": 8,
+  "timeline_segments": [
+    {
+      "index": 0,
+      "start": 0,
+      "end": 6072000,
+      "duration": 6072000,
+      "caption": "帮我生成一个关于机场出行的英语学习视频时，别只会说 help me",
+      "keywords": [
+        "help"
+      ],
+      "caption_highlight": {
+        "enabled": true,
+        "mode": "keyword_badge",
+        "highlight_color": "#2563EB",
+        "keywords": [
+          "help"
+        ]
+      },
+      "animation": {
+        "image": "slow_zoom_in",
+        "caption": "fade_in",
+        "keyword": "pop"
+      },
+      "audio_url": "https://wanzioss.oss-cn-beijing.aliyuncs.com/tts_audio/audio_1782834386975.mp3",
+      "asset_url": "https://wanzioss.oss-cn-beijing.aliyuncs.com/video_images/scene_hook_img_0.png",
+      "scene": "钩子页"
+    },
+    {
+      "index": 1,
+      "start": 6072000,
+      "end": 17496000,
+      "duration": 11424000,
+      "caption": "How can I help you?\n有什么可以帮你？",
+      "keywords": [
+        "How",
+        "can"
+      ],
+      "caption_highlight": {
+        "enabled": true,
+        "mode": "keyword_badge",
+        "highlight_color": "#2563EB",
+        "keywords": [
+          "How",
+          "can"
+        ]
+      },
+      "animation": {
+        "image": "slow_zoom_in",
+        "caption": "fade_in",
+        "keyword": "pop"
+      },
+      "audio_url": "https://wanzioss.oss-cn-beijing.aliyuncs.com/tts_audio/audio_1782834392620.mp3",
+      "asset_url": "https://wanzioss.oss-cn-beijing.aliyuncs.com/video_images/scene_scene_1.png",
+      "scene": "沉浸场景"
+    },
+    {
+      "index": 2,
+      "start": 17496000,
+      "end": 24864000,
+      "duration": 7368000,
+      "caption": "Help me.\n这句太空，对方不知道你到底要查、改、拿还是确认什么。",
+      "keywords": [
+        "Help"
+      ],
+      "caption_highlight": {
+        "enabled": true,
+        "mode": "keyword_badge",
+        "highlight_color": "#2563EB",
+        "keywords": [
+          "Help"
+        ]
+      },
+      "animation": {
+        "image": "slow_zoom_in",
+        "caption": "fade_in",
+        "keyword": "pop"
+      },
+      "audio_url": "https://wanzioss.oss-cn-beijing.aliyuncs.com/tts_audio/audio_1782834396485.mp3",
+      "asset_url": "https://wanzioss.oss-cn-beijing.aliyuncs.com/video_images/scene_scene_2.png",
+      "scene": "错误表达"
+    },
+    {
+      "index": 3,
+      "start": 24864000,
+      "end": 31776000,
+      "duration": 6912000,
+      "caption": "Could you help me with this?\n可以帮我处理一下这个吗？",
+      "keywords": [
+        "help"
+      ],
+      "caption_highlight": {
+        "enabled": true,
+        "mode": "keyword_badge",
+        "highlight_color": "#2563EB",
+        "keywords": [
+          "help"
+        ]
+      },
+      "animation": {
+        "image": "slow_zoom_in",
+        "caption": "fade_in",
+        "keyword": "pop"
+      },
+      "audio_url": "https://wanzioss.oss-cn-beijing.aliyuncs.com/tts_audio/audio_1782834399794.mp3",
+      "asset_url": "https://wanzioss.oss-cn-beijing.aliyuncs.com/video_images/scene_scene_3.png",
+      "scene": "最短能救场"
+    },
+    {
+      "index": 4,
+      "start": 31776000,
+      "end": 37848000,
+      "duration": 6072000,
+      "caption": "Could you check this for me?\n可以帮我检查一下这个吗？",
+      "keywords": [
+        "check"
+      ],
+      "caption_highlight": {
+        "enabled": true,
+        "mode": "keyword_badge",
+        "highlight_color": "#2563EB",
+        "keywords": [
+          "check"
+        ]
+      },
+      "animation": {
+        "image": "slow_zoom_in",
+        "caption": "fade_in",
+        "keyword": "pop"
+      },
+      "audio_url": "https://wanzioss.oss-cn-beijing.aliyuncs.com/tts_audio/audio_1782834403090.mp3",
+      "asset_url": "https://wanzioss.oss-cn-beijing.aliyuncs.com/video_images/scene_scene_4.png",
+      "scene": "完整一点"
+    },
+    {
+      "index": 5,
+      "start": 37848000,
+      "end": 47472000,
+      "duration": 9624000,
+      "caption": "Could you help me figure out what I should do next?\n可以帮我看看下一步该怎么处理吗？",
+      "keywords": [
+        "help",
+        "figure"
+      ],
+      "caption_highlight": {
+        "enabled": true,
+        "mode": "keyword_badge",
+        "highlight_color": "#2563EB",
+        "keywords": [
+          "help",
+          "figure"
+        ]
+      },
+      "animation": {
+        "image": "slow_zoom_in",
+        "caption": "fade_in",
+        "keyword": "pop"
+      },
+      "audio_url": "https://wanzioss.oss-cn-beijing.aliyuncs.com/tts_audio/audio_1782834407337.mp3",
+      "asset_url": "https://wanzioss.oss-cn-beijing.aliyuncs.com/video_images/scene_scene_5.png",
+      "scene": "更具体一点"
+    },
+    {
+      "index": 6,
+      "start": 47472000,
+      "end": 51840000,
+      "duration": 4368000,
+      "caption": "Could you check this for me?\n跟小丸子读一遍",
+      "keywords": [
+        "check"
+      ],
+      "caption_highlight": {
+        "enabled": true,
+        "mode": "keyword_badge",
+        "highlight_color": "#2563EB",
+        "keywords": [
+          "check"
+        ]
+      },
+      "animation": {
+        "image": "slow_zoom_in",
+        "caption": "fade_in",
+        "keyword": "pop"
+      },
+      "audio_url": "https://wanzioss.oss-cn-beijing.aliyuncs.com/tts_audio/audio_1782834410033.mp3",
+      "asset_url": "https://wanzioss.oss-cn-beijing.aliyuncs.com/video_images/scene_scene_6.png",
+      "scene": "跟读打卡"
+    },
+    {
+      "index": 7,
+      "start": 51840000,
+      "end": 58776000,
+      "duration": 6936000,
+      "caption": "你在帮我生成一个关于机场出行的英语学习视频还卡过哪句？评论区告诉我。",
+      "keywords": [],
+      "caption_highlight": {
+        "enabled": true,
+        "mode": "keyword_badge",
+        "highlight_color": "#2563EB",
+        "keywords": []
+      },
+      "animation": {
+        "image": "slow_zoom_in",
+        "caption": "fade_in",
+        "keyword": "pop"
+      },
+      "audio_url": "https://wanzioss.oss-cn-beijing.aliyuncs.com/tts_audio/audio_1782834413731.mp3",
+      "asset_url": "https://wanzioss.oss-cn-beijing.aliyuncs.com/video_images/scene_hook_img_7.png",
+      "scene": "预告页"
+    }
+  ],
+  "steps_status": [
+    {
+      "step": "create_draft",
+      "url": "http://123.57.144.37:30000/openapi/capcut-mate/v1/create_draft",
+      "request": {
+        "width": 1080,
+        "height": 1920
+      },
+      "response": {
+        "code": 0,
+        "message": "成功",
+        "draft_url": "http://123.57.144.37:30000/openapi/capcut-mate/v1/get_draft?draft_id=20260630234805a8aecdcf",
+        "tip_url": "https://docs.jcaigc.cn/"
+      }
+    },
+    {
+      "step": "imgs_infos",
+      "url": "http://123.57.144.37:30000/openapi/capcut-mate/v1/imgs_infos",
+      "request": {
+        "timelines": [
+          {
+            "start": 0,
+            "end": 6072000
+          },
+          {
+            "start": 6072000,
+            "end": 17496000
+          },
+          {
+            "start": 17496000,
+            "end": 24864000
+          },
+          {
+            "start": 24864000,
+            "end": 31776000
+          },
+          {
+            "start": 31776000,
+            "end": 37848000
+          },
+          {
+            "start": 37848000,
+            "end": 47472000
+          },
+          {
+            "start": 47472000,
+            "end": 51840000
+          },
+          {
+            "start": 51840000,
+            "end": 58776000
+          }
+        ],
+        "width": 1080,
+        "height": 1920,
+        "in_animation": "向上滑动",
+        "in_animation_duration": 500000
+      },
+      "response": {
+        "code": 0,
+        "message": "成功"
+      }
+    },
+    {
+      "step": "add_images",
+      "url": "http://123.57.144.37:30000/openapi/capcut-mate/v1/add_images",
+      "request": {
+        "draft_url": "http://123.57.144.37:30000/openapi/capcut-mate/v1/get_draft?draft_id=20260630234805a8aecdcf",
+        "scale_x": 1.0,
+        "scale_y": 1.0,
+        "transform_x": 0,
+        "transform_y": 0
+      },
+      "response": {
+        "code": 0,
+        "message": "成功",
+        "draft_url": "http://123.57.144.37:30000/openapi/capcut-mate/v1/get_draft?draft_id=20260630234805a8aecdcf",
+        "track_id": "9b61d0ce4e8b48d7bacccfec73d38bde",
+        "image_ids": [
+          "86521fcf597049cea31a9d16c0989878",
+          "ddd879ac7d894044aa4711917f3d2e26",
+          "de22242845c345dbafabb6cf67f3e471",
+          "4fa4a6cf8e2a481682a3eb92f5f1311a",
+          "38561d1b92f54bfb84009fcb6f3a597c",
+          "6e0a5e8554624c50915e1a5456002072",
+          "ffe36a266fda431a879cac553d5c041a",
+          "d853d8bb49c147a8a0f4b9a21a74e3d6"
+        ],
+        "segment_ids": [
+          "0683a71ae7d84d7e85cf8401703db939",
+          "fb1cc473b786447c8ea6491a4a71eba5",
+          "94d1ead2cf43469488cacfe12bdf42d2",
+          "f458153ad17140768de7d56f20b231aa",
+          "b107252b146f483cb93cd4ff92a3a950",
+          "6bb45719e4464a5b89f04abecb71d56e",
+          "ea25f6d4f54a414994df41240a9c93e3",
+          "4205f408a194421db4f2146e07006c31"
+        ],
+        "segment_infos": [
+          {
+            "id": "0683a71ae7d84d7e85cf8401703db939",
+            "start": 0,
+            "end": 6072000
+          },
+          {
+            "id": "fb1cc473b786447c8ea6491a4a71eba5",
+            "start": 6072000,
+            "end": 17496000
+          },
+          {
+            "id": "94d1ead2cf43469488cacfe12bdf42d2",
+            "start": 17496000,
+            "end": 24864000
+          },
+          {
+            "id": "f458153ad17140768de7d56f20b231aa",
+            "start": 24864000,
+            "end": 31776000
+          },
+          {
+            "id": "b107252b146f483cb93cd4ff92a3a950",
+            "start": 31776000,
+            "end": 37848000
+          },
+          {
+            "id": "6bb45719e4464a5b89f04abecb71d56e",
+            "start": 37848000,
+            "end": 47472000
+          },
+          {
+            "id": "ea25f6d4f54a414994df41240a9c93e3",
+            "start": 47472000,
+            "end": 51840000
+          },
+          {
+            "id": "4205f408a194421db4f2146e07006c31",
+            "start": 51840000,
+            "end": 58776000
+          }
+        ]
+      }
+    },
+    {
+      "step": "keyframes_infos",
+      "url": "http://123.57.144.37:30000/openapi/capcut-mate/v1/keyframes_infos",
+      "request": {
+        "ctype": "UNIFORM_SCALE",
+        "offsets": "0|100",
+        "values": "1.0|1.08",
+        "width": 1080,
+        "height": 1920
+      },
+      "response": {
+        "code": 0,
+        "message": "成功"
+      }
+    },
+    {
+      "step": "add_keyframes",
+      "url": "http://123.57.144.37:30000/openapi/capcut-mate/v1/add_keyframes",
+      "request": {
+        "draft_url": "http://123.57.144.37:30000/openapi/capcut-mate/v1/get_draft?draft_id=20260630234805a8aecdcf",
+        "keyframes_length": 1289
+      },
+      "response": {
+        "code": 0,
+        "message": "成功",
+        "draft_url": "http://123.57.144.37:30000/openapi/capcut-mate/v1/get_draft?draft_id=20260630234805a8aecdcf",
+        "keyframes_added": 0,
+        "affected_segments": []
+      }
+    },
+    {
+      "step": "caption_infos",
+      "url": "http://123.57.144.37:30000/openapi/capcut-mate/v1/caption_infos",
+      "request": {
+        "timelines": [
+          {
+            "start": 0,
+            "end": 6072000
+          },
+          {
+            "start": 6072000,
+            "end": 17496000
+          },
+          {
+            "start": 17496000,
+            "end": 24864000
+          },
+          {
+            "start": 24864000,
+            "end": 31776000
+          },
+          {
+            "start": 31776000,
+            "end": 37848000
+          },
+          {
+            "start": 37848000,
+            "end": 47472000
+          },
+          {
+            "start": 47472000,
+            "end": 51840000
+          },
+          {
+            "start": 51840000,
+            "end": 58776000
+          }
+        ],
+        "in_animation": "向上滑动",
+        "in_animation_duration": 500000
+      },
+      "response": {
+        "code": 0,
+        "message": "成功"
+      }
+    },
+    {
+      "step": "add_captions",
+      "url": "http://123.57.144.37:30000/openapi/capcut-mate/v1/add_captions",
+      "request": {
+        "draft_url": "http://123.57.144.37:30000/openapi/capcut-mate/v1/get_draft?draft_id=20260630234805a8aecdcf",
+        "text_color": "#111111",
+        "border_color": "#FFFFFF",
+        "border_width": 2,
+        "alignment": 1,
+        "font_size": 10,
+        "alpha": 1.0,
+        "bold": true,
+        "italic": true,
+        "line_spacing": 2,
+        "has_shadow": true,
+        "shadow_info": {
+          "shadow_color": "#000000",
+          "shadow_alpha": 0.3,
+          "shadow_diffuse": 4,
+          "shadow_distance": 2,
+          "shadow_angle": -45
+        },
+        "transform_x": 0,
+        "transform_y": 630
+      },
+      "response": {
+        "code": 0,
+        "message": "成功",
+        "draft_url": "http://123.57.144.37:30000/openapi/capcut-mate/v1/get_draft?draft_id=20260630234805a8aecdcf",
+        "track_id": "ad3fd06a086849fbbdcdf8675c554595",
+        "text_ids": [
+          "00a859bdfec540ed8b0a7ed61e1e10e2",
+          "15f873da29004df0b506015c73fc9ffc",
+          "3e5951f9eba54f3e834210f3a8ae6698",
+          "1a7a94ac01ed4787805918e64082f32b",
+          "ced725bf37f549bc963677131f8ed68c",
+          "2d30667fbf404de0b004383edf8c8814",
+          "7333142bb0d84c7a8047a48a92fc73c0",
+          "eadf85b49b3944aaab74c7a99da21136"
+        ],
+        "segment_ids": [
+          "8bd0740779e640299a794a5eb92611c9",
+          "33992f5708604b03988d99c63c2d06a3",
+          "34d925c841bc40a18c1e9be5a39e57f3",
+          "11fd70fc676d421ea549f9997528bef2",
+          "58b974c139cd4568b1c0918136d8a770",
+          "b46536044b914ba585020b646b8b15f4",
+          "09d3f288521f46a7af578acb04ebe374",
+          "4ad3447f9f144682a31433542ad61a6a"
+        ],
+        "segment_infos": [
+          {
+            "id": "8bd0740779e640299a794a5eb92611c9",
+            "start": 0,
+            "end": 6072000
+          },
+          {
+            "id": "33992f5708604b03988d99c63c2d06a3",
+            "start": 6072000,
+            "end": 17496000
+          },
+          {
+            "id": "34d925c841bc40a18c1e9be5a39e57f3",
+            "start": 17496000,
+            "end": 24864000
+          },
+          {
+            "id": "11fd70fc676d421ea549f9997528bef2",
+            "start": 24864000,
+            "end": 31776000
+          },
+          {
+            "id": "58b974c139cd4568b1c0918136d8a770",
+            "start": 31776000,
+            "end": 37848000
+          },
+          {
+            "id": "b46536044b914ba585020b646b8b15f4",
+            "start": 37848000,
+            "end": 47472000
+          },
+          {
+            "id": "09d3f288521f46a7af578acb04ebe374",
+            "start": 47472000,
+            "end": 51840000
+          },
+          {
+            "id": "4ad3447f9f144682a31433542ad61a6a",
+            "start": 51840000,
+            "end": 58776000
+          }
+        ]
+      }
+    },
+    {
+      "step": "add_audios",
+      "url": "http://123.57.144.37:30000/openapi/capcut-mate/v1/add_audios",
+      "request": {
+        "draft_url": "http://123.57.144.37:30000/openapi/capcut-mate/v1/get_draft?draft_id=20260630234805a8aecdcf",
+        "audio_infos": "[{\"audio_url\": \"https://wanzioss.oss-cn-beijing.aliyuncs.com/tts_audio/audio_1782834386975.mp3\", \"start\": 0, \"end\": 6072000, \"duration\": 6072000, \"volume\": 1.0}, {\"audio_url\": \"https://wanzioss.oss-cn-beijing.aliyuncs.com/tts_audio/audio_1782834392620.mp3\", \"start\": 6072000, \"end\": 17496000, \"duration\": 11424000, \"volume\": 1.0}, {\"audio_url\": \"https://wanzioss.oss-cn-beijing.aliyuncs.com/tts_audio/audio_1782834396485.mp3\", \"start\": 17496000, \"end\": 24864000, \"duration\": 7368000, \"volume\": 1.0}, {\"audio_url\": \"https://wanzioss.oss-cn-beijing.aliyuncs.com/tts_audio/audio_1782834399794.mp3\", \"start\": 24864000, \"end\": 31776000, \"duration\": 6912000, \"volume\": 1.0}, {\"audio_url\": \"https://wanzioss.oss-cn-beijing.aliyuncs.com/tts_audio/audio_1782834403090.mp3\", \"start\": 31776000, \"end\": 37848000, \"duration\": 6072000, \"volume\": 1.0}, {\"audio_url\": \"https://wanzioss.oss-cn-beijing.aliyuncs.com/tts_audio/audio_1782834407337.mp3\", \"start\": 37848000, \"end\": 47472000, \"duration\": 9624000, \"volume\": 1.0}, {\"audio_url\": \"https://wanzioss.oss-cn-beijing.aliyuncs.com/tts_audio/audio_1782834410033.mp3\", \"start\": 47472000, \"end\": 51840000, \"duration\": 4368000, \"volume\": 1.0}, {\"audio_url\": \"https://wanzioss.oss-cn-beijing.aliyuncs.com/tts_audio/audio_1782834413731.mp3\", \"start\": 51840000, \"end\": 58776000, \"duration\": 6936000, \"volume\": 1.0}]"
+      },
+      "response": {
+        "code": 0,
+        "message": "成功",
+        "draft_url": "http://123.57.144.37:30000/openapi/capcut-mate/v1/get_draft?draft_id=20260630234805a8aecdcf",
+        "track_id": "c63a9f2f688848278b03d94633499f30",
+        "audio_ids": [
+          "62ca71aebfb241e98a5c19bf038088af",
+          "f3f60f91fed14b6f921e53be48edc203",
+          "f601977e7cba439ea42e893f66f64047",
+          "a6916989063d4c779bb074546ef838b9",
+          "b67d6465a79042398541d133dd05ed9e",
+          "7cc3ebb47e534514ae0159d1b84d8e49",
+          "6f502595ccbc4b52a90a46453aa96291",
+          "e9b62837e3c341a6ab40cebac5a9245d"
+        ]
+      }
+    },
+    {
+      "step": "save_draft",
+      "url": "http://123.57.144.37:30000/openapi/capcut-mate/v1/save_draft",
+      "request": {
+        "draft_url": "http://123.57.144.37:30000/openapi/capcut-mate/v1/get_draft?draft_id=20260630234805a8aecdcf"
+      },
+      "response": {
+        "code": 0,
+        "message": "成功",
+        "draft_url": "http://123.57.144.37:30000/openapi/capcut-mate/v1/get_draft?draft_id=20260630234805a8aecdcf"
+      }
+    }
+  ],
+  "message": "剪映草稿已生成，请用 CapCut Mate 桌面端导入剪映。"
+}

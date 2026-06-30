@@ -1,0 +1,210 @@
+[
+  {
+    "index": 0,
+    "start": 0,
+    "end": 6072000,
+    "duration": 6072000,
+    "caption": "帮我生成一个关于机场出行的英语学习视频时，别只会说 help me",
+    "keywords": [
+      "help"
+    ],
+    "caption_highlight": {
+      "enabled": true,
+      "mode": "keyword_badge",
+      "highlight_color": "#2563EB",
+      "keywords": [
+        "help"
+      ]
+    },
+    "animation": {
+      "image": "slow_zoom_in",
+      "caption": "fade_in",
+      "keyword": "pop"
+    },
+    "audio_url": "https://wanzioss.oss-cn-beijing.aliyuncs.com/tts_audio/audio_1782834386975.mp3",
+    "asset_url": "https://wanzioss.oss-cn-beijing.aliyuncs.com/video_images/scene_hook_img_0.png",
+    "scene": "钩子页"
+  },
+  {
+    "index": 1,
+    "start": 6072000,
+    "end": 17496000,
+    "duration": 11424000,
+    "caption": "How can I help you?\n有什么可以帮你？",
+    "keywords": [
+      "How",
+      "can"
+    ],
+    "caption_highlight": {
+      "enabled": true,
+      "mode": "keyword_badge",
+      "highlight_color": "#2563EB",
+      "keywords": [
+        "How",
+        "can"
+      ]
+    },
+    "animation": {
+      "image": "slow_zoom_in",
+      "caption": "fade_in",
+      "keyword": "pop"
+    },
+    "audio_url": "https://wanzioss.oss-cn-beijing.aliyuncs.com/tts_audio/audio_1782834392620.mp3",
+    "asset_url": "https://wanzioss.oss-cn-beijing.aliyuncs.com/video_images/scene_scene_1.png",
+    "scene": "沉浸场景"
+  },
+  {
+    "index": 2,
+    "start": 17496000,
+    "end": 24864000,
+    "duration": 7368000,
+    "caption": "Help me.\n这句太空，对方不知道你到底要查、改、拿还是确认什么。",
+    "keywords": [
+      "Help"
+    ],
+    "caption_highlight": {
+      "enabled": true,
+      "mode": "keyword_badge",
+      "highlight_color": "#2563EB",
+      "keywords": [
+        "Help"
+      ]
+    },
+    "animation": {
+      "image": "slow_zoom_in",
+      "caption": "fade_in",
+      "keyword": "pop"
+    },
+    "audio_url": "https://wanzioss.oss-cn-beijing.aliyuncs.com/tts_audio/audio_1782834396485.mp3",
+    "asset_url": "https://wanzioss.oss-cn-beijing.aliyuncs.com/video_images/scene_scene_2.png",
+    "scene": "错误表达"
+  },
+  {
+    "index": 3,
+    "start": 24864000,
+    "end": 31776000,
+    "duration": 6912000,
+    "caption": "Could you help me with this?\n可以帮我处理一下这个吗？",
+    "keywords": [
+      "help"
+    ],
+    "caption_highlight": {
+      "enabled": true,
+      "mode": "keyword_badge",
+      "highlight_color": "#2563EB",
+      "keywords": [
+        "help"
+      ]
+    },
+    "animation": {
+      "image": "slow_zoom_in",
+      "caption": "fade_in",
+      "keyword": "pop"
+    },
+    "audio_url": "https://wanzioss.oss-cn-beijing.aliyuncs.com/tts_audio/audio_1782834399794.mp3",
+    "asset_url": "https://wanzioss.oss-cn-beijing.aliyuncs.com/video_images/scene_scene_3.png",
+    "scene": "最短能救场"
+  },
+  {
+    "index": 4,
+    "start": 31776000,
+    "end": 37848000,
+    "duration": 6072000,
+    "caption": "Could you check this for me?\n可以帮我检查一下这个吗？",
+    "keywords": [
+      "check"
+    ],
+    "caption_highlight": {
+      "enabled": true,
+      "mode": "keyword_badge",
+      "highlight_color": "#2563EB",
+      "keywords": [
+        "check"
+      ]
+    },
+    "animation": {
+      "image": "slow_zoom_in",
+      "caption": "fade_in",
+      "keyword": "pop"
+    },
+    "audio_url": "https://wanzioss.oss-cn-beijing.aliyuncs.com/tts_audio/audio_1782834403090.mp3",
+    "asset_url": "https://wanzioss.oss-cn-beijing.aliyuncs.com/video_images/scene_scene_4.png",
+    "scene": "完整一点"
+  },
+  {
+    "index": 5,
+    "start": 37848000,
+    "end": 47472000,
+    "duration": 9624000,
+    "caption": "Could you help me figure out what I should do next?\n可以帮我看看下一步该怎么处理吗？",
+    "keywords": [
+      "help",
+      "figure"
+    ],
+    "caption_highlight": {
+      "enabled": true,
+      "mode": "keyword_badge",
+      "highlight_color": "#2563EB",
+      "keywords": [
+        "help",
+        "figure"
+      ]
+    },
+    "animation": {
+      "image": "slow_zoom_in",
+      "caption": "fade_in",
+      "keyword": "pop"
+    },
+    "audio_url": "https://wanzioss.oss-cn-beijing.aliyuncs.com/tts_audio/audio_1782834407337.mp3",
+    "asset_url": "https://wanzioss.oss-cn-beijing.aliyuncs.com/video_images/scene_scene_5.png",
+    "scene": "更具体一点"
+  },
+  {
+    "index": 6,
+    "start": 47472000,
+    "end": 51840000,
+    "duration": 4368000,
+    "caption": "Could you check this for me?\n跟小丸子读一遍",
+    "keywords": [
+      "check"
+    ],
+    "caption_highlight": {
+      "enabled": true,
+      "mode": "keyword_badge",
+      "highlight_color": "#2563EB",
+      "keywords": [
+        "check"
+      ]
+    },
+    "animation": {
+      "image": "slow_zoom_in",
+      "caption": "fade_in",
+      "keyword": "pop"
+    },
+    "audio_url": "https://wanzioss.oss-cn-beijing.aliyuncs.com/tts_audio/audio_1782834410033.mp3",
+    "asset_url": "https://wanzioss.oss-cn-beijing.aliyuncs.com/video_images/scene_scene_6.png",
+    "scene": "跟读打卡"
+  },
+  {
+    "index": 7,
+    "start": 51840000,
+    "end": 58776000,
+    "duration": 6936000,
+    "caption": "你在帮我生成一个关于机场出行的英语学习视频还卡过哪句？评论区告诉我。",
+    "keywords": [],
+    "caption_highlight": {
+      "enabled": true,
+      "mode": "keyword_badge",
+      "highlight_color": "#2563EB",
+      "keywords": []
+    },
+    "animation": {
+      "image": "slow_zoom_in",
+      "caption": "fade_in",
+      "keyword": "pop"
+    },
+    "audio_url": "https://wanzioss.oss-cn-beijing.aliyuncs.com/tts_audio/audio_1782834413731.mp3",
+    "asset_url": "https://wanzioss.oss-cn-beijing.aliyuncs.com/video_images/scene_hook_img_7.png",
+    "scene": "预告页"
+  }
+]

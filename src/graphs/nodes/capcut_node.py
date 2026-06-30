@@ -1,20 +1,27 @@
 """
-CapCut Mate API 完整草稿生成流程 - 音频同步版
+CapCut Mate API 完整草稿生成流程 - 音频同步版 + 动画效果
 
 API Base URL: http://123.57.144.37:30000/openapi/capcut-mate/v1
 
 流程:
 1. POST /create_draft - 创建草稿
-2. POST /add_images - 添加图片到草稿（基于音频时间轴）
-3. POST /add_captions - 添加字幕（深色文字+白色背景+顶部位置）
-4. POST /add_audios - 添加音频（片段级同步）
-5. POST /save_draft - 保存草稿
+2. POST /imgs_infos - 生成带入场动画的图片信息
+3. POST /add_images - 添加图片到草稿（基于音频时间轴）
+4. POST /caption_infos - 生成带入场动画的字幕信息
+5. POST /add_captions - 添加字幕（深色文字+白色背景+顶部位置）
+6. POST /add_audios - 添加音频（片段级同步）
+7. POST /keyframes_infos - 生成关键帧信息（Ken Burns 画面推进效果）
+8. POST /add_keyframes - 添加关键帧到草稿
+9. POST /save_draft - 保存草稿
 
 核心原则:
 - 所有片段（图片、字幕、音频）必须使用相同的 start/end 时间轴
 - 总时长以音频总时长为准
 - 字幕固定在顶部安全区
 - 支持添加 BGM 背景音乐
+- 图片添加入场动画（向上滑动）
+- 字幕添加入场动画（向上滑动）
+- 图片添加 Ken Burns 关键帧动画（缓慢推进）
 """
 import json
 import logging
@@ -210,20 +217,52 @@ def create_capcut_draft(state: Dict[str, Any]) -> Dict[str, Any]:
 
         logger.info(f"Draft created: {draft_url}")
 
-        # ========== Step 2: 添加图片 ==========
-        # 构建图片信息列表 - 使用片段时间轴
-        image_infos_list = []
+        # ========== Step 2: 添加图片（带入场动画）==========
+        # 构建图片时间线列表
+        image_urls = []
+        image_timelines = []
         for seg in timeline_segments:
-            image_infos_list.append({
-                "image_url": seg["asset_url"],
-                "width": width,
-                "height": height,
+            image_urls.append(seg["asset_url"])
+            image_timelines.append({
                 "start": seg["start"],
                 "end": seg["end"]
             })
 
-        if image_infos_list:
-            logger.info(f"Step 2: Adding {len(image_infos_list)} images...")
+        if image_urls:
+            logger.info(f"Step 2: Adding {len(image_urls)} images with in-animation...")
+
+            # Step 2a: 调用 imgs_infos 生成带入场动画的图片信息
+            imgs_infos_payload = {
+                "imgs": image_urls,
+                "timelines": image_timelines,
+                "width": width,
+                "height": height,
+                "in_animation": "向上滑动",
+                "in_animation_duration": 500000  # 0.5秒入场动画
+            }
+
+            imgs_infos_response = _safe_post("/imgs_infos", imgs_infos_payload)
+            steps_status.append({
+                "step": "imgs_infos",
+                "url": f"{CAPCUT_MATE_BASE_URL}/imgs_infos",
+                "request": {k: v for k, v in imgs_infos_payload.items() if k != "imgs"},
+                "response": {"code": imgs_infos_response.get("code"), "message": imgs_infos_response.get("message")} if imgs_infos_response else None
+            })
+
+            if not imgs_infos_response or imgs_infos_response.get("code") != 0:
+                logger.warning(f"imgs_infos failed, falling back to basic image_infos: {imgs_infos_response}")
+                # 降级：不使用动画，直接构建 image_infos
+                image_infos_list = [
+                    {"image_url": url, "width": width, "height": height,
+                     "start": tl["start"], "end": tl["end"]}
+                    for url, tl in zip(image_urls, image_timelines)
+                ]
+            else:
+                # 使用带动画的图片信息
+                image_infos_str = imgs_infos_response.get("infos", "[]")
+                image_infos_list = json.loads(image_infos_str) if isinstance(image_infos_str, str) else image_infos_str
+
+            # Step 2b: 调用 add_images 将图片添加到草稿
             add_images_payload = {
                 "draft_url": draft_url,
                 "image_infos": json.dumps(image_infos_list, ensure_ascii=False),
@@ -237,7 +276,7 @@ def create_capcut_draft(state: Dict[str, Any]) -> Dict[str, Any]:
             steps_status.append({
                 "step": "add_images",
                 "url": f"{CAPCUT_MATE_BASE_URL}/add_images",
-                "request": add_images_payload,
+                "request": {k: v for k, v in add_images_payload.items() if k != "image_infos"},
                 "response": add_images_response
             })
 
@@ -248,19 +287,105 @@ def create_capcut_draft(state: Dict[str, Any]) -> Dict[str, Any]:
                     steps_status
                 ))
 
-        # ========== Step 3: 添加字幕 ==========
-        # 构建字幕列表 - 基于片段时间轴，使用深色文字+白色背景+底部位置
-        captions_list = []
-        for seg in timeline_segments:
-            captions_list.append({
-                "start": seg["start"],
-                "end": seg["end"],
-                "text": seg["caption"],
-                "font_size": 10
+        # ========== Step 2.5: 添加关键帧动画（Ken Burns 画面推进效果）==========
+        # 为每张图片添加缓慢缩放推进的关键帧动画
+        if image_urls:
+            logger.info("Step 2.5: Adding Ken Burns keyframe animation...")
+
+            # 构建 segment_infos（每个图片片段的时间信息）
+            segment_infos = []
+            for i, seg in enumerate(timeline_segments):
+                segment_infos.append({
+                    "id": str(i),
+                    "start": seg["start"],
+                    "end": seg["end"]
+                })
+
+            # Step 2.5a: 生成 UNIFORM_SCALE 关键帧（从 1.0 缓慢放大到 1.08）
+            keyframes_infos_payload = {
+                "ctype": "UNIFORM_SCALE",
+                "offsets": "0|100",  # 在片段的开始和结尾放置关键帧
+                "values": "1.0|1.08",  # 从 100% 缩放到 108%
+                "segment_infos": segment_infos,
+                "width": width,
+                "height": height
+            }
+
+            keyframes_infos_response = _safe_post("/keyframes_infos", keyframes_infos_payload)
+            steps_status.append({
+                "step": "keyframes_infos",
+                "url": f"{CAPCUT_MATE_BASE_URL}/keyframes_infos",
+                "request": {k: v for k, v in keyframes_infos_payload.items() if k != "segment_infos"},
+                "response": {"code": keyframes_infos_response.get("code"), "message": keyframes_infos_response.get("message")} if keyframes_infos_response else None
             })
 
-        if captions_list:
-            logger.info(f"Step 3: Adding {len(captions_list)} captions with top position...")
+            if keyframes_infos_response and keyframes_infos_response.get("code") == 0:
+                keyframes_str = keyframes_infos_response.get("keyframes_infos", "[]")
+
+                # Step 2.5b: 将关键帧应用到草稿
+                add_keyframes_payload = {
+                    "draft_url": draft_url,
+                    "keyframes": keyframes_str
+                }
+
+                add_keyframes_response = _safe_post("/add_keyframes", add_keyframes_payload)
+                steps_status.append({
+                    "step": "add_keyframes",
+                    "url": f"{CAPCUT_MATE_BASE_URL}/add_keyframes",
+                    "request": {"draft_url": draft_url, "keyframes_length": len(keyframes_str)},
+                    "response": add_keyframes_response
+                })
+
+                if add_keyframes_response and add_keyframes_response.get("code") == 0:
+                    logger.info("Ken Burns keyframe animation added successfully")
+                else:
+                    logger.warning(f"add_keyframes failed (non-critical): {add_keyframes_response}")
+            else:
+                logger.warning(f"keyframes_infos failed (non-critical): {keyframes_infos_response}")
+
+        # ========== Step 3: 添加字幕（带入场动画）==========
+        # 构建字幕列表 - 基于片段时间轴，使用深色文字+白色背景+底部位置
+        caption_texts = []
+        caption_timelines = []
+        for seg in timeline_segments:
+            caption_texts.append(seg["caption"])
+            caption_timelines.append({
+                "start": seg["start"],
+                "end": seg["end"]
+            })
+
+        if caption_texts:
+            logger.info(f"Step 3: Adding {len(caption_texts)} captions with in-animation...")
+
+            # Step 3a: 调用 caption_infos 生成带入场动画的字幕信息
+            caption_infos_payload = {
+                "texts": caption_texts,
+                "timelines": caption_timelines,
+                "in_animation": "向上滑动",
+                "in_animation_duration": 500000  # 0.5秒入场动画
+            }
+
+            caption_infos_response = _safe_post("/caption_infos", caption_infos_payload)
+            steps_status.append({
+                "step": "caption_infos",
+                "url": f"{CAPCUT_MATE_BASE_URL}/caption_infos",
+                "request": {k: v for k, v in caption_infos_payload.items() if k != "texts"},
+                "response": {"code": caption_infos_response.get("code"), "message": caption_infos_response.get("message")} if caption_infos_response else None
+            })
+
+            if not caption_infos_response or caption_infos_response.get("code") != 0:
+                logger.warning(f"caption_infos failed, falling back to basic captions: {caption_infos_response}")
+                # 降级：不使用动画，直接构建 captions
+                captions_list = [
+                    {"start": tl["start"], "end": tl["end"], "text": txt, "font_size": 10}
+                    for txt, tl in zip(caption_texts, caption_timelines)
+                ]
+            else:
+                # 使用带动画的字幕信息
+                captions_str = caption_infos_response.get("infos", "[]")
+                captions_list = json.loads(captions_str) if isinstance(captions_str, str) else captions_str
+
+            # Step 3b: 调用 add_captions 将字幕添加到草稿
             add_captions_payload = {
                 "draft_url": draft_url,
                 "captions": json.dumps(captions_list, ensure_ascii=False),
@@ -296,7 +421,7 @@ def create_capcut_draft(state: Dict[str, Any]) -> Dict[str, Any]:
             steps_status.append({
                 "step": "add_captions",
                 "url": f"{CAPCUT_MATE_BASE_URL}/add_captions",
-                "request": add_captions_payload,
+                "request": {k: v for k, v in add_captions_payload.items() if k != "captions"},
                 "response": add_captions_response
             })
 
