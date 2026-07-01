@@ -1,0 +1,99 @@
+{
+  "default_scene": "travel",
+  "scene_groups": {
+    "travel": {
+      "name": "旅游英语",
+      "keywords": ["旅游", "旅行", "机场", "值机", "登机", "飞机", "空乘", "入境", "护照", "海关", "问路", "景点", "行李"],
+      "preferred_modes": ["dialogue_scene", "scene_collection", "painpoint_contrast"],
+      "hook_strategy": "前2秒必须指向真实尴尬或高频卡壳场景，不使用泛泛标题。",
+      "content_principles": [
+        "单条视频只解决一个具体旅行动作。",
+        "优先生成真实对话场景，而不是孤立句子清单。",
+        "句子必须能在机场、飞机、酒店、餐厅、入境等场景直接开口。",
+        "避免万能求助句凑数。"
+      ],
+      "quality_checks": [
+        "开场是否能让用户立刻知道自己会遇到什么尴尬。",
+        "表达是否覆盖同一场景里的连续动作。",
+        "是否有收藏价值。"
+      ]
+    },
+    "hotel": {
+      "name": "酒店英语",
+      "keywords": ["酒店", "入住", "退房", "前台", "房间", "押金", "账单", "早餐", "寄存", "换房"],
+      "preferred_modes": ["dialogue_scene", "scene_collection", "painpoint_contrast"],
+      "hook_strategy": "用前台真实追问、账单争议、房间异常制造开场。",
+      "content_principles": [
+        "围绕住酒店服务链路推进。",
+        "每条视频聚焦一个前台或客房沟通任务。",
+        "优先加入工作人员问题和用户回应。"
+      ]
+    },
+    "restaurant": {
+      "name": "餐厅英语",
+      "keywords": ["餐厅", "点餐", "菜单", "服务员", "忌口", "过敏", "结账", "小费", "外卖"],
+      "preferred_modes": ["dialogue_scene", "scene_collection", "painpoint_contrast"],
+      "hook_strategy": "用服务员突然提问、忌口、推荐菜、结账小费等细节抓人。",
+      "content_principles": [
+        "必须有餐厅真实互动对象。",
+        "优先覆盖点餐、确认、忌口、换菜、结账等动作。",
+        "不要只生成礼貌寒暄句。"
+      ]
+    },
+    "office": {
+      "name": "办公室英语",
+      "keywords": ["办公室", "开会", "同事", "领导", "请假", "催进度", "汇报", "需求", "延期", "反馈"],
+      "preferred_modes": ["dialogue_scene", "painpoint_contrast", "scene_collection"],
+      "hook_strategy": "用打工人会怕的职场误会、催办、汇报卡壳开场。",
+      "content_principles": [
+        "贴近工作流，不做教材式表达。",
+        "句子要能直接发在会议、IM 或邮件里。",
+        "语气要职业但不生硬。"
+      ]
+    },
+    "business": {
+      "name": "商务英语",
+      "keywords": ["商务", "客户", "报价", "合同", "谈判", "提案", "预算", "会议", "合作", "邮件"],
+      "preferred_modes": ["dialogue_scene", "painpoint_contrast", "scene_collection"],
+      "hook_strategy": "用客户压价、预算卡住、合同细节、会议冷场等高压场景开场。",
+      "content_principles": [
+        "表达必须专业、克制、可直接用于商务沟通。",
+        "优先处理需求确认、异议、报价、跟进和推进下一步。",
+        "避免过度口语或幼稚表达。"
+      ]
+    },
+    "daily": {
+      "name": "生活英语",
+      "keywords": ["生活", "咖啡", "超市", "便利店", "打车", "地铁", "公交", "看医生", "药店", "银行", "理发", "租房"],
+      "preferred_modes": ["dialogue_scene", "scene_collection", "painpoint_contrast"],
+      "hook_strategy": "用海外生活中会突然卡住的小尴尬开场。",
+      "content_principles": [
+        "聚焦生活服务场景里的一个小任务。",
+        "表达要短、自然、初学者能开口。",
+        "尽量包含对方可能说的话。"
+      ]
+    },
+    "parent_child": {
+      "name": "亲子英语",
+      "keywords": ["亲子", "孩子", "绘本", "睡前", "洗漱", "早餐", "玩具", "情绪", "鼓励"],
+      "preferred_modes": ["dialogue_scene", "checkin_challenge", "scene_collection"],
+      "hook_strategy": "用家长每天都会说但不知道英文怎么说的动作开场。",
+      "content_principles": [
+        "围绕家庭一天真实互动。",
+        "表达要简单、温柔、适合家长和孩子跟读。",
+        "避免成人职场语气。"
+      ]
+    },
+    "emergency": {
+      "name": "救场英语",
+      "keywords": ["救场", "听不清", "不会说", "卡壳", "迷路", "丢东西", "付款失败", "订单", "手机没电", "紧急"],
+      "preferred_modes": ["painpoint_contrast", "dialogue_scene", "scene_collection"],
+      "hook_strategy": "直接点出不会说会导致的尴尬后果。",
+      "content_principles": [
+        "优先生成最短能接住对话的表达。",
+        "必须解决临场卡壳，不讲复杂语法。",
+        "句子要短，先活下来，再说完整。"
+      ]
+    }
+  }
+}

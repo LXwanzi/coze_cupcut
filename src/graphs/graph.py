@@ -22,6 +22,7 @@ class VideoWorkflowState(dict):
     learning_note: str
     topic: str
     scene: str
+    scene_strategy: Dict[str, Any]
     auto_generate_expressions: bool
     content_mode: str
     voice_profile_override: Dict[str, Any]

@@ -5,7 +5,13 @@ import logging
 import re
 from typing import Dict, Any, List
 
-from content.account_loader import get_account_pack
+from content.account_loader import (
+    account_exists,
+    get_account_pack,
+    list_account_ids,
+    normalize_account_id,
+    resolve_scene_strategy,
+)
 
 logger = logging.getLogger(__name__)
 DEFAULT_SHORT_DURATION_SECONDS = 28
@@ -28,16 +34,7 @@ ACCOUNT_CONTROL_KEYS = {"account", "account_id", "账号", "赛道"}
 MODE_CONTROL_KEYS = {"mode", "模式"}
 TOPIC_CONTROL_KEYS = {"topic", "主题"}
 VOICE_CONTROL_KEYS = {"音色", "voice", "语速", "speed"}
-ACCOUNT_ALIASES = {
-    "小丸子英语": "xiaowanzi_english",
-    "小丸子": "xiaowanzi_english",
-    "英语": "xiaowanzi_english",
-    "xiaowanzi": "xiaowanzi_english",
-    "xiaowanzi_english": "xiaowanzi_english",
-    "玄学": "metaphysics",
-    "玄学方向": "metaphysics",
-    "metaphysics": "metaphysics",
-}
+REQUIRE_EXPLICIT_ACCOUNT = os.getenv("REQUIRE_EXPLICIT_ACCOUNT", "1") != "0"
 
 # LLM 配置
 LLM_CONFIG_PATH = os.path.join(
@@ -93,8 +90,10 @@ def _parse_user_input(message: str) -> Dict[str, Any]:
         'learning_note': '',
         'topic': '',
         'scene': 'travel',
+        'scene_strategy': {},
         'auto_generate_expressions': True,
         'voice_profile_override': {},
+        'account_explicit': False,
     }
     
     if not message or not message.strip():
@@ -104,11 +103,14 @@ def _parse_user_input(message: str) -> Dict[str, Any]:
     message, account_controls = _extract_account_contract(message)
     if account_controls.get("account_id"):
         result["account_id"] = account_controls["account_id"]
+        result["account_explicit"] = True
     message, voice_profile_override = _extract_voice_profile_override(message)
     result['voice_profile_override'] = voice_profile_override
+    message_from_contract_topic = False
     if not message:
         if account_controls.get("topic"):
             message = account_controls["topic"]
+            message_from_contract_topic = True
         else:
             return result
 
@@ -119,9 +121,10 @@ def _parse_user_input(message: str) -> Dict[str, Any]:
         result['raw_topic'] = raw_topic
         result['topic'] = raw_topic
         # 保留剩余文本作为学习笔记（用户可能附带了英语句子）
-        result['learning_note'] = message if message else ''
+        result['learning_note'] = '' if message_from_contract_topic else (message if message else '')
         result['scene'] = _detect_scene(topic, result["account_id"])
-        result['auto_generate_expressions'] = not bool(message)
+        result['scene_strategy'] = resolve_scene_strategy(result["account_id"], topic)
+        result['auto_generate_expressions'] = message_from_contract_topic or not bool(message)
         return result
     
     # 尝试提取主题/场景
@@ -137,6 +140,7 @@ def _parse_user_input(message: str) -> Dict[str, Any]:
                 result['topic'] = f"{topic_part}：{content_part}"
                 result['learning_note'] = ''
                 result['scene'] = _detect_scene(content_part, result["account_id"])
+                result['scene_strategy'] = resolve_scene_strategy(result["account_id"], content_part)
                 result['auto_generate_expressions'] = True
                 return result
             
@@ -146,6 +150,7 @@ def _parse_user_input(message: str) -> Dict[str, Any]:
                 result['topic'] = topic_part
                 result['learning_note'] = content_part
                 result['scene'] = _detect_scene(topic_part, result["account_id"])
+                result['scene_strategy'] = resolve_scene_strategy(result["account_id"], topic_part)
                 result['raw_topic'] = topic_part
                 result['auto_generate_expressions'] = not _contains_english(content_part)
             else:
@@ -159,6 +164,7 @@ def _parse_user_input(message: str) -> Dict[str, Any]:
         result['topic'] = message
         result['learning_note'] = ''
         result['scene'] = _detect_scene(message, result["account_id"])
+        result['scene_strategy'] = resolve_scene_strategy(result["account_id"], message)
         result['auto_generate_expressions'] = True
     
     return result
@@ -203,10 +209,30 @@ def _extract_account_contract(message: str) -> tuple[str, Dict[str, str]]:
 
 
 def _normalize_account_id(value: str) -> str:
-    account = (value or "").strip()
-    if not account:
-        return ""
-    return ACCOUNT_ALIASES.get(account, ACCOUNT_ALIASES.get(account.lower(), account))
+    return normalize_account_id(value)
+
+
+def _validate_account_contract(user_input: Dict[str, Any]) -> str:
+    if REQUIRE_EXPLICIT_ACCOUNT and not user_input.get("account_explicit"):
+        return _account_contract_help()
+    account_id = user_input.get("account_id")
+    if not account_exists(account_id):
+        available = "、".join(list_account_ids()) or "无"
+        return f"账号不存在：{account_id or '未填写'}。\n当前可用账号：{available}\n\n{_account_contract_help()}"
+    return ""
+
+
+def _account_contract_help() -> str:
+    return (
+        "请先明确要生成哪个账号的视频，推荐格式：\n\n"
+        "account: xiaowanzi_english\n"
+        "mode: 场景式\n"
+        "topic: 餐厅点餐\n\n"
+        "或：\n\n"
+        "account: metaphysics\n"
+        "mode: 痛点式\n"
+        "topic: 最近总觉得钱留不住"
+    )
 
 
 def _extract_voice_profile_override(message: str) -> tuple[str, Dict[str, Any]]:
@@ -316,6 +342,7 @@ async def _run_workflow(user_input: Dict[str, Any]) -> Dict[str, Any]:
             'learning_note': user_input.get('learning_note', ''),
             'topic': user_input.get('topic', ''),
             'scene': user_input.get('scene', 'travel'),
+            'scene_strategy': user_input.get('scene_strategy', {}),
             'auto_generate_expressions': user_input.get('auto_generate_expressions', True),
             'duration_seconds': DEFAULT_SHORT_DURATION_SECONDS,
             'sentence_count': DEFAULT_SHORT_SENTENCE_COUNT,
@@ -377,6 +404,11 @@ def agent_node(state: Dict[str, Any]) -> Dict[str, Any]:
     
     # 解析用户输入
     user_input = _parse_user_input(user_message)
+    account_error = _validate_account_contract(user_input)
+    if account_error:
+        return {
+            'messages': [AIMessage(content=account_error)]
+        }
     
     if not user_input.get('learning_note') and not user_input.get('topic'):
         return {
@@ -396,6 +428,7 @@ def agent_node(state: Dict[str, Any]) -> Dict[str, Any]:
             'learning_note': user_input.get('learning_note', ''),
             'topic': user_input.get('topic', ''),
             'scene': user_input.get('scene', 'travel'),
+            'scene_strategy': user_input.get('scene_strategy', {}),
             'auto_generate_expressions': user_input.get('auto_generate_expressions', True),
             'duration_seconds': DEFAULT_SHORT_DURATION_SECONDS,
             'sentence_count': DEFAULT_SHORT_SENTENCE_COUNT,

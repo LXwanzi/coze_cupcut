@@ -1,4 +1,9 @@
-from content.account_loader import get_account_pack
+from content.account_loader import (
+    account_exists,
+    get_account_pack,
+    normalize_account_id,
+    resolve_scene_strategy,
+)
 from graphs.nodes.topic_rescue_node import (
     MODE_ALIASES,
     PAINPOINT_TRIGGERS,
@@ -20,6 +25,7 @@ def test_xiaowanzi_account_pack_loads_content_config():
     assert pack["voices"]["speaker_map"]["playful"] == "saturn_zh_female_tiaopigongzhu_tob"
     assert pack["publish"]["title_templates"]["scene_collection"].startswith("【{topic}】")
     assert pack["output"]["enabled"] is True
+    assert pack["scenes"]["scene_groups"]["travel"]["name"] == "旅游英语"
     assert any(item["id"] == "plane_attendant_help" for item in pack["scene_collection_presets"])
     assert any(item["id"] == "plane_attendant_help_painpoint" for item in pack["painpoint_presets"])
 
@@ -37,12 +43,27 @@ def test_metaphysics_account_pack_loads_isolated_config():
     assert pack["voices"]["speaker_map"]["mystic_male"] == "zh_male_ruyayichen_saturn_bigtts"
     assert pack["voices"]["speaker_map"]["gentle"] == "zh_female_santongyongns_saturn_bigtts"
     assert pack["modes"]["voice_profiles"]["painpoint_conversion"]["voice"] == "mystic_male"
+    assert pack["scenes"]["scene_groups"]["money"]["name"] == "财运状态"
     assert "强命题" in pack["script_templates"]["painpoint_conversion"]["structure"]
     assert "产品桥接" not in pack["script_templates"]["painpoint_conversion"]["structure"]
     assert pack["script_templates"]["painpoint_conversion"]["quality_gate"]["min_symptoms"] == 3
     assert pack["script_templates"]["painpoint_conversion"]["quality_gate"]["min_adjustments"] == 2
     assert pack["product_catalog"]["products"][0]["name"] == "小貔貅摆件"
     assert "保证发财" in pack["safety_rules"]["forbidden_claims"]
+
+
+def test_account_aliases_and_scene_strategy_are_pluginized():
+    assert account_exists("xiaowanzi_english") is True
+    assert normalize_account_id("玄学") == "metaphysics"
+    assert normalize_account_id("小丸子英语") == "xiaowanzi_english"
+
+    english_strategy = resolve_scene_strategy("xiaowanzi_english", "餐厅点餐")
+    assert english_strategy["scene_id"] == "restaurant"
+    assert "真实互动对象" in " ".join(english_strategy["content_principles"])
+
+    metaphysics_strategy = resolve_scene_strategy("metaphysics", "最近总觉得钱留不住")
+    assert metaphysics_strategy["scene_id"] == "money"
+    assert "不直接卖产品" in metaphysics_strategy["hook_strategy"]
 
 
 def test_topic_rescue_uses_account_pack_values():

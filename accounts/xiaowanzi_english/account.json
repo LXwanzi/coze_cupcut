@@ -1,8 +1,15 @@
 {
-  "account_id": "xiaowanzi_english",
-  "name": "小丸子英语",
-  "domain": "english_learning",
-  "persona": {
+    "account_id": "xiaowanzi_english",
+    "name": "小丸子英语",
+    "domain": "english_learning",
+    "aliases": [
+        "小丸子英语",
+        "小丸子",
+        "英语",
+        "xiaowanzi",
+        "xiaowanzi_english"
+    ],
+    "persona": {
     "role": "年轻打工人英语学习搭子",
     "tone": "亲切、有活力、乐观上进、不说教",
     "catchphrase": "每天进步一点点"

@@ -1,0 +1,66 @@
+{
+  "default_scene": "state",
+  "scene_groups": {
+    "money": {
+      "name": "财运状态",
+      "keywords": ["钱", "财", "漏财", "守财", "存不住", "钱留不住", "花钱", "发工资", "钱包", "玄关"],
+      "preferred_modes": ["painpoint_conversion", "ritual_checkin", "scene_product_seed"],
+      "hook_strategy": "用强命题和被说中的生活细节开场，不直接卖产品。",
+      "content_principles": [
+        "先讲真实生活状态，再讲传统说法。",
+        "产品不进入口播主体，只作为后续转化承接。",
+        "必须给出可执行的小调整。",
+        "不承诺发财或必定转运。"
+      ],
+      "quality_checks": [
+        "是否有具体生活动作，而不是空泛焦虑。",
+        "是否讲清楚隐藏机制。",
+        "是否避免绝对化功效承诺。"
+      ]
+    },
+    "career": {
+      "name": "事业状态",
+      "keywords": ["事业", "工作", "办公桌", "升职", "贵人", "小人", "领导", "同事", "职场", "文昌"],
+      "preferred_modes": ["painpoint_conversion", "scene_product_seed", "ritual_checkin"],
+      "hook_strategy": "用努力很多但总差一口气的反差感开场。",
+      "content_principles": [
+        "把玄学表达落到桌面、动线、专注感和边界感。",
+        "避免承诺升职加薪。",
+        "给出空间整理或随身提醒动作。"
+      ]
+    },
+    "relationship": {
+      "name": "关系状态",
+      "keywords": ["感情", "桃花", "复合", "人缘", "贵人", "关系", "沟通", "伴侣"],
+      "preferred_modes": ["painpoint_conversion", "ritual_checkin"],
+      "hook_strategy": "用关系里反复消耗的细节开场，语气温和不恐吓。",
+      "content_principles": [
+        "不承诺复合或脱单。",
+        "重点讲情绪稳定、空间舒适和沟通提醒。",
+        "产品只作为仪式感，不作为结果保证。"
+      ]
+    },
+    "home": {
+      "name": "居家气场",
+      "keywords": ["家里", "玄关", "卧室", "客厅", "镜子", "床头", "门口", "鞋柜", "杂物"],
+      "preferred_modes": ["scene_product_seed", "painpoint_conversion", "ritual_checkin"],
+      "hook_strategy": "用一进门就烦、越住越累等空间体感开场。",
+      "content_principles": [
+        "先讲空间感受，再讲传统寓意。",
+        "优先给整理、摆放、减少杂物等动作。",
+        "避免复杂禁忌和恐吓式表达。"
+      ]
+    },
+    "state": {
+      "name": "个人状态",
+      "keywords": ["不顺", "焦虑", "状态", "低迷", "睡不好", "心烦", "能量", "稳定", "转运"],
+      "preferred_modes": ["painpoint_conversion", "ritual_checkin", "scene_product_seed"],
+      "hook_strategy": "用最近总觉得不对劲但说不清的状态开场。",
+      "content_principles": [
+        "用生活秩序解释玄学感受。",
+        "给一个当天能做的小仪式。",
+        "不制造焦虑，不说绝对结论。"
+      ]
+    }
+  }
+}

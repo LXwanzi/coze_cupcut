@@ -1,8 +1,14 @@
 {
-  "account_id": "metaphysics",
-  "name": "玄学生活方式",
-  "domain": "metaphysics_lifestyle",
-  "persona": {
+    "account_id": "metaphysics",
+    "name": "玄学生活方式",
+    "domain": "metaphysics_lifestyle",
+    "aliases": [
+        "玄学",
+        "玄学方向",
+        "玄学生活方式",
+        "metaphysics"
+    ],
+    "persona": {
     "role": "温和的玄学生活方式种草博主",
     "tone": "有氛围感、温和、不制造焦虑、给人稳定感",
     "catchphrase": "给自己一个稳住的小仪式"

@@ -24,6 +24,7 @@ def build_metaphysics_plan(
     raw_topic = state.get("raw_topic") or state.get("topic") or "最近状态不太稳"
     mode, topic = _extract_mode_and_topic(raw_topic, account_pack)
     scene = state.get("scene") or _detect_scene(topic, account_pack)
+    scene_strategy = state.get("scene_strategy") or {}
     product = _select_product(topic, scene, account_pack)
     voice_profile = _voice_profile(mode, account_pack)
     brief = _build_brief(topic, mode, scene, product)
@@ -35,6 +36,7 @@ def build_metaphysics_plan(
         "account_id": account_pack.get("account_id", "metaphysics"),
         "selected_topic": brief["topic"],
         "scene": scene,
+        "scene_strategy": scene_strategy,
         "sub_scene": scene,
         "duration_seconds": duration_seconds,
         "target_duration_seconds": state.get("duration_seconds", 28),

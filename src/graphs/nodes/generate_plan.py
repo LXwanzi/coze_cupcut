@@ -113,6 +113,7 @@ def generate_plan(state: Dict[str, Any]) -> Dict[str, Any]:
         raw_topic = state.get('raw_topic', '') or topic or learning_note
         auto_generate_expressions = bool(state.get('auto_generate_expressions'))
         voice_profile_override = state.get('voice_profile_override') or {}
+        scene_strategy = state.get('scene_strategy') or {}
         user_input = learning_note or topic
         
         if not user_input:
@@ -161,6 +162,7 @@ def generate_plan(state: Dict[str, Any]) -> Dict[str, Any]:
                             scene=scene,
                             memory_context=memory_context,
                             prompt_config=prompt_config,
+                            scene_strategy=scene_strategy,
                         )
                     except TypeError:
                         generated_brief = _generate_dynamic_scene_collection_brief(
@@ -436,6 +438,7 @@ def _generate_dynamic_scene_collection_brief(
     scene: str,
     memory_context: Dict[str, Any],
     prompt_config: Optional[Dict[str, Any]] = None,
+    scene_strategy: Optional[Dict[str, Any]] = None,
 ) -> Optional[Dict[str, Any]]:
     """Use LLM to generate concrete same-scene expressions when no preset matches."""
     learned_sentences = memory_context.get('learned_sentences', []) if memory_context else []
@@ -445,6 +448,7 @@ def _generate_dynamic_scene_collection_brief(
         scene=scene,
         learned_list=learned_list,
         prompt_config=prompt_config,
+        scene_strategy=scene_strategy,
     )
     try:
         import requests
@@ -495,6 +499,7 @@ def _build_dynamic_scene_collection_prompt(
     scene: str,
     learned_list: str,
     prompt_config: Optional[Dict[str, Any]] = None,
+    scene_strategy: Optional[Dict[str, Any]] = None,
 ) -> str:
     prompt_config = prompt_config or PROMPT_CONFIG
     dynamic_config = prompt_config.get("dynamic_scene_collection") or {}
@@ -505,6 +510,7 @@ def _build_dynamic_scene_collection_prompt(
     rules = _format_numbered_lines(dynamic_config.get("rules", []))
     forbidden = _format_bullet_lines(dynamic_config.get("forbidden_expressions", [])) or "无"
     topic_specific_rules = _format_numbered_lines(dynamic_config.get("topic_specific_rules", []))
+    scene_strategy_text = _format_scene_strategy(scene_strategy or {})
     output_schema = json.dumps(
         dynamic_config.get("output_schema") or {},
         ensure_ascii=False,
@@ -536,9 +542,34 @@ def _build_dynamic_scene_collection_prompt(
 ## 主题特别规则
 {topic_specific_rules or "无"}
 
+## 当前账号场景策略
+{scene_strategy_text or "无"}
+
 ## 输出 JSON，不要 Markdown
 {output_schema}
 """
+
+
+def _format_scene_strategy(scene_strategy: Dict[str, Any]) -> str:
+    if not scene_strategy:
+        return ""
+    lines = []
+    if scene_strategy.get("name"):
+        lines.append(f"场景名称：{scene_strategy.get('name')}")
+    if scene_strategy.get("hook_strategy"):
+        lines.append(f"钩子策略：{scene_strategy.get('hook_strategy')}")
+    preferred_modes = scene_strategy.get("preferred_modes") or []
+    if preferred_modes:
+        lines.append(f"推荐模式：{', '.join(preferred_modes)}")
+    principles = scene_strategy.get("content_principles") or []
+    if principles:
+        lines.append("内容原则：")
+        lines.extend(f"- {item}" for item in principles)
+    quality_checks = scene_strategy.get("quality_checks") or []
+    if quality_checks:
+        lines.append("质量检查：")
+        lines.extend(f"- {item}" for item in quality_checks)
+    return "\n".join(lines)
 
 
 def _format_for_topic_brief(topic_brief: Dict[str, Any]) -> str:

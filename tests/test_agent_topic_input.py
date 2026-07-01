@@ -1,4 +1,8 @@
-from agents.agent import _extract_voice_profile_override, _parse_user_input
+from agents.agent import (
+    _extract_voice_profile_override,
+    _parse_user_input,
+    _validate_account_contract,
+)
 
 
 def test_parse_user_input_treats_plain_text_as_topic():
@@ -57,6 +61,8 @@ def test_parse_user_input_extracts_account_contract_multiline():
     assert parsed["raw_topic"] == "痛点式：最近总觉得钱留不住"
     assert parsed["topic"] == "痛点式：最近总觉得钱留不住"
     assert parsed["scene"] == "wallet"
+    assert parsed["scene_strategy"]["scene_id"] == "money"
+    assert parsed["account_explicit"] is True
     assert parsed["auto_generate_expressions"] is True
 
 
@@ -68,6 +74,17 @@ def test_parse_user_input_extracts_account_contract_inline():
     assert parsed["account_id"] == "metaphysics"
     assert parsed["raw_topic"] == "痛点式：最近总觉得钱留不住"
     assert parsed["scene"] == "wallet"
+
+
+def test_validate_account_contract_requires_explicit_account():
+    parsed = _parse_user_input("餐厅点餐")
+
+    message = _validate_account_contract(parsed)
+
+    assert "请先明确要生成哪个账号" in message
+    assert "account: xiaowanzi_english" in message
+
+
 
 
 def test_extract_voice_profile_accepts_tts_voice_code():

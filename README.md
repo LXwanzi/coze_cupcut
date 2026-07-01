@@ -12,6 +12,7 @@ accounts/
     account.json
     modes.json
     prompts.json
+    scenes.json
     visual.json
     voices.json
     quality_rules.json
@@ -29,6 +30,7 @@ accounts/
     account.json
     modes.json
     prompts.json
+    scenes.json
     visual.json
     voices.json
     publish.json
@@ -38,16 +40,16 @@ accounts/
     safety_rules.json
 ```
 
-运行时通过 `CONTENT_ACCOUNT_ID` 选择账号：
+本地调试可通过 `CONTENT_ACCOUNT_ID` 选择默认账号：
 
 ```bash
 CONTENT_ACCOUNT_ID=xiaowanzi_english bash scripts/local_run.sh -m flow
 CONTENT_ACCOUNT_ID=metaphysics bash scripts/local_run.sh -m flow
 ```
 
-如果未指定，默认使用 `xiaowanzi_english`。
+如果未指定，底层兼容默认值仍是 `xiaowanzi_english`。但在 Agent 生产入口中，必须由用户输入显式声明 `account`，避免多账号串台。
 
-推荐在用户输入中显式声明账号契约，避免多账号串台：
+生产输入必须显式声明账号契约：
 
 ```text
 account: xiaowanzi_english
@@ -73,7 +75,8 @@ topic: 最近总觉得钱留不住
 1. account 决定读取 accounts/<account_id>/ 下的账号插件。
 2. mode 只在当前账号的 modes.json 中解析。
 3. topic 只表达本账号下的内容主题，不再承担账号识别。
-4. 未传 account 时仍默认 xiaowanzi_english，但多账号生产建议显式传 account。
+4. Agent 入口未传 account 时直接返回格式提示，不启动视频生成。
+5. 如需本地兼容旧输入，可设置 REQUIRE_EXPLICIT_ACCOUNT=0。
 ```
 
 ## 编码规范
@@ -86,6 +89,7 @@ topic: 最近总觉得钱留不住
 人设
 专题方向
 脚本模式
+场景策略
 标题模板
 互动话术
 质量规则
@@ -115,7 +119,38 @@ if "机场值机" in topic:
     ...
 ```
 
-如果确实需要特殊规则，应放入账号配置，例如 `modes.json`、`quality_rules.json`、`script_templates.json` 或对应 preset 文件。
+如果确实需要特殊规则，应放入账号配置，例如 `scenes.json`、`modes.json`、`quality_rules.json`、`script_templates.json` 或对应 preset 文件。
+
+### 1.1 场景策略必须放在 scenes.json
+
+`scenes.json` 用来定义一个账号有哪些高流量场景域，以及每个场景域的内容策略。它不是单条视频预设，不应该写死某个具体选题的完整脚本。
+
+推荐结构：
+
+```json
+{
+  "default_scene": "travel",
+  "scene_groups": {
+    "travel": {
+      "name": "旅游英语",
+      "keywords": ["机场", "酒店", "入境"],
+      "preferred_modes": ["dialogue_scene", "scene_collection", "painpoint_contrast"],
+      "hook_strategy": "前2秒必须指向真实尴尬或高频卡壳场景。",
+      "content_principles": [
+        "单条视频只解决一个具体动作。",
+        "优先生成真实对话场景。",
+        "避免万能求助句凑数。"
+      ],
+      "quality_checks": [
+        "开场是否足够具体。",
+        "表达是否覆盖同一场景里的连续动作。"
+      ]
+    }
+  }
+}
+```
+
+框架会根据 `topic` 命中对应场景策略，并把它传给脚本生成提示词。新增赛道时，应优先补 `scenes.json`，不要在 Python 里写关键词判断。
 
 ### 2. 公共节点只处理通用字段
 
@@ -220,13 +255,14 @@ draft_url.txt
 1. 新建 `accounts/<account_id>/`。
 2. 添加 `account.json`，定义账号定位、受众、边界。
 3. 添加 `modes.json`，定义模式别名、场景识别、默认音色。
-4. 添加 `prompts.json`，定义该账号独立的脚本提示词和输出结构。
-5. 添加 `visual.json`，定义该账号独立的图片风格、角色形象、字幕规范。
-6. 添加 `voices.json`，定义可用音色和语速范围。
-7. 添加 `publish.json`，定义标题、简介、标签模板。
-8. 添加 `output.json`，定义生成结果落盘路径。
-9. 如果账号依赖产品或知识库，添加 `product_catalog.json`、`script_templates.json`、`safety_rules.json`。
-10. 补充 tests，验证账号配置能被加载，且不会影响已有账号。
+4. 添加 `scenes.json`，定义该账号的高流量场景域、钩子策略、内容原则和质量检查。
+5. 添加 `prompts.json`，定义该账号独立的脚本提示词和输出结构。
+6. 添加 `visual.json`，定义该账号独立的图片风格、角色形象、字幕规范。
+7. 添加 `voices.json`，定义可用音色和语速范围。
+8. 添加 `publish.json`，定义标题、简介、标签模板。
+9. 添加 `output.json`，定义生成结果落盘路径。
+10. 如果账号依赖产品或知识库，添加 `product_catalog.json`、`script_templates.json`、`safety_rules.json`。
+11. 补充 tests，验证账号配置能被加载，且不会影响已有账号。
 
 ### 6. 账号提示词和视觉必须隔离
 
